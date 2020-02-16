@@ -22,7 +22,11 @@ SDL_Window* displayWindow;
 bool gameIsRunning = true;
 
 ShaderProgram program;
+// mama birdie
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
+
+// baby birdie 1
+glm::mat4 modelMatrix1;
 
 float player_x = 0;
 float player_y = 0;
@@ -107,10 +111,15 @@ void Update() {
     player_y += 1.0f * deltaTime;
     player_rotate += -90.0f * deltaTime;
     
+    // mama birdie
     modelMatrix = glm::mat4(1.0f);
-//    modelMatrix = glm::scale(modelMatrix, glm::vec3(3.0f, 3.0f, 1.0f)); // mama bird needs to be bigger
+    modelMatrix = glm::scale(modelMatrix, glm::vec3(3.0f, 3.0f, 1.0f)); // mama bird needs to be bigger
+//    modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, player_y, 0.0f));
+//    modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, -player_y, 0.0f));
     
-    modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, player_y, 0.0f));
+    // baby birdie
+    modelMatrix1 = glm::mat4(1.0f);
+    modelMatrix1 = glm::translate(modelMatrix1, glm::vec3(player_x, 0.0f, 0.0f));
 //    modelMatrix = glm::rotate(modelMatrix, glm::radians(player_rotate), glm::vec3(0.0f, 0.0f, 1.0f));
     
 //    modelMatrix = glm::mat4(1.0f);
@@ -122,11 +131,11 @@ void Update() {
 void Render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
-    // mama birdie
-    program.SetModelMatrix(modelMatrix);
-
     float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
     float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
+    
+    // ---------------------- mama birdie ----------------------
+    program.SetModelMatrix(modelMatrix); // mama birdie
     
     glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
     glEnableVertexAttribArray(program.positionAttribute);
@@ -134,11 +143,28 @@ void Render() {
     glEnableVertexAttribArray(program.texCoordAttribute);
     
     glBindTexture(GL_TEXTURE_2D, birdieTextureID);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    
+    glDisableVertexAttribArray(program.positionAttribute);
+    glDisableVertexAttribArray(program.texCoordAttribute);
+    // --------------------- /mama birdie ----------------------
+    
+//    SDL_GL_SwapWindow(displayWindow);
+    
+    // -------------------- baby birdie 1 ----------------------
+    program.SetModelMatrix(modelMatrix1);
+    
+    glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program.positionAttribute);
+    glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
+    glEnableVertexAttribArray(program.texCoordAttribute);
+    
     glBindTexture(GL_TEXTURE_2D, babyTextureID);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
     glDisableVertexAttribArray(program.positionAttribute);
     glDisableVertexAttribArray(program.texCoordAttribute);
+    // ------------------- /baby birdie 1 ----------------------
     
     SDL_GL_SwapWindow(displayWindow);
 }
