@@ -18,6 +18,9 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+#include <iostream>
+using namespace std;
+
 SDL_Window* displayWindow;
 bool gameIsRunning = true;
 
@@ -30,6 +33,7 @@ glm::mat4 modelMatrix1, modelMatrix2, modelMatrix3;
 
 float player_x = 0;
 float player_y = 0;
+float player_s = 0;
 float player_rotate = 0;
 
 GLuint birdieTextureID;
@@ -58,7 +62,7 @@ GLuint LoadTexture(const char* filePath) {
 
 void Initialize() {
     SDL_Init(SDL_INIT_VIDEO);
-    displayWindow = SDL_CreateWindow("A Simple Birdie and her Babies", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
+    displayWindow = SDL_CreateWindow("Birdie Begs Bouncing Babies to Follow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
     SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
     SDL_GL_MakeCurrent(displayWindow, context);
     
@@ -99,6 +103,21 @@ void ProcessInput() {
     }
 }
 
+// helper function used for debugging!
+void printMatrix(glm::mat4 aMatrix) {
+    cout << aMatrix[0][0] << ' ' << aMatrix[0][1] << ' ' << aMatrix[0][2] << ' ' << aMatrix[0][3] << '\n';
+    cout << aMatrix[1][0] << ' ' << aMatrix[1][1] << ' ' << aMatrix[1][2] << ' ' << aMatrix[1][3] << '\n';
+    cout << aMatrix[2][0] << ' ' << aMatrix[2][1] << ' ' << aMatrix[2][2] << ' ' << aMatrix[2][3] << '\n';
+    cout << aMatrix[3][0] << ' ' << aMatrix[3][1] << ' ' << aMatrix[3][2] << ' ' << aMatrix[3][3] << '\n';
+    cout << '\n';
+}
+
+// helper function: considers fmod result == 0 at thousandth place
+bool isModZero(float x, float y) {
+    float mod = fmod(x, y);
+    return (mod * 1000) < 0;
+}
+
 float lastTicks = 0.0f;
 
 void Update() {
@@ -106,35 +125,40 @@ void Update() {
     float deltaTime = ticks - lastTicks;
     lastTicks = ticks;
     
-    player_x += 1.0f * deltaTime;
-    player_y += 1.0f * deltaTime;
+    player_x += 0.5f * deltaTime;
+    player_y += 0.5f * deltaTime;
     player_rotate += 90.0f * deltaTime;
+    player_s += 1.01 * deltaTime;
     
-    // mama birdie
+    // ---------------------- mama birdie ----------------------
+    // initial position
     modelMatrix = glm::mat4(1.0f);
-    modelMatrix = glm::scale(modelMatrix, glm::vec3(3.0f, 3.0f, 1.0f));
-//    modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, -player_y, 0.0f));
+    modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, -1.0f, 0.0f));
+    modelMatrix = glm::scale(modelMatrix, glm::vec3(4, 4, 1.0f));
+    modelMatrix = glm::translate(modelMatrix, glm::vec3(sin(1.4*player_x), 0.0f, 0.0f));
     
-    // baby birdies
-    modelMatrix1 = glm::mat4(1.0f);
-    modelMatrix1 = glm::scale(modelMatrix1, glm::vec3(1.5f, 1.5f, 1.0f));
-    modelMatrix1 = glm::translate(modelMatrix1, glm::vec3(player_x, 1.0f, 0.0f));
-    modelMatrix1 = glm::rotate(modelMatrix1, glm::radians(player_rotate), glm::vec3(0.0f, 0.0f, 1.0f));
-    
-    modelMatrix2 = glm::mat4(1.0f);
-    modelMatrix2 = glm::translate(modelMatrix2, glm::vec3(player_x, 0.0f, 0.0f));
-    modelMatrix2 = glm::rotate(modelMatrix2, glm::radians(player_rotate), glm::vec3(0.0f, 0.0f, 1.0f));
-    
-    modelMatrix3 = glm::mat4(1.0f);
-    modelMatrix3 = glm::scale(modelMatrix3, glm::vec3(1.75f, 1.75f, 1.0f));
-    modelMatrix3 = glm::translate(modelMatrix3, glm::vec3(player_x, -1.0f, 0.0f));
-    modelMatrix3 = glm::rotate(modelMatrix3, glm::radians(player_rotate), glm::vec3(0.0f, 0.0f, 1.0f));
-    
+//    // spin to enter animation!
+//    if (player_s < 4) {
+//        modelMatrix = glm::scale(modelMatrix, glm::vec3(player_s, player_s, 1.0f));
+//    } else {
+//        modelMatrix = glm::scale(modelMatrix, glm::vec3(4, 4, 1.0f));
+//        modelMatrix = glm::translate(modelMatrix, glm::vec3(sin(1.4*player_x), 0.0f, 0.0f));
+//    }
 //    modelMatrix = glm::rotate(modelMatrix, glm::radians(player_rotate), glm::vec3(0.0f, 0.0f, 1.0f));
     
-//    modelMatrix = glm::mat4(1.0f);
-//    modelMatrix = glm::scale(modelMatrix, glm::vec3(0.09f, 1.0f, 1.0f));
-//    modelMatrix = glm::rotate(modelMatrix, glm::radians(25.0f), glm::vec3(0.0f, 0.0f, 0.01f));
+    // --------------------- baby birdies ----------------------
+    modelMatrix1 = glm::mat4(1.0f);
+    modelMatrix1 = glm::translate(modelMatrix1, glm::vec3(2.0f, -1.25f, 0.0f));
+    modelMatrix1 = glm::translate(modelMatrix1, glm::vec3(2.0f, sin(20*player_x), 0.0f));
+    
+    modelMatrix2 = glm::mat4(1.0f);
+    modelMatrix2 = glm::translate(modelMatrix2, glm::vec3(1.0f, -1.0f, 0.0f));
+    modelMatrix2 = glm::translate(modelMatrix2, glm::vec3(1.0f, sin(15*player_x), 0.0f));
+    
+    modelMatrix3 = glm::mat4(1.0f);
+    modelMatrix3 = glm::translate(modelMatrix3, glm::vec3(1.5f, -1.25f, 0.0f));
+    modelMatrix3 = glm::translate(modelMatrix3, glm::vec3(1.5f, sin(10*player_x), 0.0f));
+    modelMatrix3 = glm::rotate(modelMatrix3, glm::radians(player_rotate), glm::vec3(0.0f, 0.0f, 1.0f));
 
 }
 
