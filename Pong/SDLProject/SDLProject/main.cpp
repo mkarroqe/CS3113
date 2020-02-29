@@ -35,12 +35,12 @@ float ball_speed = 1.0f;
 // Paddle 1 Initalization
 glm::vec3 p1_position = glm::vec3(0, 0, 0); // Start at 0, 0, 0
 glm::vec3 p1_movement = glm::vec3(0, 0, 0); // Don't go anywhere (yet)
-float p1_speed = 1.0f;
+float p1_speed = 3.0f;
 
 // Paddle 2 Initalization
 glm::vec3 p2_position = glm::vec3(0, 0, 0); // Start at 0, 0, 0
 glm::vec3 p2_movement = glm::vec3(0, 0, 0); // Don't go anywhere (yet)
-float p2_speed = 1.0f;
+float p2_speed = 3.0f;
 // ------------------ /INITIALIZATION OF ONSCREEN ITEMS -------------------
 
 // ------------------------------- TEXTURES -------------------------------
@@ -136,22 +136,26 @@ void ProcessInput() {
     
     const Uint8 *keys = SDL_GetKeyboardState(NULL);
     
-    if (keys[SDL_SCANCODE_LEFT]) {
-        ball_movement.x = -1.0f;
+    // Paddle 1
+    if (keys[SDL_SCANCODE_W]) {
+        p1_movement.y = 1.0f;
     }
-    else if (keys[SDL_SCANCODE_RIGHT]) {
-        ball_movement.x = 1.0f;
+    else if (keys[SDL_SCANCODE_S]) {
+        p1_movement.y = -1.0f;
+    }
+    if (glm::length(p1_movement) > 1.0f) {
+        p1_movement = glm::normalize(p1_movement);
     }
     
+    // Paddle 2
     if (keys[SDL_SCANCODE_UP]) {
-        ball_movement.y = 1.0f;
+        p2_movement.y = 1.0f;
     }
     else if (keys[SDL_SCANCODE_DOWN]) {
-        ball_movement.y = -1.0f;
+        p2_movement.y = -1.0f;
     }
-    
-    if (glm::length(ball_movement) > 1.0f) {
-        ball_movement = glm::normalize(ball_movement);
+    if (glm::length(p2_movement) > 1.0f) {
+        p2_movement = glm::normalize(p2_movement);
     }
 }
 
@@ -164,16 +168,19 @@ void Update() {
     
     // Add (direction * units per second * elapsed time)
     ball_position += ball_movement * ball_speed * deltaTime;
-    
     modelMatrix_ball = glm::mat4(1.0f);
     modelMatrix_ball = glm::scale(modelMatrix_ball, glm::vec3(0.35f, 0.35f, 1.0f));
     
+    p1_position += p1_movement * p1_speed * deltaTime;
     modelMatrix_p1 = glm::mat4(1.0f);
-    modelMatrix_p1 = glm::translate(modelMatrix_p1, glm::vec3(4.5f, 1.0f, 0.0f));
+    modelMatrix_p1 = glm::translate(modelMatrix_p1, glm::vec3(-4.5f, 1.0f, 0.0f));
+    modelMatrix_p1 = glm::translate(modelMatrix_p1, p1_position);
     modelMatrix_p1 = glm::scale(modelMatrix_p1, glm::vec3(0.35f, 2.55f, 1.0f));
     
+    p2_position += p2_movement * p2_speed * deltaTime;
     modelMatrix_p2 = glm::mat4(1.0f);
-    modelMatrix_p2 = glm::translate(modelMatrix_p2, glm::vec3(-4.5f, 0.0f, 0.0f));
+    modelMatrix_p2 = glm::translate(modelMatrix_p2, glm::vec3(4.5f, 0.0f, 0.0f));
+    modelMatrix_p2 = glm::translate(modelMatrix_p2, p2_position);
     modelMatrix_p2 = glm::scale(modelMatrix_p2, glm::vec3(0.35f, 2.55f, 1.0f));
 }
 
