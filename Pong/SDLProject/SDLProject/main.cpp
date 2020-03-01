@@ -104,8 +104,7 @@ void Initialize() {
 }
 
 void ProcessInput() {
-    ball_movement = glm::vec3(0); // so that if nothing is pressed, we don't go anywhere
-    p1_movement = glm::vec3(0);
+    p1_movement = glm::vec3(0); // so that if nothing is pressed, we don't go anywhere
     p2_movement = glm::vec3(0);
     
     SDL_Event event;
@@ -136,6 +135,15 @@ void ProcessInput() {
     
     const Uint8 *keys = SDL_GetKeyboardState(NULL);
     
+    // Ball
+    if (keys[SDL_SCANCODE_SPACE]) {
+        ball_movement.x = 1.0f;
+        ball_movement.y = 0.5f;
+    }
+    if (glm::length(ball_movement) > 1.0f) {
+        ball_movement = glm::normalize(ball_movement);
+    }
+    
     // Paddle 1
     if (keys[SDL_SCANCODE_W]) {
         p1_movement.y = 1.0f;
@@ -159,9 +167,32 @@ void ProcessInput() {
     }
 }
 
+bool isOutofBounds(glm::vec3 ball_position) {
+    float top = 3.0;
+    float bottom = -3.0;
+    float right = 4.0;
+    float left = -4.0;
+    
+    if ((ball_position[1] > top) || (ball_position[1] < bottom))
+        return true;
+    if ((ball_position[0] > right) || (ball_position[0] < left))
+        return true;
+    
+    return false;
+}
+
+bool missedPaddle(glm::vec3 ball_position) {
+    return false;
+}
+
 float lastTicks = 0.0f;
 
 void Update() {
+    if (isOutofBounds(ball_position))
+        gameIsRunning = false;
+    if (missedPaddle(ball_position))
+        gameIsRunning = false;
+    
     float ticks = (float)SDL_GetTicks() / 1000.0f;
     float deltaTime = ticks - lastTicks;
     lastTicks = ticks;
@@ -169,6 +200,20 @@ void Update() {
     // Add (direction * units per second * elapsed time)
     ball_position += ball_movement * ball_speed * deltaTime;
     modelMatrix_ball = glm::mat4(1.0f);
+    if (ball_position[0] > 2.5f) {
+//        cout << "it's the if!\n";
+        modelMatrix_ball = glm::translate(modelMatrix_ball, -ball_position);
+    }
+    else {
+        modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
+//        cout << "it's the else\n";
+    }
+    modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
+//
+//    if (ball_position[0] < 5) {
+//        cout << "ball_position: " + to_string(ball_position[0]) + "\t" + to_string(ball_position[1]) + "\t" + to_string(ball_position[2]) + "\n\n";
+//    }
+    
     modelMatrix_ball = glm::scale(modelMatrix_ball, glm::vec3(0.35f, 0.35f, 1.0f));
     
     p1_position += p1_movement * p1_speed * deltaTime;
@@ -181,6 +226,8 @@ void Update() {
     modelMatrix_p2 = glm::mat4(1.0f);
     modelMatrix_p2 = glm::translate(modelMatrix_p2, glm::vec3(4.5f, 0.0f, 0.0f));
     modelMatrix_p2 = glm::translate(modelMatrix_p2, p2_position);
+    cout << "p2_position:   " + to_string(p2_position[0]) + "\t " + to_string(p2_position[1]) + "\t" + to_string(p2_position[2]) + "\n\n";
+    
     modelMatrix_p2 = glm::scale(modelMatrix_p2, glm::vec3(0.35f, 2.55f, 1.0f));
 }
 
