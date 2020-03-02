@@ -208,14 +208,14 @@ bool isPastPaddles(glm::vec3 ball_position) {
 
 bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     // Ball Info
-    float x1 = ball_position[0];
-    float y1 = ball_position[1];
+    float x1 = ball_position.x;
+    float y1 = ball_position.y;
     float w1 = ball_scale.x;
     float h1 = ball_scale.y;
     
     // Paddle Info
-    float x2 = p_position[0];
-    float y2 = p_position[1];
+    float x2 = p_position.x;
+    float y2 = p_position.y;
     float w2 = p_scale.x;
     float h2 = p_scale.y;
     
@@ -225,7 +225,10 @@ bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     float x_dist = x_diff - ((w1 + w2) / 2);
     float y_dist = y_diff - ((h1 + h2) / 2);
     
-    if ((x_dist == 0) && (y_dist == 0))
+    if ((x_dist < 0) && (y_dist < 0))
+        cout << "x_dist: " << x_dist << "\n";
+        cout << "y_dist: " << y_dist << "\n";
+        
         return true;
     
     return false;
@@ -235,11 +238,15 @@ void updateBall(float deltaTime) {
     // ---------------------------- ball ----------------------------
         modelMatrix_ball = glm::mat4(1.0f);
         
-        if (ball_path_reversed)
+        if (ball_path_reversed) {
+            ball_movement.y *= -1.0;
             ball_position -= ball_movement * ball_speed * deltaTime;
-        else
+        }
+        else {
+            ball_movement.x *= -1.0;
             ball_position += ball_movement * ball_speed * deltaTime;
-        
+        }
+    
         if (touchedTop(ball_position)) {
             cout << "WALL TOP IS TOUCHED\n";
             ball_path_reversed = true;
@@ -250,12 +257,14 @@ void updateBall(float deltaTime) {
         }
 
         else if (areColliding(ball_position, p1_position)) {
-            ball_position += ball_movement * ball_speed * deltaTime;
+//            ball_path_reversed = true;
+            ball_position += (ball_movement * ball_speed * deltaTime);
             cout << "PADDLE ONE IS TOUCHED\n";
     //        modelMatrix_ball = glm::translate(modelMatrix_ball, -1.5f * ball_position);
         }
 
         else if (areColliding(ball_position, p2_position)) {
+//            ball_path_reversed = true;
             ball_position += ball_movement * ball_speed * deltaTime;
             cout << "PADDLE TWO IS TOUCHED\n";
     //        modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
