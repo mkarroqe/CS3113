@@ -137,8 +137,8 @@ void ProcessInput() {
     
     // Ball
     if (keys[SDL_SCANCODE_SPACE]) {
-        ball_movement.x = 1.0f;
-        ball_movement.y = 0.5f;
+//        ball_movement.x = 1.0f;
+        ball_movement.y = 1.0f;
     }
     if (glm::length(ball_movement) > 1.0f) {
         ball_movement = glm::normalize(ball_movement);
@@ -167,68 +167,119 @@ void ProcessInput() {
     }
 }
 
-bool isOutofBounds(glm::vec3 ball_position) {
-    float top = 3.0;
+bool touchedWall(glm::vec3 ball_position) {
+    float top = 2.0;
     float bottom = -3.0;
-    float right = 4.0;
-    float left = -4.0;
     
     if ((ball_position[1] > top) || (ball_position[1] < bottom))
-        return true;
-    if ((ball_position[0] > right) || (ball_position[0] < left))
         return true;
     
     return false;
 }
 
-bool missedPaddle(glm::vec3 ball_position) {
+bool isPastPaddles(glm::vec3 ball_position) {
+    float right = 4.0f;
+    float left = -4.0f;
+    
+    if ((ball_position[1] > right) || (ball_position[1] < left))
+        return true;
+    
     return false;
 }
+
+bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
+    // Ball Info
+    float x1 = ball_position[0];
+    float y1 = ball_position[1];
+    float w1 = 1;
+    float h1 = 1;
+    
+    // Paddle Info
+    float x2 = p_position[0];
+    float y2 = p_position[1];
+    float w2 = 1;
+    float h2 = 1;
+    
+    float x_diff = fabs(x2 - x1);
+    float y_diff = fabs(y2 - y1);
+    
+    float x_dist = x_diff - ((w1 + w2) / 2);
+    float y_dist = y_diff - ((h1 + h2) / 2);
+    
+    if ((x_dist == 0) && (y_dist == 0))
+        return true;
+    
+    return false;
+}
+
+//bool touching_paddle2(glm::vec3 ball_position) {
+//    float top = p2_position[1] + 0.5f;
+//    float bottom = p2_position[1] - 0.5f;
+//    float right = p2_position[0] + 0.1f;
+//    float left = p2_position[0] - 0.1f;
+//
+//    if ((ball_position[0] < right) && (ball_position[1] < top) && (ball_position[1] > bottom)) {
+//        return true;
+//    }
+//    if ((ball_position[1] > top) || (ball_position[1] < bottom))
+//        return true;
+//    if ((ball_position[0] > right) || (ball_position[0] < left))
+//        return true;
+//
+//    return false;
+//}
 
 float lastTicks = 0.0f;
 
 void Update() {
-    if (isOutofBounds(ball_position))
-        gameIsRunning = false;
-    if (missedPaddle(ball_position))
+    if (isPastPaddles(ball_position))
         gameIsRunning = false;
     
     float ticks = (float)SDL_GetTicks() / 1000.0f;
     float deltaTime = ticks - lastTicks;
     lastTicks = ticks;
     
-    // Add (direction * units per second * elapsed time)
+    // ---------------------------- ball ----------------------------
     ball_position += ball_movement * ball_speed * deltaTime;
     modelMatrix_ball = glm::mat4(1.0f);
-    if (ball_position[0] > 2.5f) {
-//        cout << "it's the if!\n";
-        modelMatrix_ball = glm::translate(modelMatrix_ball, -ball_position);
+    
+    if (touchedWall(ball_position)) {
+        cout << "WALL IS TOUCHED\n";
+        modelMatrix_ball = glm::translate(-1.0f * modelMatrix_ball, ball_position);
+    }
+    else if (areColliding(ball_position, p1_position)) {
+        cout << "PADDLE TWO IS TOUCHED\n";
+        modelMatrix_ball = glm::translate(modelMatrix_ball, -1.5f * ball_position);
+    }
+    else if (areColliding(ball_position, p2_position)) {
+        cout << "PADDLE ONE IS TOUCHED\n";
+        modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
     }
     else {
         modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
-//        cout << "it's the else\n";
     }
     modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
-//
-//    if (ball_position[0] < 5) {
-//        cout << "ball_position: " + to_string(ball_position[0]) + "\t" + to_string(ball_position[1]) + "\t" + to_string(ball_position[2]) + "\n\n";
-//    }
-    
     modelMatrix_ball = glm::scale(modelMatrix_ball, glm::vec3(0.35f, 0.35f, 1.0f));
     
+//    cout << "ball_position:   " + to_string(ball_position[0]) + "\t " + to_string(ball_position[1]) + "\t" + to_string(ball_position[2]) + "\n\n";
+    
+    // --------------------------- /ball ----------------------------
+    
+    // ---------------------------- pad1 ----------------------------
     p1_position += p1_movement * p1_speed * deltaTime;
     modelMatrix_p1 = glm::mat4(1.0f);
     modelMatrix_p1 = glm::translate(modelMatrix_p1, glm::vec3(-4.5f, 1.0f, 0.0f));
     modelMatrix_p1 = glm::translate(modelMatrix_p1, p1_position);
     modelMatrix_p1 = glm::scale(modelMatrix_p1, glm::vec3(0.35f, 2.55f, 1.0f));
+    // --------------------------- /pad1 ----------------------------
     
+    // ---------------------------- pad2 ----------------------------
     p2_position += p2_movement * p2_speed * deltaTime;
     modelMatrix_p2 = glm::mat4(1.0f);
     modelMatrix_p2 = glm::translate(modelMatrix_p2, glm::vec3(4.5f, 0.0f, 0.0f));
     modelMatrix_p2 = glm::translate(modelMatrix_p2, p2_position);
-    cout << "p2_position:   " + to_string(p2_position[0]) + "\t " + to_string(p2_position[1]) + "\t" + to_string(p2_position[2]) + "\n\n";
-    
     modelMatrix_p2 = glm::scale(modelMatrix_p2, glm::vec3(0.35f, 2.55f, 1.0f));
+    // --------------------------- /pad2 ----------------------------
 }
 
 void Render() {
@@ -237,7 +288,7 @@ void Render() {
     float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
     float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
     
-    // ---------------------- ball ----------------------
+    // ---------------------------- ball ----------------------------
     program.SetModelMatrix(modelMatrix_ball);
     
     glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
@@ -250,9 +301,9 @@ void Render() {
     
     glDisableVertexAttribArray(program.positionAttribute);
     glDisableVertexAttribArray(program.texCoordAttribute);
-    // --------------------- /ball ----------------------
+    // --------------------------- /ball ----------------------------
     
-    // ---------------------- pad1 ----------------------
+    // ---------------------------- pad1 ----------------------------
     program.SetModelMatrix(modelMatrix_p1);
     
     glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
@@ -265,10 +316,10 @@ void Render() {
     
     glDisableVertexAttribArray(program.positionAttribute);
     glDisableVertexAttribArray(program.texCoordAttribute);
-    // --------------------- /pad1 ----------------------
+    // --------------------------- /pad1 ----------------------------
     
-    // ---------------------- pad2 ----------------------
-    program.SetModelMatrix(modelMatrix_p2); // mama birdie
+    // ---------------------------- pad2 ----------------------------
+    program.SetModelMatrix(modelMatrix_p2);
     
     glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
     glEnableVertexAttribArray(program.positionAttribute);
@@ -280,12 +331,13 @@ void Render() {
     
     glDisableVertexAttribArray(program.positionAttribute);
     glDisableVertexAttribArray(program.texCoordAttribute);
-    // --------------------- /pad2 ----------------------
+    // --------------------------- /pad2 ----------------------------
     
     SDL_GL_SwapWindow(displayWindow);
 }
 
 void Shutdown() {
+    cout << "Thanks for playing, game over!\n";
     SDL_Quit();
 }
 
