@@ -2,7 +2,7 @@
 Make Pong!
 - Needs a paddle on each side that can move individually. ✔ 
 - Needs an object that bounces off of:
-  - *the paddles*
+  - *the paddles* [IN PROGRESS]
   - top/bottom wall  ✔ 
 - Does not need to keep score but must detect when someone wins.  ✔ 
 - Can use images or untextured polygons. ✔ 
@@ -14,5 +14,3 @@ Make Pong!
 
 # Bloopers
 - ![blooper-1](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/blooper-1.gif)
-- ![inprog](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demo-inprog.gif)
-
