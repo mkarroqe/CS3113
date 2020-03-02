@@ -234,8 +234,10 @@ void Update() {
     
     if (touchedWall(ball_position)) {
         cout << "WALL IS TOUCHED\n";
-        modelMatrix_ball = glm::rotate(modelMatrix_ball, glm::radians(ball_rotate), -ball_position);
-        modelMatrix_ball = glm::translate(-modelMatrix_ball, -ball_position);
+        ball_position = -1.0f * ball_position;
+        
+        modelMatrix_ball = glm::rotate(modelMatrix_ball, glm::radians(ball_rotate), ball_position);
+        modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
     }
     
     else if (areColliding(ball_position, p1_position)) {
