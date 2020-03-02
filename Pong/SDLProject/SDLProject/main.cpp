@@ -225,11 +225,12 @@ bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     float x_dist = x_diff - ((w1 + w2) / 2);
     float y_dist = y_diff - ((h1 + h2) / 2);
     
-    if ((x_dist < 0) && (y_dist < 0))
+    if ((x_dist < 0) && (y_dist < 0)) {
         cout << "x_dist: " << x_dist << "\n";
         cout << "y_dist: " << y_dist << "\n";
         
         return true;
+    }
     
     return false;
 }
@@ -239,11 +240,11 @@ void updateBall(float deltaTime) {
         modelMatrix_ball = glm::mat4(1.0f);
         
         if (ball_path_reversed) {
-            ball_movement.y *= -1.0;
+//            ball_movement.y *= -1.0;
             ball_position -= ball_movement * ball_speed * deltaTime;
         }
         else {
-            ball_movement.x *= -1.0;
+//            ball_movement.x *= -1.0;
             ball_position += ball_movement * ball_speed * deltaTime;
         }
     
