@@ -190,14 +190,14 @@ bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     // Ball Info
     float x1 = ball_position.x;
     float y1 = ball_position.y;
-    float w1 = ball_width - 0.1f;   // playing with these values
-    float h1 = ball_height - 0.1f;  // playing with these values
+    float w1 = ball_width + 0.1f;   // playing with these values
+    float h1 = ball_height + 0.1f;  // playing with these values
 
     // Paddle Info
     float x2 = p_position.x;
     float y2 = p_position.y;
-    float w2 = p_width - 0.1f;      // playing with these values
-    float h2 = p_height - 0.1f;     // playing with these values
+    float w2 = p_width - 0.5f;      // playing with these values
+    float h2 = p_height - 0.5f;     // playing with these values
 
     float x_diff = fabs(x2 - x1);
     float y_diff = fabs(y2 - y1);
