@@ -32,25 +32,27 @@ glm::mat4 viewMatrix, projectionMatrix;
 glm::mat4 modelMatrix_p1, modelMatrix_p2, modelMatrix_ball;
 
 // Ball Initalization
-glm::vec3 ball_position = glm::vec3(0, 0, 0); // Start at 0, 0, 0
-glm::vec3 ball_movement = glm::vec3(0, 0, 0); // Don't go anywhere (yet)
+glm::vec3 ball_position = glm::vec3(0, 0, 0);
+glm::vec3 ball_movement = glm::vec3(0, 0, 0);
 glm::vec3 ball_scale = glm::vec3(0.35f, 0.35f, 1.0f);
 float ball_speed = 3.0f;
 float ball_rotate = 1.0f;
 bool ball_path_reversed = false;
 
 // Paddle 1 Initalization
-glm::vec3 p1_position = glm::vec3(0, 0, 0); // Start at 0, 0, 0
-glm::vec3 p1_movement = glm::vec3(0, 0, 0); // Don't go anywhere (yet)
-float p1_speed = 3.0f;
+glm::vec3 p1_position = glm::vec3(-2.3, 0, 0);
+glm::vec3 p1_movement = glm::vec3(0, 0, 0);
+float p1_speed = 2.0f;
 
 // Paddle 2 Initalization
-glm::vec3 p2_position = glm::vec3(0, 0, 0); // Start at 0, 0, 0
+glm::vec3 p2_position = glm::vec3(2.3, 0, 0);
 glm::vec3 p2_movement = glm::vec3(0, 0, 0); // Don't go anywhere (yet)
-float p2_speed = 3.0f;
+float p2_speed = 2.0f;
 
 // Both Paddles
 glm::vec3 p_scale = glm::vec3(0.35f, 2.55f, 1.0f);
+float p_height = p_scale.y;
+float p_width = p_scale.x;
 
 // ------------------ /INITIALIZATION OF ONSCREEN ITEMS -------------------
 
@@ -114,6 +116,14 @@ void Initialize() {
     ballTextureID = LoadTexture("ball.png");
 }
 
+bool touchingTop(glm::vec3 position, float height) {
+    return ((position.y + (height / 2.0f)) < 2.54f);
+}
+
+bool touchingBottom(glm::vec3 position, float height) {
+    return ((position.y - (height / 2.0f)) > -2.54f);
+}
+
 void ProcessInput() {
     p1_movement = glm::vec3(0); // so that if nothing is pressed, we don't go anywhere
     p2_movement = glm::vec3(0);
@@ -129,15 +139,10 @@ void ProcessInput() {
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
                     case SDLK_LEFT:
-                        // Move the player left
                         break;
-                        
                     case SDLK_RIGHT:
-                        // Move the player right
                         break;
-                        
                     case SDLK_SPACE:
-                        // Some sort of action
                         break;
                 }
                 break; // SDL_KEYDOWN
@@ -148,7 +153,7 @@ void ProcessInput() {
     
     // Ball
     if (keys[SDL_SCANCODE_SPACE]) {
-        ball_movement.x = 2.5f;
+        ball_movement.x = 1.0f;
         ball_movement.y = 1.0f;
     }
     if (glm::length(ball_movement) > 1.0f) {
@@ -156,10 +161,10 @@ void ProcessInput() {
     }
     
     // Paddle 1
-    if (keys[SDL_SCANCODE_W]) {
+    if ((keys[SDL_SCANCODE_W]) && touchingTop(p1_position, p_height)) {
         p1_movement.y = 1.0f;
     }
-    else if (keys[SDL_SCANCODE_S]) {
+    else if ((keys[SDL_SCANCODE_S]) && touchingBottom(p1_position, p_height)) {
         p1_movement.y = -1.0f;
     }
     if (glm::length(p1_movement) > 1.0f) {
@@ -167,10 +172,10 @@ void ProcessInput() {
     }
     
     // Paddle 2
-    if (keys[SDL_SCANCODE_UP]) {
+    if ((keys[SDL_SCANCODE_UP]) && touchingTop(p2_position, p_height)) {
         p2_movement.y = 1.0f;
     }
-    else if (keys[SDL_SCANCODE_DOWN]) {
+    else if ((keys[SDL_SCANCODE_DOWN]) && touchingBottom(p2_position, p_height)) {
         p2_movement.y = -1.0f;
     }
     if (glm::length(p2_movement) > 1.0f) {
@@ -280,7 +285,7 @@ void updateP1(float deltaTime) {
     // ---------------------------- pad1 ----------------------------
     p1_position += p1_movement * p1_speed * deltaTime;
     modelMatrix_p1 = glm::mat4(1.0f);
-    modelMatrix_p1 = glm::translate(modelMatrix_p1, glm::vec3(-4.5f, 1.0f, 0.0f));
+    modelMatrix_p1 = glm::translate(modelMatrix_p1, p1_position);
     modelMatrix_p1 = glm::translate(modelMatrix_p1, p1_position);
     modelMatrix_p1 = glm::scale(modelMatrix_p1, p_scale);
     // --------------------------- /pad1 ----------------------------
@@ -290,7 +295,7 @@ void updateP2(float deltaTime) {
     // ---------------------------- pad2 ----------------------------
     p2_position += p2_movement * p2_speed * deltaTime;
     modelMatrix_p2 = glm::mat4(1.0f);
-    modelMatrix_p2 = glm::translate(modelMatrix_p2, glm::vec3(4.5f, 0.0f, 0.0f));
+    modelMatrix_p2 = glm::translate(modelMatrix_p2, p2_position);
     modelMatrix_p2 = glm::translate(modelMatrix_p2, p2_position);
     modelMatrix_p2 = glm::scale(modelMatrix_p2, p_scale);
     // --------------------------- /pad2 ----------------------------
