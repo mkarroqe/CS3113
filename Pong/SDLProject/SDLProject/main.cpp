@@ -38,7 +38,7 @@ glm::vec3 ball_scale = glm::vec3(0.35f, 0.35f, 1.0f);
 float ball_height = 1.0f * ball_scale.y;
 float ball_width = 1.0f * ball_scale.x;
 
-float ball_speed = 3.0f;
+float ball_speed = 3.5f;
 float ball_rotate = 1.0f;
 bool ball_path_reversed = false;
 
@@ -190,14 +190,14 @@ bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     // Ball Info
     float x1 = ball_position.x;
     float y1 = ball_position.y;
-    float w1 = ball_width + 0.1f;   // playing with these values
-    float h1 = ball_height + 0.1f;  // playing with these values
+    float w1 = ball_width + 0.32f;   // playing with these values
+    float h1 = ball_height + 0.32f;  // playing with these values
 
     // Paddle Info
     float x2 = p_position.x;
     float y2 = p_position.y;
-    float w2 = p_width - 0.5f;      // playing with these values
-    float h2 = p_height - 0.5f;     // playing with these values
+    float w2 = p_width + 0.2f;      // playing with these values
+    float h2 = p_height + 0.2f;     // playing with these values
 
     float x_diff = fabs(x2 - x1);
     float y_diff = fabs(y2 - y1);
@@ -205,14 +205,7 @@ bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     float x_dist = x_diff - ((w1 + w2) / 2);
     float y_dist = y_diff - ((h1 + h2) / 2);
 
-    if ((x_dist < 0) && (y_dist < 0)) {
-        cout << "x_dist: " << x_dist << "\n";
-        cout << "y_dist: " << y_dist << "\n";
-
-        return true;
-    }
-
-    return false;
+    return ((x_dist < 0) && (y_dist < 0));
 }
 
 void updateBall(float deltaTime) {
@@ -224,7 +217,10 @@ void updateBall(float deltaTime) {
         ball_movement.y *= -1.0f;
     }
     else if ((areColliding(ball_position, p1_position)) || (areColliding(ball_position, p2_position))) {
-        cout << "Touching a paddle!\n";
+        cout << "Touching a paddle! \n";
+        cout << "Ball: (" << ball_position.x << ", " << ball_position.y << ") \n";
+        cout << "Pad1: (" << p1_position.x << ", " << p1_position.y << ") \n";
+        cout << "Pad2: (" << p2_position.x << ", " << p2_position.y << ") \n\n";
         ball_movement.x *= -1.0f;
     }
     
