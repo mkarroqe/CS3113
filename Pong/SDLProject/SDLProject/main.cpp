@@ -35,6 +35,9 @@ glm::mat4 modelMatrix_p1, modelMatrix_p2, modelMatrix_ball;
 glm::vec3 ball_position = glm::vec3(0, 0, 0);
 glm::vec3 ball_movement = glm::vec3(0, 0, 0);
 glm::vec3 ball_scale = glm::vec3(0.35f, 0.35f, 1.0f);
+float ball_height = ball_scale.y;
+float ball_width = ball_scale.x;
+
 float ball_speed = 3.0f;
 float ball_rotate = 1.0f;
 bool ball_path_reversed = false;
@@ -46,7 +49,7 @@ float p1_speed = 2.0f;
 
 // Paddle 2 Initalization
 glm::vec3 p2_position = glm::vec3(2.3, 0, 0);
-glm::vec3 p2_movement = glm::vec3(0, 0, 0); // Don't go anywhere (yet)
+glm::vec3 p2_movement = glm::vec3(0, 0, 0);
 float p2_speed = 2.0f;
 
 // Both Paddles
@@ -116,12 +119,12 @@ void Initialize() {
     ballTextureID = LoadTexture("ball.png");
 }
 
-bool touchingTop(glm::vec3 position, float height) {
-    return ((position.y + (height / 2.0f)) < 2.54f);
+bool touchingTop(glm::vec3 position, float height, float top) {
+    return !((position.y + (height / 2.0f)) < top);
 }
 
-bool touchingBottom(glm::vec3 position, float height) {
-    return ((position.y - (height / 2.0f)) > -2.54f);
+bool touchingBottom(glm::vec3 position, float height, float bottom) {
+    return !((position.y - (height / 2.0f)) > bottom);
 }
 
 void ProcessInput() {
@@ -153,7 +156,7 @@ void ProcessInput() {
     
     // Ball
     if (keys[SDL_SCANCODE_SPACE]) {
-        ball_movement.x = 1.0f;
+        ball_movement.x = 0.0f;
         ball_movement.y = 1.0f;
     }
     if (glm::length(ball_movement) > 1.0f) {
@@ -161,10 +164,10 @@ void ProcessInput() {
     }
     
     // Paddle 1
-    if ((keys[SDL_SCANCODE_W]) && touchingTop(p1_position, p_height)) {
+    if ((keys[SDL_SCANCODE_W]) && !touchingTop(p1_position, p_height, 2.54f)) {
         p1_movement.y = 1.0f;
     }
-    else if ((keys[SDL_SCANCODE_S]) && touchingBottom(p1_position, p_height)) {
+    else if ((keys[SDL_SCANCODE_S]) && !touchingBottom(p1_position, p_height, -2.54f)) {
         p1_movement.y = -1.0f;
     }
     if (glm::length(p1_movement) > 1.0f) {
@@ -172,10 +175,10 @@ void ProcessInput() {
     }
     
     // Paddle 2
-    if ((keys[SDL_SCANCODE_UP]) && touchingTop(p2_position, p_height)) {
+    if ((keys[SDL_SCANCODE_UP]) && !touchingTop(p2_position, p_height, 2.54f)) {
         p2_movement.y = 1.0f;
     }
-    else if ((keys[SDL_SCANCODE_DOWN]) && touchingBottom(p2_position, p_height)) {
+    else if ((keys[SDL_SCANCODE_DOWN]) && !touchingBottom(p2_position, p_height, -2.54f)) {
         p2_movement.y = -1.0f;
     }
     if (glm::length(p2_movement) > 1.0f) {
@@ -183,26 +186,16 @@ void ProcessInput() {
     }
 }
 
-bool touchedTop(glm::vec3 ball_position) {
-    float top = 3.7;
-    return (ball_position[1] > top);
-}
-
-bool touchedBottom(glm::vec3 ball_position) {
-    float bottom = -3.7;
-    return (ball_position[1] < bottom);
-}
-
 bool isPastPaddles(glm::vec3 ball_position) {
-    float right = 3.2f;
-    float left = -3.2f;
+    float right = 2.5f;
+    float left = -2.5f;
     
-    if (ball_position[1] > right) {
+    if (ball_position.x > right) {
         cout << "\n==============================\n";
         cout << "Player 1 wins!\n";
         return true;
     }
-    else if (ball_position[1] < left) {
+    else if (ball_position.x < left) {
         cout << "\n==============================\n";
         cout << "Player 2 wins!\n";
         return true;
@@ -215,14 +208,14 @@ bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     // Ball Info
     float x1 = ball_position.x;
     float y1 = ball_position.y;
-    float w1 = ball_scale.x;
-    float h1 = ball_scale.y;
+    float w1 = ball_width;
+    float h1 = ball_height;
     
     // Paddle Info
     float x2 = p_position.x;
     float y2 = p_position.y;
-    float w2 = p_scale.x;
-    float h2 = p_scale.y;
+    float w2 = p_width;
+    float h2 = p_height;
     
     float x_diff = fabs(x2 - x1);
     float y_diff = fabs(y2 - y1);
@@ -245,19 +238,19 @@ void updateBall(float deltaTime) {
         modelMatrix_ball = glm::mat4(1.0f);
         
         if (ball_path_reversed) {
-//            ball_movement.y *= -1.0;
+            ball_movement.y *= -1.0;
             ball_position -= ball_movement * ball_speed * deltaTime;
         }
         else {
-//            ball_movement.x *= -1.0;
+            ball_movement.x *= -1.0;
             ball_position += ball_movement * ball_speed * deltaTime;
         }
     
-        if (touchedTop(ball_position)) {
+        if (touchingTop(ball_position, ball_height, 3.7f)) {
             cout << "WALL TOP IS TOUCHED\n";
             ball_path_reversed = true;
         }
-        else if (touchedBottom(ball_position)) {
+        else if (touchingBottom(ball_position, ball_height, -3.7f)) {
             cout << "WALL BOTTOM IS TOUCHED\n";
             ball_path_reversed = false;
         }
