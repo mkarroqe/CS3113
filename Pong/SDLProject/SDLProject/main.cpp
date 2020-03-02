@@ -1,3 +1,7 @@
+// Pong!
+// by: Mary Karroqe
+// Code adapted from CS3113 Class Template + Examples
+
 #define GL_SILENCE_DEPRECATION
 
 #ifdef _WINDOWS
@@ -31,6 +35,7 @@ glm::mat4 modelMatrix_p1, modelMatrix_p2, modelMatrix_ball;
 glm::vec3 ball_position = glm::vec3(0, 0, 0); // Start at 0, 0, 0
 glm::vec3 ball_movement = glm::vec3(0, 0, 0); // Don't go anywhere (yet)
 float ball_speed = 1.0f;
+float ball_rotate = 1.0f;
 
 // Paddle 1 Initalization
 glm::vec3 p1_position = glm::vec3(0, 0, 0); // Start at 0, 0, 0
@@ -137,7 +142,7 @@ void ProcessInput() {
     
     // Ball
     if (keys[SDL_SCANCODE_SPACE]) {
-//        ball_movement.x = 1.0f;
+        ball_movement.x = 1.0f;
         ball_movement.y = 1.0f;
     }
     if (glm::length(ball_movement) > 1.0f) {
@@ -168,8 +173,8 @@ void ProcessInput() {
 }
 
 bool touchedWall(glm::vec3 ball_position) {
-    float top = 2.0;
-    float bottom = -3.0;
+    float top = 1.7;
+    float bottom = -1.7;
     
     if ((ball_position[1] > top) || (ball_position[1] < bottom))
         return true;
@@ -212,28 +217,11 @@ bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     return false;
 }
 
-//bool touching_paddle2(glm::vec3 ball_position) {
-//    float top = p2_position[1] + 0.5f;
-//    float bottom = p2_position[1] - 0.5f;
-//    float right = p2_position[0] + 0.1f;
-//    float left = p2_position[0] - 0.1f;
-//
-//    if ((ball_position[0] < right) && (ball_position[1] < top) && (ball_position[1] > bottom)) {
-//        return true;
-//    }
-//    if ((ball_position[1] > top) || (ball_position[1] < bottom))
-//        return true;
-//    if ((ball_position[0] > right) || (ball_position[0] < left))
-//        return true;
-//
-//    return false;
-//}
-
 float lastTicks = 0.0f;
 
 void Update() {
-    if (isPastPaddles(ball_position))
-        gameIsRunning = false;
+//    if (isPastPaddles(ball_position))
+//        gameIsRunning = false;
     
     float ticks = (float)SDL_GetTicks() / 1000.0f;
     float deltaTime = ticks - lastTicks;
@@ -241,27 +229,33 @@ void Update() {
     
     // ---------------------------- ball ----------------------------
     ball_position += ball_movement * ball_speed * deltaTime;
+    ball_rotate = 180.0f * deltaTime;
     modelMatrix_ball = glm::mat4(1.0f);
     
     if (touchedWall(ball_position)) {
         cout << "WALL IS TOUCHED\n";
-        modelMatrix_ball = glm::translate(-1.0f * modelMatrix_ball, ball_position);
+        modelMatrix_ball = glm::rotate(modelMatrix_ball, glm::radians(ball_rotate), -ball_position);
+        modelMatrix_ball = glm::translate(-modelMatrix_ball, -ball_position);
     }
+    
     else if (areColliding(ball_position, p1_position)) {
         cout << "PADDLE TWO IS TOUCHED\n";
         modelMatrix_ball = glm::translate(modelMatrix_ball, -1.5f * ball_position);
     }
+    
     else if (areColliding(ball_position, p2_position)) {
         cout << "PADDLE ONE IS TOUCHED\n";
         modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
     }
+    
     else {
         modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
     }
+    
     modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
     modelMatrix_ball = glm::scale(modelMatrix_ball, glm::vec3(0.35f, 0.35f, 1.0f));
     
-//    cout << "ball_position:   " + to_string(ball_position[0]) + "\t " + to_string(ball_position[1]) + "\t" + to_string(ball_position[2]) + "\n\n";
+    cout << "ball_position:   " + to_string(ball_position[0]) + "\t " + to_string(ball_position[1]) + "\t" + to_string(ball_position[2]) + "\n\n";
     
     // --------------------------- /ball ----------------------------
     
