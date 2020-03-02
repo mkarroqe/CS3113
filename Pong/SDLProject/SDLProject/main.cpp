@@ -35,8 +35,8 @@ glm::mat4 modelMatrix_p1, modelMatrix_p2, modelMatrix_ball;
 glm::vec3 ball_position = glm::vec3(0, 0, 0);
 glm::vec3 ball_movement = glm::vec3(0, 0, 0);
 glm::vec3 ball_scale = glm::vec3(0.35f, 0.35f, 1.0f);
-float ball_height = ball_scale.y;
-float ball_width = ball_scale.x;
+float ball_height = 1.0f * ball_scale.y;
+float ball_width = 1.0f * ball_scale.x;
 
 float ball_speed = 3.0f;
 float ball_rotate = 1.0f;
@@ -54,8 +54,8 @@ float p2_speed = 2.0f;
 
 // Both Paddles
 glm::vec3 p_scale = glm::vec3(0.35f, 2.55f, 1.0f);
-float p_height = p_scale.y;
-float p_width = p_scale.x;
+float p_height = 1.0f * p_scale.y;
+float p_width = 1.0f * p_scale.x;
 
 // ------------------ /INITIALIZATION OF ONSCREEN ITEMS -------------------
 
@@ -190,65 +190,47 @@ bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     // Ball Info
     float x1 = ball_position.x;
     float y1 = ball_position.y;
-    float w1 = ball_width;
-    float h1 = ball_height;
-    
+    float w1 = ball_width - 0.1f;   // playing with these values
+    float h1 = ball_height - 0.1f;  // playing with these values
+
     // Paddle Info
     float x2 = p_position.x;
     float y2 = p_position.y;
-    float w2 = p_width;
-    float h2 = p_height;
-    
+    float w2 = p_width - 0.1f;      // playing with these values
+    float h2 = p_height - 0.1f;     // playing with these values
+
     float x_diff = fabs(x2 - x1);
     float y_diff = fabs(y2 - y1);
-    
+
     float x_dist = x_diff - ((w1 + w2) / 2);
     float y_dist = y_diff - ((h1 + h2) / 2);
-    
+
     if ((x_dist < 0) && (y_dist < 0)) {
         cout << "x_dist: " << x_dist << "\n";
         cout << "y_dist: " << y_dist << "\n";
-        
+
         return true;
     }
-    
+
     return false;
 }
 
 void updateBall(float deltaTime) {
     // ---------------------------- ball ----------------------------
-        modelMatrix_ball = glm::mat4(1.0f);
-        
-        if (ball_path_reversed) {
-            ball_movement.y *= -1.0f;
-            ball_position -= ball_movement * ball_speed * deltaTime;
-        }
-        else {
-            ball_movement.y *= 1.0;
-            ball_position += ball_movement * ball_speed * deltaTime;
-        }
+    modelMatrix_ball = glm::mat4(1.0f);
     
-        if (touchingTop(ball_position, ball_height, 3.7f)) {
-            ball_path_reversed = true;
-        }
-        else if (touchingBottom(ball_position, ball_height, -3.7f)) {
-            ball_path_reversed = false;
-        }
-
-        else if (areColliding(ball_position, p1_position)) {
-            ball_path_reversed = true;
-            ball_position += (ball_movement * ball_speed * deltaTime);
-            cout << "PADDLE ONE IS TOUCHED\n";
-        }
-
-        else if (areColliding(ball_position, p2_position)) {
-            ball_path_reversed = true;
-            ball_position -= ball_movement * ball_speed * deltaTime;
-            cout << "PADDLE TWO IS TOUCHED\n";
-        }
-        
-        modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
-        modelMatrix_ball = glm::scale(modelMatrix_ball, ball_scale);
+    if ((touchingTop(ball_position, ball_height, 3.7f) || touchingBottom(ball_position, ball_height, -3.7f))) {
+        cout << "Touching a wall!\n";
+        ball_movement.y *= -1.0f;
+    }
+    else if ((areColliding(ball_position, p1_position)) || (areColliding(ball_position, p2_position))) {
+        cout << "Touching a paddle!\n";
+        ball_movement.x *= -1.0f;
+    }
+    
+    ball_position += ball_movement * ball_speed * deltaTime;
+    modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
+    modelMatrix_ball = glm::scale(modelMatrix_ball, ball_scale);
     // --------------------------- /ball ----------------------------
 }
 
