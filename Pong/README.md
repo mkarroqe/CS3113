@@ -10,3 +10,7 @@ Make Pong!
 # Demo
 *still in progress, currently:* <br/><br/>
 ![inprog](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demo-inprog.gif)
+
+# Bloopers
+![blooper-1](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/blooper-1.gif)
+
