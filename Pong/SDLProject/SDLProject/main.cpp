@@ -186,24 +186,6 @@ void ProcessInput() {
     }
 }
 
-bool isPastPaddles(glm::vec3 ball_position) {
-    float right = 4.0f;
-    float left = -4.0f;
-    
-    if (ball_position.x > right) {
-        cout << "\n==============================\n";
-        cout << "Player 1 wins!\n";
-        return true;
-    }
-    else if (ball_position.x < left) {
-        cout << "\n==============================\n";
-        cout << "Player 2 wins!\n";
-        return true;
-    }
-    
-    return false;
-}
-
 bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     // Ball Info
     float x1 = ball_position.x;
@@ -238,7 +220,7 @@ void updateBall(float deltaTime) {
         modelMatrix_ball = glm::mat4(1.0f);
         
         if (ball_path_reversed) {
-            ball_movement.y *= -1.0;
+            ball_movement.y *= -1.0f;
             ball_position -= ball_movement * ball_speed * deltaTime;
         }
         else {
@@ -254,17 +236,15 @@ void updateBall(float deltaTime) {
         }
 
         else if (areColliding(ball_position, p1_position)) {
-//            ball_path_reversed = true;
+            ball_path_reversed = true;
             ball_position += (ball_movement * ball_speed * deltaTime);
             cout << "PADDLE ONE IS TOUCHED\n";
-    //        modelMatrix_ball = glm::translate(modelMatrix_ball, -1.5f * ball_position);
         }
 
         else if (areColliding(ball_position, p2_position)) {
-//            ball_path_reversed = true;
-            ball_position += ball_movement * ball_speed * deltaTime;
+            ball_path_reversed = true;
+            ball_position -= ball_movement * ball_speed * deltaTime;
             cout << "PADDLE TWO IS TOUCHED\n";
-    //        modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
         }
         
         modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
@@ -290,6 +270,24 @@ void updateP2(float deltaTime) {
     modelMatrix_p2 = glm::translate(modelMatrix_p2, p2_position);
     modelMatrix_p2 = glm::scale(modelMatrix_p2, p_scale);
     // --------------------------- /pad2 ----------------------------
+}
+
+bool isPastPaddles(glm::vec3 ball_position) {
+    float right = 5.0f;
+    float left = -5.0f;
+    
+    if (ball_position.x > right) {
+        cout << "\n==============================\n";
+        cout << "Player 1 wins!\n";
+        return true;
+    }
+    else if (ball_position.x < left) {
+        cout << "\n==============================\n";
+        cout << "Player 2 wins!\n";
+        return true;
+    }
+    
+    return false;
 }
 
 float lastTicks = 0.0f;
