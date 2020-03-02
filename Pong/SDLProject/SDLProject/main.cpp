@@ -19,7 +19,6 @@
 #include "stb_image.h"
 
 #include <iostream>
-#include <time.h>
 using namespace std;
 
 SDL_Window* displayWindow;
@@ -35,6 +34,7 @@ glm::mat4 modelMatrix_p1, modelMatrix_p2, modelMatrix_ball;
 // Ball Initalization
 glm::vec3 ball_position = glm::vec3(0, 0, 0); // Start at 0, 0, 0
 glm::vec3 ball_movement = glm::vec3(0, 0, 0); // Don't go anywhere (yet)
+glm::vec3 ball_scale = glm::vec3(0.35f, 0.35f, 1.0f);
 float ball_speed = 3.0f;
 float ball_rotate = 1.0f;
 bool ball_path_reversed = false;
@@ -48,6 +48,10 @@ float p1_speed = 3.0f;
 glm::vec3 p2_position = glm::vec3(0, 0, 0); // Start at 0, 0, 0
 glm::vec3 p2_movement = glm::vec3(0, 0, 0); // Don't go anywhere (yet)
 float p2_speed = 3.0f;
+
+// Both Paddles
+glm::vec3 p_scale = glm::vec3(0.35f, 2.55f, 1.0f);
+
 // ------------------ /INITIALIZATION OF ONSCREEN ITEMS -------------------
 
 // ------------------------------- TEXTURES -------------------------------
@@ -206,14 +210,14 @@ bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     // Ball Info
     float x1 = ball_position[0];
     float y1 = ball_position[1];
-    float w1 = 0.2;                 // I'm not sure about this value and don't know how to find it :/
-    float h1 = 2.0;                 // I'm not sure about this value and don't know how to find it :/
+    float w1 = ball_scale.x;
+    float h1 = ball_scale.y;
     
     // Paddle Info
     float x2 = p_position[0];
     float y2 = p_position[1];
-    float w2 = 1;
-    float h2 = 1;
+    float w2 = p_scale.x;
+    float h2 = p_scale.y;
     
     float x_diff = fabs(x2 - x1);
     float y_diff = fabs(y2 - y1);
@@ -227,6 +231,61 @@ bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     return false;
 }
 
+void updateBall(float deltaTime) {
+    // ---------------------------- ball ----------------------------
+        modelMatrix_ball = glm::mat4(1.0f);
+        
+        if (ball_path_reversed)
+            ball_position -= ball_movement * ball_speed * deltaTime;
+        else
+            ball_position += ball_movement * ball_speed * deltaTime;
+        
+        if (touchedTop(ball_position)) {
+            cout << "WALL TOP IS TOUCHED\n";
+            ball_path_reversed = true;
+        }
+        else if (touchedBottom(ball_position)) {
+            cout << "WALL BOTTOM IS TOUCHED\n";
+            ball_path_reversed = false;
+        }
+
+        else if (areColliding(ball_position, p1_position)) {
+            ball_position += ball_movement * ball_speed * deltaTime;
+            cout << "PADDLE ONE IS TOUCHED\n";
+    //        modelMatrix_ball = glm::translate(modelMatrix_ball, -1.5f * ball_position);
+        }
+
+        else if (areColliding(ball_position, p2_position)) {
+            ball_position += ball_movement * ball_speed * deltaTime;
+            cout << "PADDLE TWO IS TOUCHED\n";
+    //        modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
+        }
+        
+        modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
+        modelMatrix_ball = glm::scale(modelMatrix_ball, ball_scale);
+    // --------------------------- /ball ----------------------------
+}
+
+void updateP1(float deltaTime) {
+    // ---------------------------- pad1 ----------------------------
+    p1_position += p1_movement * p1_speed * deltaTime;
+    modelMatrix_p1 = glm::mat4(1.0f);
+    modelMatrix_p1 = glm::translate(modelMatrix_p1, glm::vec3(-4.5f, 1.0f, 0.0f));
+    modelMatrix_p1 = glm::translate(modelMatrix_p1, p1_position);
+    modelMatrix_p1 = glm::scale(modelMatrix_p1, p_scale);
+    // --------------------------- /pad1 ----------------------------
+}
+
+void updateP2(float deltaTime) {
+    // ---------------------------- pad2 ----------------------------
+    p2_position += p2_movement * p2_speed * deltaTime;
+    modelMatrix_p2 = glm::mat4(1.0f);
+    modelMatrix_p2 = glm::translate(modelMatrix_p2, glm::vec3(4.5f, 0.0f, 0.0f));
+    modelMatrix_p2 = glm::translate(modelMatrix_p2, p2_position);
+    modelMatrix_p2 = glm::scale(modelMatrix_p2, p_scale);
+    // --------------------------- /pad2 ----------------------------
+}
+
 float lastTicks = 0.0f;
 
 void Update() {
@@ -237,116 +296,35 @@ void Update() {
     float deltaTime = ticks - lastTicks;
     lastTicks = ticks;
     
-    // ---------------------------- ball ----------------------------
-    modelMatrix_ball = glm::mat4(1.0f);
-//    srand(time(NULL));
-//    ball_movement[0] *= 1.25;
-    
-    
-    if (ball_path_reversed)
-        ball_position -= ball_movement * ball_speed * deltaTime;
-    else
-        ball_position += ball_movement * ball_speed * deltaTime;
-    
-    if (touchedTop(ball_position)) {
-        cout << "WALL TOP IS TOUCHED\n";
-        ball_path_reversed = true;
-    }
-    else if (touchedBottom(ball_position)) {
-        cout << "WALL BOTTOM IS TOUCHED\n";
-        ball_path_reversed = false;
-    }
+    updateBall(deltaTime);
+    updateP1(deltaTime);
+    updateP2(deltaTime);
+}
 
-    else if (areColliding(ball_position, p1_position)) {
-//        ball_position[0] = 0.75f;
-        ball_position += ball_movement * ball_speed * deltaTime;
-        cout << "PADDLE ONE IS TOUCHED\n";
-        modelMatrix_ball = glm::translate(modelMatrix_ball, -1.5f * ball_position);
-    }
-
-    else if (areColliding(ball_position, p2_position)) {
-//        ball_position[0] = 1.5f;
-        ball_position += ball_movement * ball_speed * deltaTime;
-        cout << "PADDLE TWO IS TOUCHED\n";
-        modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
-    }
+void render_object(glm::mat4 modelMatrix, GLuint textureID) {
+    float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
+    float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
     
-    modelMatrix_ball = glm::translate(modelMatrix_ball, ball_position);
-    modelMatrix_ball = glm::scale(modelMatrix_ball, glm::vec3(0.35f, 0.35f, 1.0f));
+    program.SetModelMatrix(modelMatrix);
     
-//    cout << "ball_position:   " + to_string(ball_position[0]) + "\t " + to_string(ball_position[1]) + "\t" + to_string(ball_position[2]) + "\n\n";
+    glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program.positionAttribute);
+    glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
+    glEnableVertexAttribArray(program.texCoordAttribute);
     
-    // --------------------------- /ball ----------------------------
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
     
-    // ---------------------------- pad1 ----------------------------
-    p1_position += p1_movement * p1_speed * deltaTime;
-    modelMatrix_p1 = glm::mat4(1.0f);
-    modelMatrix_p1 = glm::translate(modelMatrix_p1, glm::vec3(-4.5f, 1.0f, 0.0f));
-    modelMatrix_p1 = glm::translate(modelMatrix_p1, p1_position);
-    modelMatrix_p1 = glm::scale(modelMatrix_p1, glm::vec3(0.35f, 2.55f, 1.0f));
-    // --------------------------- /pad1 ----------------------------
-    
-    // ---------------------------- pad2 ----------------------------
-    p2_position += p2_movement * p2_speed * deltaTime;
-    modelMatrix_p2 = glm::mat4(1.0f);
-    modelMatrix_p2 = glm::translate(modelMatrix_p2, glm::vec3(4.5f, 0.0f, 0.0f));
-    modelMatrix_p2 = glm::translate(modelMatrix_p2, p2_position);
-    modelMatrix_p2 = glm::scale(modelMatrix_p2, glm::vec3(0.35f, 2.55f, 1.0f));
-    
-//    cout << "p2_position:   " + to_string(p2_position[0]) + "\t " + to_string(p2_position[1]) + "\t" + to_string(p2_position[2]) + "\n";
-    // --------------------------- /pad2 ----------------------------
+    glDisableVertexAttribArray(program.positionAttribute);
+    glDisableVertexAttribArray(program.texCoordAttribute);
 }
 
 void Render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
-    float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
-    float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
-    
-    // ---------------------------- ball ----------------------------
-    program.SetModelMatrix(modelMatrix_ball);
-    
-    glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program.positionAttribute);
-    glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
-    glEnableVertexAttribArray(program.texCoordAttribute);
-    
-    glBindTexture(GL_TEXTURE_2D, ballTextureID);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    
-    glDisableVertexAttribArray(program.positionAttribute);
-    glDisableVertexAttribArray(program.texCoordAttribute);
-    // --------------------------- /ball ----------------------------
-    
-    // ---------------------------- pad1 ----------------------------
-    program.SetModelMatrix(modelMatrix_p1);
-    
-    glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program.positionAttribute);
-    glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
-    glEnableVertexAttribArray(program.texCoordAttribute);
-    
-    glBindTexture(GL_TEXTURE_2D, paddleTextureID);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    
-    glDisableVertexAttribArray(program.positionAttribute);
-    glDisableVertexAttribArray(program.texCoordAttribute);
-    // --------------------------- /pad1 ----------------------------
-    
-    // ---------------------------- pad2 ----------------------------
-    program.SetModelMatrix(modelMatrix_p2);
-    
-    glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program.positionAttribute);
-    glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
-    glEnableVertexAttribArray(program.texCoordAttribute);
-    
-    glBindTexture(GL_TEXTURE_2D, paddleTextureID);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    
-    glDisableVertexAttribArray(program.positionAttribute);
-    glDisableVertexAttribArray(program.texCoordAttribute);
-    // --------------------------- /pad2 ----------------------------
+    render_object(modelMatrix_ball, ballTextureID);
+    render_object(modelMatrix_p1, paddleTextureID);
+    render_object(modelMatrix_p2, paddleTextureID);
     
     SDL_GL_SwapWindow(displayWindow);
 }
