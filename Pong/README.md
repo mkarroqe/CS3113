@@ -13,6 +13,5 @@ Make Pong!
 *still in progress*
 
 # Bloopers
-- ![blooper-1](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-1.gif)
-- ![blooper-1](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-2.gif)
-- ![blooper-1](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-3.gif)
+| ![blooper-1](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-1.gif) | ![blooper-2](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-2.gif) | ![blooper-2](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-3.gif) |
+| - | - | - |
