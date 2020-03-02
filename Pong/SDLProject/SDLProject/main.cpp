@@ -156,7 +156,7 @@ void ProcessInput() {
     
     // Ball
     if (keys[SDL_SCANCODE_SPACE]) {
-        ball_movement.x = 0.0f;
+        ball_movement.x = 1.0f;
         ball_movement.y = 1.0f;
     }
     if (glm::length(ball_movement) > 1.0f) {
@@ -187,8 +187,8 @@ void ProcessInput() {
 }
 
 bool isPastPaddles(glm::vec3 ball_position) {
-    float right = 2.5f;
-    float left = -2.5f;
+    float right = 4.0f;
+    float left = -4.0f;
     
     if (ball_position.x > right) {
         cout << "\n==============================\n";
@@ -242,16 +242,14 @@ void updateBall(float deltaTime) {
             ball_position -= ball_movement * ball_speed * deltaTime;
         }
         else {
-            ball_movement.x *= -1.0;
+            ball_movement.y *= 1.0;
             ball_position += ball_movement * ball_speed * deltaTime;
         }
     
         if (touchingTop(ball_position, ball_height, 3.7f)) {
-            cout << "WALL TOP IS TOUCHED\n";
             ball_path_reversed = true;
         }
         else if (touchingBottom(ball_position, ball_height, -3.7f)) {
-            cout << "WALL BOTTOM IS TOUCHED\n";
             ball_path_reversed = false;
         }
 
