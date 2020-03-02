@@ -10,7 +10,8 @@ Make Pong!
 - You can have both players using the keyboard if you want. ✔ 
 
 # Demo
-*still in progress*
+*still in progress* <br/>
+![status](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/status.gif)
 
 # Bloopers
 ![blooper-1](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-1.gif)
