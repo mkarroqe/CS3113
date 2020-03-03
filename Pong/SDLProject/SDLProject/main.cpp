@@ -19,12 +19,22 @@
 #include "stb_image.h"
 
 #include <iostream>
+#include <time.h>
 using namespace std;
 
 SDL_Window* displayWindow;
-bool gameIsRunning = true;
-
 ShaderProgram program;
+
+bool gameIsRunning = true;
+int winner = -1;
+int p1_score, p2_score = 0;
+
+void printScore() {
+    cout << "\n````````````````````````````````\n";
+    cout << "\t\t P1: " << p1_score << "\t";
+    cout << "P2: " << p2_score << "\n";
+    cout << "````````````````````````````````\n\n";
+}
 
 // ------------------- INITIALIZATION OF ONSCREEN ITEMS -------------------
 // Initialize Matricies for paddles + ball
@@ -43,12 +53,12 @@ float ball_rotate = 1.0f;
 bool ball_path_reversed = false;
 
 // Paddle 1 Initalization
-glm::vec3 p1_position = glm::vec3(-4.5, 0, 0);
+glm::vec3 p1_position = glm::vec3(-4.75, 0, 0);
 glm::vec3 p1_movement = glm::vec3(0, 0, 0);
 float p1_speed = 3.85f;
 
 // Paddle 2 Initalization
-glm::vec3 p2_position = glm::vec3(4.5, 0, 0);
+glm::vec3 p2_position = glm::vec3(4.75, 0, 0);
 glm::vec3 p2_movement = glm::vec3(0, 0, 0);
 float p2_speed = 3.85f;
 
@@ -87,7 +97,7 @@ GLuint LoadTexture(const char* filePath) {
 
 void Initialize() {
     SDL_Init(SDL_INIT_VIDEO);
-    displayWindow = SDL_CreateWindow("Pong", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
+    displayWindow = SDL_CreateWindow("Pong!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
     SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
     SDL_GL_MakeCurrent(displayWindow, context);
     
@@ -156,8 +166,10 @@ void ProcessInput() {
     
     // Ball
     if (keys[SDL_SCANCODE_SPACE]) {
-        ball_movement.x = 1.0f;
-        ball_movement.y = 1.0f;
+        srand(time(0));                     // random seed
+        int slope = (rand() % 3) - 1;       // spice up the initial throw so it's not the same every time
+        ball_movement.x = 1.0f * slope;
+        ball_movement.y = 1.0f * slope;
     }
     if (glm::length(ball_movement) > 1.0f) {
         ball_movement = glm::normalize(ball_movement);
@@ -190,14 +202,14 @@ bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     // Ball Info
     float x1 = ball_position.x;
     float y1 = ball_position.y;
-    float w1 = ball_width;   // playing with these values
-    float h1 = ball_height;  // playing with these values
+    float w1 = ball_width - 0.2f;
+    float h1 = ball_height - 0.2f;
 
     // Paddle Info
     float x2 = p_position.x;
     float y2 = p_position.y;
-    float w2 = p_width;      // playing with these values
-    float h2 = p_height;     // playing with these values
+    float w2 = p_width;
+    float h2 = p_height;
 
     float x_diff = fabs(x2 - x1);
     float y_diff = fabs(y2 - y1);
@@ -213,14 +225,14 @@ void updateBall(float deltaTime) {
     modelMatrix_ball = glm::mat4(1.0f);
     
     if ((touchingTop(ball_position, ball_height, 3.7f) || touchingBottom(ball_position, ball_height, -3.7f))) {
-        cout << "Touching a wall!\n";
+//        cout << "Touching a wall!\n";
         ball_movement.y *= -1.0f;
     }
     else if ((areColliding(ball_position, p1_position)) || (areColliding(ball_position, p2_position))) {
-        cout << "Touching a paddle! \n";
-        cout << "Ball: (" << ball_position.x << ", " << ball_position.y << ") \n";
-        cout << "Pad1: (" << p1_position.x << ", " << p1_position.y << ") \n";
-        cout << "Pad2: (" << p2_position.x << ", " << p2_position.y << ") \n\n";
+//        cout << "Touching a paddle! \n";
+//        cout << "Ball: (" << ball_position.x << ", " << ball_position.y << ") \n";
+//        cout << "Pad1: (" << p1_position.x << ", " << p1_position.y << ") \n";
+//        cout << "Pad2: (" << p2_position.x << ", " << p2_position.y << ") \n\n";
         ball_movement.x *= -1.0f;
     }
     
@@ -249,28 +261,43 @@ void updateP2(float deltaTime) {
 }
 
 bool isPastPaddles(glm::vec3 ball_position) {
-    float right = 5.0f;
-    float left = -5.0f;
+    float right = 4.8f;
+    float left = -4.8f;
     
     if (ball_position.x > right) {
-        cout << "\n==============================\n";
-        cout << "Player 1 wins!\n";
+        p1_score += 1;
+        if (p1_score == 3)
+            winner = 1;
+        
+        cout << "\n````````````````````````````````\n";
+        cout << "\t\tCurrent Scores: \n";
+        printScore();
+        
         return true;
     }
     else if (ball_position.x < left) {
-        cout << "\n==============================\n";
-        cout << "Player 2 wins!\n";
+        p2_score += 1;
+        if (p1_score == 3)
+            winner = 2;
+        
+        cout << "\n````````````````````````````````\n";
+        cout << "\t\tCurrent Scores: \n";
+        printScore();
+        
         return true;
     }
-    
     return false;
 }
 
 float lastTicks = 0.0f;
 
 void Update() {
-    if (isPastPaddles(ball_position))
-        gameIsRunning = false;
+    if (isPastPaddles(ball_position)) {
+        if ((p1_score == 3) || (p2_score == 3))
+            gameIsRunning = false;
+        else
+            ball_position = glm::vec3(0, 0, 0);
+    }
     
     float ticks = (float)SDL_GetTicks() / 1000.0f;
     float deltaTime = ticks - lastTicks;
@@ -310,8 +337,12 @@ void Render() {
 }
 
 void Shutdown() {
-    cout << "Thanks for playing, game over!\n";
-    cout << "==============================\n\n";
+    cout << "\n================================\n";
+    cout << "\t\t Player " << winner << " wins!\n";
+    cout << "\t\t Final Scores:\n";
+    printScore();
+    cout << " Thanks for playing, game over!\n";
+    cout << "================================\n\n";
     SDL_Quit();
 }
 
