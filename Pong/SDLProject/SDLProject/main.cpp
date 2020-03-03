@@ -38,19 +38,19 @@ glm::vec3 ball_scale = glm::vec3(0.35f, 0.35f, 1.0f);
 float ball_height = 1.0f * ball_scale.y;
 float ball_width = 1.0f * ball_scale.x;
 
-float ball_speed = 3.5f;
+float ball_speed = 4.5f;
 float ball_rotate = 1.0f;
 bool ball_path_reversed = false;
 
 // Paddle 1 Initalization
-glm::vec3 p1_position = glm::vec3(-2.3, 0, 0);
+glm::vec3 p1_position = glm::vec3(-4.5, 0, 0);
 glm::vec3 p1_movement = glm::vec3(0, 0, 0);
-float p1_speed = 2.0f;
+float p1_speed = 3.85f;
 
 // Paddle 2 Initalization
-glm::vec3 p2_position = glm::vec3(2.3, 0, 0);
+glm::vec3 p2_position = glm::vec3(4.5, 0, 0);
 glm::vec3 p2_movement = glm::vec3(0, 0, 0);
-float p2_speed = 2.0f;
+float p2_speed = 3.85f;
 
 // Both Paddles
 glm::vec3 p_scale = glm::vec3(0.35f, 2.55f, 1.0f);
@@ -164,10 +164,10 @@ void ProcessInput() {
     }
     
     // Paddle 1
-    if ((keys[SDL_SCANCODE_W]) && !touchingTop(p1_position, p_height, 2.54f)) {
+    if ((keys[SDL_SCANCODE_W]) && !touchingTop(p1_position, p_height, 3.7f)) {
         p1_movement.y = 1.0f;
     }
-    else if ((keys[SDL_SCANCODE_S]) && !touchingBottom(p1_position, p_height, -2.54f)) {
+    else if ((keys[SDL_SCANCODE_S]) && !touchingBottom(p1_position, p_height, -3.7f)) {
         p1_movement.y = -1.0f;
     }
     if (glm::length(p1_movement) > 1.0f) {
@@ -175,10 +175,10 @@ void ProcessInput() {
     }
     
     // Paddle 2
-    if ((keys[SDL_SCANCODE_UP]) && !touchingTop(p2_position, p_height, 2.54f)) {
+    if ((keys[SDL_SCANCODE_UP]) && !touchingTop(p2_position, p_height, 3.7f)) {
         p2_movement.y = 1.0f;
     }
-    else if ((keys[SDL_SCANCODE_DOWN]) && !touchingBottom(p2_position, p_height, -2.54f)) {
+    else if ((keys[SDL_SCANCODE_DOWN]) && !touchingBottom(p2_position, p_height, -3.7f)) {
         p2_movement.y = -1.0f;
     }
     if (glm::length(p2_movement) > 1.0f) {
@@ -190,14 +190,14 @@ bool areColliding(glm::vec3 ball_position, glm::vec3 p_position) {
     // Ball Info
     float x1 = ball_position.x;
     float y1 = ball_position.y;
-    float w1 = ball_width + 0.32f;   // playing with these values
-    float h1 = ball_height + 0.32f;  // playing with these values
+    float w1 = ball_width;   // playing with these values
+    float h1 = ball_height;  // playing with these values
 
     // Paddle Info
     float x2 = p_position.x;
     float y2 = p_position.y;
-    float w2 = p_width + 0.2f;      // playing with these values
-    float h2 = p_height + 0.2f;     // playing with these values
+    float w2 = p_width;      // playing with these values
+    float h2 = p_height;     // playing with these values
 
     float x_diff = fabs(x2 - x1);
     float y_diff = fabs(y2 - y1);
@@ -235,7 +235,6 @@ void updateP1(float deltaTime) {
     p1_position += p1_movement * p1_speed * deltaTime;
     modelMatrix_p1 = glm::mat4(1.0f);
     modelMatrix_p1 = glm::translate(modelMatrix_p1, p1_position);
-    modelMatrix_p1 = glm::translate(modelMatrix_p1, p1_position);
     modelMatrix_p1 = glm::scale(modelMatrix_p1, p_scale);
     // --------------------------- /pad1 ----------------------------
 }
@@ -244,7 +243,6 @@ void updateP2(float deltaTime) {
     // ---------------------------- pad2 ----------------------------
     p2_position += p2_movement * p2_speed * deltaTime;
     modelMatrix_p2 = glm::mat4(1.0f);
-    modelMatrix_p2 = glm::translate(modelMatrix_p2, p2_position);
     modelMatrix_p2 = glm::translate(modelMatrix_p2, p2_position);
     modelMatrix_p2 = glm::scale(modelMatrix_p2, p_scale);
     // --------------------------- /pad2 ----------------------------
