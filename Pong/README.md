@@ -8,9 +8,11 @@ Make Pong!
 - You can have both players using the keyboard if you want. ✔ 
 
 # Demo
-#### *Huzzah! First to 3 points wins!*
-| ![status](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/final-demo.gif) | ![results](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/results.png) |
-| - | - |
+#### *Huzzah! It works!*
+| <ul> <li> Player 1: `W + S keys` </li> <li> Player 2: `Up + Down` Arrow Keys </li> <li> `Space` to start </li> <li> First to 3 points wins! </li> </ul> | ![results](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/results.png) |
+| :- | - |
+
+![final](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/final-demo.gif)
 
 # Bloopers
 | ![blooper-1](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-1.gif) | ![blooper-2](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-2.gif) | ![blooper-3](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-3.gif) | ![blooper-4](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-4.gif) |
