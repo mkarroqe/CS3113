@@ -16,11 +16,14 @@
 
 #include "Entity.hpp"
 
+#define ENEMY_COUNT 3
+
 #include <iostream>
 using namespace std;
 
 struct GameState {
     Entity* player;
+    Entity* enemies;
 };
 
 GameState state;
@@ -100,6 +103,20 @@ void Initialize() {
     state.player->animTime = 0;
     state.player->animCols = 4;
     state.player->animRows = 4;
+    
+    state.enemies = new Entity[ENEMY_COUNT];
+    GLuint enemyTextureID = LoadTexture("ctg.png");
+    
+    state.enemies[0].textureID = enemyTextureID;
+    state.enemies[0].position = glm::vec3(-2.0f, -2.0f, 0.0f);
+    
+    state.enemies[1].textureID = enemyTextureID;
+    state.enemies[1].position = glm::vec3(0.0f, -2.0f, 0.0f);
+//    state.enemies[1].movement.y = -1;
+//    state.enemies[1].speed = 1.0f;
+    
+    state.enemies[2].textureID = enemyTextureID;
+    state.enemies[2].position = glm::vec3(2.0f, -2.0f, 0.0f);
 }
 
 void ProcessInput() {
@@ -164,6 +181,10 @@ void Update() {
     float deltaTime = ticks - lastTicks;
     lastTicks = ticks;
     
+    for (int i = 0; i < ENEMY_COUNT; i++) {
+        state.enemies[i].Update(deltaTime);
+    }
+    
     state.player->Update(deltaTime);
     
 }
@@ -171,6 +192,9 @@ void Update() {
 void Render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
+    for (int i = 0; i < ENEMY_COUNT; i++) {
+        state.enemies[i].Render(&program);
+    }
     state.player->Render(&program);
     
     SDL_GL_SwapWindow(displayWindow);
