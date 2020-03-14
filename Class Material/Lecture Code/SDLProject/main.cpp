@@ -33,6 +33,17 @@ float player_speed = 1.0f;
 
 GLuint playerTextureID;
 
+int* animRight = new int[4] {3, 7, 11, 15};
+int* animLeft = new int[4] {1, 5, 9, 13};
+int* animUp = new int[4] {2, 6, 10, 14};
+int* animDown = new int[4] {0, 4, 8, 12};
+
+int* animIndices = animRight;
+
+int animFrames = 4;
+int animIndex = 0;
+float animTime = 0;
+
 GLuint LoadTexture(const char* filePath) {
     int w, h, n;
     unsigned char* image = stbi_load(filePath, &w, &h, &n, STBI_rgb_alpha);
@@ -54,9 +65,37 @@ GLuint LoadTexture(const char* filePath) {
     return textureID;
 }
 
+void DrawSpriteFromTextureAtlas(ShaderProgram *program, GLuint textureID, int index) {
+    int cols = 4; // could make function params instead
+    int rows = 4;
+    
+    float u = (float)(index % cols) / (float)cols;
+    float v = (float)(index / cols) / (float)rows;
+    
+    float width = 1.0f / (float)cols;
+    float height = 1.0f / (float)rows;
+    
+    float texCoords[] = {u, v + height, u + width, v + height, u + width, v, u, v + height, u + width, v, u, v};
+    
+    float vertices[] = {-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5};
+    
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    
+    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program->positionAttribute);
+    
+    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
+    glEnableVertexAttribArray(program->texCoordAttribute);
+    
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    
+    glDisableVertexAttribArray(program->positionAttribute);
+    glDisableVertexAttribArray(program->texCoordAttribute);
+}
+
 void Initialize() {
     SDL_Init(SDL_INIT_VIDEO);
-    displayWindow = SDL_CreateWindow("Prof is goin' places", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
+    displayWindow = SDL_CreateWindow("Lil George is Movin'", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
     SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
     SDL_GL_MakeCurrent(displayWindow, context);
     
@@ -84,7 +123,7 @@ void Initialize() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    playerTextureID = LoadTexture("ctg.png");
+    playerTextureID = LoadTexture("george_0.png");
 }
 
 void ProcessInput() {
@@ -121,16 +160,20 @@ void ProcessInput() {
     
     if (keys[SDL_SCANCODE_LEFT]) {
         player_movement.x = -1.0f;
+        animIndices = animLeft;
     }
     else if (keys[SDL_SCANCODE_RIGHT]) {
         player_movement.x = 1.0f;
+        animIndices = animRight;
     }
     
     if (keys[SDL_SCANCODE_UP]) {
         player_movement.y = 1.0f;
+        animIndices = animUp;
     }
     else if (keys[SDL_SCANCODE_DOWN]) {
         player_movement.y = -1.0f;
+        animIndices = animDown;
     }
     
     if (glm::length(player_movement) > 1.0f) {
@@ -145,6 +188,20 @@ void Update() {
     float deltaTime = ticks - lastTicks;
     lastTicks = ticks;
     
+    if (glm::length(player_movement) != 0) {
+        animTime += deltaTime;
+        
+        if (animTime >= 0.25f) { // can change character "speed" here
+            animTime = 0.0f;
+            animIndex++;
+            if (animIndex >= animFrames) {
+                animIndex = 0;
+            }
+        }
+    } else {
+        animIndex = 0;
+    }
+    
     // Add (direction * units per second * elapsed time)
     player_position += player_movement * player_speed * deltaTime;
     
@@ -157,19 +214,21 @@ void Render() {
     
     program.SetModelMatrix(modelMatrix);
     
-    float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
-    float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
+    DrawSpriteFromTextureAtlas(&program, playerTextureID, animIndices[animIndex]);
     
-    glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program.positionAttribute);
-    glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
-    glEnableVertexAttribArray(program.texCoordAttribute);
-    
-    glBindTexture(GL_TEXTURE_2D, playerTextureID);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    
-    glDisableVertexAttribArray(program.positionAttribute);
-    glDisableVertexAttribArray(program.texCoordAttribute);
+//    float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
+//    float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
+//
+//    glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+//    glEnableVertexAttribArray(program.positionAttribute);
+//    glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
+//    glEnableVertexAttribArray(program.texCoordAttribute);
+//
+//    glBindTexture(GL_TEXTURE_2D, playerTextureID);
+//    glDrawArrays(GL_TRIANGLES, 0, 6);
+//
+//    glDisableVertexAttribArray(program.positionAttribute);
+//    glDisableVertexAttribArray(program.texCoordAttribute);
     
     SDL_GL_SwapWindow(displayWindow);
 }
