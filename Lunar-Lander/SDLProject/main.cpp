@@ -105,11 +105,17 @@ void Initialize() {
     float x_pos = -2.5f;
     float y_pos = 1.5f;
     
-    for (int i = 0; i < PLATFORM_COUNT - OBS_COUNT; i++) {
+    for (int i = 0; i < PLATFORM_COUNT; i++) {
         if (i > 5 && i < 9) {
             state.platforms[i].textureID = grassPlatformTextureID;
             state.platforms[i].position = glm::vec3(x_pos_base, -3.25, 0);
             x_pos_base += 1;
+        }
+        else if (i > 9) {
+            state.platforms[i].textureID = obstaclePlatformTextureID;
+            state.platforms[i].position = glm::vec3(x_pos, y_pos, 0);
+            x_pos += 2.5;
+            y_pos -= 1;
         }
         else {
             state.platforms[i].textureID = basePlatformTextureID;
@@ -118,14 +124,6 @@ void Initialize() {
         }
     }
     for (int i = 0; i < OBS_COUNT; i++) {
-        state.platforms[i + PLATFORM_COUNT].textureID = obstaclePlatformTextureID;
-        state.platforms[i + PLATFORM_COUNT].position = glm::vec3(x_pos, y_pos, 0);
-        x_pos += 2.5;
-        y_pos -= 1;
-    }
-    
-    // Add Obstacle Tiles
-    for (int i = PLATFORM_COUNT; i < (PLATFORM_COUNT + OBS_COUNT); i++) {
         
     }
     
