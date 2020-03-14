@@ -18,6 +18,7 @@
 		EC07C6FB23FF36F70034D60B /* ctg.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC07C6FA23FF369F0034D60B /* ctg.png */; };
 		ECEDAD9D241D35FD00323CA3 /* george_0.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDAD9C241D35F400323CA3 /* george_0.png */; };
 		ECEDADA0241D3FED00323CA3 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEDAD9E241D3FED00323CA3 /* Entity.cpp */; };
+		ECEDADA2241D4FE200323CA3 /* platformPack_tile001.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADA1241D4F9600323CA3 /* platformPack_tile001.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +31,7 @@
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
 				EC07C6FB23FF36F70034D60B /* ctg.png in CopyFiles */,
 				ECEDAD9D241D35FD00323CA3 /* george_0.png in CopyFiles */,
+				ECEDADA2241D4FE200323CA3 /* platformPack_tile001.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +54,7 @@
 		ECEDAD9C241D35F400323CA3 /* george_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = george_0.png; path = "../../Assets/2D Sprites/george_0.png"; sourceTree = "<group>"; };
 		ECEDAD9E241D3FED00323CA3 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		ECEDAD9F241D3FED00323CA3 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
+		ECEDADA1241D4F9600323CA3 /* platformPack_tile001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_tile001.png; path = "../../Assets/2D Sprites/Kenney_SimplifiedPlatformer/PNG/Tiles/platformPack_tile001.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,7 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				ECEDADA1241D4F9600323CA3 /* platformPack_tile001.png */,
 				ECEDAD9C241D35F400323CA3 /* george_0.png */,
 				EC07C6FA23FF369F0034D60B /* ctg.png */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
