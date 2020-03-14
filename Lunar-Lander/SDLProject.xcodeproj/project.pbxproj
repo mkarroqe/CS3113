@@ -15,6 +15,13 @@
 		DBDF1B692323DEEA007CECB1 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B662323DEEA007CECB1 /* SDL2.framework */; };
 		DBDF1B6A2323DEEA007CECB1 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B672323DEEA007CECB1 /* SDL2_image.framework */; };
 		DBDF1B6B2323DEEA007CECB1 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */; };
+		ECEDADA0241D3FED00323CA3 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEDAD9E241D3FED00323CA3 /* Entity.cpp */; };
+		ECEDADAB241D86A300323CA3 /* bird_lander.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADAA241D869B00323CA3 /* bird_lander.png */; };
+		ECEDADAE241D877C00323CA3 /* platformPack_tile045.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADAD241D874500323CA3 /* platformPack_tile045.png */; };
+		ECEDADB0241D87A000323CA3 /* platformPack_tile002.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADAF241D879E00323CA3 /* platformPack_tile002.png */; };
+		ECEDADB2241D8F8100323CA3 /* platformPack_tile000.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADB1241D8F7E00323CA3 /* platformPack_tile000.png */; };
+		ECEDADB4241D8FC100323CA3 /* platformPack_tile004.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADB3241D8FB000323CA3 /* platformPack_tile004.png */; };
+		ECEDADB6241D93A800323CA3 /* platformPack_tile039.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADB5241D93A300323CA3 /* platformPack_tile039.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +32,12 @@
 			dstSubfolderSpec = 6;
 			files = (
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
+				ECEDADAB241D86A300323CA3 /* bird_lander.png in CopyFiles */,
+				ECEDADAE241D877C00323CA3 /* platformPack_tile045.png in CopyFiles */,
+				ECEDADB4241D8FC100323CA3 /* platformPack_tile004.png in CopyFiles */,
+				ECEDADB2241D8F8100323CA3 /* platformPack_tile000.png in CopyFiles */,
+				ECEDADB0241D87A000323CA3 /* platformPack_tile002.png in CopyFiles */,
+				ECEDADB6241D93A800323CA3 /* platformPack_tile039.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +56,14 @@
 		DBDF1B662323DEEA007CECB1 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		DBDF1B672323DEEA007CECB1 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
+		ECEDAD9E241D3FED00323CA3 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		ECEDAD9F241D3FED00323CA3 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
+		ECEDADAA241D869B00323CA3 /* bird_lander.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bird_lander.png; path = "../../Class Material/Assets/2D Sprites/bird_lander.png"; sourceTree = "<group>"; };
+		ECEDADAD241D874500323CA3 /* platformPack_tile045.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_tile045.png; path = "../../Class Material/Assets/2D Sprites/Kenney_SimplifiedPlatformer/PNG/Tiles/platformPack_tile045.png"; sourceTree = "<group>"; };
+		ECEDADAF241D879E00323CA3 /* platformPack_tile002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_tile002.png; path = "../../Class Material/Assets/2D Sprites/Kenney_SimplifiedPlatformer/PNG/Tiles/platformPack_tile002.png"; sourceTree = "<group>"; };
+		ECEDADB1241D8F7E00323CA3 /* platformPack_tile000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_tile000.png; path = "../../Class Material/Assets/2D Sprites/Kenney_SimplifiedPlatformer/PNG/Tiles/platformPack_tile000.png"; sourceTree = "<group>"; };
+		ECEDADB3241D8FB000323CA3 /* platformPack_tile004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_tile004.png; path = "../../Class Material/Assets/2D Sprites/Kenney_SimplifiedPlatformer/PNG/Tiles/platformPack_tile004.png"; sourceTree = "<group>"; };
+		ECEDADB5241D93A300323CA3 /* platformPack_tile039.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_tile039.png; path = "../../Class Material/Assets/2D Sprites/Kenney_SimplifiedPlatformer/PNG/Tiles/platformPack_tile039.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,12 +102,20 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				ECEDADB1241D8F7E00323CA3 /* platformPack_tile000.png */,
+				ECEDADAF241D879E00323CA3 /* platformPack_tile002.png */,
+				ECEDADB3241D8FB000323CA3 /* platformPack_tile004.png */,
+				ECEDADB5241D93A300323CA3 /* platformPack_tile039.png */,
+				ECEDADAD241D874500323CA3 /* platformPack_tile045.png */,
+				ECEDADAA241D869B00323CA3 /* bird_lander.png */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
 				DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */,
 				DBDF1B592323DE8D007CECB1 /* ShaderProgram.h */,
 				DBDF1B5C2323DE8D007CECB1 /* shaders */,
 				DBDF1B5A2323DE8D007CECB1 /* stb_image.h */,
 				DBDF1B522323DE3F007CECB1 /* main.cpp */,
+				ECEDAD9E241D3FED00323CA3 /* Entity.cpp */,
+				ECEDAD9F241D3FED00323CA3 /* Entity.hpp */,
 			);
 			path = SDLProject;
 			sourceTree = "<group>";
@@ -161,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */,
+				ECEDADA0241D3FED00323CA3 /* Entity.cpp in Sources */,
 				DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +314,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
@@ -302,6 +333,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
