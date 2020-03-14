@@ -14,35 +14,22 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+#include "Entity.hpp"
+
 #include <iostream>
 using namespace std;
+
+struct GameState {
+    Entity* player;
+};
+
+GameState state;
 
 SDL_Window* displayWindow;
 bool gameIsRunning = true;
 
 ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
-
-// Start at 0, 0, 0
-glm::vec3 player_position = glm::vec3(0, 0, 0);
-
-// Don't go anywhere (yet)
-glm::vec3 player_movement = glm::vec3(0, 0, 0);
-
-float player_speed = 1.0f;
-
-GLuint playerTextureID;
-
-int* animRight = new int[4] {3, 7, 11, 15};
-int* animLeft = new int[4] {1, 5, 9, 13};
-int* animUp = new int[4] {2, 6, 10, 14};
-int* animDown = new int[4] {0, 4, 8, 12};
-
-int* animIndices = animRight;
-
-int animFrames = 4;
-int animIndex = 0;
-float animTime = 0;
 
 GLuint LoadTexture(const char* filePath) {
     int w, h, n;
@@ -63,34 +50,6 @@ GLuint LoadTexture(const char* filePath) {
     stbi_image_free(image);
     
     return textureID;
-}
-
-void DrawSpriteFromTextureAtlas(ShaderProgram *program, GLuint textureID, int index) {
-    int cols = 4; // could make function params instead
-    int rows = 4;
-    
-    float u = (float)(index % cols) / (float)cols;
-    float v = (float)(index / cols) / (float)rows;
-    
-    float width = 1.0f / (float)cols;
-    float height = 1.0f / (float)rows;
-    
-    float texCoords[] = {u, v + height, u + width, v + height, u + width, v, u, v + height, u + width, v, u, v};
-    
-    float vertices[] = {-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5};
-    
-    glBindTexture(GL_TEXTURE_2D, textureID);
-    
-    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program->positionAttribute);
-    
-    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
-    glEnableVertexAttribArray(program->texCoordAttribute);
-    
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    
-    glDisableVertexAttribArray(program->positionAttribute);
-    glDisableVertexAttribArray(program->texCoordAttribute);
 }
 
 void Initialize() {
@@ -123,12 +82,29 @@ void Initialize() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    playerTextureID = LoadTexture("george_0.png");
+    state.player = new Entity();
+    state.player->position = glm::vec3(0);
+    state.player->movement = glm::vec3(0);
+    state.player->speed = 1.0f;
+    state.player->textureID = LoadTexture("george_0.png");
+    
+    state.player->animRight = new int[4] {3, 7, 11, 15};
+    state.player->animLeft = new int[4] {1, 5, 9, 13};
+    state.player->animUp = new int[4] {2, 6, 10, 14};
+    state.player->animDown = new int[4] {0, 4, 8, 12};
+
+    state.player->animIndices = state.player->animRight;
+
+    state.player->animFrames = 4;
+    state.player->animIndex = 0;
+    state.player->animTime = 0;
+    state.player->animCols = 4;
+    state.player->animRows = 4;
 }
 
 void ProcessInput() {
     
-    player_movement = glm::vec3(0); // so that if nothing is pressed, we don't go anywhere
+    state.player->movement = glm::vec3(0); // so that if nothing is pressed, we don't go anywhere
     
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -159,25 +135,25 @@ void ProcessInput() {
     const Uint8 *keys = SDL_GetKeyboardState(NULL);
     
     if (keys[SDL_SCANCODE_LEFT]) {
-        player_movement.x = -1.0f;
-        animIndices = animLeft;
+        state.player->movement.x = -1.0f;
+        state.player->animIndices = state.player->animLeft;
     }
     else if (keys[SDL_SCANCODE_RIGHT]) {
-        player_movement.x = 1.0f;
-        animIndices = animRight;
+        state.player->movement.x = 1.0f;
+        state.player->animIndices = state.player->animRight;
     }
     
     if (keys[SDL_SCANCODE_UP]) {
-        player_movement.y = 1.0f;
-        animIndices = animUp;
+        state.player->movement.y = 1.0f;
+        state.player->animIndices = state.player->animUp;
     }
     else if (keys[SDL_SCANCODE_DOWN]) {
-        player_movement.y = -1.0f;
-        animIndices = animDown;
+        state.player->movement.y = -1.0f;
+        state.player->animIndices = state.player->animDown;
     }
     
-    if (glm::length(player_movement) > 1.0f) {
-        player_movement = glm::normalize(player_movement);
+    if (glm::length(state.player->movement) > 1.0f) {
+        state.player->movement = glm::normalize(state.player->movement);
     }
 }
 
@@ -188,47 +164,14 @@ void Update() {
     float deltaTime = ticks - lastTicks;
     lastTicks = ticks;
     
-    if (glm::length(player_movement) != 0) {
-        animTime += deltaTime;
-        
-        if (animTime >= 0.25f) { // can change character "speed" here
-            animTime = 0.0f;
-            animIndex++;
-            if (animIndex >= animFrames) {
-                animIndex = 0;
-            }
-        }
-    } else {
-        animIndex = 0;
-    }
+    state.player->Update(deltaTime);
     
-    // Add (direction * units per second * elapsed time)
-    player_position += player_movement * player_speed * deltaTime;
-    
-    modelMatrix = glm::mat4(1.0f);
-    modelMatrix = glm::translate(modelMatrix, player_position);
 }
 
 void Render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
-    program.SetModelMatrix(modelMatrix);
-    
-    DrawSpriteFromTextureAtlas(&program, playerTextureID, animIndices[animIndex]);
-    
-//    float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
-//    float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
-//
-//    glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-//    glEnableVertexAttribArray(program.positionAttribute);
-//    glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
-//    glEnableVertexAttribArray(program.texCoordAttribute);
-//
-//    glBindTexture(GL_TEXTURE_2D, playerTextureID);
-//    glDrawArrays(GL_TRIANGLES, 0, 6);
-//
-//    glDisableVertexAttribArray(program.positionAttribute);
-//    glDisableVertexAttribArray(program.texCoordAttribute);
+    state.player->Render(&program);
     
     SDL_GL_SwapWindow(displayWindow);
 }
