@@ -7,11 +7,13 @@ Make a simple version of Lunar Lander:
 - You can use whatever graphics/theme as long as you meet the requirements. ✔
 
 # Demo
-*Coming soon*
-- baby bird falling into nest
+| Pass | Fail |
+| :-: | - |
+![pass](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Lunar-Lander/demos/mission-succ-lag.gif) | ![fail](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Lunar-Lander/demos/mission-fail.gif) |
+| *it likes to take a second.. working on fixing this* | |
 
 # Bloopers
 *Glad we got past this* <br/><br/>
-![blooper-1](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Lunar-Lander/bloopies/blooper-1.gif "Blooper 1")
+![blooper-1](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Lunar-Lander/demos/blooper-1.gif "Blooper 1")
 
   
