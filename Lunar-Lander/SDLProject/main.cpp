@@ -266,11 +266,11 @@ void Render() {
     }
     
     if (state.player->collidedGrass == true) {
-        DrawText(&program, LoadTexture("font1.png"), "Bird is Safe!", 0.5f, -0.25f, glm::vec3(-4.0, 0, 0));
+        DrawText(&program, LoadTexture("font1.png"), "Mission Successful!", 0.5f, -0.25f, glm::vec3(0, 0, 0));
         state.player->isActive = false;
     }
     else if (state.player->isSafe == false) {
-        DrawText(&program, LoadTexture("font1.png"), "Game Over :-(", 0.5f, -0.15f, glm::vec3(0, 0, 0));
+        DrawText(&program, LoadTexture("font1.png"), "Mission Failed :-(", 0.5f, -0.25f, glm::vec3(0, 0, 0));
         state.player->isActive = false;
     }
     
