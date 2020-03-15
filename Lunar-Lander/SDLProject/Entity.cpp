@@ -22,6 +22,10 @@ bool Entity::CheckCollision(Entity *other) {
     return false;
 }
 
+void Entity::CheckCollisionGrass() {
+    
+}
+
 void Entity::CheckCollisionsY(Entity *objects, int objectCount)
 {
     for (int i = 0; i < objectCount; i++)

@@ -52,6 +52,7 @@ public:
     Entity();
     
     bool CheckCollision(Entity *other);
+    void CheckCollisionGrass();
     void CheckCollisionsY(Entity *objects, int objectCount);
     void CheckCollisionsX(Entity *objects, int objectCount);
     void Update(float deltaTime, Entity *platforms, int platformCount);

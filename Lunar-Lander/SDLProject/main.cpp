@@ -87,10 +87,10 @@ void Initialize() {
     
     // Initialize Bird
     state.player = new Entity();
-    state.player->position = glm::vec3(0);
+    state.player->position = glm::vec3(0, 4.5f, 0);
     state.player->movement = glm::vec3(0);
-    state.player->acceleration = glm::vec3(0, - 9.81f, 0);
-    state.player->speed = 2.5f;
+    state.player->acceleration = glm::vec3(0, -1.01f, 0);
+    state.player->speed = 1.5f;
     state.player->textureID = LoadTexture("bird_lander.png");
     
     state.player->jumpPower = 5.0f;
@@ -122,9 +122,6 @@ void Initialize() {
             state.platforms[i].position = glm::vec3(x_pos_base, -3.25, 0);
             x_pos_base += 1;
         }
-    }
-    for (int i = 0; i < OBS_COUNT; i++) {
-        
     }
     
     for (int i = 0; i < (PLATFORM_COUNT + OBS_COUNT); i++ ){
@@ -168,14 +165,13 @@ void ProcessInput() {
 
     if (keys[SDL_SCANCODE_LEFT]) {
         state.player->movement.x = -1.0f;
-        state.player->animIndices = state.player->animLeft;
+        state.player->acceleration.y = -0.01f;
     }
     else if (keys[SDL_SCANCODE_RIGHT]) {
         state.player->movement.x = 1.0f;
-        state.player->animIndices = state.player->animRight;
+        state.player->acceleration.y = -0.01f;
     }
     
-
     if (glm::length(state.player->movement) > 1.0f) {
         state.player->movement = glm::normalize(state.player->movement);
     }
@@ -199,7 +195,6 @@ void Update() {
 
     while (deltaTime >= FIXED_TIMESTEP) {
         state.player->Update(FIXED_TIMESTEP, state.platforms, PLATFORM_COUNT);
-//        state.player->Update(FIXED_TIMESTEP, state.grass_platforms, GRASS_COUNT);
         
         deltaTime -= FIXED_TIMESTEP;
     }
@@ -214,9 +209,6 @@ void Render() {
     for (int i = 0; i < PLATFORM_COUNT; i++) {
         state.platforms[i].Render(&program);
     }
-//    for (int i = 0; i < GRASS_COUNT; i++) {
-//        state.grass_platforms[i].Render(&program);
-//    }
     
     state.player->Render(&program);
     
