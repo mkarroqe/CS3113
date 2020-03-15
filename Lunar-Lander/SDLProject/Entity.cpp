@@ -23,13 +23,6 @@ bool Entity::CheckCollision(Entity *other) {
     return false;
 }
 
-bool Entity::CheckCollisionGrass(Entity* grassTile) {
-    if (CheckCollision(grassTile)) {
-        return true;
-    }
-    return false;
-}
-
 void Entity::CheckCollisionsY(Entity *objects, int objectCount)
 {
     for (int i = 0; i < objectCount; i++)
@@ -101,40 +94,6 @@ void Entity::Update(float deltaTime, Entity *platforms, int platformCount)
     modelMatrix = glm::mat4(1.0f);
     modelMatrix = glm::translate(modelMatrix, position);
 }
-
-//void Entity::DrawSpriteFromTextureAtlas(ShaderProgram *program, GLuint textureID, int index)
-//{
-////    float u = (float)(index % animCols) / (float)animCols;
-////    float v = (float)(index / animCols) / (float)animRows;
-////
-////    float width = 1.0f / (float)animCols;
-////    float height = 1.0f / (float)animRows;
-//    
-//    float u = 1.0f;
-//    float v = 1.0f;
-//    float width = 1.0f;
-//    float height = 1.0f;
-//    
-//    float texCoords[] = { u, v + height, u + width, v + height, u + width, v,
-//        u, v + height, u + width, v, u, v};
-//    
-//    float vertices[]  = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
-//    
-//    glBindTexture(GL_TEXTURE_2D, textureID);
-//    
-//    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-//    glEnableVertexAttribArray(program->positionAttribute);
-//    
-//    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
-//    glEnableVertexAttribArray(program->texCoordAttribute);
-//    
-//    glDrawArrays(GL_TRIANGLES, 0, 6);
-//    
-//    glDisableVertexAttribArray(program->positionAttribute);
-//    glDisableVertexAttribArray(program->texCoordAttribute);
-//}
-
-
 
 void Entity::Render(ShaderProgram *program) {
     if (isActive == false) return;

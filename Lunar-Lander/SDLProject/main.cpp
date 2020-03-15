@@ -223,11 +223,9 @@ void ProcessInput() {
             state.player->movement = glm::normalize(state.player->movement);
         }
     }
-    else if ((state.player->CheckCollisionGrass(&state.platforms[6])) || (state.player->CheckCollisionGrass(&state.platforms[7])) || (state.player->CheckCollisionGrass(&state.platforms[8]))) {
+    else if ((state.player->CheckCollision(&state.platforms[6])) || (state.player->CheckCollision(&state.platforms[7])) || (state.player->CheckCollision(&state.platforms[8]))) {
         
         state.player->collidedGrass = true;
-        state.player->isSafe = true;
-
         std::cout << "Bird is Safe!!\n";
     }
     else {
@@ -267,8 +265,6 @@ void Render() {
         state.platforms[i].Render(&program);
     }
     
-    state.player->Render(&program);
-    
     if (state.player->collidedGrass == true) {
         DrawText(&program, LoadTexture("font1.png"), "Bird is Safe!", 0.5f, -0.25f, glm::vec3(-4.0, 0, 0));
         state.player->isActive = false;
@@ -277,6 +273,8 @@ void Render() {
         DrawText(&program, LoadTexture("font1.png"), "Game Over :-(", 0.5f, -0.15f, glm::vec3(0, 0, 0));
         state.player->isActive = false;
     }
+    
+    state.player->Render(&program);
     
     SDL_GL_SwapWindow(displayWindow);
 }
