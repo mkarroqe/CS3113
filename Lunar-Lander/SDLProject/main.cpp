@@ -78,8 +78,7 @@ void Initialize() {
     glUseProgram(program.programID);
     
     // light cyan
-//    glClearColor(1.9f, 1.0f, 1.0f, 1.0f);
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(1.9f, 1.0f, 1.0f, 1.0f);
     glEnable(GL_BLEND);
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -226,20 +225,15 @@ void ProcessInput() {
     }
     else if ((state.player->CheckCollisionGrass(&state.platforms[6])) || (state.player->CheckCollisionGrass(&state.platforms[7])) || (state.player->CheckCollisionGrass(&state.platforms[8]))) {
         
-//        GLuint fontTextureID = LoadTexture("font1.png");
-//        DrawText(&program, fontTextureID, "Bird is Safe!", 0.5f, -0.25f, glm::vec3(0, 0, 0));
-        DrawText(&program, LoadTexture("font1.png"), "Bird is Safe!", 0.5f, -0.25f, glm::vec3(4.5f, -4.0f, 0));
         state.player->collidedGrass = true;
-        
+        state.player->isSafe = true;
+
         std::cout << "Bird is Safe!!\n";
     }
     else {
-//        DrawText(&program, fontTextureID, "Game Over", 0.5f, -0.25f, glm::vec3(-4.75f, -3.0f, 0));
-        
+        state.player->isSafe = false;
         std::cout << "Game Over\n";
-        state.player->isActive = false;
     }
-
 }
 
 #define FIXED_TIMESTEP 0.0166666f
@@ -262,8 +256,6 @@ void Update() {
         deltaTime -= FIXED_TIMESTEP;
     }
     
-    
-
     accumulator = deltaTime;
 }
 
@@ -277,12 +269,13 @@ void Render() {
     
     state.player->Render(&program);
     
-    if (state.player->isActive && state.player->collidedGrass) {
-        DrawText(&program, LoadTexture("font1.png"), "Bird is Safe!", 0.5f, -0.25f, glm::vec3(0, 0, 0));
+    if (state.player->collidedGrass == true) {
+        DrawText(&program, LoadTexture("font1.png"), "Bird is Safe!", 0.5f, -0.25f, glm::vec3(-4.0, 0, 0));
         state.player->isActive = false;
     }
-    else if (state.player->isActive == false) {
+    else if (state.player->isSafe == false) {
         DrawText(&program, LoadTexture("font1.png"), "Game Over :-(", 0.5f, -0.15f, glm::vec3(0, 0, 0));
+        state.player->isActive = false;
     }
     
     SDL_GL_SwapWindow(displayWindow);
