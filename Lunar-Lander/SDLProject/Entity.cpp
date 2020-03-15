@@ -22,8 +22,11 @@ bool Entity::CheckCollision(Entity *other) {
     return false;
 }
 
-void Entity::CheckCollisionGrass() {
-    
+bool Entity::CheckCollisionGrass(Entity* grassTile) {
+    if (CheckCollision(grassTile)) {
+        return true;
+    }
+    return false;
 }
 
 void Entity::CheckCollisionsY(Entity *objects, int objectCount)
@@ -83,30 +86,7 @@ void Entity::Update(float deltaTime, Entity *platforms, int platformCount)
     collidedBottom = false;
     collidedLeft = false;
     collidedRight = false;
-    
-    if (animIndices != NULL) {
-        if (glm::length(movement) != 0) {
-            animTime += deltaTime;
-
-            if (animTime >= 0.25f)
-            {
-                animTime = 0.0f;
-                animIndex++;
-                if (animIndex >= animFrames)
-                {
-                    animIndex = 0;
-                }
-            }
-        } else {
-            animIndex = 0;
-        }
-    }
-    
-    if (jump) {
-        jump = false;
-        
-        velocity.y += jumpPower;
-    }
+    collidedGrass = false;
     
     velocity.x = movement.x * speed;
     velocity += acceleration * deltaTime;
@@ -123,11 +103,16 @@ void Entity::Update(float deltaTime, Entity *platforms, int platformCount)
 
 void Entity::DrawSpriteFromTextureAtlas(ShaderProgram *program, GLuint textureID, int index)
 {
-    float u = (float)(index % animCols) / (float)animCols;
-    float v = (float)(index / animCols) / (float)animRows;
+//    float u = (float)(index % animCols) / (float)animCols;
+//    float v = (float)(index / animCols) / (float)animRows;
+//
+//    float width = 1.0f / (float)animCols;
+//    float height = 1.0f / (float)animRows;
     
-    float width = 1.0f / (float)animCols;
-    float height = 1.0f / (float)animRows;
+    float u = 1.0f;
+    float v = 1.0f;
+    float width = 1.0f;
+    float height = 1.0f;
     
     float texCoords[] = { u, v + height, u + width, v + height, u + width, v,
         u, v + height, u + width, v, u, v};
@@ -152,11 +137,6 @@ void Entity::Render(ShaderProgram *program) {
     if (isActive == false) return;
     
     program->SetModelMatrix(modelMatrix);
-    
-    if (animIndices != NULL) {
-        DrawSpriteFromTextureAtlas(program, textureID, animIndices[animIndex]);
-        return;
-    }
     
     float vertices[]  = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
     float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };

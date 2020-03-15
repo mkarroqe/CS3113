@@ -21,26 +21,11 @@ public:
     float width = 1;
     float height = 1;
     
-    float jump = false;
-    float jumpPower = 0;
-    
     float speed;
     
     GLuint textureID;
     
     glm::mat4 modelMatrix;
-    
-    int *animRight = NULL;
-    int *animLeft = NULL;
-    int *animUp = NULL;
-    int *animDown = NULL;
-
-    int *animIndices = NULL;
-    int animFrames = 0;
-    int animIndex = 0;
-    float animTime = 0;
-    int animCols = 0;
-    int animRows = 0;
     
     bool isActive = true;
     
@@ -48,11 +33,12 @@ public:
     bool collidedBottom = false;
     bool collidedLeft = false;
     bool collidedRight = false;
-    
+    bool collidedGrass = false;
+        
     Entity();
     
     bool CheckCollision(Entity *other);
-    void CheckCollisionGrass();
+    bool CheckCollisionGrass(Entity* grassTile);
     void CheckCollisionsY(Entity *objects, int objectCount);
     void CheckCollisionsX(Entity *objects, int objectCount);
     void Update(float deltaTime, Entity *platforms, int platformCount);

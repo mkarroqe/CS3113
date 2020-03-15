@@ -89,12 +89,10 @@ void Initialize() {
     state.player = new Entity();
     state.player->position = glm::vec3(0, 4.5f, 0);
     state.player->movement = glm::vec3(0);
-    state.player->acceleration = glm::vec3(0, -1.01f, 0);
+    state.player->acceleration = glm::vec3(0, -0.91f, 0);
     state.player->speed = 1.5f;
     state.player->textureID = LoadTexture("bird_lander.png");
-    
-    state.player->jumpPower = 5.0f;
-    
+        
     // Initialize Base Tiles
     state.platforms = new Entity[PLATFORM_COUNT + OBS_COUNT];
     GLuint basePlatformTextureID = LoadTexture("platformPack_tile002.png");
@@ -106,9 +104,11 @@ void Initialize() {
     float y_pos = 1.5f;
     
     for (int i = 0; i < PLATFORM_COUNT; i++) {
+        // platforms 6, 7, 8
         if (i > 5 && i < 9) {
             state.platforms[i].textureID = grassPlatformTextureID;
             state.platforms[i].position = glm::vec3(x_pos_base, -3.25, 0);
+            state.platforms[i].height = 0.35;
             x_pos_base += 1;
         }
         else if (i > 9) {
@@ -151,11 +151,12 @@ void ProcessInput() {
                         // Move the player right
                         break;
                         
-                    case SDLK_SPACE:
-                        if (state.player->collidedBottom) {
-                            state.player->jump = true;
-                        }
-                        break;
+//                    case SDLK_SPACE:
+//                        if (state.player->collidedBottom) {
+////                            state.player->jump = true;
+//                            std::cout << "Game Over";
+//                        }
+//                        break;
                 }
                 break; // SDL_KEYDOWN
         }
@@ -163,17 +164,26 @@ void ProcessInput() {
     
     const Uint8 *keys = SDL_GetKeyboardState(NULL);
 
-    if (keys[SDL_SCANCODE_LEFT]) {
-        state.player->movement.x = -1.0f;
-        state.player->acceleration.y = -0.01f;
+    if (state.player->collidedBottom == false) {
+        if (keys[SDL_SCANCODE_LEFT]) {
+            state.player->movement.x = -1.0f;
+            state.player->acceleration.y = -0.5f;
+        }
+        else if (keys[SDL_SCANCODE_RIGHT]) {
+            state.player->movement.x = 1.0f;
+            state.player->acceleration.y = -0.5f;
+        }
+        
+        if (glm::length(state.player->movement) > 1.0f) {
+            state.player->movement = glm::normalize(state.player->movement);
+        }
     }
-    else if (keys[SDL_SCANCODE_RIGHT]) {
-        state.player->movement.x = 1.0f;
-        state.player->acceleration.y = -0.01f;
+    else if ((state.player->CheckCollisionGrass(&state.platforms[6])) || (state.player->CheckCollisionGrass(&state.platforms[7])) || (state.player->CheckCollisionGrass(&state.platforms[8]))) {
+        std::cout << "Bird is Safe!!\n";
     }
-    
-    if (glm::length(state.player->movement) > 1.0f) {
-        state.player->movement = glm::normalize(state.player->movement);
+    else {
+        std::cout << "Game Over\n";
+        state.player->isActive = false;
     }
 
 }
@@ -195,9 +205,10 @@ void Update() {
 
     while (deltaTime >= FIXED_TIMESTEP) {
         state.player->Update(FIXED_TIMESTEP, state.platforms, PLATFORM_COUNT);
-        
         deltaTime -= FIXED_TIMESTEP;
     }
+    
+    
 
     accumulator = deltaTime;
 }
