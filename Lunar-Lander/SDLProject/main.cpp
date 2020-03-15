@@ -226,17 +226,18 @@ void ProcessInput() {
     }
     else if ((state.player->CheckCollisionGrass(&state.platforms[6])) || (state.player->CheckCollisionGrass(&state.platforms[7])) || (state.player->CheckCollisionGrass(&state.platforms[8]))) {
         
-        GLuint fontTextureID = LoadTexture("font1.png");
-        DrawText(&program, fontTextureID, "Bird is Safe!", 0.5f, -0.25f, glm::vec3(0, 0, 0));
+//        GLuint fontTextureID = LoadTexture("font1.png");
+//        DrawText(&program, fontTextureID, "Bird is Safe!", 0.5f, -0.25f, glm::vec3(0, 0, 0));
+        DrawText(&program, LoadTexture("font1.png"), "Bird is Safe!", 0.5f, -0.25f, glm::vec3(4.5f, -4.0f, 0));
+        state.player->collidedGrass = true;
         
         std::cout << "Bird is Safe!!\n";
     }
     else {
-        GLuint fontTextureID = LoadTexture("font1.png");
-        DrawText(&program, fontTextureID, "Game Over", 0.5f, -0.25f, glm::vec3(-4.75f, -3.0f, 0));
+//        DrawText(&program, fontTextureID, "Game Over", 0.5f, -0.25f, glm::vec3(-4.75f, -3.0f, 0));
         
         std::cout << "Game Over\n";
-//        state.player->isActive = false;
+        state.player->isActive = false;
     }
 
 }
@@ -274,9 +275,15 @@ void Render() {
         state.platforms[i].Render(&program);
     }
     
-    DrawText(&program, LoadTexture("font1.png"), "Bird is Safe!", 0.5f, -0.25f, glm::vec3(-4.5f, -4.0f, 0));
-    
     state.player->Render(&program);
+    
+    if (state.player->isActive && state.player->collidedGrass) {
+        DrawText(&program, LoadTexture("font1.png"), "Bird is Safe!", 0.5f, -0.25f, glm::vec3(0, 0, 0));
+        state.player->isActive = false;
+    }
+    else if (state.player->isActive == false) {
+        DrawText(&program, LoadTexture("font1.png"), "Game Over :-(", 0.5f, -0.15f, glm::vec3(0, 0, 0));
+    }
     
     SDL_GL_SwapWindow(displayWindow);
 }
