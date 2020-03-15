@@ -22,6 +22,7 @@
 		ECEDADB2241D8F8100323CA3 /* platformPack_tile000.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADB1241D8F7E00323CA3 /* platformPack_tile000.png */; };
 		ECEDADB4241D8FC100323CA3 /* platformPack_tile004.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADB3241D8FB000323CA3 /* platformPack_tile004.png */; };
 		ECEDADB6241D93A800323CA3 /* platformPack_tile039.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADB5241D93A300323CA3 /* platformPack_tile039.png */; };
+		ECEDADB8241E87C300323CA3 /* font1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADB7241E87BA00323CA3 /* font1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +39,7 @@
 				ECEDADB2241D8F8100323CA3 /* platformPack_tile000.png in CopyFiles */,
 				ECEDADB0241D87A000323CA3 /* platformPack_tile002.png in CopyFiles */,
 				ECEDADB6241D93A800323CA3 /* platformPack_tile039.png in CopyFiles */,
+				ECEDADB8241E87C300323CA3 /* font1.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +66,7 @@
 		ECEDADB1241D8F7E00323CA3 /* platformPack_tile000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_tile000.png; path = "../../Class Material/Assets/2D Sprites/Kenney_SimplifiedPlatformer/PNG/Tiles/platformPack_tile000.png"; sourceTree = "<group>"; };
 		ECEDADB3241D8FB000323CA3 /* platformPack_tile004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_tile004.png; path = "../../Class Material/Assets/2D Sprites/Kenney_SimplifiedPlatformer/PNG/Tiles/platformPack_tile004.png"; sourceTree = "<group>"; };
 		ECEDADB5241D93A300323CA3 /* platformPack_tile039.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_tile039.png; path = "../../Class Material/Assets/2D Sprites/Kenney_SimplifiedPlatformer/PNG/Tiles/platformPack_tile039.png"; sourceTree = "<group>"; };
+		ECEDADB7241E87BA00323CA3 /* font1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font1.png; path = "../../Class Material/Assets/Fonts/font1.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +105,7 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				ECEDADB7241E87BA00323CA3 /* font1.png */,
 				ECEDADB1241D8F7E00323CA3 /* platformPack_tile000.png */,
 				ECEDADAF241D879E00323CA3 /* platformPack_tile002.png */,
 				ECEDADB3241D8FB000323CA3 /* platformPack_tile004.png */,

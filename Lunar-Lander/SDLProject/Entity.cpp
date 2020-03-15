@@ -1,4 +1,5 @@
 #include "Entity.hpp"
+#include <vector>
 
 Entity::Entity()
 {
@@ -101,36 +102,71 @@ void Entity::Update(float deltaTime, Entity *platforms, int platformCount)
     modelMatrix = glm::translate(modelMatrix, position);
 }
 
-void Entity::DrawSpriteFromTextureAtlas(ShaderProgram *program, GLuint textureID, int index)
+//void Entity::DrawSpriteFromTextureAtlas(ShaderProgram *program, GLuint textureID, int index)
+//{
+////    float u = (float)(index % animCols) / (float)animCols;
+////    float v = (float)(index / animCols) / (float)animRows;
+////
+////    float width = 1.0f / (float)animCols;
+////    float height = 1.0f / (float)animRows;
+//    
+//    float u = 1.0f;
+//    float v = 1.0f;
+//    float width = 1.0f;
+//    float height = 1.0f;
+//    
+//    float texCoords[] = { u, v + height, u + width, v + height, u + width, v,
+//        u, v + height, u + width, v, u, v};
+//    
+//    float vertices[]  = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
+//    
+//    glBindTexture(GL_TEXTURE_2D, textureID);
+//    
+//    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+//    glEnableVertexAttribArray(program->positionAttribute);
+//    
+//    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
+//    glEnableVertexAttribArray(program->texCoordAttribute);
+//    
+//    glDrawArrays(GL_TRIANGLES, 0, 6);
+//    
+//    glDisableVertexAttribArray(program->positionAttribute);
+//    glDisableVertexAttribArray(program->texCoordAttribute);
+//}
+
+void Entity::DrawText(ShaderProgram *program, GLuint fontTextureID, std::string text, float size, float spacing, glm::vec3 position)
 {
-//    float u = (float)(index % animCols) / (float)animCols;
-//    float v = (float)(index / animCols) / (float)animRows;
-//
-//    float width = 1.0f / (float)animCols;
-//    float height = 1.0f / (float)animRows;
-    
-    float u = 1.0f;
-    float v = 1.0f;
-    float width = 1.0f;
-    float height = 1.0f;
-    
-    float texCoords[] = { u, v + height, u + width, v + height, u + width, v,
-        u, v + height, u + width, v, u, v};
-    
-    float vertices[]  = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
-    
-    glBindTexture(GL_TEXTURE_2D, textureID);
-    
-    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program->positionAttribute);
-    
-    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
-    glEnableVertexAttribArray(program->texCoordAttribute);
-    
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    
-    glDisableVertexAttribArray(program->positionAttribute);
-    glDisableVertexAttribArray(program->texCoordAttribute);
+    float width = 1.0f / 16.0f;
+    float height = 1.0f / 16.0f;
+
+    std::vector<float> vertices;
+    std::vector<float> texCoords;
+
+    for (int i = 0; i < text.size(); i++) {
+        int index = (int)text[i];
+        float offset = (size + spacing) * i;
+        float u = (float)(index % 16) / 16.0f;
+        float v = (float)(index / 16) / 16.0f;
+        
+        vertices.insert(vertices.end(), {
+            offset + (-0.5f * size), 0.5f * size,
+            offset + (-0.5f * size), -0.5f * size,
+            offset + (0.5f * size), 0.5f * size,
+            offset + (0.5f * size), -0.5f * size,
+            offset + (0.5f * size), 0.5f * size,
+            offset + (-0.5f * size), -0.5f * size,
+        });
+        
+        texCoords.insert(texCoords.end(), {
+            u, v,
+            u, v + height,
+            u + width, v,
+            u + width, v + height,
+            u + width, v,
+            u, v + height,
+        });
+
+    } // end of for loop
 }
 
 void Entity::Render(ShaderProgram *program) {

@@ -84,6 +84,7 @@ void Initialize() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    
     // Initialize Game Objects
+//    GLuint fontTextureID = LoadTexture("font1.png");
     
     // Initialize Bird
     state.player = new Entity();
@@ -150,13 +151,6 @@ void ProcessInput() {
                     case SDLK_RIGHT:
                         // Move the player right
                         break;
-                        
-//                    case SDLK_SPACE:
-//                        if (state.player->collidedBottom) {
-////                            state.player->jump = true;
-//                            std::cout << "Game Over";
-//                        }
-//                        break;
                 }
                 break; // SDL_KEYDOWN
         }
@@ -179,9 +173,14 @@ void ProcessInput() {
         }
     }
     else if ((state.player->CheckCollisionGrass(&state.platforms[6])) || (state.player->CheckCollisionGrass(&state.platforms[7])) || (state.player->CheckCollisionGrass(&state.platforms[8]))) {
+        
+//        DrawText(&program, LoadTexture("font1.png"), "Bird is Safe!", 0.5f, -0.25f, glm::vec3(-4.75f, -3.0f, 0));
+        
         std::cout << "Bird is Safe!!\n";
     }
     else {
+//        DrawText(&program, LoadTexture("font1.png"), "Game Over", 0.5f, -0.25f, glm::vec3(-4.75f, -3.0f, 0));
+        
         std::cout << "Game Over\n";
         state.player->isActive = false;
     }
