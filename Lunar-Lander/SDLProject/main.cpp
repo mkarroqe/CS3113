@@ -15,6 +15,7 @@
 #include "stb_image.h"
 
 #include "Entity.hpp"
+#include <vector>
 
 #define PLATFORM_COUNT 13
 #define OBS_COUNT 3
@@ -53,7 +54,6 @@ GLuint LoadTexture(const char* filePath) {
     return textureID;
 }
 
-
 void Initialize() {
     SDL_Init(SDL_INIT_VIDEO);
     displayWindow = SDL_CreateWindow("Bird Lander", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
@@ -78,13 +78,13 @@ void Initialize() {
     glUseProgram(program.programID);
     
     // light cyan
-    glClearColor(1.9f, 1.0f, 1.0f, 1.0f);
+//    glClearColor(1.9f, 1.0f, 1.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glEnable(GL_BLEND);
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    
     // Initialize Game Objects
-//    GLuint fontTextureID = LoadTexture("font1.png");
     
     // Initialize Bird
     state.player = new Entity();
@@ -128,6 +128,58 @@ void Initialize() {
     for (int i = 0; i < (PLATFORM_COUNT + OBS_COUNT); i++ ){
         state.platforms[i].Update(0, NULL, 0);
     }
+}
+
+void DrawText(ShaderProgram *program, GLuint fontTextureID, std::string text, float size, float spacing, glm::vec3 position)
+{
+    float width = 1.0f / 16.0f;
+    float height = 1.0f / 16.0f;
+
+    std::vector<float> vertices;
+    std::vector<float> texCoords;
+
+    for (int i = 0; i < text.size(); i++) {
+        int index = (int)text[i];
+        float offset = (size + spacing) * i;
+        float u = (float)(index % 16) / 16.0f;
+        float v = (float)(index / 16) / 16.0f;
+        
+        vertices.insert(vertices.end(), {
+            offset + (-0.5f * size), 0.5f * size,
+            offset + (-0.5f * size), -0.5f * size,
+            offset + (0.5f * size), 0.5f * size,
+            offset + (0.5f * size), -0.5f * size,
+            offset + (0.5f * size), 0.5f * size,
+            offset + (-0.5f * size), -0.5f * size,
+        });
+        
+        texCoords.insert(texCoords.end(), {
+            u, v,
+            u, v + height,
+            u + width, v,
+            u + width, v + height,
+            u + width, v,
+            u, v + height,
+        });
+
+    } // end of for loop
+    
+    glm::mat4 fontModelMatrix = glm::mat4(1.0f);
+    modelMatrix = glm::translate(fontModelMatrix, position);
+    program->SetModelMatrix(fontModelMatrix);
+    
+    glUseProgram(program->programID);
+
+    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices.data());
+    glEnableVertexAttribArray(program->positionAttribute);
+
+    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords.data());
+    glEnableVertexAttribArray(program->texCoordAttribute);
+
+    glDrawArrays(GL_TRIANGLES, 0, (int)(text.size() * 6));
+
+    glDisableVertexAttribArray(program->positionAttribute);
+    glDisableVertexAttribArray(program->texCoordAttribute);
 }
 
 void ProcessInput() {
@@ -174,15 +226,17 @@ void ProcessInput() {
     }
     else if ((state.player->CheckCollisionGrass(&state.platforms[6])) || (state.player->CheckCollisionGrass(&state.platforms[7])) || (state.player->CheckCollisionGrass(&state.platforms[8]))) {
         
-//        DrawText(&program, LoadTexture("font1.png"), "Bird is Safe!", 0.5f, -0.25f, glm::vec3(-4.75f, -3.0f, 0));
+        GLuint fontTextureID = LoadTexture("font1.png");
+        DrawText(&program, fontTextureID, "Bird is Safe!", 0.5f, -0.25f, glm::vec3(0, 0, 0));
         
         std::cout << "Bird is Safe!!\n";
     }
     else {
-//        DrawText(&program, LoadTexture("font1.png"), "Game Over", 0.5f, -0.25f, glm::vec3(-4.75f, -3.0f, 0));
+        GLuint fontTextureID = LoadTexture("font1.png");
+        DrawText(&program, fontTextureID, "Game Over", 0.5f, -0.25f, glm::vec3(-4.75f, -3.0f, 0));
         
         std::cout << "Game Over\n";
-        state.player->isActive = false;
+//        state.player->isActive = false;
     }
 
 }
@@ -219,6 +273,8 @@ void Render() {
     for (int i = 0; i < PLATFORM_COUNT; i++) {
         state.platforms[i].Render(&program);
     }
+    
+    DrawText(&program, LoadTexture("font1.png"), "Bird is Safe!", 0.5f, -0.25f, glm::vec3(-4.5f, -4.0f, 0));
     
     state.player->Render(&program);
     
