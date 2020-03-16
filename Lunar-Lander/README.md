@@ -10,7 +10,6 @@ Make a simple version of Lunar Lander:
 | Pass | Fail |
 | :-: | - |
 ![pass](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Lunar-Lander/demos/mission-succ-lag.gif) | ![fail](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Lunar-Lander/demos/mission-fail.gif) |
-| *it likes to take a second.. working on fixing this* | |
 
 # Bloopers
 *Glad we got past this* <br/><br/>
