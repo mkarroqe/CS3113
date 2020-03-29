@@ -15,10 +15,12 @@
 		DBDF1B692323DEEA007CECB1 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B662323DEEA007CECB1 /* SDL2.framework */; };
 		DBDF1B6A2323DEEA007CECB1 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B672323DEEA007CECB1 /* SDL2_image.framework */; };
 		DBDF1B6B2323DEEA007CECB1 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */; };
-		EC07C6FB23FF36F70034D60B /* ctg.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC07C6FA23FF369F0034D60B /* ctg.png */; };
-		ECEDAD9D241D35FD00323CA3 /* george_0.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDAD9C241D35F400323CA3 /* george_0.png */; };
+		EC9822282431502F00920AD8 /* platformPack_tile030.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC98222324314EA700920AD8 /* platformPack_tile030.png */; };
+		EC9822292431503100920AD8 /* tp.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC98222424314EAE00920AD8 /* tp.png */; };
+		EC98222A2431503400920AD8 /* virus1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC98222524314EB500920AD8 /* virus1.png */; };
+		EC98222B2431503700920AD8 /* virus2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC98222624314EBC00920AD8 /* virus2.png */; };
+		EC98222C2431503B00920AD8 /* virus3.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC98222724314EC200920AD8 /* virus3.png */; };
 		ECEDADA0241D3FED00323CA3 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEDAD9E241D3FED00323CA3 /* Entity.cpp */; };
-		ECEDADA2241D4FE200323CA3 /* platformPack_tile001.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADA1241D4F9600323CA3 /* platformPack_tile001.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,9 +31,11 @@
 			dstSubfolderSpec = 6;
 			files = (
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
-				EC07C6FB23FF36F70034D60B /* ctg.png in CopyFiles */,
-				ECEDAD9D241D35FD00323CA3 /* george_0.png in CopyFiles */,
-				ECEDADA2241D4FE200323CA3 /* platformPack_tile001.png in CopyFiles */,
+				EC9822282431502F00920AD8 /* platformPack_tile030.png in CopyFiles */,
+				EC9822292431503100920AD8 /* tp.png in CopyFiles */,
+				EC98222A2431503400920AD8 /* virus1.png in CopyFiles */,
+				EC98222B2431503700920AD8 /* virus2.png in CopyFiles */,
+				EC98222C2431503B00920AD8 /* virus3.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,11 +54,13 @@
 		DBDF1B662323DEEA007CECB1 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		DBDF1B672323DEEA007CECB1 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
-		EC07C6FA23FF369F0034D60B /* ctg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ctg.png; path = "../../Assets/2D Sprites/ctg.png"; sourceTree = "<group>"; };
-		ECEDAD9C241D35F400323CA3 /* george_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = george_0.png; path = "../../Assets/2D Sprites/george_0.png"; sourceTree = "<group>"; };
+		EC98222324314EA700920AD8 /* platformPack_tile030.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_tile030.png; path = Sprites/platformPack_tile030.png; sourceTree = SOURCE_ROOT; };
+		EC98222424314EAE00920AD8 /* tp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tp.png; path = Sprites/tp.png; sourceTree = SOURCE_ROOT; };
+		EC98222524314EB500920AD8 /* virus1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = virus1.png; path = Sprites/virus1.png; sourceTree = SOURCE_ROOT; };
+		EC98222624314EBC00920AD8 /* virus2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = virus2.png; path = Sprites/virus2.png; sourceTree = SOURCE_ROOT; };
+		EC98222724314EC200920AD8 /* virus3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = virus3.png; path = Sprites/virus3.png; sourceTree = SOURCE_ROOT; };
 		ECEDAD9E241D3FED00323CA3 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		ECEDAD9F241D3FED00323CA3 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
-		ECEDADA1241D4F9600323CA3 /* platformPack_tile001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_tile001.png; path = "../../Assets/2D Sprites/Kenney_SimplifiedPlatformer/PNG/Tiles/platformPack_tile001.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,9 +99,11 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
-				ECEDADA1241D4F9600323CA3 /* platformPack_tile001.png */,
-				ECEDAD9C241D35F400323CA3 /* george_0.png */,
-				EC07C6FA23FF369F0034D60B /* ctg.png */,
+				EC98222324314EA700920AD8 /* platformPack_tile030.png */,
+				EC98222424314EAE00920AD8 /* tp.png */,
+				EC98222524314EB500920AD8 /* virus1.png */,
+				EC98222624314EBC00920AD8 /* virus2.png */,
+				EC98222724314EC200920AD8 /* virus3.png */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
 				DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */,
 				DBDF1B592323DE8D007CECB1 /* ShaderProgram.h */,

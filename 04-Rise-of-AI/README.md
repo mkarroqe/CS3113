@@ -11,4 +11,6 @@ Create a simple Scene with AI:
 *Coming soon*
 
 # Bloopers
-*Coming soon*
+| [!bloop1](demos/blooper-1.gif) |
+| - |
+| *it's not a bug, it's a feature* ||

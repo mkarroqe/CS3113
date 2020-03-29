@@ -78,7 +78,7 @@ void Initialize() {
     
     glUseProgram(program.programID);
     
-    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glEnable(GL_BLEND);
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -94,7 +94,7 @@ void Initialize() {
     state.player->movement = glm::vec3(0);
     state.player->acceleration = glm::vec3(0, - 9.81f, 0);
     state.player->speed = 2.5f;
-    state.player->textureID = LoadTexture("george_0.png");
+    state.player->textureID = LoadTexture("tp.png");
     
     state.player->animRight = new int[4] {3, 7, 11, 15};
     state.player->animLeft = new int[4] {1, 5, 9, 13};
@@ -108,14 +108,14 @@ void Initialize() {
     state.player->animCols = 4;
     state.player->animRows = 4;
     
-    state.player->height = 0.8f;
-    state.player->width = 0.35f;
+    state.player->height = 1.0f;
+    state.player->width = 1.0f;
     
     state.player->jumpPower = 5.0f;
     
     state.platforms = new Entity[PLATFORM_COUNT];
     
-    GLuint platformTextureID = LoadTexture("platformPack_tile001.png");
+    GLuint platformTextureID = LoadTexture("platformPack_tile030.png");
     
     for (int i = 0; i < PLATFORM_COUNT; i++) {
         state.platforms[i].entityType = PLATFORM;
@@ -128,7 +128,7 @@ void Initialize() {
     }
     
     state.enemies = new Entity[ENEMY_COUNT];
-    GLuint enemyTextureID = LoadTexture("ctg.png");
+    GLuint enemyTextureID = LoadTexture("virus1.png");
     
     state.enemies[0].entityType = ENEMY;
     state.enemies[0].textureID = enemyTextureID;
