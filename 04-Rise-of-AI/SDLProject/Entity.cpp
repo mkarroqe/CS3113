@@ -190,10 +190,10 @@ void Entity::Render(ShaderProgram *program) {
     
     program->SetModelMatrix(modelMatrix);
     
-    if (animIndices != NULL) {
-        DrawSpriteFromTextureAtlas(program, textureID, animIndices[animIndex]);
-        return;
-    }
+//    if (animIndices != NULL) {
+//        DrawSpriteFromTextureAtlas(program, textureID, animIndices[animIndex]);
+//        return;
+//    }
     
     float vertices[]  = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
     float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };

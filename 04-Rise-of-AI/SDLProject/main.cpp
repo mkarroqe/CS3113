@@ -96,17 +96,17 @@ void Initialize() {
     state.player->speed = 2.5f;
     state.player->textureID = LoadTexture("tp.png");
     
-    state.player->animRight = new int[4] {3, 7, 11, 15};
-    state.player->animLeft = new int[4] {1, 5, 9, 13};
-    state.player->animUp = new int[4] {2, 6, 10, 14};
-    state.player->animDown = new int[4] {0, 4, 8, 12};
-
-    state.player->animIndices = state.player->animRight;
-    state.player->animFrames = 4;
-    state.player->animIndex = 0;
-    state.player->animTime = 0;
-    state.player->animCols = 4;
-    state.player->animRows = 4;
+//    state.player->animRight = new int[4] {3, 7, 11, 15};
+//    state.player->animLeft = new int[4] {1, 5, 9, 13};
+//    state.player->animUp = new int[4] {2, 6, 10, 14};
+//    state.player->animDown = new int[4] {0, 4, 8, 12};
+//
+//    state.player->animIndices = state.player->animRight;
+//    state.player->animFrames = 4;
+//    state.player->animIndex = 0;
+//    state.player->animTime = 0;
+//    state.player->animCols = 4;
+//    state.player->animRows = 4;
     
     state.player->height = 1.0f;
     state.player->width = 1.0f;
@@ -174,11 +174,11 @@ void ProcessInput() {
 
     if (keys[SDL_SCANCODE_LEFT]) {
         state.player->movement.x = -1.0f;
-        state.player->animIndices = state.player->animLeft;
+//        state.player->animIndices = state.player->animLeft;
     }
     else if (keys[SDL_SCANCODE_RIGHT]) {
         state.player->movement.x = 1.0f;
-        state.player->animIndices = state.player->animRight;
+//        state.player->animIndices = state.player->animRight;
     }
     
 
