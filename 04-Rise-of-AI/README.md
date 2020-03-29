@@ -11,9 +11,9 @@ Create a simple Scene with AI:
 *Coming soon*
 
 # Bloopers
-| ![bloop1](demos/blooper-1.gif) |
-| - |
-| *it's not a bug, it's a feature* |
+| ![bloop1](demos/blooper-1.gif) | ![bloop2](demos/blooper-2.gif) |
+| :-: | :-: |
+| *it's not a bug, it's a feature* | *IT'S NOT A BUG, IT'S A **FEATURE***
 
 # Image Credits
 Thank you, internet! These images are not my own.
