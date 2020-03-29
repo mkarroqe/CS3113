@@ -5,6 +5,6 @@ Please enjoy my projects from my Introduction to Game Programming class! Class i
 1. _**Assignment 1:** [Simple 2D Scene](https://github.com/mkarroqe/CS3113/blob/master/Simple-Birdie/README.md)_ <br/> A stressed mama bird and some bouncing babies. Scribbly art by yours truly. <br/> ![baby birdie](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Class%20Material/Assets/2D%20Sprites/baby_birdie.png) ![baby birdie](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Class%20Material/Assets/2D%20Sprites/baby_birdie.png) ![baby birdie](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Class%20Material/Assets/2D%20Sprites/baby_birdie.png) <br /><br />
 2. _**Assignment 2:** [Pong](https://github.com/mkarroqe/CS3113/tree/master/Pong)_ <br/> A very minimal version of Pong, ft. two rectangular paddles and a rectangular ball: ![ball](https://github.com/mkarroqe/CS3113/blob/master/Pong/ball.png) <br /><br />
 3. _**Assignment 3:** [Lunar Lander](https://github.com/mkarroqe/CS3113/tree/master/Lunar-Lander)_ <br/> Bird version of the classic game where you must guide the falling bird in a grassy "nest". <br /><br />
-4. _**Assignment 4:** Rise of the AI_ <br/> Coming soon. <br /><br />
+4. _**Assignment 4:** [Rise of the AI](https://github.com/mkarroqe/CS3113/blob/master/AI-Scene/README.md)_ <br/> In Progress. <br /><br />
 5. _**Assignment 5:** Platformer_ <br/> Coming soon. <br /><br />
 6. _**Assignment 6:** Student's Choice_ <br/> Coming soon. <br /><br />
