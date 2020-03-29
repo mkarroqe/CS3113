@@ -9,16 +9,16 @@ Make Pong!
 
 # Demo
 #### *Huzzah! It works!*
-| <ul> <li> Player 1: `W + S keys` </li> <li> Player 2: `Up + Down` Arrow Keys </li> <li> `Space` to start </li> <li> First to 3 points wins! </li> </ul> | ![results](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/results.png) |
+| <ul> <li> Player 1: `W + S keys` </li> <li> Player 2: `Up + Down` Arrow Keys </li> <li> `Space` to start </li> <li> First to 3 points wins! </li> </ul> | ![results](demos/results.png) |
 | :- | - |
 
-![final](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/final-demo.gif)
+![final](demos/final-demo.gif)
 
 # Bloopers
-| ![blooper-1](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-1.gif) | ![blooper-2](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-2.gif) | 
+| ![blooper-1](demos/blooper-1.gif) | ![blooper-2](demos/blooper-2.gif) | 
 | :-: | :-: |
 | *Not a Bounce* | *Decision Anxiety* |
-| ![blooper-3](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-3.gif) | ![blooper-4](https://raw.githubusercontent.com/mkarroqe/CS3113/master/Pong/demos/blooper-4.gif) |
+| ![blooper-3](demos/blooper-3.gif) | ![blooper-4](demos/blooper-4.gif) |
  | *Rebellion* | *Paddle Fear* |
 
 > S/o to [this website](https://ezgif.com/video-to-gif/) for making gif generation super easy
