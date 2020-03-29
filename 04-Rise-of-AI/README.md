@@ -11,6 +11,16 @@ Create a simple Scene with AI:
 *Coming soon*
 
 # Bloopers
-| [!bloop1](demos/blooper-1.gif) |
+| ![bloop1](demos/blooper-1.gif) |
 | - |
-| *it's not a bug, it's a feature* ||
+| *it's not a bug, it's a feature* |
+
+# Image Credits
+Thank you, internet! These images are not my own.
+
+| Image Name | Image | Credit |
+| - | :-: | - |
+| `virus1.png` | <img src="Sprites/virus1.png" width=100px/> | Image by <a href="https://pixabay.com/users/iXimus-2352783/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4973104">Vektor Kunst iXimus</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4973104">Pixabay</a> |
+| `virus2.png` | <img src="Sprites/virus2.png" width=100px/> | Image by <a href="https://pixabay.com/users/iXimus-2352783/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4973104">Vektor Kunst iXimus</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4973104">Pixabay</a> |
+| `virus3.png` | <img src="Sprites/virus3.png" width=100px/> | Image by <a href="https://pixabay.com/users/iXimus-2352783/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4973104">Vektor Kunst iXimus</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4973104">Pixabay</a>|
+| `tp.png` | <img src="Sprites/tp.png" width=100px/> | Image from <a href="https://www.kickstarter.com/projects/marialeall/toilet-paper-madness">Toilet Paper Madness</a> <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4973104"></a>Kickstarter by <a href="https://marialeal.com/">María Leal</a> |
