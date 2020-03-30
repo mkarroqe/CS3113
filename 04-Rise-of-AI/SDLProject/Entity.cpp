@@ -149,17 +149,14 @@ void Entity::AIPatrol() {
 }
 
 void Entity::AIJump(Entity *player) {
-    // jumps in place when player is near to prevent them from passing
+    // jumps in place 
     switch(aiState) {
         case IDLE:
-//            velocity.y = 0;
-            if (glm::distance(position, player->position) < 3.0f) {
-                aiState = ACTIVE;
-            }
+            velocity.y = 0;
             break;
             
         case ACTIVE:
-            velocity.y += 2.5;
+            velocity.y += 2.5; // TODO: stopped working?
             aiState = IDLE;
             
             break;

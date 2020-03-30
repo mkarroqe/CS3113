@@ -97,9 +97,9 @@ void Initialize() {
 
     state.player->position = glm::vec3(-4, -1, 0);
     state.player->movement = glm::vec3(0);
-    state.player->acceleration = glm::vec3(0, -9.81f, 0);
+    state.player->acceleration = glm::vec3(0, -2.81f, 0);
     state.player->speed = 2.85f;
-    state.player->jumpPower = 5.2f;
+    state.player->jumpPower = 3.2f;
     
     // --------------------------- ENEMIES -----------------------------
     state.enemies = new Entity[ENEMY_COUNT];
@@ -121,9 +121,9 @@ void Initialize() {
             enemyTextureID = LoadTexture("virus3.png");
         }
         else {
-            state.enemies[i].position = glm::vec3(-0.5f, -1.25f, 0);
+            state.enemies[i].position = glm::vec3(-1.15f, -1.25f, 0);
             state.enemies[i].aiType = JUMP;
-            state.enemies[i].aiState = IDLE;
+            state.enemies[i].aiState = ACTIVE;
             enemyTextureID = LoadTexture("virus2.png");
         }
         
@@ -312,12 +312,12 @@ void Render() {
     state.player->Render(&program);
     
     if (state.player->defeatedEnemies == true) {
-        DrawText(&program, LoadTexture("font1.png"), "You Win!", 0.5f, -0.25f, glm::vec3(0, 0, 0));
+        DrawText(&program, LoadTexture("font1.png"), "You Win!", 0.5f, -0.25f, glm::vec3(1.0, 0, 0));
         std::cout << "win\n";
         state.player->isActive = false;
     }
     else if (state.player->wasDefeated == true) {
-        DrawText(&program, LoadTexture("font1.png"), "Game Over", 0.5f, -0.25f, glm::vec3(0, 0, 0));
+        DrawText(&program, LoadTexture("font1.png"), "Game Over", 0.5f, -0.25f, glm::vec3(1.0, 0, 0));
         std::cout << "lose\n";
         state.player->isActive = false;
     }
