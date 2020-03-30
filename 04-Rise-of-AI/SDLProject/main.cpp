@@ -115,8 +115,8 @@ void Initialize() {
             enemyTextureID = LoadTexture("virus1.png");
         }
         else if (i == 1) {
-            state.enemies[i].position = glm::vec3(0.5, 2.75f, 0);
-            state.enemies[i].aiType = WAITANDGO;
+            state.enemies[i].position = glm::vec3(-2.5, 2.75f, 0);
+            state.enemies[i].aiType = PATROL;
             state.enemies[i].aiState = IDLE;
             enemyTextureID = LoadTexture("virus3.png");
         }

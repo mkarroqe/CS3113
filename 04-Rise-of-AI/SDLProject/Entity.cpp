@@ -79,6 +79,10 @@ void Entity::AI(Entity *player) {
             
         case WAITANDGO:
             AIWaitAndGo(player);
+            break;
+            
+        case PATROL:
+            AIPatrol();
     }
 }
 
@@ -102,10 +106,17 @@ void Entity::AIWaitAndGo(Entity *player) {
             }
            
             break;
-            
-        case ATTACKING:
-            break;
     }
+}
+
+// TODO: bounce back
+void Entity::AIPatrol() {
+    if (position.x < 0.5)
+        movement = glm::vec3(1, 0, 0);
+    else
+        position.x = -4.5f;
+        movement = glm::vec3(1, 0, 0);
+    
 }
 
 void Entity::Update(float deltaTime, Entity *player, Entity *platforms, int platformCount)
