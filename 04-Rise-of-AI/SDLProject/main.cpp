@@ -16,7 +16,7 @@
 
 #include "Entity.hpp"
 
-#define PLATFORM_COUNT 11
+#define PLATFORM_COUNT 22
 #define ENEMY_COUNT 1
 
 struct GameState {
@@ -96,18 +96,6 @@ void Initialize() {
     state.player->speed = 2.5f;
     state.player->textureID = LoadTexture("tp.png");
     
-//    state.player->animRight = new int[4] {3, 7, 11, 15};
-//    state.player->animLeft = new int[4] {1, 5, 9, 13};
-//    state.player->animUp = new int[4] {2, 6, 10, 14};
-//    state.player->animDown = new int[4] {0, 4, 8, 12};
-//
-//    state.player->animIndices = state.player->animRight;
-//    state.player->animFrames = 4;
-//    state.player->animIndex = 0;
-//    state.player->animTime = 0;
-//    state.player->animCols = 4;
-//    state.player->animRows = 4;
-    
     state.player->height = 1.0f;
     state.player->width = 1.0f;
     
@@ -117,11 +105,37 @@ void Initialize() {
     
     GLuint platformTextureID = LoadTexture("platformPack_tile030.png");
     
+    int x = 0;
     for (int i = 0; i < PLATFORM_COUNT; i++) {
         state.platforms[i].entityType = PLATFORM;
         state.platforms[i].textureID = platformTextureID;
-        state.platforms[i].position = glm::vec3(-5 + i, -3.25, 0);
+        
+        if (i < 10) {
+            state.platforms[i].position = glm::vec3(-4.5 + i, -3.25, 0);
+            std::cout << i << ": " << state.platforms[i].position[0] << ", " << state.platforms[i].position[1] << "\n";
+        }
+        else if (i < 14) {
+            x = i - 4;
+            state.platforms[i].position = glm::vec3(-4.5 + x, -2.25, 0);
+            std::cout << i << ": " << state.platforms[i].position[0] << ", " << state.platforms[i].position[1] << "\n";
+        }
+        else if (i < 17) {
+            x = i - 7;
+            state.platforms[i].position = glm::vec3(-4.5 + x, -1.25, 0);
+            std::cout << i << ": " << state.platforms[i].position[0] << ", " << state.platforms[i].position[1] << "\n";
+        }
+        else if (i < 19) {
+            x = i - 9;
+            state.platforms[i].position = glm::vec3(-4.5 + x, -0.25, 0);
+            std::cout << i << ": " << state.platforms[i].position[0] << ", " << state.platforms[i].position[1] << "\n";
+        }
+        else {
+            x = i - 19;
+            state.platforms[i].position = glm::vec3(-4.5 + x, 0.75, 0);
+            std::cout << i << ": " << state.platforms[i].position[0] << ", " << state.platforms[i].position[1] << "\n";
+        }
     }
+    
  
     for (int i = 0; i < PLATFORM_COUNT; i++) {
         state.platforms[i].Update(0, NULL, NULL, 0);
