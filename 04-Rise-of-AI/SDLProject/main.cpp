@@ -16,8 +16,8 @@
 
 #include "Entity.hpp"
 
-#define PLATFORM_COUNT 22
-#define ENEMY_COUNT 1
+#define PLATFORM_COUNT 25
+#define ENEMY_COUNT 3
 
 struct GameState {
     Entity *player;
@@ -57,7 +57,7 @@ GLuint LoadTexture(const char* filePath) {
 
 void Initialize() {
     SDL_Init(SDL_INIT_VIDEO);
-    displayWindow = SDL_CreateWindow("Textured!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
+    displayWindow = SDL_CreateWindow("An Unlikely Hero", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
     SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
     SDL_GL_MakeCurrent(displayWindow, context);
     
@@ -83,26 +83,61 @@ void Initialize() {
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-   
-    // Initialize Game Objects
+    // -----------------------------------------------------------------
+    //                      Initialize Game Objects
+    // --------------------------- PLAYER ------------------------------
     
-    // Initialize Player
     state.player = new Entity();
     state.player->entityType = PLAYER;
-    
-    state.player->position = glm::vec3(-4, -1, 0);
-    state.player->movement = glm::vec3(0);
-    state.player->acceleration = glm::vec3(0, - 9.81f, 0);
-    state.player->speed = 2.5f;
-    state.player->textureID = LoadTexture("tp.png");
-    
+
+    GLuint playerTextureID = LoadTexture("tp.png");
+    state.player->textureID = playerTextureID;
     state.player->height = 1.0f;
     state.player->width = 1.0f;
+
+    state.player->position = glm::vec3(-4, -1, 0);
+    state.player->movement = glm::vec3(0);
+    state.player->acceleration = glm::vec3(0, -9.81f, 0);
+    state.player->speed = 2.85f;
+    state.player->jumpPower = 5.2f;
     
-    state.player->jumpPower = 5.0f;
+    // --------------------------- ENEMIES -----------------------------
+    state.enemies = new Entity[ENEMY_COUNT];
     
+    GLuint enemyTextureID;
+    for (int i = 0; i < ENEMY_COUNT; i ++) {
+        state.enemies[i].entityType = ENEMY;
+        
+        if (i == 0) {
+            state.enemies[i].position = glm::vec3(4, 1.75f, 0);
+            state.enemies[i].aiType = WAITANDGO;
+            state.enemies[i].aiState = IDLE;
+            enemyTextureID = LoadTexture("virus1.png");
+        }
+        else if (i == 1) {
+            state.enemies[i].position = glm::vec3(0.5, 2.75f, 0);
+            state.enemies[i].aiType = WAITANDGO;
+            state.enemies[i].aiState = IDLE;
+            enemyTextureID = LoadTexture("virus3.png");
+        }
+        else {
+            state.enemies[i].position = glm::vec3(-0.5f, -1.25f, 0);
+            state.enemies[i].aiType = WAITANDGO;
+            state.enemies[i].aiState = IDLE;
+            enemyTextureID = LoadTexture("virus2.png");
+        }
+        
+        state.enemies[i].textureID = enemyTextureID;
+        state.enemies[i].height = 1.0f;
+        state.enemies[i].width = 1.0f;
+        
+        state.enemies[i].movement = glm::vec3(0);
+//        state.enemies[i].acceleration = glm::vec3(0, -9.81f, 0);
+        state.enemies[i].speed = 1;
+    }
+    
+    // -------------------------- PLATFORMS ----------------------------
     state.platforms = new Entity[PLATFORM_COUNT];
-    
     GLuint platformTextureID = LoadTexture("platformPack_tile030.png");
     
     int x = 0;
@@ -112,48 +147,29 @@ void Initialize() {
         
         if (i < 10) {
             state.platforms[i].position = glm::vec3(-4.5 + i, -3.25, 0);
-            std::cout << i << ": " << state.platforms[i].position[0] << ", " << state.platforms[i].position[1] << "\n";
         }
         else if (i < 14) {
             x = i - 4;
             state.platforms[i].position = glm::vec3(-4.5 + x, -2.25, 0);
-            std::cout << i << ": " << state.platforms[i].position[0] << ", " << state.platforms[i].position[1] << "\n";
         }
         else if (i < 17) {
             x = i - 7;
             state.platforms[i].position = glm::vec3(-4.5 + x, -1.25, 0);
-            std::cout << i << ": " << state.platforms[i].position[0] << ", " << state.platforms[i].position[1] << "\n";
         }
         else if (i < 19) {
             x = i - 9;
             state.platforms[i].position = glm::vec3(-4.5 + x, -0.25, 0);
-            std::cout << i << ": " << state.platforms[i].position[0] << ", " << state.platforms[i].position[1] << "\n";
         }
         else {
             x = i - 19;
             state.platforms[i].position = glm::vec3(-4.5 + x, 0.75, 0);
-            std::cout << i << ": " << state.platforms[i].position[0] << ", " << state.platforms[i].position[1] << "\n";
         }
-    }
-    
- 
-    for (int i = 0; i < PLATFORM_COUNT; i++) {
+        
         state.platforms[i].Update(0, NULL, NULL, 0);
     }
-    
-    state.enemies = new Entity[ENEMY_COUNT];
-    GLuint enemyTextureID = LoadTexture("virus1.png");
-    
-    state.enemies[0].entityType = ENEMY;
-    state.enemies[0].textureID = enemyTextureID;
-    state.enemies[0].position = glm::vec3(4, -2.25, 0);
-    state.enemies[0].speed = 1;
-    state.enemies[0].aiType = WAITANDGO;
-    state.enemies[0].aiState = IDLE;
 }
 
 void ProcessInput() {
-    
     state.player->movement = glm::vec3(0);
     
     SDL_Event event;
@@ -188,11 +204,9 @@ void ProcessInput() {
 
     if (keys[SDL_SCANCODE_LEFT]) {
         state.player->movement.x = -1.0f;
-//        state.player->animIndices = state.player->animLeft;
     }
     else if (keys[SDL_SCANCODE_RIGHT]) {
         state.player->movement.x = 1.0f;
-//        state.player->animIndices = state.player->animRight;
     }
     
 
@@ -227,7 +241,7 @@ void Update() {
         
         deltaTime -= FIXED_TIMESTEP;
     }
-
+    
     accumulator = deltaTime;
 }
 

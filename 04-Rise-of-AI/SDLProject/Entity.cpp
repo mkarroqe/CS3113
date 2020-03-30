@@ -116,14 +116,14 @@ void Entity::Update(float deltaTime, Entity *player, Entity *platforms, int plat
     collidedBottom = false;
     collidedLeft = false;
     collidedRight = false;
-    
+
     if (entityType == ENEMY) {
+        CheckCollisionsY(platforms, platformCount);
         AI(player);
     }
     
     if (jump) {
         jump = false;
-        
         velocity.y += jumpPower;
     }
     

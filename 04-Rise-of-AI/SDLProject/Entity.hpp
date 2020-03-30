@@ -39,18 +39,6 @@ public:
     
     glm::mat4 modelMatrix;
     
-//    int *animRight = NULL;
-//    int *animLeft = NULL;
-//    int *animUp = NULL;
-//    int *animDown = NULL;
-
-//    int *animIndices = NULL;
-//    int animFrames = 0;
-//    int animIndex = 0;
-//    float animTime = 0;
-//    int animCols = 0;
-//    int animRows = 0;
-    
     bool isActive = true;
     
     bool collidedTop = false;
@@ -63,6 +51,7 @@ public:
     bool CheckCollision(Entity *other);
     void CheckCollisionsY(Entity *objects, int objectCount);
     void CheckCollisionsX(Entity *objects, int objectCount);
+    
     void Update(float deltaTime, Entity *player, Entity *platforms, int platformCount);
     void Render(ShaderProgram *program);
     void DrawSpriteFromTextureAtlas(ShaderProgram *program, GLuint textureID, int index);
