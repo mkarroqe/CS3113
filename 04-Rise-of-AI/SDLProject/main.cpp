@@ -311,6 +311,18 @@ void Render() {
     
     state.player->Render(&program);
     
+    int defeatCount = 0;
+    for (int i = 0; i < ENEMY_COUNT; i++) {
+        if (state.enemies[i].wasDefeated) {
+            defeatCount += 1;
+        }
+    }
+    std::cout << "defeatCount: " << defeatCount << "\n";
+    if (defeatCount == ENEMY_COUNT) {
+        state.player->defeatedEnemies = true;
+    }
+    
+    // WIN/LOSE TEXT
     if (state.player->defeatedEnemies == true) {
         DrawText(&program, LoadTexture("font1.png"), "You Win!", 0.5f, -0.25f, glm::vec3(1.0, 0, 0));
         std::cout << "win\n";

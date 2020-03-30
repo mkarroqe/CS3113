@@ -76,10 +76,14 @@ void Entity::CheckEnemyCollision(Entity *enemies, int enemyCount) {
     {
         Entity *enemy = &enemies[i];
 
-        if (CheckCollision(enemy))
-        {
-            std::cout << "u hit an enemy " << i << " dawg\n";
-            wasDefeated = true;
+        if (CheckCollision(enemy)) {
+            if (enemy->collidedBottom) {
+                enemy->wasDefeated = true;
+                enemy->isActive = false;
+            }
+            else {
+                this->wasDefeated = true; // me
+            }
         }
     }
 }
@@ -123,8 +127,6 @@ void Entity::AIWaitAndGo(Entity *player) {
             } else {
                 movement = glm::vec3(1, 0, 0);
             }
-            defeatedEnemies = true; // TODO: delete this is just a test of text
-
             break;
     }
 }
@@ -153,6 +155,7 @@ void Entity::AIJump(Entity *player) {
     switch(aiState) {
         case IDLE:
             velocity.y = 0;
+            aiState = ACTIVE;
             break;
             
         case ACTIVE:
@@ -171,11 +174,12 @@ void Entity::Update(float deltaTime, Entity *player, Entity *platforms, int plat
     collidedBottom = false;
     collidedLeft = false;
     collidedRight = false;
-
-    CheckEnemyCollision(enemies, enemyCount);
     
     if (entityType == ENEMY) {
         AI(player);
+    }
+    else {
+        CheckEnemyCollision(enemies, enemyCount);
     }
     
     if (jump) {
