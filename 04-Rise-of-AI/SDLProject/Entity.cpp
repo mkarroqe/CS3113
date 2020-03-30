@@ -83,6 +83,12 @@ void Entity::AI(Entity *player) {
             
         case PATROL:
             AIPatrol();
+            break;
+            
+        case JUMP:
+            AIJump(player);
+            break;
+            
     }
 }
 
@@ -94,11 +100,11 @@ void Entity::AIWaitAndGo(Entity *player) {
     switch(aiState) {
         case IDLE:
             if (glm::distance(position, player->position) < 3.0f) {
-                aiState = WALKING;
+                aiState = ACTIVE;
             }
             break;
             
-        case WALKING:
+        case ACTIVE:
             if (player->position.x < position.x) {
                 movement = glm::vec3(-1, 0, 0);
             } else {
@@ -111,12 +117,39 @@ void Entity::AIWaitAndGo(Entity *player) {
 
 // TODO: bounce back
 void Entity::AIPatrol() {
-    if (position.x < 0.5)
-        movement = glm::vec3(1, 0, 0);
-    else
-        position.x = -4.5f;
-        movement = glm::vec3(1, 0, 0);
-    
+    switch(aiState) {
+        case IDLE:
+            break;
+            
+        case ACTIVE:
+            if (position.x < 0.5) {
+                movement = glm::vec3(1, 0, 0);
+            }
+            else {
+                position.x = -4.5f;
+                movement = glm::vec3(1, 0, 0);
+            }
+            movement = glm::vec3(1, 0, 0);
+            break;
+    }
+}
+
+void Entity::AIJump(Entity *player) {
+    // jumps in place when player is near to prevent them from passing
+    switch(aiState) {
+        case IDLE:
+            velocity.y = 0;
+            if (glm::distance(position, player->position) < 3.0f) {
+                aiState = ACTIVE;
+            }
+            break;
+            
+        case ACTIVE:
+            velocity.y += 0.5; // this should work once i figure out the gravity situation..
+            aiState = IDLE;
+            
+            break;
+    }
 }
 
 void Entity::Update(float deltaTime, Entity *player, Entity *platforms, int platformCount)
