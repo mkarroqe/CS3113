@@ -11,7 +11,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
-enum EntityType {PLAYER, BULLET, PLATFORM, ENEMY};
+enum EntityType {PLAYER, PLATFORM, ENEMY};
 
 enum AIType { WALKER, WAITANDGO, PATROL, JUMP };
 enum AIState { IDLE, ACTIVE };

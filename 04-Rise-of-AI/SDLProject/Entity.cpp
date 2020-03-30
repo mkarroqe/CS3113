@@ -78,7 +78,8 @@ void Entity::CheckEnemyCollision(Entity *enemies, int enemyCount) {
 
         if (CheckCollision(enemy))
         {
-            std::cout << "u hit an enemy dawg\n";
+            std::cout << "u hit an enemy " << i << " dawg\n";
+            wasDefeated = true;
         }
     }
 }
@@ -151,14 +152,14 @@ void Entity::AIJump(Entity *player) {
     // jumps in place when player is near to prevent them from passing
     switch(aiState) {
         case IDLE:
-            velocity.y = 0;
+//            velocity.y = 0;
             if (glm::distance(position, player->position) < 3.0f) {
                 aiState = ACTIVE;
             }
             break;
             
         case ACTIVE:
-            velocity.y += 2.5; // this should work once i figure out the gravity situation..
+            velocity.y += 2.5;
             aiState = IDLE;
             
             break;
