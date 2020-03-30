@@ -115,7 +115,7 @@ void Entity::AIWaitAndGo(Entity *player) {
     }
 }
 
-// TODO: bounce back
+// TODO: bounce back?
 void Entity::AIPatrol() {
     switch(aiState) {
         case IDLE:
@@ -145,7 +145,7 @@ void Entity::AIJump(Entity *player) {
             break;
             
         case ACTIVE:
-            velocity.y += 0.5; // this should work once i figure out the gravity situation..
+            velocity.y += 2.5; // this should work once i figure out the gravity situation..
             aiState = IDLE;
             
             break;
@@ -162,7 +162,6 @@ void Entity::Update(float deltaTime, Entity *player, Entity *platforms, int plat
     collidedRight = false;
 
     if (entityType == ENEMY) {
-        CheckCollisionsY(platforms, platformCount);
         AI(player);
     }
     

@@ -132,7 +132,7 @@ void Initialize() {
         state.enemies[i].width = 1.0f;
         
         state.enemies[i].movement = glm::vec3(0);
-//        state.enemies[i].acceleration = glm::vec3(0, -9.81f, 0);
+        state.enemies[i].acceleration = glm::vec3(0, -9.81f, 0);
         state.enemies[i].speed = 1;
     }
     
