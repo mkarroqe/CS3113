@@ -7,6 +7,7 @@
 #define GL_GLEXT_PROTOTYPES 1
 #include <SDL.h>
 #include <SDL_opengl.h>
+#include <vector>
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
@@ -86,7 +87,6 @@ void Initialize() {
     // -----------------------------------------------------------------
     //                      Initialize Game Objects
     // --------------------------- PLAYER ------------------------------
-    
     state.player = new Entity();
     state.player->entityType = PLAYER;
 
@@ -132,7 +132,7 @@ void Initialize() {
         state.enemies[i].width = 1.0f;
         
         state.enemies[i].movement = glm::vec3(0);
-        state.enemies[i].acceleration = glm::vec3(0, -9.81f, 0);
+        state.enemies[i].acceleration = glm::vec3(0, -9.81f, 0); // TODO: fix
         state.enemies[i].speed = 1;
     }
     
@@ -165,8 +165,61 @@ void Initialize() {
             state.platforms[i].position = glm::vec3(-4.5 + x, 0.75, 0);
         }
         
-        state.platforms[i].Update(0, NULL, NULL, 0);
+        state.platforms[i].Update(0, NULL, NULL, 0, NULL, NULL);
     }
+}
+
+// Reused code from last assignment
+void DrawText(ShaderProgram *program, GLuint fontTextureID, std::string text, float size, float spacing, glm::vec3 position)
+{
+    float width = 1.0f / 16.0f;
+    float height = 1.0f / 16.0f;
+
+    std::vector<float> vertices;
+    std::vector<float> texCoords;
+
+    for (int i = 0; i < text.size(); i++) {
+        int index = (int)text[i];
+        float offset = (size + spacing) * i;
+        float u = (float)(index % 16) / 16.0f;
+        float v = (float)(index / 16) / 16.0f;
+        
+        vertices.insert(vertices.end(), {
+            offset + (-0.5f * size), 0.5f * size,
+            offset + (-0.5f * size), -0.5f * size,
+            offset + (0.5f * size), 0.5f * size,
+            offset + (0.5f * size), -0.5f * size,
+            offset + (0.5f * size), 0.5f * size,
+            offset + (-0.5f * size), -0.5f * size,
+        });
+        
+        texCoords.insert(texCoords.end(), {
+            u, v,
+            u, v + height,
+            u + width, v,
+            u + width, v + height,
+            u + width, v,
+            u, v + height,
+        });
+
+    } // end of for loop
+    
+    glm::mat4 fontModelMatrix = glm::mat4(1.0f);
+    modelMatrix = glm::translate(fontModelMatrix, position);
+    program->SetModelMatrix(fontModelMatrix);
+    
+    glUseProgram(program->programID);
+
+    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices.data());
+    glEnableVertexAttribArray(program->positionAttribute);
+
+    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords.data());
+    glEnableVertexAttribArray(program->texCoordAttribute);
+
+    glDrawArrays(GL_TRIANGLES, 0, (int)(text.size() * 6));
+
+    glDisableVertexAttribArray(program->positionAttribute);
+    glDisableVertexAttribArray(program->texCoordAttribute);
 }
 
 void ProcessInput() {
@@ -208,7 +261,6 @@ void ProcessInput() {
     else if (keys[SDL_SCANCODE_RIGHT]) {
         state.player->movement.x = 1.0f;
     }
-    
 
     if (glm::length(state.player->movement) > 1.0f) {
         state.player->movement = glm::normalize(state.player->movement);
@@ -233,10 +285,10 @@ void Update() {
 
     while (deltaTime >= FIXED_TIMESTEP) {
         // Update. Notice it's FIXED_TIMESTEP. Not deltaTime
-        state.player->Update(FIXED_TIMESTEP, state.player, state.platforms, PLATFORM_COUNT);
+        state.player->Update(FIXED_TIMESTEP, state.player, state.platforms, PLATFORM_COUNT, state.enemies, ENEMY_COUNT);
         
         for (int i = 0; i < ENEMY_COUNT; i++) {
-            state.enemies[i].Update(FIXED_TIMESTEP, state.player, state.platforms, ENEMY_COUNT);
+            state.enemies[i].Update(FIXED_TIMESTEP, state.player, state.platforms, PLATFORM_COUNT, state.enemies, ENEMY_COUNT);
         }
         
         deltaTime -= FIXED_TIMESTEP;
@@ -258,6 +310,17 @@ void Render() {
     }
     
     state.player->Render(&program);
+    
+    if (state.player->defeatedEnemies == true) {
+        DrawText(&program, LoadTexture("font1.png"), "You Win!", 0.5f, -0.25f, glm::vec3(0, 0, 0));
+        std::cout << "win\n";
+        state.player->isActive = false;
+    }
+    else if (state.player->wasDefeated == true) {
+        DrawText(&program, LoadTexture("font1.png"), "Game Over", 0.5f, -0.25f, glm::vec3(0, 0, 0));
+        std::cout << "lose\n";
+        state.player->isActive = false;
+    }
     
     SDL_GL_SwapWindow(displayWindow);
 }

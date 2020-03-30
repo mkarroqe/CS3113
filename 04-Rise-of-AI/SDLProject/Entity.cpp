@@ -71,6 +71,18 @@ void Entity::CheckCollisionsX(Entity *objects, int objectCount)
     }
 }
 
+void Entity::CheckEnemyCollision(Entity *enemies, int enemyCount) {
+    for (int i = 0; i < enemyCount; i++)
+    {
+        Entity *enemy = &enemies[i];
+
+        if (CheckCollision(enemy))
+        {
+            std::cout << "u hit an enemy dawg\n";
+        }
+    }
+}
+
 void Entity::AI(Entity *player) {
     switch(aiType) {
         case WALKER:
@@ -110,7 +122,8 @@ void Entity::AIWaitAndGo(Entity *player) {
             } else {
                 movement = glm::vec3(1, 0, 0);
             }
-           
+            defeatedEnemies = true; // TODO: delete this is just a test of text
+
             break;
     }
 }
@@ -152,7 +165,7 @@ void Entity::AIJump(Entity *player) {
     }
 }
 
-void Entity::Update(float deltaTime, Entity *player, Entity *platforms, int platformCount)
+void Entity::Update(float deltaTime, Entity *player, Entity *platforms, int platformCount, Entity *enemies, int enemyCount)
 {
     if (isActive == false) return;
     
@@ -161,6 +174,8 @@ void Entity::Update(float deltaTime, Entity *player, Entity *platforms, int plat
     collidedLeft = false;
     collidedRight = false;
 
+    CheckEnemyCollision(enemies, enemyCount);
+    
     if (entityType == ENEMY) {
         AI(player);
     }

@@ -20,6 +20,8 @@
 		EC98222A2431503400920AD8 /* virus1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC98222524314EB500920AD8 /* virus1.png */; };
 		EC98222B2431503700920AD8 /* virus2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC98222624314EBC00920AD8 /* virus2.png */; };
 		EC98222C2431503B00920AD8 /* virus3.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC98222724314EC200920AD8 /* virus3.png */; };
+		EC9822302432929A00920AD8 /* font1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC98222F2432928D00920AD8 /* font1.png */; };
+		EC982232243295E700920AD8 /* ball.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC982231243295E400920AD8 /* ball.png */; };
 		ECEDADA0241D3FED00323CA3 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEDAD9E241D3FED00323CA3 /* Entity.cpp */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +33,8 @@
 			dstSubfolderSpec = 6;
 			files = (
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
+				EC982232243295E700920AD8 /* ball.png in CopyFiles */,
+				EC9822302432929A00920AD8 /* font1.png in CopyFiles */,
 				EC9822282431502F00920AD8 /* platformPack_tile030.png in CopyFiles */,
 				EC9822292431503100920AD8 /* tp.png in CopyFiles */,
 				EC98222A2431503400920AD8 /* virus1.png in CopyFiles */,
@@ -59,6 +63,8 @@
 		EC98222524314EB500920AD8 /* virus1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = virus1.png; path = Sprites/virus1.png; sourceTree = SOURCE_ROOT; };
 		EC98222624314EBC00920AD8 /* virus2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = virus2.png; path = Sprites/virus2.png; sourceTree = SOURCE_ROOT; };
 		EC98222724314EC200920AD8 /* virus3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = virus3.png; path = Sprites/virus3.png; sourceTree = SOURCE_ROOT; };
+		EC98222F2432928D00920AD8 /* font1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font1.png; path = "../../00-Class-Material/Assets/Fonts/font1.png"; sourceTree = "<group>"; };
+		EC982231243295E400920AD8 /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ball.png; path = Sprites/ball.png; sourceTree = SOURCE_ROOT; };
 		ECEDAD9E241D3FED00323CA3 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		ECEDAD9F241D3FED00323CA3 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +105,8 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				EC982231243295E400920AD8 /* ball.png */,
+				EC98222F2432928D00920AD8 /* font1.png */,
 				EC98222324314EA700920AD8 /* platformPack_tile030.png */,
 				EC98222424314EAE00920AD8 /* tp.png */,
 				EC98222524314EB500920AD8 /* virus1.png */,
