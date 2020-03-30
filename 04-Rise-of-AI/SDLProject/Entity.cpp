@@ -121,24 +121,6 @@ void Entity::Update(float deltaTime, Entity *player, Entity *platforms, int plat
         AI(player);
     }
     
-//    if (animIndices != NULL) {
-//        if (glm::length(movement) != 0) {
-//            animTime += deltaTime;
-//
-//            if (animTime >= 0.25f)
-//            {
-//                animTime = 0.0f;
-//                animIndex++;
-//                if (animIndex >= animFrames)
-//                {
-//                    animIndex = 0;
-//                }
-//            }
-//        } else {
-//            animIndex = 0;
-//        }
-//    }
-    
     if (jump) {
         jump = false;
         
@@ -160,11 +142,11 @@ void Entity::Update(float deltaTime, Entity *player, Entity *platforms, int plat
 
 void Entity::DrawSpriteFromTextureAtlas(ShaderProgram *program, GLuint textureID, int index)
 {
-    float u = 0; // (float)(index % animCols) / (float)animCols;
-    float v = 0; // (float)(index / animCols) / (float)animRows;
+    float u = 0;
+    float v = 0;
 
-    float width = 1.0f; /// (float)animCols;
-    float height = 1.0f; /// (float)animRows;
+    float width = 1.0f;
+    float height = 1.0f;
     
     float texCoords[] = { u, v + height, u + width, v + height, u + width, v,
         u, v + height, u + width, v, u, v};
@@ -189,11 +171,6 @@ void Entity::Render(ShaderProgram *program) {
     if (isActive == false) return;
     
     program->SetModelMatrix(modelMatrix);
-    
-//    if (animIndices != NULL) {
-//        DrawSpriteFromTextureAtlas(program, textureID, animIndices[animIndex]);
-//        return;
-//    }
     
     float vertices[]  = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
     float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
