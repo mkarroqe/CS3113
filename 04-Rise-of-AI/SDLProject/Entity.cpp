@@ -124,12 +124,13 @@ void Entity::AIWaitAndGo(Entity *player) {
             break;
             
         case ACTIVE:
+            if (glm::distance(position, player->position) > 3.5f) {
+                aiState = IDLE;
+            }
+            
             // speeds up for the kill!
             if (glm::distance(position, player->position) < 2.5f) {
-                speed = 1.09;
-            }
-            else if ((glm::distance(position, player->position) < 0.02f)) {
-                speed = 0;
+                speed = 1.45;
             }
             else {
                 speed = 1;
@@ -139,10 +140,6 @@ void Entity::AIWaitAndGo(Entity *player) {
                 movement = glm::vec3(-1, 0, 0);
             } else {
                 movement = glm::vec3(1, 0, 0);
-            }
-            
-            if (glm::distance(position, player->position) > 3.0f) {
-                aiState = IDLE;
             }
             
             break;
@@ -173,19 +170,19 @@ void Entity::AIJump(Entity *player) {
     switch(aiState) {
         case IDLE:
             std::cout << aiState << "\n";
-            if (glm::distance(position, player->position) < 2.0f) {
+            if (glm::distance(position, player->position) < 1.5f) {
                 aiState = ACTIVE;
             }
             else {
-                velocity.y -= 2.75;
+                velocity.y = -4.75;
             }
             break;
             
         case ACTIVE:
             std::cout << aiState << "\n";
-            velocity.y = 2.95;
+            velocity.y = 4.0;
             
-            if (glm::distance(position, player->position) > 2.0f) {
+            if (glm::distance(position, player->position) > 1.5f) {
                 aiState = IDLE;
             }
             

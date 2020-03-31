@@ -124,7 +124,7 @@ void Initialize() {
         }
         else {
             state.enemies[i].position = glm::vec3(-2.0f, -1.25f, 0);
-            state.enemies[i].acceleration = glm::vec3(0, -30.81f, 0);
+            state.enemies[i].acceleration = glm::vec3(0, -9.81f, 0);
             state.enemies[i].aiType = JUMP;
             state.enemies[i].aiState = IDLE;
             enemyTextureID = LoadTexture("virus2.png");
