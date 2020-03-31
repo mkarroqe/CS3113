@@ -124,16 +124,32 @@ void Entity::AIWaitAndGo(Entity *player) {
             break;
             
         case ACTIVE:
+            // speeds up for the kill!
+            if (glm::distance(position, player->position) < 2.5f) {
+                speed = 1.09;
+            }
+            else if ((glm::distance(position, player->position) < 0.02f)) {
+                speed = 0;
+            }
+            else {
+                speed = 1;
+            }
+            
             if (player->position.x < position.x) {
                 movement = glm::vec3(-1, 0, 0);
             } else {
                 movement = glm::vec3(1, 0, 0);
             }
+            
+            if (glm::distance(position, player->position) > 3.0f) {
+                aiState = IDLE;
+            }
+            
             break;
     }
 }
 
-// TODO: bounce back?
+// "teleporting"
 void Entity::AIPatrol() {
     switch(aiState) {
         case IDLE:
@@ -153,21 +169,25 @@ void Entity::AIPatrol() {
 }
 
 void Entity::AIJump(Entity *player) {
-    // jumps in place 
+    // tease jump-- makes it more challenging to hit because moves as you do; can't walk underneath
     switch(aiState) {
         case IDLE:
-            if (glm::distance(position, player->position) < 1.0f) {
+            std::cout << aiState << "\n";
+            if (glm::distance(position, player->position) < 2.0f) {
                 aiState = ACTIVE;
             }
-            velocity.y = 0;
+            else {
+                velocity.y -= 2.75;
+            }
             break;
             
         case ACTIVE:
-            if (glm::distance(position, player->position) > 1.0f) {
+            std::cout << aiState << "\n";
+            velocity.y = 2.95;
+            
+            if (glm::distance(position, player->position) > 2.0f) {
                 aiState = IDLE;
             }
-            velocity.y += 3.5; // TODO: stopped working?
-            aiState = IDLE;
             
             break;
     }
