@@ -110,20 +110,23 @@ void Initialize() {
         
         if (i == 0) {
             state.enemies[i].position = glm::vec3(4, 1.75f, 0);
+            state.enemies[i].acceleration = glm::vec3(0, -9.81f, 0);
             state.enemies[i].aiType = WAITANDGO;
             state.enemies[i].aiState = IDLE;
             enemyTextureID = LoadTexture("virus1.png");
         }
         else if (i == 1) {
             state.enemies[i].position = glm::vec3(-2.5, 2.75f, 0);
+            state.enemies[i].acceleration = glm::vec3(0, -9.81f, 0);
             state.enemies[i].aiType = PATROL;
             state.enemies[i].aiState = ACTIVE;
             enemyTextureID = LoadTexture("virus3.png");
         }
         else {
-            state.enemies[i].position = glm::vec3(-1.15f, -1.25f, 0);
+            state.enemies[i].position = glm::vec3(-2.75f, -1.25f, 0);
+            state.enemies[i].acceleration = glm::vec3(0, -30.81f, 0);
             state.enemies[i].aiType = JUMP;
-            state.enemies[i].aiState = ACTIVE;
+            state.enemies[i].aiState = IDLE;
             enemyTextureID = LoadTexture("virus2.png");
         }
         
@@ -132,7 +135,6 @@ void Initialize() {
         state.enemies[i].width = 1.0f;
         
         state.enemies[i].movement = glm::vec3(0);
-        state.enemies[i].acceleration = glm::vec3(0, -9.81f, 0); // TODO: fix
         state.enemies[i].speed = 1;
     }
     

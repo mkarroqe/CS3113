@@ -65,7 +65,7 @@ void Entity::CheckCollisionsX(Entity *objects, int objectCount)
             else if (velocity.x < 0) {
                 position.x += penetrationX;
                 velocity.x = 0;
-                collidedLeft = true; // something here for future assingment
+                collidedLeft = true;
             }
         }
     }
@@ -77,12 +77,14 @@ void Entity::CheckEnemyCollision(Entity *enemies, int enemyCount) {
         Entity *enemy = &enemies[i];
 
         if (CheckCollision(enemy)) {
-            if (enemy->collidedBottom) {
-                enemy->wasDefeated = true;
-                enemy->isActive = false;
+            if (velocity.y < 0) {                           // not the most elegant but works!
+                if (enemy->position.y <= position.y) {
+                    enemy->wasDefeated = true;
+                    enemy->isActive = false;
+                }
             }
             else {
-                this->wasDefeated = true; // me
+                wasDefeated = true;
             }
         }
     }
@@ -154,12 +156,17 @@ void Entity::AIJump(Entity *player) {
     // jumps in place 
     switch(aiState) {
         case IDLE:
+            if (glm::distance(position, player->position) < 1.0f) {
+                aiState = ACTIVE;
+            }
             velocity.y = 0;
-            aiState = ACTIVE;
             break;
             
         case ACTIVE:
-            velocity.y += 2.5; // TODO: stopped working?
+            if (glm::distance(position, player->position) > 1.0f) {
+                aiState = IDLE;
+            }
+            velocity.y += 3.5; // TODO: stopped working?
             aiState = IDLE;
             
             break;
@@ -179,6 +186,7 @@ void Entity::Update(float deltaTime, Entity *player, Entity *platforms, int plat
         AI(player);
     }
     else {
+//        CheckCollisionsY(enemies, enemyCount);
         CheckEnemyCollision(enemies, enemyCount);
     }
     
