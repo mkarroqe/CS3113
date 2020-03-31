@@ -8,7 +8,14 @@ Create a simple Scene with AI:
 - You can use whatever graphics/theme (or change the text) as long as you meet the requirements.
 
 # Demo
-*Coming soon*
+Our toilet paper protagonist must squash the viruses. 
+- The first virus is a master of tricks, and bops up and down as our TP hero moves, making it difficult to pass. Outwitted, it is squashed when TP takes to the air. 
+- Our second opponent's eyes are red from mourning loss. It will not lose sight of anything again, and follows our hero when sensed. It also speeds up when close for the kill. 
+- Our final opponent is a bit underwhelming for a final boss-- it is too lazy to walk back when patrolling, and teleports instead. Our TP easily defeats it and wins the game.
+- Normality restored?
+
+![demo](demos/demo-win.gif)
+> Please excuse the slow frame rate-- the scene was long!
 
 # Bloopers
 | ![bloop1](demos/blooper-1.gif) | ![bloop2](demos/blooper-2.gif) |
