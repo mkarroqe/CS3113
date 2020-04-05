@@ -9,5 +9,5 @@ Please enjoy my projects from my Introduction to Game Programming class! <br /> 
 | 2 | _[Pong](https://github.com/mkarroqe/CS3113/tree/master/02-Pong)_ | A very minimal version of Pong, ft. two red, rectangular paddles and a red, rectangular ball. | ![baby](https://raw.githubusercontent.com/mkarroqe/CS3113/master/02-Pong/ball.png "ball")  |
 | 3 | _(Not so) [Lunar Lander](https://github.com/mkarroqe/CS3113/tree/master/03-Lunar-Lander)_ | Bird version of the classic game where you must guide the falling bird in a grassy "nest". | <img src="https://github.com/mkarroqe/CS3113/blob/master/00-Class-Material/Assets/2D%20Sprites/bird_lander.png?raw=true" width=130 /> |
 | 4 | _[Rise of the AI](https://github.com/mkarroqe/CS3113/blob/master/04-Rise-of-AI/README.md)_ | Basic AI scene featuring an unlikely protagonist, <img src="https://github.com/mkarroqe/CS3113/raw/master/04-Rise-of-AI/Sprites/tp.png" width=20 />, out to deveat 3 virus enemies with 3 different behaviors. | <img src="https://github.com/mkarroqe/CS3113/raw/master/04-Rise-of-AI/Sprites/virus3.png" width=50 /> |
-| 5 | _Platformer_ | Coming soon. | - |
-| 6 | _Student's Choice_ | Coming soon. | - |
+| 5 | _Platformer_ | - | - |
+| 6 | _Student's Choice_ | - | - |
