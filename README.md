@@ -1,7 +1,7 @@
 # CS3113 - Intro to Game Programming
-Please enjoy my projects from my Introduction to Game Programming class! Class information and repository can be found [here](https://github.com/carmineguida/CS3113).
+Please enjoy my projects from my Introduction to Game Programming class! <br /> Class information and repository can be found [here](https://github.com/carmineguida/CS3113).
 
-## Contents
+# Contents
 
 | # | Project | Description | Preview |
 | - | - | - | :-: |
