@@ -12,7 +12,7 @@ unsigned int level1_data[] =
     3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 3,
     3, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 3,
     3, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
-    3, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 3,
+    3, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 3,
     3, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 0, 3,
     3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 3, 0, 3,
     3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 3, 3, 3, 0, 3,
@@ -75,14 +75,15 @@ void Level1::Initialize() {
 void Level1::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.enemies, LEVEL1_ENEMY_COUNT, state.map);
     
-    if (state.player->position.x >= 15) {
+    if (state.player->position.x >= 15.85) {
         state.nextScene = 1;
-//        GLuint fontTextureID = Util::LoadTexture("pixel_font.png");
-//        Util::DrawText(state.program, fontTextureID, "Welcome to Platformer", 2.0f, 1.0f, glm::vec3(0, 0, 0));
     }
 }
 
 void Level1::Render(ShaderProgram *program) {
+    GLuint fontTextureID = Util::LoadTexture("pixel_font.png");
+    Util::DrawText(program, fontTextureID, "Level 1", 0.8f, 0.1f, glm::vec3(2, -13, 0));
+    
     state.map->Render(program);
     state.player->Render(program);
 }

@@ -1,24 +1,33 @@
 #include "Level2.hpp"
 
-#define LEVEL2_WIDTH 14
-#define LEVEL2_HEIGHT 8
+#define LEVEL2_WIDTH 18
+#define LEVEL2_HEIGHT 17
 
 #define LEVEL2_ENEMY_COUNT 1
 
 unsigned int level2_data[] =
 {
-    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3,
-    3, 1, 1, 1, 1, 1, 1, 0, 1, 3, 3, 3, 3, 3,
-    3, 2, 2, 2, 2, 2, 2, 0, 2, 3, 3, 3, 3, 3
+    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 3,
+    3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 3,
+    3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 3, 3, 0, 0, 3, 3, 0, 3,
+    3, 0, 0, 3, 3, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3,
+    3, 3, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+    3, 2, 2, 0, 0, 0, 0, 2, 2, 3, 2, 0, 2, 0, 0, 2, 0, 3,
+    3, 0, 0, 2, 0, 2, 0, 0, 3, 0, 0, 0, 0, 0, 2, 3, 0, 3,
+    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 3, 0, 3,
+    3, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 3, 3, 3, 0, 3,
+    3, 0, 0, 0, 0, 2, 2, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 3,
+    3, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+    3, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+    3, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 3, 3,
+    3, 0, 0, 3, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 3, 3, 3, 3,
+    3, 3, 0, 0, 3, 3, 0, 0, 2, 3, 3, 0, 2, 3, 0, 0, 0, 3,
+    3, 3, 3, 0, 0, 0, 0, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+    3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 0, 3
 };
 
+
 void Level2::Initialize() {
-    
     state.nextScene = -1;
     
     GLuint mapTextureID = Util::LoadTexture("tileset.png");
@@ -28,9 +37,9 @@ void Level2::Initialize() {
     state.player = new Entity();
     state.player->entityType = PLAYER;
     
-    state.player->position = glm::vec3(5, 0, 0);
+    state.player->position = glm::vec3(15.85, 0, 0);
     state.player->movement = glm::vec3(0);
-    state.player->acceleration = glm::vec3(0, - 9.81f, 0);
+    state.player->acceleration = glm::vec3(0, -9.81f, 0);
     state.player->speed = 2.5f;
     state.player->textureID = Util::LoadTexture("george_0.png");
     
@@ -65,9 +74,16 @@ void Level2::Initialize() {
 
 void Level2::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.enemies, LEVEL2_ENEMY_COUNT, state.map);
+    
+//    if ((state.player->position.x >= 14.5) && (state.player->position.y >= -1)) {
+//        state.nextScene = 2;
+//    }
 }
 
 void Level2::Render(ShaderProgram *program) {
+    GLuint fontTextureID = Util::LoadTexture("pixel_font.png");
+    Util::DrawText(program, fontTextureID, "Level 2", 0.8f, 0.1f, glm::vec3(9.5, -10.5, 0));
+    
     state.map->Render(program);
     state.player->Render(program);
 }

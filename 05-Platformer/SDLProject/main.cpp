@@ -63,6 +63,7 @@ void Initialize() {
 //    sceneList[0] = new Menu();
     sceneList[0] = new Level1();
     sceneList[1] = new Level2();
+//    sceneList[2] = new Level1();
     SwitchToScene(sceneList[0]);
 }
 
@@ -132,7 +133,6 @@ void Update() {
     }
 
     while (deltaTime >= FIXED_TIMESTEP) {
-        // Update. Notice it's FIXED_TIMESTEP. Not deltaTime
         currentScene->Update(FIXED_TIMESTEP);
         deltaTime -= FIXED_TIMESTEP;
     }
@@ -141,20 +141,8 @@ void Update() {
     
     viewMatrix = glm::mat4(1.0f);
     
-//    float x_view = -6;
-//    float y_view = 12.75;
-//
-//    if (currentScene->state.player->position.y > -12) {
-//        x_view = -6;
-//        y_view = -currentScene->state.player->position.y;
-//    }
-//    if (currentScene->state.player->position.x > 4) {
-//        x_view = -currentScene->state.player->position.x;
-//        y_view = -currentScene->state.player->position.y;
-//    }
-    
     if (currentScene->state.player->position.y > -12.5) {
-        if (currentScene->state.player->position.x > 6) {
+        if (currentScene->state.player->position.x > 5) {
             if (currentScene->state.player->position.x > 12) {
                 if (currentScene->state.player->position.y > -2) {
                     viewMatrix = glm::translate(viewMatrix, glm::vec3(-12, 2.1, 0));
@@ -173,17 +161,21 @@ void Update() {
             }
         }
         else {
-            // this
             if (currentScene->state.player->position.y > -2) {
                 viewMatrix = glm::translate(viewMatrix, glm::vec3(-currentScene->state.player->position.x, 2.1, 0));
             }
             else {
-                viewMatrix = glm::translate(viewMatrix, glm::vec3(-6, -currentScene->state.player->position.y, 0));
+                viewMatrix = glm::translate(viewMatrix, glm::vec3(-5, -currentScene->state.player->position.y, 0));
             }
         }
     }
     else {
-        viewMatrix = glm::translate(viewMatrix, glm::vec3(-currentScene->state.player->position.x, 12.75, 0));
+        if (currentScene->state.player->position.x < 5) {
+            viewMatrix = glm::translate(viewMatrix, glm::vec3(-5, 12.75, 0));
+        }
+        else {
+            viewMatrix = glm::translate(viewMatrix, glm::vec3(-currentScene->state.player->position.x, 12.75, 0));
+        }
     }
     
     std::cout << "(" << currentScene->state.player->position.x
