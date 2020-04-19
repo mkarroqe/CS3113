@@ -17,6 +17,7 @@
 #include "Scene.hpp"
 #include "Level1.hpp"
 #include "Level2.hpp"
+#include "Level3.hpp"
 
 SDL_Window* displayWindow;
 bool gameIsRunning = true;
@@ -63,7 +64,7 @@ void Initialize() {
 //    sceneList[0] = new Menu();
     sceneList[0] = new Level1();
     sceneList[1] = new Level2();
-//    sceneList[2] = new Level1();
+    sceneList[2] = new Level3();
     SwitchToScene(sceneList[0]);
 }
 
@@ -139,6 +140,7 @@ void Update() {
 
     accumulator = deltaTime;
     
+    // TODO: fix view when on top row to stop at wall
     viewMatrix = glm::mat4(1.0f);
     
     if (currentScene->state.player->position.y > -12.5) {

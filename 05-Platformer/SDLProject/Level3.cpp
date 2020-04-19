@@ -1,22 +1,22 @@
-#include "Level2.hpp"
+#include "Level3.hpp"
 
-#define LEVEL2_WIDTH 18
-#define LEVEL2_HEIGHT 17
+#define LEVEL3_WIDTH 18
+#define LEVEL3_HEIGHT 17
 
-#define LEVEL2_ENEMY_COUNT 1
+#define LEVEL3_ENEMY_COUNT 1
 
-unsigned int level2_data[] =
+unsigned int level3_data[] =
 {
-    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 3,
-    3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 3,
-    3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 3, 3, 0, 0, 3, 3, 0, 3,
-    3, 0, 0, 3, 3, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3,
-    3, 3, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
-    3, 2, 2, 0, 0, 0, 0, 2, 2, 3, 2, 0, 2, 0, 0, 2, 0, 3,
-    3, 0, 0, 2, 0, 2, 0, 0, 3, 0, 0, 0, 0, 0, 2, 3, 0, 3,
-    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 3, 0, 3,
-    3, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 3, 3, 3, 0, 3,
-    3, 0, 0, 0, 0, 2, 2, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 3,
+    3, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 3,
+    3, 0, 0, 2, 2, 2, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 2, 3,
+    3, 0, 0, 2, 3, 0, 0, 2, 0, 0, 0, 3, 3, 3, 0, 0, 3, 3,
+    3, 0, 2, 3, 3, 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 3,
+    3, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+    3, 0, 2, 0, 0, 0, 2, 2, 2, 3, 2, 0, 2, 0, 2, 2, 0, 3,
+    3, 1, 0, 2, 2, 2, 0, 0, 3, 0, 0, 0, 0, 0, 2, 3, 0, 3,
+    3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 3, 3, 0, 3,
+    3, 3, 2, 1, 0, 0, 1, 2, 0, 3, 2, 2, 3, 3, 3, 3, 0, 3,
+    3, 0, 2, 2, 2, 2, 2, 3, 3, 2, 3, 0, 0, 0, 0, 0, 0, 3,
     3, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 3,
     3, 0, 2, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
     3, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 3, 3,
@@ -27,17 +27,17 @@ unsigned int level2_data[] =
 };
 
 
-void Level2::Initialize() {
+void Level3::Initialize() {
     state.nextScene = -1;
     
     GLuint mapTextureID = Util::LoadTexture("tileset.png");
-    state.map = new Map(LEVEL2_WIDTH, LEVEL2_HEIGHT, level2_data, mapTextureID, 1.0f, 4, 1);
+    state.map = new Map(LEVEL3_WIDTH, LEVEL3_HEIGHT, level3_data, mapTextureID, 1.0f, 4, 1);
     
     // Initialize Player
     state.player = new Entity();
     state.player->entityType = PLAYER;
     
-    state.player->position = glm::vec3(15.85, 0, 0);
+    state.player->position = glm::vec3(14.8, 0, 0);
     state.player->movement = glm::vec3(0);
     state.player->acceleration = glm::vec3(0, -9.81f, 0);
     state.player->speed = 2.5f;
@@ -60,7 +60,7 @@ void Level2::Initialize() {
     
     state.player->jumpPower = 5.0f;
     
-    state.enemies = new Entity[LEVEL2_ENEMY_COUNT];
+    state.enemies = new Entity[LEVEL3_ENEMY_COUNT];
     GLuint enemyTextureID = Util::LoadTexture("ctg.png");
     
     state.enemies[0].entityType = ENEMY;
@@ -72,17 +72,17 @@ void Level2::Initialize() {
     state.enemies[0].isActive = false;
 }
 
-void Level2::Update(float deltaTime) {
-    state.player->Update(deltaTime, state.player, state.enemies, LEVEL2_ENEMY_COUNT, state.map);
+void Level3::Update(float deltaTime) {
+    state.player->Update(deltaTime, state.player, state.enemies, LEVEL3_ENEMY_COUNT, state.map);
     
     if ((state.player->position.x >= 14.45) && (state.player->position.y >= 0.8)) {
         state.nextScene = 2;
     }
 }
 
-void Level2::Render(ShaderProgram *program) {
+void Level3::Render(ShaderProgram *program) {
     GLuint fontTextureID = Util::LoadTexture("pixel_font.png");
-    Util::DrawText(program, fontTextureID, "Level 2", 0.8f, 0.1f, glm::vec3(9.5, -10.5, 0));
+    Util::DrawText(program, fontTextureID, "Level 3", 0.8f, 0.1f, glm::vec3(9.5, -10.5, 0));
     
     state.map->Render(program);
     state.player->Render(program);
