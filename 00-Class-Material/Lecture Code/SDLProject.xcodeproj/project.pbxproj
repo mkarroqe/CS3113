@@ -19,6 +19,12 @@
 		ECEDAD9D241D35FD00323CA3 /* george_0.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDAD9C241D35F400323CA3 /* george_0.png */; };
 		ECEDADA0241D3FED00323CA3 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEDAD9E241D3FED00323CA3 /* Entity.cpp */; };
 		ECEDADA2241D4FE200323CA3 /* platformPack_tile001.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEDADA1241D4F9600323CA3 /* platformPack_tile001.png */; };
+		ECEE8C47244BA357008263C5 /* tileset.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEE8C46244BA357008263C5 /* tileset.png */; };
+		ECEE8C4A244BA43F008263C5 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEE8C48244BA43F008263C5 /* Map.cpp */; };
+		ECEE8C4D244C0386008263C5 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEE8C4B244C0386008263C5 /* Util.cpp */; };
+		ECEE8C50244C08CA008263C5 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEE8C4E244C08CA008263C5 /* Scene.cpp */; };
+		ECEE8C53244C0B4B008263C5 /* Level1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEE8C51244C0B4B008263C5 /* Level1.cpp */; };
+		ECEE8C56244C0DFD008263C5 /* Level2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEE8C54244C0DFD008263C5 /* Level2.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +38,7 @@
 				EC07C6FB23FF36F70034D60B /* ctg.png in CopyFiles */,
 				ECEDAD9D241D35FD00323CA3 /* george_0.png in CopyFiles */,
 				ECEDADA2241D4FE200323CA3 /* platformPack_tile001.png in CopyFiles */,
+				ECEE8C47244BA357008263C5 /* tileset.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +62,18 @@
 		ECEDAD9E241D3FED00323CA3 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		ECEDAD9F241D3FED00323CA3 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		ECEDADA1241D4F9600323CA3 /* platformPack_tile001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_tile001.png; path = "../../Assets/2D Sprites/Kenney_SimplifiedPlatformer/PNG/Tiles/platformPack_tile001.png"; sourceTree = "<group>"; };
+		ECEE8C45244BA34A008263C5 /* tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tileset.png; path = "../../Assets/2D Sprites/tileset.png"; sourceTree = "<group>"; };
+		ECEE8C46244BA357008263C5 /* tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tileset.png; path = "../Assets/2D Sprites/tileset.png"; sourceTree = "<group>"; };
+		ECEE8C48244BA43F008263C5 /* Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		ECEE8C49244BA43F008263C5 /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
+		ECEE8C4B244C0386008263C5 /* Util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
+		ECEE8C4C244C0386008263C5 /* Util.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Util.hpp; sourceTree = "<group>"; };
+		ECEE8C4E244C08CA008263C5 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
+		ECEE8C4F244C08CA008263C5 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
+		ECEE8C51244C0B4B008263C5 /* Level1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Level1.cpp; sourceTree = "<group>"; };
+		ECEE8C52244C0B4B008263C5 /* Level1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Level1.hpp; sourceTree = "<group>"; };
+		ECEE8C54244C0DFD008263C5 /* Level2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Level2.cpp; sourceTree = "<group>"; };
+		ECEE8C55244C0DFD008263C5 /* Level2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Level2.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +95,7 @@
 		DBDF1B462323DE3F007CECB1 = {
 			isa = PBXGroup;
 			children = (
+				ECEE8C46244BA357008263C5 /* tileset.png */,
 				DBDF1B512323DE3F007CECB1 /* SDLProject */,
 				DBDF1B502323DE3F007CECB1 /* Products */,
 				DBDF1B5F2323DE92007CECB1 /* Frameworks */,
@@ -93,6 +113,7 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				ECEE8C45244BA34A008263C5 /* tileset.png */,
 				ECEDADA1241D4F9600323CA3 /* platformPack_tile001.png */,
 				ECEDAD9C241D35F400323CA3 /* george_0.png */,
 				EC07C6FA23FF369F0034D60B /* ctg.png */,
@@ -102,8 +123,18 @@
 				DBDF1B5C2323DE8D007CECB1 /* shaders */,
 				DBDF1B5A2323DE8D007CECB1 /* stb_image.h */,
 				DBDF1B522323DE3F007CECB1 /* main.cpp */,
+				ECEE8C4E244C08CA008263C5 /* Scene.cpp */,
+				ECEE8C51244C0B4B008263C5 /* Level1.cpp */,
+				ECEE8C52244C0B4B008263C5 /* Level1.hpp */,
+				ECEE8C4F244C08CA008263C5 /* Scene.hpp */,
+				ECEE8C4B244C0386008263C5 /* Util.cpp */,
+				ECEE8C4C244C0386008263C5 /* Util.hpp */,
 				ECEDAD9E241D3FED00323CA3 /* Entity.cpp */,
 				ECEDAD9F241D3FED00323CA3 /* Entity.hpp */,
+				ECEE8C48244BA43F008263C5 /* Map.cpp */,
+				ECEE8C49244BA43F008263C5 /* Map.hpp */,
+				ECEE8C54244C0DFD008263C5 /* Level2.cpp */,
+				ECEE8C55244C0DFD008263C5 /* Level2.hpp */,
 			);
 			path = SDLProject;
 			sourceTree = "<group>";
@@ -177,9 +208,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECEE8C50244C08CA008263C5 /* Scene.cpp in Sources */,
 				DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */,
 				ECEDADA0241D3FED00323CA3 /* Entity.cpp in Sources */,
+				ECEE8C4A244BA43F008263C5 /* Map.cpp in Sources */,
 				DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */,
+				ECEE8C56244C0DFD008263C5 /* Level2.cpp in Sources */,
+				ECEE8C4D244C0386008263C5 /* Util.cpp in Sources */,
+				ECEE8C53244C0B4B008263C5 /* Level1.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

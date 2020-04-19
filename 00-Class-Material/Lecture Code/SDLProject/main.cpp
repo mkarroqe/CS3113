@@ -11,21 +11,12 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
 #include "Entity.hpp"
-
-#define PLATFORM_COUNT 11
-#define ENEMY_COUNT 1
-
-struct GameState {
-    Entity *player;
-    Entity *platforms;
-    Entity *enemies;
-};
-
-GameState state;
+#include "Map.hpp"
+#include "Util.hpp"
+#include "Scene.hpp"
+#include "Level1.hpp"
+#include "Level2.hpp"
 
 SDL_Window* displayWindow;
 bool gameIsRunning = true;
@@ -33,27 +24,13 @@ bool gameIsRunning = true;
 ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
 
-GLuint LoadTexture(const char* filePath) {
-    int w, h, n;
-    unsigned char* image = stbi_load(filePath, &w, &h, &n, STBI_rgb_alpha);
-    
-    if (image == NULL) {
-        std::cout << "Unable to load image. Make sure the path is correct\n";
-        assert(false);
-    }
-    
-    GLuint textureID;
-    glGenTextures(1, &textureID);
-    glBindTexture(GL_TEXTURE_2D, textureID);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-    
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    
-    stbi_image_free(image);
-    return textureID;
-}
+Scene *currentScene;
+Scene *sceneList[2];
 
+void SwitchToScene(Scene *scene) {
+    currentScene = scene;
+    currentScene->Initialize();
+}
 
 void Initialize() {
     SDL_Init(SDL_INIT_VIDEO);
@@ -83,64 +60,14 @@ void Initialize() {
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-   
-    // Initialize Game Objects
-    
-    // Initialize Player
-    state.player = new Entity();
-    state.player->entityType = PLAYER;
-    
-    state.player->position = glm::vec3(-4, -1, 0);
-    state.player->movement = glm::vec3(0);
-    state.player->acceleration = glm::vec3(0, - 9.81f, 0);
-    state.player->speed = 2.5f;
-    state.player->textureID = LoadTexture("george_0.png");
-    
-    state.player->animRight = new int[4] {3, 7, 11, 15};
-    state.player->animLeft = new int[4] {1, 5, 9, 13};
-    state.player->animUp = new int[4] {2, 6, 10, 14};
-    state.player->animDown = new int[4] {0, 4, 8, 12};
-
-    state.player->animIndices = state.player->animRight;
-    state.player->animFrames = 4;
-    state.player->animIndex = 0;
-    state.player->animTime = 0;
-    state.player->animCols = 4;
-    state.player->animRows = 4;
-    
-    state.player->height = 0.8f;
-    state.player->width = 0.35f;
-    
-    state.player->jumpPower = 5.0f;
-    
-    state.platforms = new Entity[PLATFORM_COUNT];
-    
-    GLuint platformTextureID = LoadTexture("platformPack_tile001.png");
-    
-    for (int i = 0; i < PLATFORM_COUNT; i++) {
-        state.platforms[i].entityType = PLATFORM;
-        state.platforms[i].textureID = platformTextureID;
-        state.platforms[i].position = glm::vec3(-5 + i, -3.25, 0);
-    }
- 
-    for (int i = 0; i < PLATFORM_COUNT; i++) {
-        state.platforms[i].Update(0, NULL, NULL, 0);
-    }
-    
-    state.enemies = new Entity[ENEMY_COUNT];
-    GLuint enemyTextureID = LoadTexture("ctg.png");
-    
-    state.enemies[0].entityType = ENEMY;
-    state.enemies[0].textureID = enemyTextureID;
-    state.enemies[0].position = glm::vec3(4, -2.25, 0);
-    state.enemies[0].speed = 1;
-    state.enemies[0].aiType = WAITANDGO;
-    state.enemies[0].aiState = IDLE;
+    sceneList[0] = new Level1();
+    sceneList[1] = new Level2();
+    SwitchToScene(sceneList[0]);
 }
 
 void ProcessInput() {
     
-    state.player->movement = glm::vec3(0);
+    currentScene->state.player->movement = glm::vec3(0);
     
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -161,8 +88,8 @@ void ProcessInput() {
                         break;
                         
                     case SDLK_SPACE:
-                        if (state.player->collidedBottom) {
-                            state.player->jump = true;
+                        if (currentScene->state.player->collidedBottom) {
+                            currentScene->state.player->jump = true;
                         }
                         break;
                 }
@@ -173,17 +100,17 @@ void ProcessInput() {
     const Uint8 *keys = SDL_GetKeyboardState(NULL);
 
     if (keys[SDL_SCANCODE_LEFT]) {
-        state.player->movement.x = -1.0f;
-        state.player->animIndices = state.player->animLeft;
+        currentScene->state.player->movement.x = -1.0f;
+        currentScene->state.player->animIndices = currentScene->state.player->animLeft;
     }
     else if (keys[SDL_SCANCODE_RIGHT]) {
-        state.player->movement.x = 1.0f;
-        state.player->animIndices = state.player->animRight;
+        currentScene->state.player->movement.x = 1.0f;
+        currentScene->state.player->animIndices = currentScene->state.player->animRight;
     }
     
 
-    if (glm::length(state.player->movement) > 1.0f) {
-        state.player->movement = glm::normalize(state.player->movement);
+    if (glm::length(currentScene->state.player->movement) > 1.0f) {
+        currentScene->state.player->movement = glm::normalize(currentScene->state.player->movement);
     }
 
 }
@@ -205,31 +132,27 @@ void Update() {
 
     while (deltaTime >= FIXED_TIMESTEP) {
         // Update. Notice it's FIXED_TIMESTEP. Not deltaTime
-        state.player->Update(FIXED_TIMESTEP, state.player, state.platforms, PLATFORM_COUNT);
-        
-        for (int i = 0; i < ENEMY_COUNT; i++) {
-            state.enemies[i].Update(FIXED_TIMESTEP, state.player, state.platforms, ENEMY_COUNT);
-        }
-        
+        currentScene->Update(FIXED_TIMESTEP);
         deltaTime -= FIXED_TIMESTEP;
     }
 
     accumulator = deltaTime;
+    
+    viewMatrix = glm::mat4(1.0f);
+    if (currentScene->state.player->position.x > 5) {
+        viewMatrix = glm::translate(viewMatrix, glm::vec3(-currentScene->state.player->position.x, 3.75, 0));
+    } else {
+        viewMatrix = glm::translate(viewMatrix, glm::vec3(-5, 3.75, 0));
+    }
 }
 
 
 void Render() {
     glClear(GL_COLOR_BUFFER_BIT);
-
-    for (int i = 0; i < PLATFORM_COUNT; i++) {
-        state.platforms[i].Render(&program);
-    }
     
-    for (int i = 0; i < ENEMY_COUNT; i++) {
-        state.enemies[i].Render(&program);
-    }
+    program.SetViewMatrix(viewMatrix);
     
-    state.player->Render(&program);
+    currentScene->Render(&program);
     
     SDL_GL_SwapWindow(displayWindow);
 }
@@ -245,6 +168,11 @@ int main(int argc, char* argv[]) {
     while (gameIsRunning) {
         ProcessInput();
         Update();
+        
+        if (currentScene->state.nextScene >= 0) {
+            SwitchToScene(sceneList[currentScene->state.nextScene]);
+        }
+        
         Render();
     }
     
