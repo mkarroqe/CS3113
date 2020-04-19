@@ -1,4 +1,6 @@
-# Platformer
+# Instructions
+Make a platformer game!
+
 - Menu Screen
   - Show the name of the game. Press enter to start.
 - GamePlay
