@@ -15,4 +15,4 @@ Make a platformer game!
 *In Progress*
 
 # Bloopers
-*In Progress*
+![blooper](demos/blooper-1.gif)
