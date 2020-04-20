@@ -164,7 +164,12 @@ void Update() {
         }
         else {
             if (currentScene->state.player->position.y > -2) {
-                viewMatrix = glm::translate(viewMatrix, glm::vec3(-currentScene->state.player->position.x, 2.1, 0));
+                if (currentScene->state.player->position.x < 5) {
+                    viewMatrix = glm::translate(viewMatrix, glm::vec3(-5, 2.1, 0));
+                }
+                else {
+                    viewMatrix = glm::translate(viewMatrix, glm::vec3(-currentScene->state.player->position.x, 2.1, 0));
+                }
             }
             else {
                 viewMatrix = glm::translate(viewMatrix, glm::vec3(-5, -currentScene->state.player->position.y, 0));

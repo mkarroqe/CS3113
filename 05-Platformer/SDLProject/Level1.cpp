@@ -84,6 +84,14 @@ void Level1::Render(ShaderProgram *program) {
     GLuint fontTextureID = Util::LoadTexture("pixel_font.png");
     Util::DrawText(program, fontTextureID, "Level 1", 0.8f, 0.1f, glm::vec3(2, -13, 0));
     
+    Util::DrawText(program, fontTextureID, "Up!", 0.2f, 0.05f, glm::vec3(8.7, -10, 0));
+    Util::DrawText(program, fontTextureID, "Up!", 0.2f, 0.05f, glm::vec3(8.7, -11, 0));
+    Util::DrawText(program, fontTextureID, "Up!", 0.2f, 0.05f, glm::vec3(8.7, -12, 0));
+    
+    Util::DrawText(program, fontTextureID, "Climb!", 0.2f, 0.05f, glm::vec3(2.0, -4.8, 0));
+    
+    Util::DrawText(program, fontTextureID, "Finish..?", 0.2f, 0.1f, glm::vec3(13, 0.5, 0));
+    
     state.map->Render(program);
     state.player->Render(program);
 }

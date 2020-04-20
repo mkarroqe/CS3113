@@ -83,6 +83,8 @@ void Level2::Update(float deltaTime) {
 void Level2::Render(ShaderProgram *program) {
     GLuint fontTextureID = Util::LoadTexture("pixel_font.png");
     Util::DrawText(program, fontTextureID, "Level 2", 0.8f, 0.1f, glm::vec3(9.5, -10.5, 0));
+    Util::DrawText(program, fontTextureID, "Gotta get back up", 0.2f, 0.05f, glm::vec3(9.4, -11.3, 0));
+    Util::DrawText(program, fontTextureID, "..Finish?", 0.2f, 0.05f, glm::vec3(13.7, 1.0, 0));
     
     state.map->Render(program);
     state.player->Render(program);
