@@ -75,8 +75,17 @@ void Level3::Initialize() {
 void Level3::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.enemies, LEVEL3_ENEMY_COUNT, state.map);
     
-    if ((state.player->position.x >= 14.45) && (state.player->position.y >= 0.8)) {
-        state.nextScene = 2;
+    if ((state.player->position.x >= 10.2) && (state.player->position.y >= 0.85)) {
+        state.nextScene = 4;
+    }
+    // falling into pit
+    else if (state.player->position.y < -15.5) {
+        if (state.player->lives == 0) {
+            state.nextScene = 5;
+        }
+        else {
+            state.player->lives -= 1;
+        }
     }
 }
 

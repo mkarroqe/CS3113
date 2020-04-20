@@ -26,6 +26,10 @@ unsigned int level1_data[] =
     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 0, 3
 };
 
+Level1::Level1(int _lives) {
+    state.player_lives = _lives;
+}
+
 void Level1::Initialize() {
     
     state.nextScene = -1;
@@ -78,6 +82,16 @@ void Level1::Update(float deltaTime) {
     if (state.player->position.x >= 15.85) {
         state.nextScene = 2;
     }
+    // falling into pit
+    else if (state.player->position.y < -15.5) {
+        if (state.player->lives == 0) {
+            state.nextScene = 5;
+        }
+        else {
+            state.player->loseLife();
+            state.nextScene = 1;
+        }
+    }
 }
 
 void Level1::Render(ShaderProgram *program) {
@@ -91,6 +105,16 @@ void Level1::Render(ShaderProgram *program) {
     Util::DrawText(program, fontTextureID, "Climb!", 0.2f, 0.05f, glm::vec3(2.0, -4.8, 0));
     
     Util::DrawText(program, fontTextureID, "Finish..?", 0.2f, 0.1f, glm::vec3(13, 0.5, 0));
+    
+    // formatting lives
+    std::string lives_str = std::to_string(state.player->lives);
+    
+    // thanks https://stackoverflow.com/a/58972804 for tip
+    std::string rounded = lives_str.substr(0, lives_str.find(".")+0);
+    
+    std::string lives_left = "Lives: " + rounded;
+    
+    Util::DrawText(program, fontTextureID, lives_left, 0.2f, 0.1f, glm::vec3(3, 1.0, 0));
     
     state.map->Render(program);
     state.player->Render(program);

@@ -21,6 +21,9 @@
 #include "Level2.hpp"
 #include "Level3.hpp"
 
+#include "Win.hpp"
+#include "Lose.hpp"
+
 SDL_Window* displayWindow;
 bool gameIsRunning = true;
 
@@ -28,7 +31,7 @@ ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
 
 Scene *currentScene;
-Scene *sceneList[4];
+Scene *sceneList[6];
 
 void SwitchToScene(Scene *scene) {
     currentScene = scene;
@@ -67,6 +70,8 @@ void Initialize() {
     sceneList[1] = new Level1();
     sceneList[2] = new Level2();
     sceneList[3] = new Level3();
+    sceneList[4] = new Win();
+    sceneList[5] = new Lose();
     SwitchToScene(sceneList[0]);
 }
 

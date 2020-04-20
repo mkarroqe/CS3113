@@ -53,6 +53,7 @@ class Entity {
         int animRows = 0;
         
         bool isActive = true;
+        float lives = 3;
         
         bool collidedTop = false;
         bool collidedBottom = false;
@@ -61,6 +62,7 @@ class Entity {
         
         Entity();
         
+        void loseLife();
         bool CheckCollision(Entity *other);
         void CheckCollisionsY(Entity *objects, int objectCount);
         void CheckCollisionsX(Entity *objects, int objectCount);

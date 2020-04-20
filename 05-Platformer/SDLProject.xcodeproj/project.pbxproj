@@ -27,6 +27,8 @@
 		ECEE8C5F244C2B9D008263C5 /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEE8C5D244C2B9D008263C5 /* Menu.cpp */; };
 		ECEE8C61244C2C3B008263C5 /* pixel_font.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEE8C60244C2C36008263C5 /* pixel_font.png */; };
 		ECEE8C64244CF6D0008263C5 /* Level3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEE8C62244CF6D0008263C5 /* Level3.cpp */; };
+		ECEE8C67244D2F02008263C5 /* Lose.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEE8C65244D2F02008263C5 /* Lose.cpp */; };
+		ECEE8C6A244D2F0F008263C5 /* Win.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEE8C68244D2F0F008263C5 /* Win.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -80,6 +82,10 @@
 		ECEE8C60244C2C36008263C5 /* pixel_font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pixel_font.png; path = "../../00-Class-Material/Assets/Fonts/pixel_font.png"; sourceTree = "<group>"; };
 		ECEE8C62244CF6D0008263C5 /* Level3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Level3.cpp; sourceTree = "<group>"; };
 		ECEE8C63244CF6D0008263C5 /* Level3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Level3.hpp; sourceTree = "<group>"; };
+		ECEE8C65244D2F02008263C5 /* Lose.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Lose.cpp; sourceTree = "<group>"; };
+		ECEE8C66244D2F02008263C5 /* Lose.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Lose.hpp; sourceTree = "<group>"; };
+		ECEE8C68244D2F0F008263C5 /* Win.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Win.cpp; sourceTree = "<group>"; };
+		ECEE8C69244D2F0F008263C5 /* Win.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Win.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +151,10 @@
 				ECEE8C54244C0DFD008263C5 /* Level2.cpp */,
 				ECEE8C62244CF6D0008263C5 /* Level3.cpp */,
 				ECEE8C63244CF6D0008263C5 /* Level3.hpp */,
+				ECEE8C65244D2F02008263C5 /* Lose.cpp */,
+				ECEE8C66244D2F02008263C5 /* Lose.hpp */,
+				ECEE8C68244D2F0F008263C5 /* Win.cpp */,
+				ECEE8C69244D2F0F008263C5 /* Win.hpp */,
 			);
 			path = SDLProject;
 			sourceTree = "<group>";
@@ -219,10 +229,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECEE8C5F244C2B9D008263C5 /* Menu.cpp in Sources */,
+				ECEE8C67244D2F02008263C5 /* Lose.cpp in Sources */,
 				ECEE8C50244C08CA008263C5 /* Scene.cpp in Sources */,
 				DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */,
 				ECEDADA0241D3FED00323CA3 /* Entity.cpp in Sources */,
 				ECEE8C64244CF6D0008263C5 /* Level3.cpp in Sources */,
+				ECEE8C6A244D2F0F008263C5 /* Win.cpp in Sources */,
 				ECEE8C4A244BA43F008263C5 /* Map.cpp in Sources */,
 				DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */,
 				ECEE8C56244C0DFD008263C5 /* Level2.cpp in Sources */,

@@ -7,8 +7,13 @@ Entity::Entity()
     acceleration = glm::vec3(0);
     velocity = glm::vec3(0);
     speed = 0;
+    lives = 3;
     
     modelMatrix = glm::mat4(1.0f);
+}
+
+void Entity::loseLife() {
+    lives -= 1;
 }
 
 bool Entity::CheckCollision(Entity *other) {

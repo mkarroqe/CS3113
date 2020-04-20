@@ -78,6 +78,15 @@ void Level2::Update(float deltaTime) {
     if ((state.player->position.x >= 14.45) && (state.player->position.y >= 0.8)) {
         state.nextScene = 3;
     }
+    // falling into pit
+    else if (state.player->position.y < -15.5) {
+        if (state.player->lives == 0) {
+            state.nextScene = 5;
+        }
+        else {
+            state.player->lives -= 1;
+        }
+    }
 }
 
 void Level2::Render(ShaderProgram *program) {
