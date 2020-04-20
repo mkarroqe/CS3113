@@ -67,7 +67,7 @@ void Initialize() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     sceneList[0] = new Menu();
-    sceneList[1] = new Level1();
+    sceneList[1] = new Level1(3); // remove this constructor stuff
     sceneList[2] = new Level2();
     sceneList[3] = new Level3();
     sceneList[4] = new Win();

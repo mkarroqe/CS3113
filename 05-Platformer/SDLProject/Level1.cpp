@@ -89,7 +89,7 @@ void Level1::Update(float deltaTime) {
         }
         else {
             state.player->loseLife();
-            state.nextScene = 1;
+            state.nextScene = 5;
         }
     }
 }
