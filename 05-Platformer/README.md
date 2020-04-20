@@ -14,5 +14,14 @@ Make a platformer game!
 # Demo
 *In Progress*
 
+| ![](demos/menu.png) | ![](demos/level1.png) | ![](demos/level2.png) |
+| - | - | - |
+| ![](demos/level3.png) | ![](demos/win.png) | ![](demos/lose.png) |
+
+Remaining Tasks:
+- Adding music
+- Adding AI
+- Fixing `lives` bug
+
 # Bloopers
 ![blooper](demos/blooper-1.gif)
