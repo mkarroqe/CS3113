@@ -15,6 +15,8 @@
 #include "Map.hpp"
 #include "Util.hpp"
 #include "Scene.hpp"
+
+#include "Menu.hpp"
 #include "Level1.hpp"
 #include "Level2.hpp"
 #include "Level3.hpp"
@@ -26,7 +28,7 @@ ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
 
 Scene *currentScene;
-Scene *sceneList[3];
+Scene *sceneList[4];
 
 void SwitchToScene(Scene *scene) {
     currentScene = scene;
@@ -61,10 +63,10 @@ void Initialize() {
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-//    sceneList[0] = new Menu();
-    sceneList[0] = new Level1();
-    sceneList[1] = new Level2();
-    sceneList[2] = new Level3();
+    sceneList[0] = new Menu();
+    sceneList[1] = new Level1();
+    sceneList[2] = new Level2();
+    sceneList[3] = new Level3();
     SwitchToScene(sceneList[0]);
 }
 
@@ -89,6 +91,10 @@ void ProcessInput() {
                     case SDLK_RIGHT:
                         // Move the player right
                         break;
+                    
+                    case SDLK_RETURN:
+                        SwitchToScene(sceneList[1]);
+                        break;
                         
                     case SDLK_SPACE:
                         if (currentScene->state.player->collidedBottom) {
@@ -102,6 +108,10 @@ void ProcessInput() {
     
     const Uint8 *keys = SDL_GetKeyboardState(NULL);
 
+    if (keys[SDL_SCANCODE_RETURN]) {
+        SwitchToScene(sceneList[1]);
+    }
+    
     if (keys[SDL_SCANCODE_LEFT]) {
         currentScene->state.player->movement.x = -1.0f;
         currentScene->state.player->animIndices = currentScene->state.player->animLeft;
@@ -140,7 +150,7 @@ void Update() {
 
     accumulator = deltaTime;
     
-    // TODO: fix view when on top row to stop at wall
+    // ----------------- VIEW MATRIX -----------------
     viewMatrix = glm::mat4(1.0f);
     
     if (currentScene->state.player->position.y > -12.5) {
@@ -184,6 +194,7 @@ void Update() {
             viewMatrix = glm::translate(viewMatrix, glm::vec3(-currentScene->state.player->position.x, 12.75, 0));
         }
     }
+    // ---------------- /VIEW MATRIX -----------------
     
     std::cout << "(" << currentScene->state.player->position.x
         << ", " << currentScene->state.player->position.y;

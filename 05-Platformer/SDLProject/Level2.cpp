@@ -76,7 +76,7 @@ void Level2::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.enemies, LEVEL2_ENEMY_COUNT, state.map);
     
     if ((state.player->position.x >= 14.45) && (state.player->position.y >= 0.8)) {
-        state.nextScene = 2;
+        state.nextScene = 3;
     }
 }
 
