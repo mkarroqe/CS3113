@@ -35,6 +35,7 @@ Scene *currentScene;
 Scene *sceneList[6];
 
 Mix_Music *music;
+Mix_Chunk *hop;
 
 void SwitchToScene(Scene *scene) {
     currentScene = scene;
@@ -58,6 +59,8 @@ void Initialize() {
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
     music = Mix_LoadMUS("KK I THINK - Tyler, the Creator KK Slider Cover.mp3");
     Mix_PlayMusic(music, -1);
+    
+    hop = Mix_LoadWAV("spin_jump.wav");
     
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);
@@ -111,6 +114,7 @@ void ProcessInput() {
                     case SDLK_SPACE:
                         if (currentScene->state.player->collidedBottom) {
                             currentScene->state.player->jump = true;
+                            Mix_PlayChannel(-1, hop, 0);
                         }
                         break;
                 }
