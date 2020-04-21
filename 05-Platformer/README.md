@@ -1,3 +1,5 @@
+> **Note: As of 4/21, assignment is still in progress. Thank you!**
+
 # Instructions
 Make a platformer game!
 
