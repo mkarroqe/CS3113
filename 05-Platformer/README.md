@@ -13,6 +13,11 @@ Make a platformer game!
   - If the player touches the AI the player dies (you can do collidedBottom kill if you want). 
   - At least 1 looping background music, and at least 1 sound effect.
 
+# Audio Credits
+Background Music: [*KK I THINK - Tyler, the Creator KK Slider Cover*](https://www.youtube.com/watch?v=G-g84zoFkYQ) by [Gunk](https://www.youtube.com/channel/UCA1TbpsMa9_iPTmKn0qd_bg) on YouTube
+
+Jumping sound effect: [*Spin Jump Sound*](http://soundbible.com/1898-Spin-Jump.html) from [SoundBible](http://soundbible.com/)
+
 # Demo
 *In Progress* 
 
