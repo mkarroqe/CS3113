@@ -23,7 +23,7 @@ Jumping sound effect: [*Spin Jump Sound*](http://soundbible.com/1898-Spin-Jump.h
 
 | The Villian |
 | - |
-| 1[](ai.png) |
+| ![](ai.png) |
 | *s/o to [this site](https://make8bitart.com/)* |
 
 | ![](demos/menu.png) | ![](demos/level1.png) | ![](demos/level2.png) |
