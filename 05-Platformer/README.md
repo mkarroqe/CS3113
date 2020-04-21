@@ -14,7 +14,7 @@ Make a platformer game!
   - At least 1 looping background music, and at least 1 sound effect.
 
 # Demo
-*In Progress*
+*In Progress* 
 
 | ![](demos/menu.png) | ![](demos/level1.png) | ![](demos/level2.png) |
 | - | - | - |
