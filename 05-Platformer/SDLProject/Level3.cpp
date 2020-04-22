@@ -61,36 +61,36 @@ void Level3::Initialize() {
     state.player->height = 0.8f;
     state.player->width = 0.35f;
     
-    state.player->jumpPower = 5.0f;
+    state.player->jumpPower = 6.0f;
     
     // ----------------- Initialize Enemies -----------------
     state.enemies = new Entity[LEVEL3_ENEMY_COUNT];
-    
-    state.enemies[0].entityType = ENEMY;
-    state.enemies[0].position = glm::vec3(1, -3, 0);
-    state.enemies[0].acceleration = glm::vec3(0, -9.81f, 0);
-    
-    state.enemies[0].aiType = WALKER;
-    state.enemies[0].aiState = ACTIVE;
-    
-    state.enemies[0].textureID = Util::LoadTexture("ai.png");
-    state.enemies[0].height = 0.35f;
-    state.enemies[0].width = 0.35f;
-    state.enemies[0].movement = glm::vec3(0);
-    state.enemies[0].speed = 1;
-    
-    state.enemies[1].entityType = ENEMY;
-    state.enemies[1].position = glm::vec3(1, -11, 0);
-    state.enemies[1].acceleration = glm::vec3(0, -9.81f, 0);
-    
-    state.enemies[1].aiType = WALKER;
-    state.enemies[1].aiState = ACTIVE;
-    
-    state.enemies[1].textureID = Util::LoadTexture("ai.png");
-    state.enemies[1].height = 0.35f;
-    state.enemies[1].width = 0.35f;
-    state.enemies[1].movement = glm::vec3(0);
-    state.enemies[1].speed = 1;
+        
+    GLuint enemyTextureID = Util::LoadTexture("ai.png");;
+    for (int i = 0; i < LEVEL3_ENEMY_COUNT; i ++) {
+        state.enemies[i].entityType = ENEMY;
+        
+        if (i == 0) {
+            state.enemies[i].position = glm::vec3(13.0f, -9.5f, 0);
+        }
+        else if (i == 1) {
+            state.enemies[i].position = glm::vec3(8.8f, -8.0f, 0);
+        }
+        else {
+            state.enemies[i].position = glm::vec3(9.8f, 0.0f, 0);
+        }
+        
+        state.enemies[i].acceleration = glm::vec3(0, -9.81f, 0);
+        state.enemies[i].aiType = WAITANDGO;
+        state.enemies[i].aiState = IDLE;
+        
+        state.enemies[i].textureID = enemyTextureID;
+        state.enemies[i].height = 1.0f;
+        state.enemies[i].width = 0.5f;
+        
+        state.enemies[i].movement = glm::vec3(0);
+        state.enemies[i].speed = 1;
+    }
 }
 
 void Level3::Update(float deltaTime) {
