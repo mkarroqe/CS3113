@@ -1,4 +1,11 @@
 > **Note: As of 4/21, assignment is still in progress. Thank you!**
+>
+> Remaining Task:
+> - Adding AI
+>  - Figure out why sprites are invisible :(
+>  - if you hit them (coordinates visible in console) you do lose lives however!
+>
+> *All other tasks are completed!*
 
 # Instructions
 Make a platformer game!
@@ -30,10 +37,6 @@ Jumping sound effect: [*Spin Jump Sound*](http://soundbible.com/1898-Spin-Jump.h
 | - | - | - |
 | ![](demos/level3.png) | ![](demos/win.png) | ![](demos/lose.png) |
 
-Remaining Tasks:
-- Adding music
-- Adding AI
-- Fixing `lives` bug
-
 # Bloopers
-![blooper](demos/blooper-1.gif)
+| ![blooper](demos/blooper-1.gif) | ![blooper](demos/blooper-2.gif) |
+| - | - |
