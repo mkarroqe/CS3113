@@ -243,18 +243,25 @@ void Entity::Update(float deltaTime, Entity *player, Entity *objects, int object
 
         velocity.y += jumpPower;
     }
-
+    
     velocity.x = movement.x * speed;
     velocity += acceleration * deltaTime;
 
     position.y += velocity.y * deltaTime; // Move on Y
     CheckCollisionsY(map);
-    CheckCollisionsY(objects, objectCount); // Fix if needed
+//    CheckCollisionsY(objects, objectCount); // Fix if needed
 
     position.x += velocity.x * deltaTime; // Move on X
     CheckCollisionsX(map);
-    CheckCollisionsX(objects, objectCount); // Fix if needed
+//    CheckCollisionsX(objects, objectCount); // Fix if needed
 
+    if (entityType == PLAYER) {
+        CheckCollisionsY(objects, objectCount);
+//    }
+//    if (objects->entityType == PLAYER) {
+        CheckCollisionsX(objects, objectCount);
+    }
+    
     modelMatrix = glm::mat4(1.0f);
     modelMatrix = glm::translate(modelMatrix, position);
 }

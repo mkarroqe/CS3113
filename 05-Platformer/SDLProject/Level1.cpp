@@ -68,7 +68,7 @@ void Level1::Initialize() {
     state.enemies = new Entity[LEVEL1_ENEMY_COUNT];
     
     state.enemies[0].entityType = ENEMY;
-    state.enemies[0].position = glm::vec3(1, -3, 0);
+    state.enemies[0].position = glm::vec3(5, 0, 0);
     state.enemies[0].acceleration = glm::vec3(0, -9.81f, 0);
     
     state.enemies[0].aiType = WALKER;
@@ -81,7 +81,7 @@ void Level1::Initialize() {
     state.enemies[0].speed = 1;
     
     state.enemies[1].entityType = ENEMY;
-    state.enemies[1].position = glm::vec3(1, -11, 0);
+    state.enemies[1].position = glm::vec3(1, 0, 0);
     state.enemies[1].acceleration = glm::vec3(0, -9.81f, 0);
     
     state.enemies[1].aiType = WALKER;
@@ -96,6 +96,10 @@ void Level1::Initialize() {
 
 void Level1::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.enemies, LEVEL1_ENEMY_COUNT, state.map);
+    
+    for (int i = 0; i < LEVEL1_ENEMY_COUNT; i++) {
+        state.enemies[i].Update(deltaTime, state.player, state.enemies, LEVEL1_ENEMY_COUNT, state.map);
+    }
     
     std::cout << "Lives: " << state.player_lives << "\n";
     
