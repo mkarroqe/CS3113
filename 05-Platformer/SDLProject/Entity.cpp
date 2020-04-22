@@ -249,16 +249,12 @@ void Entity::Update(float deltaTime, Entity *player, Entity *objects, int object
 
     position.y += velocity.y * deltaTime; // Move on Y
     CheckCollisionsY(map);
-//    CheckCollisionsY(objects, objectCount); // Fix if needed
 
     position.x += velocity.x * deltaTime; // Move on X
     CheckCollisionsX(map);
-//    CheckCollisionsX(objects, objectCount); // Fix if needed
 
     if (entityType == PLAYER) {
         CheckCollisionsY(objects, objectCount);
-//    }
-//    if (objects->entityType == PLAYER) {
         CheckCollisionsX(objects, objectCount);
     }
     

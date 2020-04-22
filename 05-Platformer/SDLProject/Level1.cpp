@@ -3,7 +3,7 @@
 #define LEVEL1_WIDTH 18
 #define LEVEL1_HEIGHT 17
 
-#define LEVEL1_ENEMY_COUNT 2
+#define LEVEL1_ENEMY_COUNT 1
 
 unsigned int level1_data[] =
 {
@@ -68,30 +68,18 @@ void Level1::Initialize() {
     state.enemies = new Entity[LEVEL1_ENEMY_COUNT];
     
     state.enemies[0].entityType = ENEMY;
-    state.enemies[0].position = glm::vec3(5, 0, 0);
+    state.enemies[0].position = glm::vec3(9, -
+9, 0);
     state.enemies[0].acceleration = glm::vec3(0, -9.81f, 0);
     
-    state.enemies[0].aiType = WALKER;
-    state.enemies[0].aiState = ACTIVE;
+    state.enemies[0].aiType = WAITANDGO;
+    state.enemies[0].aiState = IDLE;
     
     state.enemies[0].textureID = Util::LoadTexture("ai.png");
-    state.enemies[0].height = 0.35f;
-    state.enemies[0].width = 0.35f;
+    state.enemies[0].height = 1.0f;
+    state.enemies[0].width = 0.5f;
     state.enemies[0].movement = glm::vec3(0);
     state.enemies[0].speed = 1;
-    
-    state.enemies[1].entityType = ENEMY;
-    state.enemies[1].position = glm::vec3(1, 0, 0);
-    state.enemies[1].acceleration = glm::vec3(0, -9.81f, 0);
-    
-    state.enemies[1].aiType = WALKER;
-    state.enemies[1].aiState = ACTIVE;
-    
-    state.enemies[1].textureID = Util::LoadTexture("ai.png");
-    state.enemies[1].height = 0.35f;
-    state.enemies[1].width = 0.35f;
-    state.enemies[1].movement = glm::vec3(0);
-    state.enemies[1].speed = 1;
 }
 
 void Level1::Update(float deltaTime) {
@@ -108,13 +96,15 @@ void Level1::Update(float deltaTime) {
         std::cout << state.enemies[0].position.y << ") \n";
         
         if(state.player->CheckCollision(&state.enemies[i])) {
-            std::cout << "ah!\n";
-            loseLife();
-            state.nextScene = 1;
-        }
-        if(state.enemies[0].collidedTop) {
-            std::cout << "yuh\n";
-            state.enemies[0].isActive = false;
+            if(state.enemies[i].collidedTop) {
+                std::cout << "yuh\n";
+                state.enemies[i].isActive = false;
+            }
+            else {
+                std::cout << "ah!\n";
+                loseLife();
+                state.nextScene = 1;
+            }
         }
     }
     

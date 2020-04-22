@@ -3,7 +3,7 @@
 #define LEVEL3_WIDTH 18
 #define LEVEL3_HEIGHT 17
 
-#define LEVEL3_ENEMY_COUNT 2
+#define LEVEL3_ENEMY_COUNT 3
 
 unsigned int level3_data[] =
 {
@@ -95,6 +95,29 @@ void Level3::Initialize() {
 
 void Level3::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.enemies, LEVEL3_ENEMY_COUNT, state.map);
+    
+    for (int i = 0; i < LEVEL3_ENEMY_COUNT; i++) {
+        state.enemies[i].Update(deltaTime, state.player, state.enemies, LEVEL3_ENEMY_COUNT, state.map);
+    }
+    
+    std::cout << "Lives: " << state.player_lives << "\n";
+    
+    for (int i = 0; i < LEVEL3_ENEMY_COUNT; i++) {
+        std::cout << "Enemy: (" << state.enemies[i].position.x << ", ";
+        std::cout << state.enemies[0].position.y << ") \n";
+        
+        if(state.player->CheckCollision(&state.enemies[i])) {
+            if(state.enemies[i].collidedTop) {
+                std::cout << "yuh\n";
+                state.enemies[i].isActive = false;
+            }
+            else {
+                std::cout << "ah!\n";
+                loseLife();
+                state.nextScene = 3;
+            }
+        }
+    }
     
     if ((state.player->position.x >= 10.2) && (state.player->position.y >= 0.85)) {
         state.nextScene = 4;
