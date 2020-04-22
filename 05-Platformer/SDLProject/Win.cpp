@@ -69,6 +69,9 @@ void Win::Update(float deltaTime) {
 
 void Win::Render(ShaderProgram *program) {
     GLuint fontTextureID = Util::LoadTexture("pixel_font.png");
+    Util::DrawText(program, fontTextureID, "wow", 0.4f, 0.1f, glm::vec3(1.5, 10, 0));
+    Util::DrawText(program, fontTextureID, "wow", 0.4f, 0.1f, glm::vec3(3.5, 5, 0));
+    Util::DrawText(program, fontTextureID, "wow!", 0.4f, 0.1f, glm::vec3(2.5, 0, 0));
     Util::DrawText(program, fontTextureID, "You Win!", 0.4f, 0.1f, glm::vec3(2.0, -10, 0));
         
     state.map->Render(program);

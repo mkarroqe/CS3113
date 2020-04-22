@@ -70,7 +70,7 @@ void Map::Render(ShaderProgram *program)
     glEnableVertexAttribArray(program->texCoordAttribute);
 
     glBindTexture(GL_TEXTURE_2D, textureID);
-    glDrawArrays(GL_TRIANGLES, 0, (int)vertices.size());
+    glDrawArrays(GL_TRIANGLES, 0, (int)vertices.size() / 2);
 
     glDisableVertexAttribArray(program->positionAttribute);
     glDisableVertexAttribArray(program->texCoordAttribute);

@@ -31,7 +31,7 @@
 		ECEE8C6A244D2F0F008263C5 /* Win.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEE8C68244D2F0F008263C5 /* Win.cpp */; };
 		ECEE8C6D244FAA24008263C5 /* KK I THINK - Tyler, the Creator KK Slider Cover.mp3 in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEE8C6B244FA6A3008263C5 /* KK I THINK - Tyler, the Creator KK Slider Cover.mp3 */; };
 		ECEE8C70244FAC41008263C5 /* spin_jump.wav in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEE8C6F244FAC35008263C5 /* spin_jump.wav */; };
-		ECEE8C72244FB463008263C5 /* ai.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEE8C71244FB45B008263C5 /* ai.png */; };
+		ECEE8C73244FE570008263C5 /* ai.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEE8C71244FB45B008263C5 /* ai.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,9 +45,9 @@
 				ECEE8C5A244C2AC9008263C5 /* ctg.png in CopyFiles */,
 				ECEE8C5B244C2ACB008263C5 /* george_0.png in CopyFiles */,
 				ECEE8C5C244C2ACE008263C5 /* tileset.png in CopyFiles */,
+				ECEE8C73244FE570008263C5 /* ai.png in CopyFiles */,
 				ECEE8C61244C2C3B008263C5 /* pixel_font.png in CopyFiles */,
 				ECEE8C70244FAC41008263C5 /* spin_jump.wav in CopyFiles */,
-				ECEE8C72244FB463008263C5 /* ai.png in CopyFiles */,
 				ECEE8C6D244FAA24008263C5 /* KK I THINK - Tyler, the Creator KK Slider Cover.mp3 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

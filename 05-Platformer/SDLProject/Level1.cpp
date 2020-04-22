@@ -71,7 +71,7 @@ void Level1::Initialize() {
     state.enemies[0].height = 0.8f;
     state.enemies[0].width = 0.35f;
     
-    state.enemies[0].aiType = WAITANDGO;
+    state.enemies[0].aiType = WALKER;
     state.enemies[0].aiState = IDLE;
     state.enemies[0].entityType = ENEMY;
     state.enemies[0].textureID = Util::LoadTexture("ai.png");
@@ -81,6 +81,9 @@ void Level1::Initialize() {
 
 void Level1::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.enemies, LEVEL1_ENEMY_COUNT, state.map);
+    
+    std::cout << "Enemy: (" << state.enemies[0].position.x << ", ";
+    std::cout << state.enemies[0].position.y << ") \n";
     
     std::cout << "Lives: " << state.player_lives << "\n";
     
