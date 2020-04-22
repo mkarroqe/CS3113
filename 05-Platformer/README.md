@@ -17,19 +17,20 @@ Make a platformer game!
 | *Final demo ft. slothy frame rate* |
 
 ### Level 1
-| ![](demos/level1_3.png) | ![](demos/level1_4.png) |
+| *can't reach* | ![](demos/level1/6.png) |
 | - | - |
-| ![](demos/level1_1.png) | ![](demos/level1_2.png) |
+| ![](demos/level1/4.png) | ![](demos/level1/3.png) |
+| ![](demos/level1/1.png) | ![](demos/level1/2.png) |
 
 ### Level 2
-| ![](demos/level2_3.png) | ![](demos/level2_4.png) |
+| ![](demos/level2/3.png) | ![](demos/level2/4.png) |
 | - | - |
-| ![](demos/level2_1.png) | ![](demos/level2_2.png) |
+| ![](demos/level2/1.png) | ![](demos/level2/2.png) |
 
 ### Level 3
-| ![](demos/level3_3.png) | ![](demos/level3_4.png) |
+| ![](demos/level3/3.png) | ![](demos/level3/4.png) |
 | - | - |
-| ![](demos/level3_1.png) | ![](demos/level3_2.png) |
+| ![](demos/level3/1.png) | ![](demos/level3/2.png) |
 
 ### General 
 | ![](demos/menu.png) | ![](demos/win.png) | ![](demos/lose.png) |
