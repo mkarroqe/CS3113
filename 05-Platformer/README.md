@@ -1,9 +1,8 @@
 > **Note: As of 4/21, assignment is still in progress. Thank you!**
 >
 > Remaining Task:
-> - Adding AI
->  - Figure out why sprites are invisible :(
->  - if you hit them (coordinates visible in console) you do lose lives however!
+>  - Figure out why Ais are invisible :(
+>  - if you hit them (coordinates visible in console) you do lose lives however! [demo here](https://github.com/mkarroqe/CS3113/blob/master/05-Platformer/demos/demo-lives-ai.mov)
 >
 > *All other tasks are completed!*
 
