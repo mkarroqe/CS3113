@@ -59,10 +59,13 @@ class Entity {
         bool collidedBottom = false;
         bool collidedLeft = false;
         bool collidedRight = false;
+    
+        bool defeatedEnemies = false;
+        bool wasDefeated = false;
         
         Entity();
         
-        void loseLife();
+//        void loseLife();
         bool CheckCollision(Entity *other);
         void CheckCollisionsY(Entity *objects, int objectCount);
         void CheckCollisionsX(Entity *objects, int objectCount);
@@ -73,6 +76,7 @@ class Entity {
         void Render(ShaderProgram *program);
         void DrawSpriteFromTextureAtlas(ShaderProgram *program, GLuint textureID, int index);
         
+        void CheckEnemyCollision(Entity *enemies, int enemyCount);
         void AI(Entity *player);
         void AIWalker();
         void AIWaitAndGo(Entity *player);

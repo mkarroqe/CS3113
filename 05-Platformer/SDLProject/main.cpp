@@ -37,8 +37,21 @@ Scene *sceneList[6];
 Mix_Music *music;
 Mix_Chunk *hop;
 
-void SwitchToScene(Scene *scene) {
-    currentScene = scene;
+void SwitchToScene(int _nextScene, int _lives=3) {
+    if (_nextScene == 1) {
+        currentScene = new Level1(_lives);
+    }
+    else if (_nextScene == 2) {
+        currentScene = new Level2(_lives);
+    }
+    else if (_nextScene == 3) {
+        currentScene = new Level3(_lives);
+    }
+    
+    // if win (4) or lose (5)
+    else {
+        currentScene = sceneList[_nextScene];
+    }
     currentScene->Initialize();
 }
 
@@ -77,12 +90,12 @@ void Initialize() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     sceneList[0] = new Menu();
-    sceneList[1] = new Level1(3); // remove this constructor stuff
-    sceneList[2] = new Level2();
-    sceneList[3] = new Level3();
+    sceneList[1] = new Level1(3);
+    sceneList[2] = new Level2(3);
+    sceneList[3] = new Level3(3);
     sceneList[4] = new Win();
     sceneList[5] = new Lose();
-    SwitchToScene(sceneList[0]);
+    SwitchToScene(0);
 }
 
 void ProcessInput() {
@@ -108,7 +121,8 @@ void ProcessInput() {
                         break;
                     
                     case SDLK_RETURN:
-                        SwitchToScene(sceneList[1]);
+                        currentScene->state.player_lives = 3;
+                        SwitchToScene(1);
                         break;
                         
                     case SDLK_SPACE:
@@ -125,7 +139,8 @@ void ProcessInput() {
     const Uint8 *keys = SDL_GetKeyboardState(NULL);
 
     if (keys[SDL_SCANCODE_RETURN]) {
-        SwitchToScene(sceneList[1]);
+        currentScene->state.player_lives = 3;
+        SwitchToScene(1);
     }
     
     if (keys[SDL_SCANCODE_LEFT]) {
@@ -240,8 +255,37 @@ int main(int argc, char* argv[]) {
         ProcessInput();
         Update();
         
+//        it's set to -1 in the beginning
+        // if not equal to -1
+        // if positive do regular thing
+        // if negative, create new (same level) with less lives.
+        
+//        if (currentScene->state.nextScene > 0) {
+//            SwitchToScene(sceneList[currentScene->state.nextScene]);
+//        }
+//        else if (currentScene->state.nextScene < 0) {
+//            if (currentScene->state.nextScene == -1) {
+//                Scene* next_level = new Level1(currentScene->state.player_lives);
+//                SwitchToScene(next_level);
+//            }
+//            else if (currentScene->state.nextScene == -2) {
+//                Scene* next_level = new Level2(currentScene->state.player_lives);
+//                SwitchToScene(next_level);
+//            }
+//            else if (currentScene->state.nextScene == -3) {
+//                Scene* next_level = new Level3(currentScene->state.player_lives);
+//                SwitchToScene(next_level);
+//            }
+//        }
+        
         if (currentScene->state.nextScene >= 0) {
-            SwitchToScene(sceneList[currentScene->state.nextScene]);
+            if (currentScene->state.player_lives == 0) {
+                SwitchToScene(5);
+            }
+            // if next is less than curr initialize w less lives?
+            else {
+                SwitchToScene(currentScene->state.nextScene, currentScene->state.player_lives);
+            }
         }
         
         Render();

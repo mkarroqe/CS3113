@@ -26,9 +26,12 @@ unsigned int level3_data[] =
     3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3
 };
 
+Level3::Level3(int _lives) {
+    state.player_lives = _lives;
+}
 
 void Level3::Initialize() {
-    state.nextScene = -1;
+    state.nextScene = -10;
     
     GLuint mapTextureID = Util::LoadTexture("tileset.png");
     state.map = new Map(LEVEL3_WIDTH, LEVEL3_HEIGHT, level3_data, mapTextureID, 1.0f, 4, 1);
@@ -95,6 +98,16 @@ void Level3::Render(ShaderProgram *program) {
     Util::DrawText(program, fontTextureID, "3", 0.8f, 0.1f, glm::vec3(13.75, -0.1, 0));
     
     Util::DrawText(program, fontTextureID, "End!", 0.2f, 0.05f, glm::vec3(9.85, 1.05, 0));
+    
+    // formatting lives
+    std::string lives_str = std::to_string(state.player_lives);
+    
+    // thanks https://stackoverflow.com/a/58972804 for tip
+    std::string rounded = lives_str.substr(0, lives_str.find(".")+0);
+    
+    std::string lives_left = "Lives: " + rounded;
+    
+    Util::DrawText(program, fontTextureID, lives_left, 0.2f, 0.1f, glm::vec3(3, 1.0, 0));
     
     state.map->Render(program);
     state.player->Render(program);

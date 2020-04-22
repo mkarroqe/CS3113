@@ -3,7 +3,7 @@
 #define LEVEL1_WIDTH 18
 #define LEVEL1_HEIGHT 17
 
-#define LEVEL1_ENEMY_COUNT 1
+#define LEVEL1_ENEMY_COUNT 2
 
 unsigned int level1_data[] =
 {
@@ -32,7 +32,7 @@ Level1::Level1(int _lives) {
 
 void Level1::Initialize() {
     
-    state.nextScene = -1;
+    state.nextScene = -10;
     
     GLuint mapTextureID = Util::LoadTexture("tileset.png");
     state.map = new Map(LEVEL1_WIDTH, LEVEL1_HEIGHT, level1_data, mapTextureID, 1.0f, 4, 1);
@@ -65,19 +65,34 @@ void Level1::Initialize() {
     state.player->jumpPower = 5.0f;
     
     state.enemies = new Entity[LEVEL1_ENEMY_COUNT];
-    GLuint enemyTextureID = Util::LoadTexture("ctg.png");
-    
-    state.enemies[0].entityType = ENEMY;
-    state.enemies[0].textureID = enemyTextureID;
-    state.enemies[0].position = glm::vec3(4, -2.25, 0);
+    state.enemies[0].position = glm::vec3(2.5, -14, 0);
     state.enemies[0].speed = 1;
+    
+    state.enemies[0].height = 0.8f;
+    state.enemies[0].width = 0.35f;
+    
     state.enemies[0].aiType = WAITANDGO;
     state.enemies[0].aiState = IDLE;
-    state.enemies[0].isActive = false;
+    state.enemies[0].entityType = ENEMY;
+    state.enemies[0].textureID = Util::LoadTexture("ai.png");
+    
+    state.enemies[0].isActive = true;
 }
 
 void Level1::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.enemies, LEVEL1_ENEMY_COUNT, state.map);
+    
+    std::cout << "Lives: " << state.player_lives << "\n";
+    
+    if(state.player->CheckCollision(&state.enemies[0])) {
+        std::cout << "ah!\n";
+        loseLife();
+        state.nextScene = 1;
+    }
+    if(state.enemies[0].collidedTop) {
+        std::cout << "yuh\n";
+        state.enemies[0].isActive = false;
+    }
     
     if (state.player->position.x >= 15.85) {
         state.nextScene = 2;
@@ -88,8 +103,8 @@ void Level1::Update(float deltaTime) {
             state.nextScene = 5;
         }
         else {
-            state.player->loseLife();
-            state.nextScene = 5;
+            loseLife();
+            state.nextScene = 1;
         }
     }
 }
@@ -107,7 +122,7 @@ void Level1::Render(ShaderProgram *program) {
     Util::DrawText(program, fontTextureID, "Finish..?", 0.2f, 0.1f, glm::vec3(13, 0.5, 0));
     
     // formatting lives
-    std::string lives_str = std::to_string(state.player->lives);
+    std::string lives_str = std::to_string(state.player_lives);
     
     // thanks https://stackoverflow.com/a/58972804 for tip
     std::string rounded = lives_str.substr(0, lives_str.find(".")+0);

@@ -12,10 +12,6 @@ Entity::Entity()
     modelMatrix = glm::mat4(1.0f);
 }
 
-void Entity::loseLife() {
-    lives -= 1;
-}
-
 bool Entity::CheckCollision(Entity *other) {
     if (isActive == false || other->isActive == false) return false;
     
@@ -140,6 +136,26 @@ void Entity::CheckCollisionsX(Entity *objects, int objectCount)
                 position.x += penetrationX;
                 velocity.x = 0;
                 collidedLeft = true; // something here for future assingment
+            }
+        }
+    }
+}
+
+// From last assignment
+void Entity::CheckEnemyCollision(Entity *enemies, int enemyCount) {
+    for (int i = 0; i < enemyCount; i++)
+    {
+        Entity *enemy = &enemies[i];
+
+        if (CheckCollision(enemy)) {
+            if (velocity.y < 0) {                           // not the most elegant but works!
+                if (enemy->position.y <= position.y) {
+                    enemy->wasDefeated = true;
+                    enemy->isActive = false;
+                }
+            }
+            else {
+                wasDefeated = true;
             }
         }
     }

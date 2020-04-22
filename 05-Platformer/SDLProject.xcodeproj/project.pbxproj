@@ -31,6 +31,7 @@
 		ECEE8C6A244D2F0F008263C5 /* Win.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEE8C68244D2F0F008263C5 /* Win.cpp */; };
 		ECEE8C6D244FAA24008263C5 /* KK I THINK - Tyler, the Creator KK Slider Cover.mp3 in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEE8C6B244FA6A3008263C5 /* KK I THINK - Tyler, the Creator KK Slider Cover.mp3 */; };
 		ECEE8C70244FAC41008263C5 /* spin_jump.wav in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEE8C6F244FAC35008263C5 /* spin_jump.wav */; };
+		ECEE8C72244FB463008263C5 /* ai.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECEE8C71244FB45B008263C5 /* ai.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,7 @@
 				ECEE8C5C244C2ACE008263C5 /* tileset.png in CopyFiles */,
 				ECEE8C61244C2C3B008263C5 /* pixel_font.png in CopyFiles */,
 				ECEE8C70244FAC41008263C5 /* spin_jump.wav in CopyFiles */,
+				ECEE8C72244FB463008263C5 /* ai.png in CopyFiles */,
 				ECEE8C6D244FAA24008263C5 /* KK I THINK - Tyler, the Creator KK Slider Cover.mp3 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,6 +94,7 @@
 		ECEE8C69244D2F0F008263C5 /* Win.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Win.hpp; sourceTree = "<group>"; };
 		ECEE8C6B244FA6A3008263C5 /* KK I THINK - Tyler, the Creator KK Slider Cover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "KK I THINK - Tyler, the Creator KK Slider Cover.mp3"; path = "audio/KK I THINK - Tyler, the Creator KK Slider Cover.mp3"; sourceTree = SOURCE_ROOT; };
 		ECEE8C6F244FAC35008263C5 /* spin_jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = spin_jump.wav; path = audio/spin_jump.wav; sourceTree = SOURCE_ROOT; };
+		ECEE8C71244FB45B008263C5 /* ai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ai.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,7 @@
 				ECEE8C6B244FA6A3008263C5 /* KK I THINK - Tyler, the Creator KK Slider Cover.mp3 */,
 				ECEE8C6F244FAC35008263C5 /* spin_jump.wav */,
 				ECEE8C60244C2C36008263C5 /* pixel_font.png */,
+				ECEE8C71244FB45B008263C5 /* ai.png */,
 				ECEE8C57244C2AB7008263C5 /* ctg.png */,
 				ECEE8C59244C2AB7008263C5 /* george_0.png */,
 				ECEE8C58244C2AB7008263C5 /* tileset.png */,
