@@ -255,29 +255,6 @@ int main(int argc, char* argv[]) {
         ProcessInput();
         Update();
         
-//        it's set to -1 in the beginning
-        // if not equal to -1
-        // if positive do regular thing
-        // if negative, create new (same level) with less lives.
-        
-//        if (currentScene->state.nextScene > 0) {
-//            SwitchToScene(sceneList[currentScene->state.nextScene]);
-//        }
-//        else if (currentScene->state.nextScene < 0) {
-//            if (currentScene->state.nextScene == -1) {
-//                Scene* next_level = new Level1(currentScene->state.player_lives);
-//                SwitchToScene(next_level);
-//            }
-//            else if (currentScene->state.nextScene == -2) {
-//                Scene* next_level = new Level2(currentScene->state.player_lives);
-//                SwitchToScene(next_level);
-//            }
-//            else if (currentScene->state.nextScene == -3) {
-//                Scene* next_level = new Level3(currentScene->state.player_lives);
-//                SwitchToScene(next_level);
-//            }
-//        }
-        
         if (currentScene->state.nextScene >= 0) {
             if (currentScene->state.player_lives == 0) {
                 SwitchToScene(5);

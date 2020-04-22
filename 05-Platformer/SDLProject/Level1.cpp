@@ -3,7 +3,7 @@
 #define LEVEL1_WIDTH 18
 #define LEVEL1_HEIGHT 17
 
-#define LEVEL1_ENEMY_COUNT 1
+#define LEVEL1_ENEMY_COUNT 2
 
 unsigned int level1_data[] =
 {
@@ -68,35 +68,50 @@ void Level1::Initialize() {
     state.enemies = new Entity[LEVEL1_ENEMY_COUNT];
     
     state.enemies[0].entityType = ENEMY;
-    state.enemies[0].position = glm::vec3(7, -3, 0);
+    state.enemies[0].position = glm::vec3(1, -3, 0);
     state.enemies[0].acceleration = glm::vec3(0, -9.81f, 0);
     
-    state.enemies[0].aiType = WAITANDGO;
-    state.enemies[0].aiState = IDLE;
+    state.enemies[0].aiType = WALKER;
+    state.enemies[0].aiState = ACTIVE;
     
     state.enemies[0].textureID = Util::LoadTexture("ai.png");
     state.enemies[0].height = 0.35f;
     state.enemies[0].width = 0.35f;
     state.enemies[0].movement = glm::vec3(0);
     state.enemies[0].speed = 1;
+    
+    state.enemies[1].entityType = ENEMY;
+    state.enemies[1].position = glm::vec3(1, -11, 0);
+    state.enemies[1].acceleration = glm::vec3(0, -9.81f, 0);
+    
+    state.enemies[1].aiType = WALKER;
+    state.enemies[1].aiState = ACTIVE;
+    
+    state.enemies[1].textureID = Util::LoadTexture("ai.png");
+    state.enemies[1].height = 0.35f;
+    state.enemies[1].width = 0.35f;
+    state.enemies[1].movement = glm::vec3(0);
+    state.enemies[1].speed = 1;
 }
 
 void Level1::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.enemies, LEVEL1_ENEMY_COUNT, state.map);
     
-    std::cout << "Enemy: (" << state.enemies[0].position.x << ", ";
-    std::cout << state.enemies[0].position.y << ") \n";
-    
     std::cout << "Lives: " << state.player_lives << "\n";
     
-    if(state.player->CheckCollision(&state.enemies[0])) {
-        std::cout << "ah!\n";
-        loseLife();
-        state.nextScene = 1;
-    }
-    if(state.enemies[0].collidedTop) {
-        std::cout << "yuh\n";
-        state.enemies[0].isActive = false;
+    for (int i = 0; i < LEVEL1_ENEMY_COUNT; i++) {
+        std::cout << "Enemy: (" << state.enemies[i].position.x << ", ";
+        std::cout << state.enemies[0].position.y << ") \n";
+        
+        if(state.player->CheckCollision(&state.enemies[i])) {
+            std::cout << "ah!\n";
+            loseLife();
+            state.nextScene = 1;
+        }
+        if(state.enemies[0].collidedTop) {
+            std::cout << "yuh\n";
+            state.enemies[0].isActive = false;
+        }
     }
     
     if (state.player->position.x >= 15.85) {
@@ -104,11 +119,11 @@ void Level1::Update(float deltaTime) {
     }
     // falling into pit
     else if (state.player->position.y < -15.5) {
+        loseLife();
         if (state.player->lives == 0) {
             state.nextScene = 5;
         }
         else {
-            loseLife();
             state.nextScene = 1;
         }
     }
@@ -136,7 +151,12 @@ void Level1::Render(ShaderProgram *program) {
     
     Util::DrawText(program, fontTextureID, lives_left, 0.2f, 0.1f, glm::vec3(3, 1.0, 0));
     
+//    state.enemies->Render(program); // why isn't this working rightttt
+    for (int i = 0; i < LEVEL1_ENEMY_COUNT; i++) {
+        state.enemies[i].Render(program);
+    }
+    
     state.map->Render(program);
     state.player->Render(program);
-    state.enemies[0].Render(program);
+    
 }

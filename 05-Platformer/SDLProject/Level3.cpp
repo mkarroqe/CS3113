@@ -3,7 +3,7 @@
 #define LEVEL3_WIDTH 18
 #define LEVEL3_HEIGHT 17
 
-#define LEVEL3_ENEMY_COUNT 1
+#define LEVEL3_ENEMY_COUNT 2
 
 unsigned int level3_data[] =
 {
@@ -63,16 +63,34 @@ void Level3::Initialize() {
     
     state.player->jumpPower = 5.0f;
     
+    // ----------------- Initialize Enemies -----------------
     state.enemies = new Entity[LEVEL3_ENEMY_COUNT];
-    GLuint enemyTextureID = Util::LoadTexture("ctg.png");
     
     state.enemies[0].entityType = ENEMY;
-    state.enemies[0].textureID = enemyTextureID;
-    state.enemies[0].position = glm::vec3(4, -2.25, 0);
+    state.enemies[0].position = glm::vec3(1, -3, 0);
+    state.enemies[0].acceleration = glm::vec3(0, -9.81f, 0);
+    
+    state.enemies[0].aiType = WALKER;
+    state.enemies[0].aiState = ACTIVE;
+    
+    state.enemies[0].textureID = Util::LoadTexture("ai.png");
+    state.enemies[0].height = 0.35f;
+    state.enemies[0].width = 0.35f;
+    state.enemies[0].movement = glm::vec3(0);
     state.enemies[0].speed = 1;
-    state.enemies[0].aiType = WAITANDGO;
-    state.enemies[0].aiState = IDLE;
-    state.enemies[0].isActive = false;
+    
+    state.enemies[1].entityType = ENEMY;
+    state.enemies[1].position = glm::vec3(1, -11, 0);
+    state.enemies[1].acceleration = glm::vec3(0, -9.81f, 0);
+    
+    state.enemies[1].aiType = WALKER;
+    state.enemies[1].aiState = ACTIVE;
+    
+    state.enemies[1].textureID = Util::LoadTexture("ai.png");
+    state.enemies[1].height = 0.35f;
+    state.enemies[1].width = 0.35f;
+    state.enemies[1].movement = glm::vec3(0);
+    state.enemies[1].speed = 1;
 }
 
 void Level3::Update(float deltaTime) {
@@ -83,11 +101,12 @@ void Level3::Update(float deltaTime) {
     }
     // falling into pit
     else if (state.player->position.y < -15.5) {
+        loseLife();
         if (state.player->lives == 0) {
             state.nextScene = 5;
         }
         else {
-            state.player->lives -= 1;
+            state.nextScene = 3;
         }
     }
 }
@@ -108,6 +127,10 @@ void Level3::Render(ShaderProgram *program) {
     std::string lives_left = "Lives: " + rounded;
     
     Util::DrawText(program, fontTextureID, lives_left, 0.2f, 0.1f, glm::vec3(3, 1.0, 0));
+    
+    for (int i = 0; i < LEVEL3_ENEMY_COUNT; i++) {
+        state.enemies[i].Render(program);
+    }
     
     state.map->Render(program);
     state.player->Render(program);
