@@ -21,6 +21,11 @@ Jumping sound effect: [*Spin Jump Sound*](http://soundbible.com/1898-Spin-Jump.h
 # Demo
 *In Progress* 
 
+Remaining Tasks:
+- Adding AI
+  - Figure out why sprites are invisible :(
+  - if you hit them (coordinates visible in console) you do lose lives however!
+
 | The Villian |
 | - |
 | ![](ai.png) |
@@ -30,10 +35,6 @@ Jumping sound effect: [*Spin Jump Sound*](http://soundbible.com/1898-Spin-Jump.h
 | - | - | - |
 | ![](demos/level3.png) | ![](demos/win.png) | ![](demos/lose.png) |
 
-Remaining Tasks:
-- Adding music
-- Adding AI
-- Fixing `lives` bug
-
 # Bloopers
-![blooper](demos/blooper-1.gif)
+| ![blooper](demos/blooper-1.gif) | ![blooper](demos/blooper-2.gif) |
+| - | - |
