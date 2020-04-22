@@ -180,20 +180,29 @@ void Entity::AIWaitAndGo(Entity *player) {
     switch(aiState) {
         case IDLE:
             if (glm::distance(position, player->position) < 3.0f) {
-                aiState = WALKING;
+                aiState = ACTIVE;
             }
             break;
             
-        case WALKING:
+        case ACTIVE:
+            if (glm::distance(position, player->position) > 3.5f) {
+                aiState = IDLE;
+            }
+            
+            // speeds up for the kill!
+            if (glm::distance(position, player->position) < 2.5f) {
+                speed = 1.45;
+            }
+            else {
+                speed = 1;
+            }
+            
             if (player->position.x < position.x) {
                 movement = glm::vec3(-1, 0, 0);
             } else {
                 movement = glm::vec3(1, 0, 0);
             }
-           
-            break;
             
-        case ATTACKING:
             break;
     }
 }

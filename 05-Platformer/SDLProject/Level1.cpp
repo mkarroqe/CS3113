@@ -3,7 +3,7 @@
 #define LEVEL1_WIDTH 18
 #define LEVEL1_HEIGHT 17
 
-#define LEVEL1_ENEMY_COUNT 2
+#define LEVEL1_ENEMY_COUNT 1
 
 unsigned int level1_data[] =
 {
@@ -37,7 +37,7 @@ void Level1::Initialize() {
     GLuint mapTextureID = Util::LoadTexture("tileset.png");
     state.map = new Map(LEVEL1_WIDTH, LEVEL1_HEIGHT, level1_data, mapTextureID, 1.0f, 4, 1);
     
-    // Initialize Player
+    // ----------------- Initialize Player ------------------
     state.player = new Entity();
     state.player->entityType = PLAYER;
     
@@ -64,19 +64,21 @@ void Level1::Initialize() {
     
     state.player->jumpPower = 5.0f;
     
+    // ----------------- Initialize Enemies -----------------
     state.enemies = new Entity[LEVEL1_ENEMY_COUNT];
-    state.enemies[0].position = glm::vec3(2.5, -14, 0);
-    state.enemies[0].speed = 1;
     
-    state.enemies[0].height = 0.8f;
-    state.enemies[0].width = 0.35f;
-    
-    state.enemies[0].aiType = WALKER;
-    state.enemies[0].aiState = IDLE;
     state.enemies[0].entityType = ENEMY;
-    state.enemies[0].textureID = Util::LoadTexture("ai.png");
+    state.enemies[0].position = glm::vec3(7, -3, 0);
+    state.enemies[0].acceleration = glm::vec3(0, -9.81f, 0);
     
-    state.enemies[0].isActive = true;
+    state.enemies[0].aiType = WAITANDGO;
+    state.enemies[0].aiState = IDLE;
+    
+    state.enemies[0].textureID = Util::LoadTexture("ai.png");
+    state.enemies[0].height = 0.35f;
+    state.enemies[0].width = 0.35f;
+    state.enemies[0].movement = glm::vec3(0);
+    state.enemies[0].speed = 1;
 }
 
 void Level1::Update(float deltaTime) {
@@ -136,4 +138,5 @@ void Level1::Render(ShaderProgram *program) {
     
     state.map->Render(program);
     state.player->Render(program);
+    state.enemies[0].Render(program);
 }
