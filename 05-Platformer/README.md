@@ -1,11 +1,3 @@
-### Final [Commit](https://github.com/mkarroqe/CS3113/commit/cfc5bfcd1a76df643c7e8c30c8d7985fb66ff066) for Submission: 4/21 11:44pm
-
-> Status:
->  - Ais are invisible :(
->  - if you hit them (coordinates visible in console) you do lose lives however! [demo here](https://github.com/mkarroqe/CS3113/blob/master/05-Platformer/demos/demo-lives-ai.mov)
->
-> *All other tasks are completed!*
-
 # Instructions
 Make a platformer game!
 
@@ -20,19 +12,34 @@ Make a platformer game!
   - At least 1 looping background music, and at least 1 sound effect.
 
 # Demos
-Full Run, Winning Screen with losing two lives falling in pits [here](https://github.com/mkarroqe/CS3113/blob/master/05-Platformer/demos/full-demo-win.mov)
+| ![](demos/FINAL-DEMO.gif) |
+| :-: |
+| *Final demo ft. slothy frame rate* |
 
-Full Run, losing by falling in pits [here](https://github.com/mkarroqe/CS3113/blob/master/05-Platformer/demos/demo-lose.mov)
-> These are both videos that require downloading them to view.
+### Level 1
+| ![](demos/level1_3.png) | ![](demos/level1_4.png) |
+| - | - |
+| ![](demos/level1_1.png) | ![](demos/level1_2.png) |
 
-| ![](demos/menu.png) | ![](demos/level1.png) | ![](demos/level2.png) |
+### Level 2
+| ![](demos/level2_3.png) | ![](demos/level2_4.png) |
+| - | - |
+| ![](demos/level2_1.png) | ![](demos/level2_2.png) |
+
+### Level 3
+| ![](demos/level3_3.png) | ![](demos/level3_4.png) |
+| - | - |
+| ![](demos/level3_1.png) | ![](demos/level3_2.png) |
+
+### General 
+| ![](demos/menu.png) | ![](demos/win.png) | ![](demos/lose.png) |
 | - | - | - |
-| ![](demos/level3.png) | ![](demos/win.png) | ![](demos/lose.png) |
 
-| The (Invisible) Villian |
-| - |
-| ![](ai.png) |
-| *s/o to [this site](https://make8bitart.com/)* |
+### Cast
+| Cool George | The Villian |
+| :-: | :-: |
+| ![](cool_george.png) | ![](ai.png) |
+| | *s/o to [this site](https://make8bitart.com/)* |
 
 # Audio Credits
 Background Music: [*KK I THINK - Tyler, the Creator KK Slider Cover*](https://www.youtube.com/watch?v=G-g84zoFkYQ) by [Gunk](https://www.youtube.com/channel/UCA1TbpsMa9_iPTmKn0qd_bg) on YouTube
