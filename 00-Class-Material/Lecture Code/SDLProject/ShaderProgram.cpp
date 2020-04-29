@@ -25,6 +25,7 @@ void ShaderProgram::Load(const char *vertexShaderFile, const char *fragmentShade
     projectionMatrixUniform = glGetUniformLocation(programID, "projectionMatrix");
     viewMatrixUniform = glGetUniformLocation(programID, "viewMatrix");
 	colorUniform = glGetUniformLocation(programID, "color");
+    lightPositionUniform = glGetUniformLocation(programID, "lightPosition");
     
     positionAttribute = glGetAttribLocation(programID, "position");
     texCoordAttribute = glGetAttribLocation(programID, "texCoord");
@@ -102,4 +103,9 @@ void ShaderProgram::SetModelMatrix(const glm::mat4 &matrix) {
 void ShaderProgram::SetProjectionMatrix(const glm::mat4 &matrix) {
     glUseProgram(programID);
     glUniformMatrix4fv(projectionMatrixUniform, 1, GL_FALSE, &matrix[0][0]);    
+}
+
+void ShaderProgram::SetLightPosition(glm::vec3 position) {
+    glUseProgram(programID);
+    glUniform2f(lightPositionUniform, position.x, position.y);
 }

@@ -48,7 +48,7 @@ void Initialize() {
     
     glViewport(0, 0, 640, 480);
     
-    program.Load("shaders/vertex_textured.glsl", "shaders/effects_textured.glsl");
+    program.Load("shaders/vertex_lit.glsl", "shaders/fragment_lit.glsl");
     
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);
@@ -143,6 +143,7 @@ void Update() {
     while (deltaTime >= FIXED_TIMESTEP) {
         // Update. Notice it's FIXED_TIMESTEP. Not deltaTime
         currentScene->Update(FIXED_TIMESTEP);
+        program.SetLightPosition(currentScene->state.player->position);
         
         // every time player lands, shake!
         if (lastCollidedBottom == false && currentScene->state.player->collidedBottom) {

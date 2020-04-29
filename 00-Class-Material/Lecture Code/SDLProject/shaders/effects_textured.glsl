@@ -1,3 +1,4 @@
+// make sure to send view, model, and projection matricies to shaders if you're switching from them!
 
 uniform sampler2D diffuse;
 varying vec2 texCoordVar;
