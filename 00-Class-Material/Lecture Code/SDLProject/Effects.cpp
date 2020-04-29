@@ -7,6 +7,7 @@ Effects::Effects(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
     program.SetViewMatrix(viewMatrix);
     currentEffect = NONE;
     alpha = 0;
+    speed = 1;
 }
 
 void Effects::DrawOverlay() {
@@ -18,15 +19,20 @@ void Effects::DrawOverlay() {
     glDisableVertexAttribArray(program.positionAttribute);
 }
 
-void Effects::Start(EffectType effectType) {
+void Effects::Start(EffectType effectType, float effectSpeed) {
     currentEffect = effectType;
-
+    speed = effectSpeed;
+    
     switch (currentEffect) {
         case NONE:
             break;
 
         case FADEIN:
             alpha = 1.0f;
+            break;
+            
+        case FADEOUT:
+            alpha = 0.0f;
             break;
      }
 }
@@ -37,8 +43,12 @@ void Effects::Update(float deltaTime) {
             break;
 
         case FADEIN:
-            alpha -= deltaTime;
+            alpha -= (deltaTime * speed);
             if (alpha <= 0) currentEffect = NONE;
+            break;
+    
+        case FADEOUT:
+            alpha += (deltaTime * speed);
             break;
     }
 }
@@ -51,6 +61,7 @@ void Effects::Render() {
             return;
             break;
 
+        case FADEOUT:
         case FADEIN:
             modelMatrix = glm::scale(modelMatrix, glm::vec3(10, 10, 1));
             program.SetModelMatrix(modelMatrix);

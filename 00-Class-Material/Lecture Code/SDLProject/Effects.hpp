@@ -13,17 +13,18 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
-enum EffectType { NONE, FADEIN };
+enum EffectType { NONE, FADEIN, FADEOUT };
 
 class Effects {
     ShaderProgram program;
     float alpha;
+    float speed;
     EffectType currentEffect;
 
 public:
     Effects(glm::mat4 projectionMatrix, glm::mat4 viewMatrix);
     void DrawOverlay();
-    void Start(EffectType effectType);
+    void Start(EffectType effectType, float effectSpeed);
     void Update(float deltaTime);
     void Render();
 };

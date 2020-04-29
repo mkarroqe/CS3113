@@ -70,7 +70,7 @@ void Initialize() {
     
     effects = new Effects(projectionMatrix, viewMatrix);
     
-    effects->Start(FADEIN);
+    effects->Start(FADEOUT, 0.5f);
 }
 
 void ProcessInput() {
