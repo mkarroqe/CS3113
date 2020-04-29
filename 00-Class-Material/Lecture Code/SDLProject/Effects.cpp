@@ -8,6 +8,8 @@ Effects::Effects(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
     currentEffect = NONE;
     alpha = 0;
     speed = 1;
+    
+    viewOffset = glm::vec3(0, 0, 0);
 }
 
 void Effects::DrawOverlay() {
@@ -42,6 +44,10 @@ void Effects::Start(EffectType effectType, float effectSpeed) {
         case SHRINK:
             size = 10.0f;
             break;
+            
+        case SHAKE:
+            timeLeft = 1.0f;
+            break;
      }
 }
 
@@ -67,6 +73,19 @@ void Effects::Update(float deltaTime) {
             size -= (deltaTime * speed);
             if (size <= 0) currentEffect = NONE;
             break;
+            
+        case SHAKE:
+            timeLeft -= (deltaTime * speed);
+            if (timeLeft <= 0) {
+                viewOffset = glm::vec3(0, 0, 0);
+                currentEffect = NONE;
+            }
+            else {
+                float max = 0.1f;
+                float min = -0.1f;
+                float r = ((float)rand() / RAND_MAX) * (max - min) + min;
+                viewOffset = glm::vec3(r, r, 0); // x, y directions can be set to 0
+            }
     }
 }
 
@@ -92,6 +111,9 @@ void Effects::Render() {
             program.SetModelMatrix(modelMatrix);
             program.SetColor(0, 0, 0, 1);
             DrawOverlay();
+            break;
+            
+        case SHAKE:
             break;
     }
 }

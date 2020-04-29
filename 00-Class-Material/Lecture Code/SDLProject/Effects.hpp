@@ -13,16 +13,19 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
-enum EffectType { NONE, FADEIN, FADEOUT, GROW, SHRINK };
+enum EffectType { NONE, FADEIN, FADEOUT, GROW, SHRINK, SHAKE };
 
 class Effects {
     ShaderProgram program;
     float alpha;
     float speed;
     float size;
+    float timeLeft;
     EffectType currentEffect;
 
 public:
+    glm::vec3 viewOffset; // needs to be public so we can access it from main
+    
     Effects(glm::mat4 projectionMatrix, glm::mat4 viewMatrix);
     void DrawOverlay();
     void Start(EffectType effectType, float effectSpeed);
