@@ -48,7 +48,7 @@ void Initialize() {
     
     glViewport(0, 0, 640, 480);
     
-    program.Load("shaders/vertex_textured.glsl", "shaders/fragment_textured.glsl");
+    program.Load("shaders/vertex_textured.glsl", "shaders/effects_textured.glsl");
     
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);
@@ -70,7 +70,7 @@ void Initialize() {
     
     effects = new Effects(projectionMatrix, viewMatrix);
     
-    effects->Start(FADEIN, 0.5f);
+//    effects->Start(FADEIN, 0.5f);
 }
 
 void ProcessInput() {
@@ -146,7 +146,7 @@ void Update() {
         
         // every time player lands, shake!
         if (lastCollidedBottom == false && currentScene->state.player->collidedBottom) {
-            effects->Start(SHAKE, 2.0f);
+//            effects->Start(SHAKE, 2.0f);
         }
         
         lastCollidedBottom = currentScene->state.player->collidedBottom;
