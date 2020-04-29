@@ -34,6 +34,14 @@ void Effects::Start(EffectType effectType, float effectSpeed) {
         case FADEOUT:
             alpha = 0.0f;
             break;
+            
+        case GROW:
+            size = 0.0f;
+            break;
+        
+        case SHRINK:
+            size = 10.0f;
+            break;
      }
 }
 
@@ -49,6 +57,15 @@ void Effects::Update(float deltaTime) {
     
         case FADEOUT:
             alpha += (deltaTime * speed);
+            break;
+            
+        case GROW:
+            size += (deltaTime * speed);
+            break;
+            
+        case SHRINK:
+            size -= (deltaTime * speed);
+            if (size <= 0) currentEffect = NONE;
             break;
     }
 }
@@ -66,6 +83,14 @@ void Effects::Render() {
             modelMatrix = glm::scale(modelMatrix, glm::vec3(10, 10, 1));
             program.SetModelMatrix(modelMatrix);
             program.SetColor(0, 0, 0, alpha);
+            DrawOverlay();
+            break;
+            
+        case SHRINK:
+        case GROW:
+            modelMatrix = glm::scale(modelMatrix, glm::vec3(size, size * 0.75, 1));
+            program.SetModelMatrix(modelMatrix);
+            program.SetColor(0, 0, 0, 1);
             DrawOverlay();
             break;
     }

@@ -13,12 +13,13 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
-enum EffectType { NONE, FADEIN, FADEOUT };
+enum EffectType { NONE, FADEIN, FADEOUT, GROW, SHRINK };
 
 class Effects {
     ShaderProgram program;
     float alpha;
     float speed;
+    float size;
     EffectType currentEffect;
 
 public:
