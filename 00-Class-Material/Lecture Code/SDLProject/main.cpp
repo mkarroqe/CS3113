@@ -14,6 +14,8 @@
 #include "Entity.hpp"
 #include "Map.hpp"
 #include "Util.hpp"
+#include "Effects.hpp"
+
 #include "Scene.hpp"
 #include "Level1.hpp"
 #include "Level2.hpp"
@@ -26,6 +28,8 @@ glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
 
 Scene *currentScene;
 Scene *sceneList[2];
+
+Effects *effects;
 
 void SwitchToScene(Scene *scene) {
     currentScene = scene;
@@ -63,6 +67,10 @@ void Initialize() {
     sceneList[0] = new Level1();
     sceneList[1] = new Level2();
     SwitchToScene(sceneList[0]);
+    
+    effects = new Effects(projectionMatrix, viewMatrix);
+    
+    effects->Start(FADEIN);
 }
 
 void ProcessInput() {
@@ -133,6 +141,9 @@ void Update() {
     while (deltaTime >= FIXED_TIMESTEP) {
         // Update. Notice it's FIXED_TIMESTEP. Not deltaTime
         currentScene->Update(FIXED_TIMESTEP);
+        
+        effects->Update(FIXED_TIMESTEP);
+        
         deltaTime -= FIXED_TIMESTEP;
     }
 
@@ -152,7 +163,10 @@ void Render() {
     
     program.SetViewMatrix(viewMatrix);
     
+    glUseProgram(program.programID);
     currentScene->Render(&program);
+    
+    effects->Render();
     
     SDL_GL_SwapWindow(displayWindow);
 }
