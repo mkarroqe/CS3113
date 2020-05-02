@@ -16,46 +16,6 @@
 #include "Util.h"
 #include "Entity.h"
 
-float cubeVertices[] = {
-    -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
-    -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5,
-    
-    0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5,
-    0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5,
-    
-    -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5,
-    -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5,
-    
-    0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5,
-    0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5,
-    
-    -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5,
-    -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5,
-    
-    0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5,
-    0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5
-};
-
-float cubeTexCoords[] = {
-    0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-    0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-    
-    0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-    0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-    
-    0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-    0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-    
-    0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-    0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-    
-    0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-    0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-    
-    0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-    0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f
-};
-
 SDL_Window* displayWindow;
 bool gameIsRunning = true;
 
@@ -113,11 +73,12 @@ void Initialize() {
     
     GLuint cubeTextureID = Util::LoadTexture("crate1_diffuse.png");
     
+    Mesh *cubeMesh = new Mesh();
+    cubeMesh->LoadOBJ("cube.obj");
+    
     state.objects[0].textureID = cubeTextureID;
+    state.objects[0].mesh = cubeMesh;
     state.objects[0].position = glm::vec3(0, 0, -5);
-    state.objects[0].vertices = cubeVertices;
-    state.objects[0].texCoords = cubeTexCoords;
-    state.objects[0].numVertices = 36;
     state.objects[0].entityType = CUBE;
 }
 

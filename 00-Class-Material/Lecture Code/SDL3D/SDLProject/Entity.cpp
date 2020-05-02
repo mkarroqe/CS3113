@@ -31,15 +31,6 @@ void Entity::Render(ShaderProgram *program) {
     
     glBindTexture(GL_TEXTURE_2D, textureID);
     
-    glVertexAttribPointer(program->positionAttribute, 3, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program->positionAttribute);
-    
-    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
-    glEnableVertexAttribArray(program->texCoordAttribute);
-    
-    glDrawArrays(GL_TRIANGLES, 0, numVertices);
-    
-    glDisableVertexAttribArray(program->positionAttribute);
-    glDisableVertexAttribArray(program->texCoordAttribute);
+    mesh->Render(program);
 }
 

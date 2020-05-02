@@ -12,6 +12,7 @@
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
+#include "Mesh.h"
 
 enum EntityType { PLAYER, PLATFORM, ENEMY, CUBE };
 
@@ -27,9 +28,7 @@ public:
     float speed;
     
     GLuint textureID;
-    float *vertices;
-    float *texCoords;
-    int numVertices;
+    Mesh *mesh;
     
     glm::mat4 modelMatrix;
     
