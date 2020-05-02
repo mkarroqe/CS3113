@@ -9,5 +9,9 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 - Some way for the player to win (killing all the AI, collecting all the coins, whatever you want).
 - At least 1 looping background music, and at least 1 sound effect.
 
+# Inspiration
+| My late aquatic children, Roomba the snail and Emo the betta. | <img src="demos/muses.png" width=500px /> |
+| - | - |
+
 # Demo
 *in progress*
