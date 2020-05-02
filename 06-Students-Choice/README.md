@@ -1,13 +1,13 @@
-# CS3113 - Intro to Game Programming
-Please enjoy my projects from my Introduction to Game Programming class! <br /> Class information and repository can be found [here](https://github.com/carmineguida/CS3113).
+# Instructions
+Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensions of the previous project. If you are making a 2D game it needs to be something other than a platformer. It can be a top down game for instance, or other style of 2D game. A 3D platformer is OK! You must use new assets (art, music, sound) for this project. No Good/Evil Professor Carmines. No using George or anything from the lectures.
 
-# Contents
+### Requirements:
+- Menu Screen: Show the name of the game. Press enter to start.
+- About 2 Minutes of Gameplay. (can be 1 giant level, multiple levels, etc.)
+- Some sort of moving AI
+- Some way for the player to lose (touching an AI, falling off a ledge, running out of time).
+- Some way for the player to win (killing all the AI, collecting all the coins, whatever you want).
+- At least 1 looping background music, and at least 1 sound effect.
 
-| # | Project | Description | Preview |
-| - | :-: | - | :-: |
-| 1 | _[Simple 2D Scene](https://github.com/mkarroqe/CS3113/blob/master/01-Simple-Birdie/README.md)_ | A stressed mama bird and 3 rowdy,  bouncing babies. ![baby](https://raw.githubusercontent.com/mkarroqe/CS3113/master/00-Class-Material/Assets/2D%20Sprites/baby_birdie.png "baby bird") <br/> ![baby](https://raw.githubusercontent.com/mkarroqe/CS3113/master/00-Class-Material/Assets/2D%20Sprites/baby_birdie.png "baby bird") | ![baby](https://raw.githubusercontent.com/mkarroqe/CS3113/master/00-Class-Material/Assets/2D%20Sprites/baby_birdie.png "baby bird") |
-| 2 | _[Pong](https://github.com/mkarroqe/CS3113/tree/master/02-Pong)_ | A very minimal version of Pong, ft. two red, rectangular paddles and a red, rectangular ball. | ![baby](https://raw.githubusercontent.com/mkarroqe/CS3113/master/02-Pong/ball.png "ball")  |
-| 3 | _(Not so) [Lunar Lander](https://github.com/mkarroqe/CS3113/tree/master/03-Lunar-Lander)_ | Bird version of the classic game where you must guide the falling bird in a grassy "nest". | <img src="https://github.com/mkarroqe/CS3113/blob/master/00-Class-Material/Assets/2D%20Sprites/bird_lander.png?raw=true" width=130 /> |
-| 4 | _[Rise of the AI](https://github.com/mkarroqe/CS3113/blob/master/04-Rise-of-AI/README.md)_ | Basic AI scene featuring an unlikely protagonist, <img src="https://github.com/mkarroqe/CS3113/raw/master/04-Rise-of-AI/Sprites/tp.png" width=20 />, out to deveat 3 virus enemies with 3 different behaviors. | <img src="https://github.com/mkarroqe/CS3113/raw/master/04-Rise-of-AI/Sprites/virus3.png" width=50 /> |
-| 5 | _[Platformer](https://github.com/mkarroqe/CS3113/blob/master/05-Platformer/)_ | Our classic pal George is off on a three level adventure. He climbs and avoids enemies. | ![](https://github.com/mkarroqe/CS3113/blob/master/05-Platformer/ai.png) |
-| 6 | _Student's Choice_ |  |  |
+# Demo
+*in progress*
