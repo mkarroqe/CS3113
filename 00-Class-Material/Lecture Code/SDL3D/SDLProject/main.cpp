@@ -22,7 +22,7 @@ bool gameIsRunning = true;
 ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
 
-#define OBJECT_COUNT 3
+#define OBJECT_COUNT 2
 
 struct GameState {
     Entity *player;
@@ -71,36 +71,54 @@ void Initialize() {
     
     state.objects = new Entity[OBJECT_COUNT];
     
-    GLuint cubeTextureID = Util::LoadTexture("crate1_diffuse.png");
+    GLuint shipTextureID = Util::LoadTexture("ship.png");
+    Mesh *shipMesh = new Mesh();
+    shipMesh->LoadOBJ("ship.obj");
     
-    Mesh *cubeMesh = new Mesh();
-    cubeMesh->LoadOBJ("cube.obj");
+    state.objects[0].textureID = shipTextureID;
+        state.objects[0].mesh = shipMesh;
+        state.objects[0].position = glm::vec3(-5, 0, 10);
+        state.objects[0].rotation = glm::vec3(0, 180, 0);
+        state.objects[0].acceleration = glm::vec3(0, 0, -10);
+        state.objects[0].entityType = SHIP;
     
-    state.objects[0].textureID = cubeTextureID;
-    state.objects[0].mesh = cubeMesh;
-    state.objects[0].position = glm::vec3(0, 0, -5);
-    state.objects[0].entityType = CUBE;
+    state.objects[1].textureID = shipTextureID;
+    state.objects[1].mesh = shipMesh;
+    state.objects[1].position = glm::vec3(5, 0, 10);
+    state.objects[1].rotation = glm::vec3(0, 180, 0);
+    state.objects[1].acceleration = glm::vec3(0, 0, -10);
+    state.objects[1].entityType = SHIP;
     
-    GLuint marioTextureID = Util::LoadTexture("mario_body.png");
-    
-    Mesh *marioMesh = new Mesh();
-    marioMesh->LoadOBJ("mario.obj");
-    
-    state.objects[1].textureID = marioTextureID;
-    state.objects[1].mesh = marioMesh;
-    state.objects[1].position = glm::vec3(-10, 0, -40);
-    state.objects[1].scale = glm::vec3(0.25f, 0.25f, 0.25f);
-    state.objects[1].entityType = ENEMY;
-    
-    GLuint pikachuTextureID = Util::LoadTexture("pikachu.png");
-    
-    Mesh *pikachuMesh = new Mesh();
-    pikachuMesh->LoadOBJ("pikachu.obj");
-    
-    state.objects[2].textureID = pikachuTextureID;
-    state.objects[2].mesh = pikachuMesh;
-    state.objects[2].position = glm::vec3(2, 0, -4);
-    state.objects[2].entityType = ENEMY;
+//    GLuint cubeTextureID = Util::LoadTexture("crate1_diffuse.png");
+//
+//    Mesh *cubeMesh = new Mesh();
+//    cubeMesh->LoadOBJ("cube.obj");
+//
+//    state.objects[0].textureID = cubeTextureID;
+//    state.objects[0].mesh = cubeMesh;
+//    state.objects[0].position = glm::vec3(0, 0, -5);
+//    state.objects[0].entityType = CUBE;
+//
+//    GLuint marioTextureID = Util::LoadTexture("mario_body.png");
+//
+//    Mesh *marioMesh = new Mesh();
+//    marioMesh->LoadOBJ("mario.obj");
+//
+//    state.objects[1].textureID = marioTextureID;
+//    state.objects[1].mesh = marioMesh;
+//    state.objects[1].position = glm::vec3(-10, 0, -40);
+//    state.objects[1].scale = glm::vec3(0.25f, 0.25f, 0.25f);
+//    state.objects[1].entityType = ENEMY;
+//
+//    GLuint pikachuTextureID = Util::LoadTexture("pikachu.png");
+//
+//    Mesh *pikachuMesh = new Mesh();
+//    pikachuMesh->LoadOBJ("pikachu.obj");
+//
+//    state.objects[2].textureID = pikachuTextureID;
+//    state.objects[2].mesh = pikachuMesh;
+//    state.objects[2].position = glm::vec3(2, 0, -4);
+//    state.objects[2].entityType = ENEMY;
 }
 
 void ProcessInput() {
