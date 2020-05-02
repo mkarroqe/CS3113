@@ -21,6 +21,8 @@ bool gameIsRunning = true;
 
 ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
+glm::mat4 uiViewMatrix, uiProjectionMatrix;
+GLuint fontTextureID;
 
 #define OBJECT_COUNT 4
 #define ENEMY_COUNT 10
@@ -46,6 +48,10 @@ void Initialize() {
     glViewport(0, 0, 1280, 720);
     
     program.Load("shaders/vertex_textured.glsl", "shaders/fragment_textured.glsl");
+    
+    uiViewMatrix = glm::mat4(1.0);
+    uiProjectionMatrix = glm::ortho(-6.4f, 6.4f, -3.6f, 3.6f, -1.0f, 1.0f);
+    fontTextureID = Util::LoadTexture("font2.png");
     
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);
@@ -200,8 +206,11 @@ void Update() {
 void Render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    program.SetProjectionMatrix(projectionMatrix);
     program.SetViewMatrix(viewMatrix);
+    
 //    state.player->Render(&program);
+    
     for (int i = 0; i < OBJECT_COUNT; i++) {
         state.objects[i].Render(&program);
     }
@@ -209,6 +218,12 @@ void Render() {
     for (int i = 0; i < ENEMY_COUNT; i++) {
         state.enemies[i].Render(&program);
     }
+    
+    // Once we are done drawing 3D objects...switch!
+    program.SetProjectionMatrix(uiProjectionMatrix);
+    program.SetViewMatrix(uiViewMatrix);
+
+    Util::DrawText(&program, fontTextureID, "Lives: 3", 0.5, -0.1f, glm::vec3(-6, 3.2, 0));
     
     SDL_GL_SwapWindow(displayWindow);
 }

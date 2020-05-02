@@ -28,6 +28,7 @@
 		EC19C6A5245DFB7F0085EE63 /* ship.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C69A245DFB510085EE63 /* ship.png */; };
 		EC19C6A8245E159E0085EE63 /* floor.JPG in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C6A6245E15720085EE63 /* floor.JPG */; };
 		EC19C6AA245E27610085EE63 /* ctg.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C6A9245E27550085EE63 /* ctg.png */; };
+		EC19C6AC245E2DDE0085EE63 /* font2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C6AB245E2DD80085EE63 /* font2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +39,7 @@
 			dstSubfolderSpec = 6;
 			files = (
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
+				EC19C6AC245E2DDE0085EE63 /* font2.png in CopyFiles */,
 				EC19C6AA245E27610085EE63 /* ctg.png in CopyFiles */,
 				EC19C6A8245E159E0085EE63 /* floor.JPG in CopyFiles */,
 				EC19C697245DF32B0085EE63 /* crate1_diffuse.png in CopyFiles */,
@@ -82,6 +84,7 @@
 		EC19C69E245DFB510085EE63 /* pikachu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pikachu.png; path = "../../../Assets/3D Models/pikachu.png"; sourceTree = "<group>"; };
 		EC19C6A6245E15720085EE63 /* floor.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = floor.JPG; path = ../../../Assets/seamlessTextures/floor.JPG; sourceTree = "<group>"; };
 		EC19C6A9245E27550085EE63 /* ctg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ctg.png; path = "../../../Assets/2D Sprites/ctg.png"; sourceTree = "<group>"; };
+		EC19C6AB245E2DD80085EE63 /* font2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font2.png; path = ../../../Assets/Fonts/font2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,7 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				EC19C6AB245E2DD80085EE63 /* font2.png */,
 				EC19C6A9245E27550085EE63 /* ctg.png */,
 				EC19C6A6245E15720085EE63 /* floor.JPG */,
 				EC19C696245DF31E0085EE63 /* crate1_diffuse.png */,
