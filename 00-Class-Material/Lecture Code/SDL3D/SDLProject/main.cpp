@@ -73,7 +73,7 @@ void Initialize() {
     
     GLuint floorTextureID = Util::LoadTexture("floor.JPG");
     Mesh *cubeMesh = new Mesh();
-    cubeMesh->LoadOBJ("cube.obj");
+    cubeMesh->LoadOBJ("cube.obj", 10);
     
     state.objects[0].textureID = floorTextureID;
         state.objects[0].mesh = cubeMesh;

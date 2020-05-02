@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-void Mesh::LoadOBJ(const char *fileName) {
+void Mesh::LoadOBJ(const char *fileName, float textureRepeat) {
     
     std::ifstream infile(fileName);
     std::string line;
@@ -31,7 +31,7 @@ void Mesh::LoadOBJ(const char *fileName) {
             while(getline(sStream, token, ' ') && numUVs < 2) {
                 if(token.size() > 0) {
                     printf("token: [%s]\n", token.c_str());
-                    fileUVs.push_back(atof(token.c_str()));
+                    fileUVs.push_back(atof(token.c_str()) * textureRepeat);
                     numUVs++;
                 }
             }

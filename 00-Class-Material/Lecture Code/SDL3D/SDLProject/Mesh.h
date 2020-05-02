@@ -7,7 +7,6 @@
 
 #define GL_GLEXT_PROTOTYPES 1
 
-
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
@@ -24,7 +23,7 @@ class Mesh {
     public:
     
         void Render(ShaderProgram *program);
-        void LoadOBJ(const char *fileName);
+        void LoadOBJ(const char *fileName, float textureRepeat);
     
         std::vector<float> vertices;
         std::vector<float> uvs;
