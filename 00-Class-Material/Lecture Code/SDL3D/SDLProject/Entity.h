@@ -28,6 +28,11 @@ public:
     
     float speed;
     
+    bool billboard;
+    float width;
+    float height;
+    float depth;
+    
     GLuint textureID;
     Mesh *mesh;
     
@@ -35,7 +40,8 @@ public:
     
     Entity();
     
-    void Update(float deltaTime);
+    bool CheckCollision(Entity *other);
+    void Update(float deltaTime, Entity *player, Entity *objects, int objectCount);
     void Render(ShaderProgram *program);
 };
 

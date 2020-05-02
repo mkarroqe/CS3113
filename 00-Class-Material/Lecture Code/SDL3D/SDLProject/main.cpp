@@ -22,7 +22,7 @@ bool gameIsRunning = true;
 ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
 
-#define OBJECT_COUNT 2
+#define OBJECT_COUNT 4
 
 struct GameState {
     Entity *player;
@@ -80,7 +80,7 @@ void Initialize() {
         state.objects[0].position = glm::vec3(0, -0.25f, 0);
         state.objects[0].rotation = glm::vec3(0, 0, 0);
         state.objects[0].acceleration = glm::vec3(0, 0, 0);
-    state.objects[0].scale = glm::vec3(20, 0.5f, 20);
+    state.objects[0].scale = glm::vec3(20, 0.75f, 20);
         state.objects[0].entityType = FLOOR;
     
     GLuint crateTextureID = Util::LoadTexture("crate1_diffuse.png");
@@ -89,8 +89,18 @@ void Initialize() {
     
     state.objects[1].textureID = crateTextureID;
     state.objects[1].mesh = crateMesh;
-    state.objects[1].position = glm::vec3(0, 0.5, -5);
+    state.objects[1].position = glm::vec3(0, 0.75, -5);
     state.objects[1].entityType = CRATE;
+    
+    state.objects[2].textureID = crateTextureID;
+    state.objects[2].mesh = crateMesh;
+    state.objects[2].position = glm::vec3(-1, 0.75, -5);
+    state.objects[2].entityType = CRATE;
+    
+    state.objects[3].textureID = crateTextureID;
+    state.objects[3].mesh = crateMesh;
+    state.objects[3].position = glm::vec3(0, 1.75, -5);
+    state.objects[3].entityType = CRATE;
 }
 
 void ProcessInput() {
@@ -151,10 +161,10 @@ void Update() {
     }
     
     while (deltaTime >= FIXED_TIMESTEP) {
-        state.player->Update(FIXED_TIMESTEP);
+        state.player->Update(FIXED_TIMESTEP, state.player, state.objects, OBJECT_COUNT);
         
         for (int i = 0; i < OBJECT_COUNT; i++) {
-            state.objects[i].Update(FIXED_TIMESTEP);
+            state.objects[i].Update(FIXED_TIMESTEP, state.player, state.objects, OBJECT_COUNT);
         }
         
         deltaTime -= FIXED_TIMESTEP;

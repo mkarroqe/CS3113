@@ -11,14 +11,43 @@ Entity::Entity()
     modelMatrix = glm::mat4(1.0f);
     
     speed = 0.0f;
+    
+    billboard = false;
+    
+    width = 1.0f;
+    height = 1.0f;
+    depth = 1.0f;
 }
 
-void Entity::Update(float deltaTime)
+bool Entity::CheckCollision(Entity *other)
 {
+    float xdist = fabs(position.x - other->position.x) - ((width + other->width) / 2.0f);
+    float ydist = fabs(position.y - other->position.y) - ((height + other->height) / 2.0f);
+    float zdist = fabs(position.z - other->position.z) - ((depth + other->depth) / 2.0f);
+    if (xdist < 0 && ydist < 0 && zdist < 0) return true;
+
+    return false;
+}
+
+void Entity::Update(float deltaTime, Entity *player, Entity *objects, int objectCount)
+{
+    glm::vec3 previousPosition = position;
+
     velocity += acceleration * deltaTime;
     position += velocity * deltaTime;
     
-    if (entityType == CUBE) {
+    if (entityType == PLAYER) {
+        for (int i = 0; i < objectCount; i++) {
+            // Ignore collisions with the floor
+            if (objects[i].entityType == FLOOR) continue;
+
+            if (CheckCollision(&objects[i])) {
+                position = previousPosition;
+                break;
+            }
+        }
+    }
+    else if (entityType == CUBE) {
         rotation.y += 45 * deltaTime;
         rotation.z += 45 * deltaTime;
     }
