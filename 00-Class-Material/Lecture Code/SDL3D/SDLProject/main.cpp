@@ -118,6 +118,7 @@ void Initialize() {
     state.objects[0].vertices = cubeVertices;
     state.objects[0].texCoords = cubeTexCoords;
     state.objects[0].numVertices = 36;
+    state.objects[0].entityType = CUBE;
 }
 
 void ProcessInput() {

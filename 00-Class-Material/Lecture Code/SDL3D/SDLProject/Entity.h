@@ -13,7 +13,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
-enum EntityType { PLAYER, PLATFORM, ENEMY };
+enum EntityType { PLAYER, PLATFORM, ENEMY, CUBE };
 
 class Entity {
 public:
@@ -22,6 +22,7 @@ public:
     glm::vec3 position;
     glm::vec3 velocity;
     glm::vec3 acceleration;
+    glm::vec3 rotation;
     
     float speed;
     
