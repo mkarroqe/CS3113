@@ -22,7 +22,7 @@ bool gameIsRunning = true;
 ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
 
-#define OBJECT_COUNT 1
+#define OBJECT_COUNT 2
 
 struct GameState {
     Entity *player;
@@ -65,7 +65,7 @@ void Initialize() {
     
     state.player = new Entity();
     state.player->entityType = PLAYER;
-    state.player->position = glm::vec3(0, 1.5f, 0);
+    state.player->position = glm::vec3(0, 0.5f, 0);
     state.player->acceleration = glm::vec3(0, 0, 0);
     state.player->speed = 1.0f;
     
@@ -73,15 +73,24 @@ void Initialize() {
     
     GLuint floorTextureID = Util::LoadTexture("floor.JPG");
     Mesh *cubeMesh = new Mesh();
-    cubeMesh->LoadOBJ("cube.obj", 10);
+    cubeMesh->LoadOBJ("cube.obj", 20);
     
     state.objects[0].textureID = floorTextureID;
         state.objects[0].mesh = cubeMesh;
         state.objects[0].position = glm::vec3(0, -0.25f, 0);
         state.objects[0].rotation = glm::vec3(0, 0, 0);
         state.objects[0].acceleration = glm::vec3(0, 0, 0);
-    state.objects[0].scale = glm::vec3(10, 0.5f, 10);
+    state.objects[0].scale = glm::vec3(20, 0.5f, 20);
         state.objects[0].entityType = FLOOR;
+    
+    GLuint crateTextureID = Util::LoadTexture("crate1_diffuse.png");
+    Mesh *crateMesh = new Mesh();
+    crateMesh->LoadOBJ("cube.obj", 1);
+    
+    state.objects[1].textureID = crateTextureID;
+    state.objects[1].mesh = crateMesh;
+    state.objects[1].position = glm::vec3(0, 0.5, -5);
+    state.objects[1].entityType = CRATE;
 }
 
 void ProcessInput() {
@@ -102,6 +111,27 @@ void ProcessInput() {
                 }
                 break;
         }
+    }
+    
+    const Uint8 *keys = SDL_GetKeyboardState(NULL);
+
+    if (keys[SDL_SCANCODE_A]) {
+        state.player->rotation.y += 1.0f;
+    }
+    else if (keys[SDL_SCANCODE_D]) {
+        state.player->rotation.y -= 1.0f;
+    }
+    
+    state.player->velocity.x = 0;
+    state.player->velocity.z = 0;
+
+    if (keys[SDL_SCANCODE_W]) {
+        state.player->velocity.z = cos(glm::radians(state.player->rotation.y)) * -2.0f;
+        state.player->velocity.x = sin(glm::radians(state.player->rotation.y)) * -2.0f;
+    }
+    else if (keys[SDL_SCANCODE_S]) {
+        state.player->velocity.z = cos(glm::radians(state.player->rotation.y)) * 2.0f;
+        state.player->velocity.x = sin(glm::radians(state.player->rotation.y)) * 2.0f;
     }
 }
 
@@ -131,12 +161,18 @@ void Update() {
     }
     
     accumulator = deltaTime;
+    
+    viewMatrix = glm::mat4(1.0f);
+    viewMatrix = glm::rotate(viewMatrix,
+    glm::radians(state.player->rotation.y), glm::vec3(0, -1.0f, 0));
+    viewMatrix = glm::translate(viewMatrix, -state.player->position);
 }
 
 
 void Render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    program.SetViewMatrix(viewMatrix);
 //    state.player->Render(&program);
     for (int i = 0; i < OBJECT_COUNT; i++) {
         state.objects[i].Render(&program);
