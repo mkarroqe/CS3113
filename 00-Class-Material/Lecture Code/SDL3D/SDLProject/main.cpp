@@ -88,7 +88,8 @@ void Initialize() {
     
     state.objects[1].textureID = marioTextureID;
     state.objects[1].mesh = marioMesh;
-    state.objects[1].position = glm::vec3(-10, -20, -80);
+    state.objects[1].position = glm::vec3(-10, 0, -40);
+    state.objects[1].scale = glm::vec3(0.25f, 0.25f, 0.25f);
     state.objects[1].entityType = ENEMY;
     
     GLuint pikachuTextureID = Util::LoadTexture("pikachu.png");
