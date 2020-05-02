@@ -21,8 +21,10 @@ bool gameIsRunning = true;
 
 ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
+
 glm::mat4 uiViewMatrix, uiProjectionMatrix;
 GLuint fontTextureID;
+GLuint heartTextureID;
 
 #define OBJECT_COUNT 4
 #define ENEMY_COUNT 10
@@ -52,6 +54,7 @@ void Initialize() {
     uiViewMatrix = glm::mat4(1.0);
     uiProjectionMatrix = glm::ortho(-6.4f, 6.4f, -3.6f, 3.6f, -1.0f, 1.0f);
     fontTextureID = Util::LoadTexture("font2.png");
+    heartTextureID = Util::LoadTexture("platformPack_item017.png");
     
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);
@@ -224,6 +227,12 @@ void Render() {
     program.SetViewMatrix(uiViewMatrix);
 
     Util::DrawText(&program, fontTextureID, "Lives: 3", 0.5, -0.1f, glm::vec3(-6, 3.2, 0));
+    
+    for (int i = 0; i < 3; i++)
+    {
+        // These icons are small, so just move 0.5 to the right for each one.
+        Util::DrawIcon(&program, heartTextureID, glm::vec3(5 + (i * 0.5f), 3.2, 0));
+    }
     
     SDL_GL_SwapWindow(displayWindow);
 }

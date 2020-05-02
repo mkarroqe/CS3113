@@ -78,3 +78,23 @@ void Util::DrawText(ShaderProgram *program, int fontTexture, std::string text, f
     glDisableVertexAttribArray(program->positionAttribute);
     glDisableVertexAttribArray(program->texCoordAttribute);
 }
+
+void Util::DrawIcon(ShaderProgram *program, int iconTexture, glm::vec3 position) {
+    glm::mat4 modelMatrix = glm::mat4(1.0f);
+    modelMatrix = glm::translate(modelMatrix, position);
+    program->SetModelMatrix(modelMatrix);
+    float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
+    float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
+
+    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program->positionAttribute);
+
+    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
+    glEnableVertexAttribArray(program->texCoordAttribute);
+
+    glBindTexture(GL_TEXTURE_2D, iconTexture);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    glDisableVertexAttribArray(program->positionAttribute);
+    glDisableVertexAttribArray(program->texCoordAttribute);
+}
