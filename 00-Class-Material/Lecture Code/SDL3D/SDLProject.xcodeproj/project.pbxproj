@@ -26,6 +26,7 @@
 		EC19C6A3245DFB790085EE63 /* pikachu.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C69E245DFB510085EE63 /* pikachu.png */; };
 		EC19C6A4245DFB7C0085EE63 /* ship.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C69D245DFB510085EE63 /* ship.obj */; };
 		EC19C6A5245DFB7F0085EE63 /* ship.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C69A245DFB510085EE63 /* ship.png */; };
+		EC19C6A8245E159E0085EE63 /* floor.JPG in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C6A6245E15720085EE63 /* floor.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +37,7 @@
 			dstSubfolderSpec = 6;
 			files = (
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
+				EC19C6A8245E159E0085EE63 /* floor.JPG in CopyFiles */,
 				EC19C697245DF32B0085EE63 /* crate1_diffuse.png in CopyFiles */,
 				EC19C69F245DFB620085EE63 /* cube.obj in CopyFiles */,
 				EC19C6A0245DFB680085EE63 /* mario_body.png in CopyFiles */,
@@ -76,6 +78,7 @@
 		EC19C69C245DFB510085EE63 /* mario_body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mario_body.png; path = "../../../Assets/3D Models/mario_body.png"; sourceTree = "<group>"; };
 		EC19C69D245DFB510085EE63 /* ship.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = ship.obj; path = "../../../Assets/3D Models/ship.obj"; sourceTree = "<group>"; };
 		EC19C69E245DFB510085EE63 /* pikachu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pikachu.png; path = "../../../Assets/3D Models/pikachu.png"; sourceTree = "<group>"; };
+		EC19C6A6245E15720085EE63 /* floor.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = floor.JPG; path = ../../../Assets/seamlessTextures/floor.JPG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,7 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				EC19C6A6245E15720085EE63 /* floor.JPG */,
 				EC19C696245DF31E0085EE63 /* crate1_diffuse.png */,
 				EC19C69B245DFB510085EE63 /* cube.obj */,
 				EC19C69C245DFB510085EE63 /* mario_body.png */,
