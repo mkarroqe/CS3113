@@ -23,10 +23,12 @@ ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
 
 #define OBJECT_COUNT 4
+#define ENEMY_COUNT 10
 
 struct GameState {
     Entity *player;
     Entity *objects;
+    Entity *enemies;
 };
 
 GameState state;
@@ -101,6 +103,18 @@ void Initialize() {
     state.objects[3].mesh = crateMesh;
     state.objects[3].position = glm::vec3(0, 1.75, -5);
     state.objects[3].entityType = CRATE;
+    
+    state.enemies = new Entity[ENEMY_COUNT];
+    
+    GLuint enemyTextureID = Util::LoadTexture("ctg.png");
+    
+    for (int i = 0; i < ENEMY_COUNT; i++) {
+        state.enemies[i].billboard = true;
+        state.enemies[i].textureID = enemyTextureID;
+        state.enemies[i].position = glm::vec3(rand() % 20 - 10, 0.5, rand() % 20 - 10);
+        state.enemies[i].rotation = glm::vec3(0, 0, 0);
+        state.enemies[i].acceleration = glm::vec3(0, 0, 0);
+    }
 }
 
 void ProcessInput() {
@@ -167,6 +181,10 @@ void Update() {
             state.objects[i].Update(FIXED_TIMESTEP, state.player, state.objects, OBJECT_COUNT);
         }
         
+        for (int i = 0; i < ENEMY_COUNT; i++) {
+            state.enemies[i].Update(FIXED_TIMESTEP, state.player, state.objects, OBJECT_COUNT);
+        }
+        
         deltaTime -= FIXED_TIMESTEP;
     }
     
@@ -186,6 +204,10 @@ void Render() {
 //    state.player->Render(&program);
     for (int i = 0; i < OBJECT_COUNT; i++) {
         state.objects[i].Render(&program);
+    }
+    
+    for (int i = 0; i < ENEMY_COUNT; i++) {
+        state.enemies[i].Render(&program);
     }
     
     SDL_GL_SwapWindow(displayWindow);

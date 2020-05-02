@@ -32,6 +32,16 @@ bool Entity::CheckCollision(Entity *other)
 void Entity::Update(float deltaTime, Entity *player, Entity *objects, int objectCount)
 {
     glm::vec3 previousPosition = position;
+    
+    if (billboard) {
+        float directionX = position.x - player->position.x;
+        float directionZ = position.z - player->position.z;
+        rotation.y = glm::degrees(atan2f(directionX, directionZ));
+        
+        // come towards us
+        velocity.z = cos(glm::radians(rotation.y)) * -1.0f;
+        velocity.x = sin(glm::radians(rotation.y)) * -1.0f;
+    }
 
     velocity += acceleration * deltaTime;
     position += velocity * deltaTime;
@@ -65,9 +75,30 @@ void Entity::Update(float deltaTime, Entity *player, Entity *objects, int object
 
 void Entity::Render(ShaderProgram *program) {
     program->SetModelMatrix(modelMatrix);
-    
+        
     glBindTexture(GL_TEXTURE_2D, textureID);
-    
-    mesh->Render(program);
+
+    if (billboard) {
+        Entity::DrawBillboard(program);
+    }
+    else {
+        mesh->Render(program);
+    }
+}
+
+void Entity::DrawBillboard(ShaderProgram *program) {
+    float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
+    float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
+
+    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program->positionAttribute);
+
+    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
+    glEnableVertexAttribArray(program->texCoordAttribute);
+
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    glDisableVertexAttribArray(program->positionAttribute);
+    glDisableVertexAttribArray(program->texCoordAttribute);
 }
 
