@@ -22,7 +22,7 @@ bool gameIsRunning = true;
 ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
 
-#define OBJECT_COUNT 1
+#define OBJECT_COUNT 3
 
 struct GameState {
     Entity *player;
@@ -80,6 +80,26 @@ void Initialize() {
     state.objects[0].mesh = cubeMesh;
     state.objects[0].position = glm::vec3(0, 0, -5);
     state.objects[0].entityType = CUBE;
+    
+    GLuint marioTextureID = Util::LoadTexture("mario_body.png");
+    
+    Mesh *marioMesh = new Mesh();
+    marioMesh->LoadOBJ("mario.obj");
+    
+    state.objects[1].textureID = marioTextureID;
+    state.objects[1].mesh = marioMesh;
+    state.objects[1].position = glm::vec3(-10, -20, -80);
+    state.objects[1].entityType = ENEMY;
+    
+    GLuint pikachuTextureID = Util::LoadTexture("pikachu.png");
+    
+    Mesh *pikachuMesh = new Mesh();
+    pikachuMesh->LoadOBJ("pikachu.obj");
+    
+    state.objects[2].textureID = pikachuTextureID;
+    state.objects[2].mesh = pikachuMesh;
+    state.objects[2].position = glm::vec3(2, 0, -4);
+    state.objects[2].entityType = ENEMY;
 }
 
 void ProcessInput() {
@@ -122,7 +142,7 @@ void Update() {
         state.player->Update(FIXED_TIMESTEP);
         
         for (int i = 0; i < OBJECT_COUNT; i++) {
-            state.objects[0].Update(FIXED_TIMESTEP);
+            state.objects[i].Update(FIXED_TIMESTEP);
         }
         
         deltaTime -= FIXED_TIMESTEP;
