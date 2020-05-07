@@ -14,6 +14,13 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 | :-: | :-: |
 | [Betta](https://free3d.com/3d-model/crowntailbetta-v1--31129.html) | [Snail](https://free3d.com/3d-model/snail-23158.html) |
 
+WIP List:
+- [gravel2.jpg](https://www.pinterest.com/pin/353814114473920228/)
+- [gravel.jpg](http://naturesocean.com/aquarium-supplies/Snow-White-Aquarium-Gravel.html)
+- [grass](https://free3d.com/3d-model/high-quality-grass-78178.html)
+- [palm](https://free3d.com/3d-model/palm-54462.html)
+- [fern](https://free3d.com/3d-model/-fern-v2--65217.html)
+
 # Inspiration
 | My late aquatic children, Roomba the snail and Emo the betta. | <img src="demos/muses.png" width=500px /> |
 | - | - |
