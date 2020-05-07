@@ -18,18 +18,8 @@
 		DBDF1B692323DEEA007CECB1 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B662323DEEA007CECB1 /* SDL2.framework */; };
 		DBDF1B6A2323DEEA007CECB1 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B672323DEEA007CECB1 /* SDL2_image.framework */; };
 		DBDF1B6B2323DEEA007CECB1 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */; };
-		EC19C697245DF32B0085EE63 /* crate1_diffuse.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C696245DF31E0085EE63 /* crate1_diffuse.png */; };
 		EC19C69F245DFB620085EE63 /* cube.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C69B245DFB510085EE63 /* cube.obj */; };
-		EC19C6A0245DFB680085EE63 /* mario_body.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C69C245DFB510085EE63 /* mario_body.png */; };
-		EC19C6A1245DFB6B0085EE63 /* mario.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C698245DFB500085EE63 /* mario.obj */; };
-		EC19C6A2245DFB6E0085EE63 /* pikachu.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C699245DFB510085EE63 /* pikachu.obj */; };
-		EC19C6A3245DFB790085EE63 /* pikachu.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C69E245DFB510085EE63 /* pikachu.png */; };
-		EC19C6A4245DFB7C0085EE63 /* ship.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C69D245DFB510085EE63 /* ship.obj */; };
-		EC19C6A5245DFB7F0085EE63 /* ship.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C69A245DFB510085EE63 /* ship.png */; };
-		EC19C6A8245E159E0085EE63 /* floor.JPG in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C6A6245E15720085EE63 /* floor.JPG */; };
-		EC19C6AA245E27610085EE63 /* ctg.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C6A9245E27550085EE63 /* ctg.png */; };
 		EC19C6AC245E2DDE0085EE63 /* font2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C6AB245E2DD80085EE63 /* font2.png */; };
-		EC19C6AE245E2FF40085EE63 /* platformPack_item017.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC19C6AD245E2FF00085EE63 /* platformPack_item017.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,18 +30,8 @@
 			dstSubfolderSpec = 6;
 			files = (
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
-				EC19C6AE245E2FF40085EE63 /* platformPack_item017.png in CopyFiles */,
 				EC19C6AC245E2DDE0085EE63 /* font2.png in CopyFiles */,
-				EC19C6AA245E27610085EE63 /* ctg.png in CopyFiles */,
-				EC19C6A8245E159E0085EE63 /* floor.JPG in CopyFiles */,
-				EC19C697245DF32B0085EE63 /* crate1_diffuse.png in CopyFiles */,
 				EC19C69F245DFB620085EE63 /* cube.obj in CopyFiles */,
-				EC19C6A0245DFB680085EE63 /* mario_body.png in CopyFiles */,
-				EC19C6A1245DFB6B0085EE63 /* mario.obj in CopyFiles */,
-				EC19C6A2245DFB6E0085EE63 /* pikachu.obj in CopyFiles */,
-				EC19C6A3245DFB790085EE63 /* pikachu.png in CopyFiles */,
-				EC19C6A4245DFB7C0085EE63 /* ship.obj in CopyFiles */,
-				EC19C6A5245DFB7F0085EE63 /* ship.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,18 +56,8 @@
 		DBDF1B662323DEEA007CECB1 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		DBDF1B672323DEEA007CECB1 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
-		EC19C696245DF31E0085EE63 /* crate1_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = crate1_diffuse.png; path = "../../../Assets/3D Models/3crates/crate1/crate1_diffuse.png"; sourceTree = "<group>"; };
-		EC19C698245DFB500085EE63 /* mario.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = mario.obj; path = "../../../Assets/3D Models/mario.obj"; sourceTree = "<group>"; };
-		EC19C699245DFB510085EE63 /* pikachu.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = pikachu.obj; path = "../../../Assets/3D Models/pikachu.obj"; sourceTree = "<group>"; };
-		EC19C69A245DFB510085EE63 /* ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ship.png; path = "../../../Assets/3D Models/ship.png"; sourceTree = "<group>"; };
 		EC19C69B245DFB510085EE63 /* cube.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = cube.obj; path = "../../../Assets/3D Models/cube.obj"; sourceTree = "<group>"; };
-		EC19C69C245DFB510085EE63 /* mario_body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mario_body.png; path = "../../../Assets/3D Models/mario_body.png"; sourceTree = "<group>"; };
-		EC19C69D245DFB510085EE63 /* ship.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = ship.obj; path = "../../../Assets/3D Models/ship.obj"; sourceTree = "<group>"; };
-		EC19C69E245DFB510085EE63 /* pikachu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pikachu.png; path = "../../../Assets/3D Models/pikachu.png"; sourceTree = "<group>"; };
-		EC19C6A6245E15720085EE63 /* floor.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = floor.JPG; path = ../../../Assets/seamlessTextures/floor.JPG; sourceTree = "<group>"; };
-		EC19C6A9245E27550085EE63 /* ctg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ctg.png; path = "../../../Assets/2D Sprites/ctg.png"; sourceTree = "<group>"; };
 		EC19C6AB245E2DD80085EE63 /* font2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font2.png; path = ../../../Assets/Fonts/font2.png; sourceTree = "<group>"; };
-		EC19C6AD245E2FF00085EE63 /* platformPack_item017.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = platformPack_item017.png; path = "../../../Assets/2D Sprites/Kenney_SimplifiedPlatformer/PNG/Items/platformPack_item017.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,18 +96,8 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
-				EC19C6AD245E2FF00085EE63 /* platformPack_item017.png */,
 				EC19C6AB245E2DD80085EE63 /* font2.png */,
-				EC19C6A9245E27550085EE63 /* ctg.png */,
-				EC19C6A6245E15720085EE63 /* floor.JPG */,
-				EC19C696245DF31E0085EE63 /* crate1_diffuse.png */,
 				EC19C69B245DFB510085EE63 /* cube.obj */,
-				EC19C69C245DFB510085EE63 /* mario_body.png */,
-				EC19C698245DFB500085EE63 /* mario.obj */,
-				EC19C699245DFB510085EE63 /* pikachu.obj */,
-				EC19C69E245DFB510085EE63 /* pikachu.png */,
-				EC19C69D245DFB510085EE63 /* ship.obj */,
-				EC19C69A245DFB510085EE63 /* ship.png */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
 				DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */,
 				DBDF1B592323DE8D007CECB1 /* ShaderProgram.h */,
