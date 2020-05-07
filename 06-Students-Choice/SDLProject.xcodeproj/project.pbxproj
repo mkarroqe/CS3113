@@ -22,6 +22,8 @@
 		ECF5585C2463BB0C00B918D5 /* gravel2.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF558592463BB0200B918D5 /* gravel2.jpg */; };
 		ECF5585F2463BD7000B918D5 /* fern_diffuse.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5585D2463BD5900B918D5 /* fern_diffuse.jpg */; };
 		ECF558602463BD7400B918D5 /* fern.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5585E2463BD5F00B918D5 /* fern.obj */; };
+		ECF558632463C02800B918D5 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECF558612463C02800B918D5 /* Scene.cpp */; };
+		ECF558692463C29100B918D5 /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECF558672463C29100B918D5 /* Menu.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +66,10 @@
 		ECF5585A2463BB0200B918D5 /* cube.obj */ = {isa = PBXFileReference; lastKnownFileType = file; name = cube.obj; path = Assets/Ground/cube.obj; sourceTree = SOURCE_ROOT; };
 		ECF5585D2463BD5900B918D5 /* fern_diffuse.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fern_diffuse.jpg; path = Assets/Fern/fern_diffuse.jpg; sourceTree = SOURCE_ROOT; };
 		ECF5585E2463BD5F00B918D5 /* fern.obj */ = {isa = PBXFileReference; lastKnownFileType = file; name = fern.obj; path = Assets/Fern/fern.obj; sourceTree = SOURCE_ROOT; };
+		ECF558612463C02800B918D5 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
+		ECF558622463C02800B918D5 /* Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		ECF558672463C29100B918D5 /* Menu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Menu.cpp; sourceTree = "<group>"; };
+		ECF558682463C29100B918D5 /* Menu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Menu.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,12 +118,16 @@
 				DBDF1B5C2323DE8D007CECB1 /* shaders */,
 				DBDF1B5A2323DE8D007CECB1 /* stb_image.h */,
 				DBDF1B522323DE3F007CECB1 /* main.cpp */,
+				ECF558612463C02800B918D5 /* Scene.cpp */,
+				ECF558622463C02800B918D5 /* Scene.h */,
 				DB4C61F9236CE8FD0096309D /* Entity.cpp */,
 				DB4C61FA236CE8FD0096309D /* Entity.h */,
 				DB1BA2932378E51A001F1FBC /* Mesh.cpp */,
 				DB1BA2942378E51A001F1FBC /* Mesh.h */,
 				DB1BA2962378E7A5001F1FBC /* Util.cpp */,
 				DB1BA2972378E7A5001F1FBC /* Util.h */,
+				ECF558682463C29100B918D5 /* Menu.hpp */,
+				ECF558672463C29100B918D5 /* Menu.cpp */,
 			);
 			path = SDLProject;
 			sourceTree = "<group>";
@@ -190,9 +200,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECF558632463C02800B918D5 /* Scene.cpp in Sources */,
 				DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */,
 				DB4C61FB236CE8FD0096309D /* Entity.cpp in Sources */,
 				DB1BA2952378E51A001F1FBC /* Mesh.cpp in Sources */,
+				ECF558692463C29100B918D5 /* Menu.cpp in Sources */,
 				DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */,
 				DB1BA2982378E7A5001F1FBC /* Util.cpp in Sources */,
 			);
