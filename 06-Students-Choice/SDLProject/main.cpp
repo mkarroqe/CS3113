@@ -26,8 +26,8 @@ glm::mat4 uiViewMatrix, uiProjectionMatrix;
 GLuint fontTextureID;
 GLuint heartTextureID;
 
-#define OBJECT_COUNT 4
-#define ENEMY_COUNT 10
+#define OBJECT_COUNT 1
+#define ENEMY_COUNT 0
 
 struct GameState {
     Entity *player;
@@ -39,7 +39,7 @@ GameState state;
 
 void Initialize() {
     SDL_Init(SDL_INIT_VIDEO);
-    displayWindow = SDL_CreateWindow("3D!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_OPENGL);
+    displayWindow = SDL_CreateWindow("Save Roomba", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_OPENGL);
     SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
     SDL_GL_MakeCurrent(displayWindow, context);
     
@@ -53,8 +53,8 @@ void Initialize() {
     
     uiViewMatrix = glm::mat4(1.0);
     uiProjectionMatrix = glm::ortho(-6.4f, 6.4f, -3.6f, 3.6f, -1.0f, 1.0f);
-    fontTextureID = Util::LoadTexture("font2.png");
-    heartTextureID = Util::LoadTexture("platformPack_item017.png");
+//    fontTextureID = Util::LoadTexture("font2.png");
+//    heartTextureID = Util::LoadTexture("gravel2.jpg");
     
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);
@@ -82,7 +82,7 @@ void Initialize() {
     
     state.objects = new Entity[OBJECT_COUNT];
     
-    GLuint floorTextureID = Util::LoadTexture("floor.JPG");
+    GLuint floorTextureID = Util::LoadTexture("gravel2.jpg");
     Mesh *cubeMesh = new Mesh();
     cubeMesh->LoadOBJ("cube.obj", 20);
     
@@ -94,36 +94,36 @@ void Initialize() {
     state.objects[0].scale = glm::vec3(20, 0.75f, 20);
         state.objects[0].entityType = FLOOR;
     
-    GLuint crateTextureID = Util::LoadTexture("crate1_diffuse.png");
-    Mesh *crateMesh = new Mesh();
-    crateMesh->LoadOBJ("cube.obj", 1);
-    
-    state.objects[1].textureID = crateTextureID;
-    state.objects[1].mesh = crateMesh;
-    state.objects[1].position = glm::vec3(0, 0.75, -5);
-    state.objects[1].entityType = CRATE;
-    
-    state.objects[2].textureID = crateTextureID;
-    state.objects[2].mesh = crateMesh;
-    state.objects[2].position = glm::vec3(-1, 0.75, -5);
-    state.objects[2].entityType = CRATE;
-    
-    state.objects[3].textureID = crateTextureID;
-    state.objects[3].mesh = crateMesh;
-    state.objects[3].position = glm::vec3(0, 1.75, -5);
-    state.objects[3].entityType = CRATE;
-    
-    state.enemies = new Entity[ENEMY_COUNT];
-    
-    GLuint enemyTextureID = Util::LoadTexture("ctg.png");
-    
-    for (int i = 0; i < ENEMY_COUNT; i++) {
-        state.enemies[i].billboard = true;
-        state.enemies[i].textureID = enemyTextureID;
-        state.enemies[i].position = glm::vec3(rand() % 20 - 10, 0.5, rand() % 20 - 10);
-        state.enemies[i].rotation = glm::vec3(0, 0, 0);
-        state.enemies[i].acceleration = glm::vec3(0, 0, 0);
-    }
+//    GLuint crateTextureID = Util::LoadTexture("crate1_diffuse.png");
+//    Mesh *crateMesh = new Mesh();
+//    crateMesh->LoadOBJ("cube.obj", 1);
+//
+//    state.objects[1].textureID = crateTextureID;
+//    state.objects[1].mesh = crateMesh;
+//    state.objects[1].position = glm::vec3(0, 0.75, -5);
+//    state.objects[1].entityType = CRATE;
+//
+//    state.objects[2].textureID = crateTextureID;
+//    state.objects[2].mesh = crateMesh;
+//    state.objects[2].position = glm::vec3(-1, 0.75, -5);
+//    state.objects[2].entityType = CRATE;
+//
+//    state.objects[3].textureID = crateTextureID;
+//    state.objects[3].mesh = crateMesh;
+//    state.objects[3].position = glm::vec3(0, 1.75, -5);
+//    state.objects[3].entityType = CRATE;
+//
+//    state.enemies = new Entity[ENEMY_COUNT];
+//
+//    GLuint enemyTextureID = Util::LoadTexture("ctg.png");
+//
+//    for (int i = 0; i < ENEMY_COUNT; i++) {
+//        state.enemies[i].billboard = true;
+//        state.enemies[i].textureID = enemyTextureID;
+//        state.enemies[i].position = glm::vec3(rand() % 20 - 10, 0.5, rand() % 20 - 10);
+//        state.enemies[i].rotation = glm::vec3(0, 0, 0);
+//        state.enemies[i].acceleration = glm::vec3(0, 0, 0);
+//    }
 }
 
 void ProcessInput() {
