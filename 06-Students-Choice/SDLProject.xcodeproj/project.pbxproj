@@ -20,6 +20,8 @@
 		DBDF1B6B2323DEEA007CECB1 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */; };
 		ECF5585B2463BB0A00B918D5 /* cube.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5585A2463BB0200B918D5 /* cube.obj */; };
 		ECF5585C2463BB0C00B918D5 /* gravel2.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF558592463BB0200B918D5 /* gravel2.jpg */; };
+		ECF5585F2463BD7000B918D5 /* fern_diffuse.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5585D2463BD5900B918D5 /* fern_diffuse.jpg */; };
+		ECF558602463BD7400B918D5 /* fern.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5585E2463BD5F00B918D5 /* fern.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +34,8 @@
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
 				ECF5585B2463BB0A00B918D5 /* cube.obj in CopyFiles */,
 				ECF5585C2463BB0C00B918D5 /* gravel2.jpg in CopyFiles */,
+				ECF5585F2463BD7000B918D5 /* fern_diffuse.jpg in CopyFiles */,
+				ECF558602463BD7400B918D5 /* fern.obj in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +62,8 @@
 		DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
 		ECF558592463BB0200B918D5 /* gravel2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = gravel2.jpg; path = Assets/Ground/gravel2.jpg; sourceTree = SOURCE_ROOT; };
 		ECF5585A2463BB0200B918D5 /* cube.obj */ = {isa = PBXFileReference; lastKnownFileType = file; name = cube.obj; path = Assets/Ground/cube.obj; sourceTree = SOURCE_ROOT; };
+		ECF5585D2463BD5900B918D5 /* fern_diffuse.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fern_diffuse.jpg; path = Assets/Fern/fern_diffuse.jpg; sourceTree = SOURCE_ROOT; };
+		ECF5585E2463BD5F00B918D5 /* fern.obj */ = {isa = PBXFileReference; lastKnownFileType = file; name = fern.obj; path = Assets/Fern/fern.obj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,8 @@
 			children = (
 				ECF5585A2463BB0200B918D5 /* cube.obj */,
 				ECF558592463BB0200B918D5 /* gravel2.jpg */,
+				ECF5585D2463BD5900B918D5 /* fern_diffuse.jpg */,
+				ECF5585E2463BD5F00B918D5 /* fern.obj */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
 				DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */,
 				DBDF1B592323DE8D007CECB1 /* ShaderProgram.h */,

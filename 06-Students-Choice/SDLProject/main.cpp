@@ -26,7 +26,7 @@ glm::mat4 uiViewMatrix, uiProjectionMatrix;
 GLuint fontTextureID;
 GLuint heartTextureID;
 
-#define OBJECT_COUNT 1
+#define OBJECT_COUNT 2
 #define ENEMY_COUNT 0
 
 struct GameState {
@@ -94,14 +94,14 @@ void Initialize() {
     state.objects[0].scale = glm::vec3(20, 0.75f, 20);
         state.objects[0].entityType = FLOOR;
     
-//    GLuint crateTextureID = Util::LoadTexture("crate1_diffuse.png");
-//    Mesh *crateMesh = new Mesh();
-//    crateMesh->LoadOBJ("cube.obj", 1);
-//
-//    state.objects[1].textureID = crateTextureID;
-//    state.objects[1].mesh = crateMesh;
-//    state.objects[1].position = glm::vec3(0, 0.75, -5);
-//    state.objects[1].entityType = CRATE;
+    GLuint fernTextureID = Util::LoadTexture("fern_diffuse.jpg");
+    Mesh *fernMesh = new Mesh();
+    fernMesh->LoadOBJ("fern.obj", 1);
+
+    state.objects[1].textureID = fernTextureID;
+    state.objects[1].mesh = fernMesh;
+    state.objects[1].position = glm::vec3(0, 0.75, -5);
+    state.objects[1].entityType = PLANT;
 //
 //    state.objects[2].textureID = crateTextureID;
 //    state.objects[2].mesh = crateMesh;
