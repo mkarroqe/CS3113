@@ -25,3 +25,7 @@ Original music by [Charlie Reynolds](https://soundcloud.com/saxyjew).
 # Inspiration
 | My late aquatic children, Roomba the snail and Emo the betta. | <img src="demos/muses.png" width=500px /> |
 | - | - |
+
+# Bloopers
+![](demos/bloopers/fern-overload.gif)
++ def more coming soon
