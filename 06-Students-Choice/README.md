@@ -9,6 +9,12 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 - Some way for the player to win (killing all the AI, collecting all the coins, whatever you want).
 - At least 1 looping background music, and at least 1 sound effect.
 
+# Demo
+*in progress*
+
+# Music Credits
+Original music by [Charlie Reynolds](https://soundcloud.com/saxyjew).
+
 # Asset Credits
 | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/Assets/Betta/betta-demo.jpg) | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/assets/snail/SNAIL.JPG) | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/Assets/Grass/grass-demo.png) |
 | :-: | :-: | :-: |
@@ -19,6 +25,3 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 # Inspiration
 | My late aquatic children, Roomba the snail and Emo the betta. | <img src="demos/muses.png" width=500px /> |
 | - | - |
-
-# Demo
-*in progress*
