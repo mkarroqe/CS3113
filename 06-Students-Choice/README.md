@@ -12,10 +12,14 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 # Demo
 *in progress*
 
-# Music Credits
+# Asset Credits
+## Music
 Original music by [Charlie Reynolds](https://soundcloud.com/saxyjew).
 
-# Asset Credits
+## Font
+[Boxy Bold Font Split](https://opengameart.org/content/boxy-bold-font-split) by [Clint Bellanger](https://opengameart.org/users/clint-bellanger) via [@cemkalyoncu](https://opengameart.org/users/cemkalyoncu) on [`OpenGameArt.org`](https://opengameart.org/)
+
+## Graphics
 | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/Assets/Betta/betta-demo.jpg) | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/assets/snail/SNAIL.JPG) | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/Assets/Grass/grass-demo.png) |
 | :-: | :-: | :-: |
 | [Betta](https://free3d.com/3d-model/crowntailbetta-v1--31129.html) | [Snail](https://free3d.com/3d-model/snail-23158.html) | [Grass](https://free3d.com/3d-model/high-quality-grass-78178.html) |
