@@ -53,8 +53,8 @@ void Initialize() {
     
     uiViewMatrix = glm::mat4(1.0);
     uiProjectionMatrix = glm::ortho(-6.4f, 6.4f, -3.6f, 3.6f, -1.0f, 1.0f);
-//    fontTextureID = Util::LoadTexture("font2.png");
-//    heartTextureID = Util::LoadTexture("gravel2.jpg");
+    fontTextureID = Util::LoadTexture("font_small.png");
+    heartTextureID = Util::LoadTexture("gravel2.jpg");
     
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);

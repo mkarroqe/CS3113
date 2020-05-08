@@ -22,6 +22,9 @@
 		ECF5585C2463BB0C00B918D5 /* gravel2.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF558592463BB0200B918D5 /* gravel2.jpg */; };
 		ECF5585F2463BD7000B918D5 /* fern_diffuse.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5585D2463BD5900B918D5 /* fern_diffuse.jpg */; };
 		ECF558602463BD7400B918D5 /* fern.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5585E2463BD5F00B918D5 /* fern.obj */; };
+		ECF5586E2466087100B918D5 /* boxybold.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5586D2466085B00B918D5 /* boxybold.png */; };
+		ECF5587024660CE700B918D5 /* font2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5586F24660CDE00B918D5 /* font2.png */; };
+		ECF5587224660E8B00B918D5 /* font_small.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5587124660E8100B918D5 /* font_small.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +35,9 @@
 			dstSubfolderSpec = 6;
 			files = (
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
+				ECF5587224660E8B00B918D5 /* font_small.png in CopyFiles */,
+				ECF5587024660CE700B918D5 /* font2.png in CopyFiles */,
+				ECF5586E2466087100B918D5 /* boxybold.png in CopyFiles */,
 				ECF5585B2463BB0A00B918D5 /* cube.obj in CopyFiles */,
 				ECF5585C2463BB0C00B918D5 /* gravel2.jpg in CopyFiles */,
 				ECF5585F2463BD7000B918D5 /* fern_diffuse.jpg in CopyFiles */,
@@ -64,6 +70,9 @@
 		ECF5585A2463BB0200B918D5 /* cube.obj */ = {isa = PBXFileReference; lastKnownFileType = file; name = cube.obj; path = Assets/Ground/cube.obj; sourceTree = SOURCE_ROOT; };
 		ECF5585D2463BD5900B918D5 /* fern_diffuse.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fern_diffuse.jpg; path = Assets/Fern/fern_diffuse.jpg; sourceTree = SOURCE_ROOT; };
 		ECF5585E2463BD5F00B918D5 /* fern.obj */ = {isa = PBXFileReference; lastKnownFileType = file; name = fern.obj; path = Assets/Fern/fern.obj; sourceTree = SOURCE_ROOT; };
+		ECF5586D2466085B00B918D5 /* boxybold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boxybold.png; path = Assets/Font/boxybold.png; sourceTree = SOURCE_ROOT; };
+		ECF5586F24660CDE00B918D5 /* font2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font2.png; path = Assets/Font/font2.png; sourceTree = SOURCE_ROOT; };
+		ECF5587124660E8100B918D5 /* font_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font_small.png; path = Assets/Font/font_small.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +111,9 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				ECF5587124660E8100B918D5 /* font_small.png */,
+				ECF5586F24660CDE00B918D5 /* font2.png */,
+				ECF5586D2466085B00B918D5 /* boxybold.png */,
 				ECF5585A2463BB0200B918D5 /* cube.obj */,
 				ECF558592463BB0200B918D5 /* gravel2.jpg */,
 				ECF5585D2463BD5900B918D5 /* fern_diffuse.jpg */,
