@@ -27,7 +27,7 @@ GLuint Util::LoadTexture(const char* filePath) {
 
 void Util::DrawText(ShaderProgram *program, int fontTexture, std::string text, float size, float spacing, glm::vec3 position) {
     float width = 1.0f / 16.0f;
-    float height = 1.0 / 6.0f;
+    float height = 1.0 / 16.0f;
 
     std::vector<float> vertices;
     std::vector<float> texCoords;
@@ -37,7 +37,7 @@ void Util::DrawText(ShaderProgram *program, int fontTexture, std::string text, f
         int index = (int)text[i];
         
         float u = (float)(index % 16) / 16.0f;
-        float v = (float)(index / 6) / 6.0f;
+        float v = (float)(index / 16) / 16.0f;
         
         float offset = (size + spacing) * i;
         

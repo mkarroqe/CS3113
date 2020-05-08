@@ -53,8 +53,8 @@ void Initialize() {
     
     uiViewMatrix = glm::mat4(1.0);
     uiProjectionMatrix = glm::ortho(-6.4f, 6.4f, -3.6f, 3.6f, -1.0f, 1.0f);
-    fontTextureID = Util::LoadTexture("font_small.png");
-    heartTextureID = Util::LoadTexture("gravel2.jpg");
+    fontTextureID = Util::LoadTexture("small_blocky.png");
+//    heartTextureID = Util::LoadTexture("gravel2.jpg");
     
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);
@@ -62,7 +62,7 @@ void Initialize() {
     
     program.SetProjectionMatrix(projectionMatrix);
     program.SetViewMatrix(viewMatrix);
-    program.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+    program.SetColor(0.0f, 1.0f, 1.0f, 1.0f);
     
     glUseProgram(program.programID);
     
@@ -72,7 +72,7 @@ void Initialize() {
     glDepthMask(GL_TRUE);
     glDepthFunc(GL_LEQUAL);
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
     
     state.player = new Entity();
     state.player->entityType = PLAYER;
@@ -226,7 +226,7 @@ void Render() {
     program.SetProjectionMatrix(uiProjectionMatrix);
     program.SetViewMatrix(uiViewMatrix);
 
-    Util::DrawText(&program, fontTextureID, "Lives: 3", 0.5, -0.1f, glm::vec3(-6, 3.2, 0));
+    Util::DrawText(&program, fontTextureID, "Lives: 3", 0.25, 0.0f, glm::vec3(-6, 3.2, 0));
     
     for (int i = 0; i < 3; i++)
     {
