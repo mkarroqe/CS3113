@@ -26,11 +26,12 @@ glm::mat4 uiViewMatrix, uiProjectionMatrix;
 GLuint fontTextureID;
 GLuint heartTextureID;
 
-#define OBJECT_COUNT 5
+#define OBJECT_COUNT 4
 #define ENEMY_COUNT 1
 
 struct GameState {
     Entity *player;
+//    Entity *snail;
     Entity *objects;
     Entity *enemies;
 };
@@ -77,7 +78,7 @@ void Initialize() {
     state.player = new Entity();
     state.player->entityType = PLAYER;
     state.player->position = glm::vec3(0, 0.5f, 0);
-    state.player->acceleration = glm::vec3(0, 0, 0);
+//    state.player->acceleration = glm::vec3(0, 0, 0);
     state.player->speed = 1.0f;
     
     state.objects = new Entity[OBJECT_COUNT];
@@ -129,16 +130,19 @@ void Initialize() {
     state.objects[3].entityType = PLANT;
     
     // ---------------- SNAIL ----------------
-    GLuint snailTextureID = Util::LoadTexture("SNAIL.png");
-    Mesh *snailMesh = new Mesh();
-    snailMesh->LoadOBJ("SNAIL.OBJ", 1);
-    
-    state.objects[4].textureID = snailTextureID;
-    state.objects[4].mesh = snailMesh;
-    state.objects[4].scale = glm::vec3(14.0f, 14.0f, 14.0f);
-    state.objects[4].position = glm::vec3(-0.25, 0.19, -2);
-    state.objects[4].rotation = glm::vec3(0, 90, 0);
-    state.objects[4].entityType = PLAYER;
+//    GLuint snailTextureID = Util::LoadTexture("SNAIL.png");
+//    Mesh *snailMesh = new Mesh();
+//    snailMesh->LoadOBJ("SNAIL.OBJ", 1);
+//    
+//    state.snail = new Entity();
+//    state.snail->entityType = PLAYER;
+//    
+//    state.snail[0].textureID = snailTextureID;
+//    state.snail[0].mesh = snailMesh;
+//    state.snail[0].scale = glm::vec3(14.0f, 14.0f, 14.0f);
+//    state.snail[0].position = glm::vec3(-0.25, 0.19, -2);
+//    state.snail[0].rotation = glm::vec3(0, 90, 0);
+//    state.snail[0].entityType = PLAYER;
 
     // ---------------- BETTA ----------------
     state.enemies = new Entity[ENEMY_COUNT];
