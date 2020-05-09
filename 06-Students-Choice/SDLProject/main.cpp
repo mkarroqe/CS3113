@@ -230,14 +230,17 @@ void ProcessInput() {
     }
     
     if (keys[SDL_SCANCODE_UP]) {
+        state.objects[snail_num].rotation.y -= 2.75;
         state.objects[snail_num].position.z -= 0.01f;
-//        state.objects[snail_num].rotation.x =  cos(glm::radians(state.objects[snail_num].rotation.y)) * -2.0f;
-//        state.objects[snail_num].position.z = sin(glm::radians(state.objects[snail_num].rotation.y)) * -2.0f;
+        
+//        // roll
+//        state.objects[snail_num].rotation.x -= 25;
+//        state.objects[snail_num].position.z -= 0.01f;
+    
     }
     else if (keys[SDL_SCANCODE_DOWN]) {
+        state.objects[snail_num].rotation.y += 2.75;
         state.objects[snail_num].position.z += 0.01f;
-//        state.player->rotation.z = cos(glm::radians(state.player->rotation.y)) * 2.0f;
-//        state.player->velocity.x = sin(glm::radians(state.player->rotation.y)) * 2.0f;
     }
 }
 
