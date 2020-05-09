@@ -31,5 +31,7 @@ Original music by [Charlie Reynolds](https://soundcloud.com/saxyjew).
 | - | - |
 
 # Bloopers
-![](demos/bloopers/fern-overload.gif)
+| ![](demos/bloopers/fern-overload.gif) | ![](demos/bloopers/fern-overload-2.png) |
+| - | - |
+
 + def more coming soon
