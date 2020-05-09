@@ -146,12 +146,13 @@ void Initialize() {
     Mesh *snailMesh = new Mesh();
     snailMesh->LoadOBJ("SNAIL.OBJ", 1);
     
-    state.objects[10].textureID = snailTextureID;
-    state.objects[10].mesh = snailMesh;
-    state.objects[10].scale = glm::vec3(14.0f, 14.0f, 14.0f);
-    state.objects[10].position = glm::vec3(-0.25, 0.19, -2);
-    state.objects[10].rotation = glm::vec3(0, 90, 0);
-    state.objects[10].entityType = SNAIL;
+    int snail_num = num_ferns + num_grass + num_palms + 1;
+    state.objects[snail_num].textureID = snailTextureID;
+    state.objects[snail_num].mesh = snailMesh;
+    state.objects[snail_num].scale = glm::vec3(14.0f, 14.0f, 14.0f);
+    state.objects[snail_num].position = glm::vec3(-0.25, 0.19, -2);
+    state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
+    state.objects[snail_num].entityType = SNAIL;
     
     // --------------- ENEMIES ----------------
     state.enemies = new Entity[ENEMY_COUNT];
@@ -198,7 +199,8 @@ void ProcessInput() {
     }
     
     const Uint8 *keys = SDL_GetKeyboardState(NULL);
-
+    
+    // -------------- PLAYER VIEW ----------------
     if (keys[SDL_SCANCODE_A]) {
         state.player->rotation.y += 1.0f;
     }
@@ -217,6 +219,24 @@ void ProcessInput() {
         state.player->velocity.z = cos(glm::radians(state.player->rotation.y)) * 2.0f;
         state.player->velocity.x = sin(glm::radians(state.player->rotation.y)) * 2.0f;
     }
+    // --------------- SNAIL MOVES ----------------
+    int snail_num = OBJECT_COUNT - 1;
+    
+    if (keys[SDL_SCANCODE_LEFT]) {
+        state.objects[snail_num].position.x -= 0.01f;
+    }
+    else if (keys[SDL_SCANCODE_RIGHT]) {
+        state.objects[snail_num].position.x += 0.01f;
+    }
+    
+//    if (keys[SDL_SCANCODE_UP]) {
+//        state.objects[snail_num].position.z = cos(glm::radians(state.objects[snail_num].position.y)) * -2.0f;
+//        state.objects[snail_num].velocity.x = sin(glm::radians(state.objects[snail_num].position.y)) * -2.0f;
+//    }
+//    else if (keys[SDL_SCANCODE_DOWN]) {
+//        state.player->velocity.z = cos(glm::radians(state.player->rotation.y)) * 2.0f;
+//        state.player->velocity.x = sin(glm::radians(state.player->rotation.y)) * 2.0f;
+//    }
 }
 
 #define FIXED_TIMESTEP 0.0166666f
