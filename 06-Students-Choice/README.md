@@ -9,6 +9,13 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 - Some way for the player to win (killing all the AI, collecting all the coins, whatever you want).
 - At least 1 looping background music, and at least 1 sound effect.
 
+# Controls
+| Key | Function |
+| :-: | :-: |
+| Enter | Start Game |
+| `WASD` | Orbit Scene |
+| Arrow Keys | Move Snail |
+
 # Demo
 *in progress*
 
