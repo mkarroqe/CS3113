@@ -26,7 +26,7 @@ glm::mat4 uiViewMatrix, uiProjectionMatrix;
 GLuint fontTextureID;
 GLuint heartTextureID;
 
-#define OBJECT_COUNT 2
+#define OBJECT_COUNT 3
 #define ENEMY_COUNT 0
 
 struct GameState {
@@ -94,19 +94,27 @@ void Initialize() {
     state.objects[0].scale = glm::vec3(20, 0.75f, 20);
         state.objects[0].entityType = FLOOR;
     
+    // ---------------- FERN ----------------
     GLuint fernTextureID = Util::LoadTexture("fern_diffuse.jpg");
     Mesh *fernMesh = new Mesh();
     fernMesh->LoadOBJ("fern.obj", 1);
 
     state.objects[1].textureID = fernTextureID;
     state.objects[1].mesh = fernMesh;
-    state.objects[1].position = glm::vec3(0, 0.75, -5);
+    state.objects[1].scale = glm::vec3(0.005, 0.004f, 0.005f);
+    state.objects[1].position = glm::vec3(0, 0.5, -5);
+    state.objects[1].rotation = glm::vec3(0, 270, 10);
     state.objects[1].entityType = PLANT;
-//
-//    state.objects[2].textureID = crateTextureID;
-//    state.objects[2].mesh = crateMesh;
-//    state.objects[2].position = glm::vec3(-1, 0.75, -5);
-//    state.objects[2].entityType = CRATE;
+
+    // ---------------- GRASS ----------------
+    GLuint grassTextureID = Util::LoadTexture("Grass.png");
+    Mesh *grassMesh = new Mesh();
+    grassMesh->LoadOBJ("Low Grass.obj", 1);
+    
+    state.objects[2].textureID = grassTextureID;
+    state.objects[2].mesh = grassMesh;
+    state.objects[2].position = glm::vec3(0, 0.15, -2);
+    state.objects[2].entityType = PLANT;
 //
 //    state.objects[3].textureID = crateTextureID;
 //    state.objects[3].mesh = crateMesh;
