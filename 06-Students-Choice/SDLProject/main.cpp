@@ -229,14 +229,16 @@ void ProcessInput() {
         state.objects[snail_num].position.x += 0.01f;
     }
     
-//    if (keys[SDL_SCANCODE_UP]) {
-//        state.objects[snail_num].position.z = cos(glm::radians(state.objects[snail_num].position.y)) * -2.0f;
-//        state.objects[snail_num].velocity.x = sin(glm::radians(state.objects[snail_num].position.y)) * -2.0f;
-//    }
-//    else if (keys[SDL_SCANCODE_DOWN]) {
-//        state.player->velocity.z = cos(glm::radians(state.player->rotation.y)) * 2.0f;
+    if (keys[SDL_SCANCODE_UP]) {
+        state.objects[snail_num].position.z -= 0.01f;
+//        state.objects[snail_num].rotation.x =  cos(glm::radians(state.objects[snail_num].rotation.y)) * -2.0f;
+//        state.objects[snail_num].position.z = sin(glm::radians(state.objects[snail_num].rotation.y)) * -2.0f;
+    }
+    else if (keys[SDL_SCANCODE_DOWN]) {
+        state.objects[snail_num].position.z += 0.01f;
+//        state.player->rotation.z = cos(glm::radians(state.player->rotation.y)) * 2.0f;
 //        state.player->velocity.x = sin(glm::radians(state.player->rotation.y)) * 2.0f;
-//    }
+    }
 }
 
 #define FIXED_TIMESTEP 0.0166666f
