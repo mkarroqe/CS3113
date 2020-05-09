@@ -32,6 +32,9 @@
 		ECF5588924663CFD00B918D5 /* betta.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5588724663CF700B918D5 /* betta.jpg */; };
 		ECF5588A24663D0000B918D5 /* betta.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5588824663CF700B918D5 /* betta.obj */; };
 		ECF5588C246714F800B918D5 /* betta.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5588B246714CC00B918D5 /* betta.png */; };
+		ECF5588F2467220300B918D5 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECF5588D2467220200B918D5 /* Scene.cpp */; };
+		ECF558922467236300B918D5 /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECF558902467236200B918D5 /* Level.cpp */; };
+		ECF55895246730BB00B918D5 /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECF55893246730BB00B918D5 /* Menu.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -94,6 +97,12 @@
 		ECF5588724663CF700B918D5 /* betta.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = betta.jpg; path = Assets/Betta/betta.jpg; sourceTree = SOURCE_ROOT; };
 		ECF5588824663CF700B918D5 /* betta.obj */ = {isa = PBXFileReference; lastKnownFileType = file; name = betta.obj; path = Assets/Betta/betta.obj; sourceTree = SOURCE_ROOT; };
 		ECF5588B246714CC00B918D5 /* betta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = betta.png; path = Assets/Betta/betta.png; sourceTree = SOURCE_ROOT; };
+		ECF5588D2467220200B918D5 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
+		ECF5588E2467220200B918D5 /* Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		ECF558902467236200B918D5 /* Level.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Level.cpp; sourceTree = "<group>"; };
+		ECF558912467236200B918D5 /* Level.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
+		ECF55893246730BB00B918D5 /* Menu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Menu.cpp; sourceTree = "<group>"; };
+		ECF55894246730BB00B918D5 /* Menu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +167,12 @@
 				DB1BA2942378E51A001F1FBC /* Mesh.h */,
 				DB1BA2962378E7A5001F1FBC /* Util.cpp */,
 				DB1BA2972378E7A5001F1FBC /* Util.h */,
+				ECF5588D2467220200B918D5 /* Scene.cpp */,
+				ECF5588E2467220200B918D5 /* Scene.h */,
+				ECF558902467236200B918D5 /* Level.cpp */,
+				ECF558912467236200B918D5 /* Level.h */,
+				ECF55893246730BB00B918D5 /* Menu.cpp */,
+				ECF55894246730BB00B918D5 /* Menu.h */,
 			);
 			path = SDLProject;
 			sourceTree = "<group>";
@@ -230,10 +245,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECF5588F2467220300B918D5 /* Scene.cpp in Sources */,
 				DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */,
 				DB4C61FB236CE8FD0096309D /* Entity.cpp in Sources */,
+				ECF558922467236300B918D5 /* Level.cpp in Sources */,
 				DB1BA2952378E51A001F1FBC /* Mesh.cpp in Sources */,
 				DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */,
+				ECF55895246730BB00B918D5 /* Menu.cpp in Sources */,
 				DB1BA2982378E7A5001F1FBC /* Util.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

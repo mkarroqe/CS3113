@@ -15,6 +15,13 @@
 
 #include "Util.h"
 #include "Entity.h"
+#include "Scene.h"
+
+#include "Level.h"
+#include "Menu.h"
+
+#define OBJECT_COUNT 11
+#define ENEMY_COUNT 1
 
 SDL_Window* displayWindow;
 bool gameIsRunning = true;
@@ -26,16 +33,20 @@ glm::mat4 uiViewMatrix, uiProjectionMatrix;
 GLuint fontTextureID;
 GLuint heartTextureID;
 
-#define OBJECT_COUNT 11
-#define ENEMY_COUNT 1
+Scene *currentScene;
+Scene *sceneList[2];
 
-struct GameState {
-    Entity *player;
-    Entity *objects;
-    Entity *enemies;
-};
-
-GameState state;
+void SwitchToScene(int _nextScene, int _lives=3) {
+    if (_nextScene == 1) {
+        currentScene = new Level(_lives);
+    }
+    
+    // if win (4) or lose (5)
+    else {
+        currentScene = sceneList[_nextScene];
+    }
+    currentScene->Initialize();
+}
 
 void Initialize() {
     SDL_Init(SDL_INIT_VIDEO);
@@ -53,8 +64,8 @@ void Initialize() {
     
     uiViewMatrix = glm::mat4(1.0);
     uiProjectionMatrix = glm::ortho(-6.4f, 6.4f, -3.6f, 3.6f, -1.0f, 1.0f);
-    fontTextureID = Util::LoadTexture("small_blocky.png");
-//    heartTextureID = Util::LoadTexture("gravel2.jpg");
+//    fontTextureID = Util::LoadTexture("small_blocky.png");
+////    heartTextureID = Util::LoadTexture("gravel2.jpg");
     
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);
@@ -71,111 +82,13 @@ void Initialize() {
     glEnable(GL_DEPTH_TEST);
     glDepthMask(GL_TRUE);
     glDepthFunc(GL_LEQUAL);
-
+    
     glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
     
-    state.player = new Entity();
-    state.player->entityType = PLAYER;
-    state.player->position = glm::vec3(0, 0.5f, 0);
-//    state.player->acceleration = glm::vec3(0, 0, 0);
-    state.player->speed = 1.75f;
+    sceneList[0] = new Menu();
+    sceneList[1] = new Level(3);
+    SwitchToScene(0);
     
-    // ------------- OBJECTS ----------------
-    state.objects = new Entity[OBJECT_COUNT];
-    // -------------- GROUND ---------------
-    GLuint floorTextureID = Util::LoadTexture("gravel2.jpg");
-    Mesh *cubeMesh = new Mesh();
-    cubeMesh->LoadOBJ("cube.obj", 20);
-    
-    state.objects[0].textureID = floorTextureID;
-    state.objects[0].mesh = cubeMesh;
-    state.objects[0].position = glm::vec3(0, -0.25f, 0);
-    state.objects[0].rotation = glm::vec3(0, 0, 0);
-    state.objects[0].acceleration = glm::vec3(0, 0, 0);
-    state.objects[0].scale = glm::vec3(20, 0.75f, 20);
-    state.objects[0].entityType = FLOOR;
-    
-    // ---------------- FERN ----------------
-    GLuint fernTextureID = Util::LoadTexture("fern_diffuse.jpg");
-    Mesh *fernMesh = new Mesh();
-    fernMesh->LoadOBJ("fern.obj", 1);
-    
-    int num_ferns = 3;
-    for (int i = 0; i < num_ferns; i++) {
-        int num = 1 + i;
-        state.objects[num].textureID = fernTextureID;
-        state.objects[num].mesh = fernMesh;
-        state.objects[num].scale = glm::vec3(0.005, 0.004f, 0.005f);
-        state.objects[num].position = glm::vec3(rand() % 20 - 10, 0.15, rand() % 20 - 10);//glm::vec3(0, 0.15, -2);
-        state.objects[num].rotation = glm::vec3(270, 0, 0);
-        state.objects[num].entityType = PLANT;
-    }
-
-    // ---------------- GRASS ----------------
-    GLuint grassTextureID = Util::LoadTexture("Grass.png");
-    Mesh *grassMesh = new Mesh();
-    grassMesh->LoadOBJ("Low Grass.obj", 1);
-
-    int num_grass = 3;
-    for (int i = 0; i < num_grass; i++) {
-        int num = 1 + num_ferns + i;
-        state.objects[num].textureID = grassTextureID;
-        state.objects[num].mesh = grassMesh;
-        state.objects[num].scale = glm::vec3(2.0f, 2.0f, 2.0f);
-        state.objects[num].position = glm::vec3(rand() % 20 - 10, 0.15, rand() % 20 - 10);//glm::vec3(0, 0.15, -2);
-        state.objects[num].entityType = PLANT;
-    }
-
-    // ----------------- PALM ----------------
-    GLuint palmTextureID = Util::LoadTexture("palmleaves.png");
-    Mesh *palmMesh = new Mesh();
-    palmMesh->LoadOBJ("Palm_01.obj", 1);
-
-    int num_palms = 3;
-    for (int i = 0; i < num_palms; i++) {
-        int num = 1 + num_ferns + num_grass + i;
-        state.objects[num].textureID = palmTextureID;
-        state.objects[num].mesh = palmMesh;
-        state.objects[num].scale = glm::vec3(0.05, 0.05f, 0.05f);
-        state.objects[num].position = glm::vec3(rand() % 20 - 10, 0.15, rand() % 20 - 10);//glm::vec3(0.25, 0.15, -2);
-        state.objects[num].entityType = PLANT;
-    }
-    
-    // ---------------- SNAIL ----------------
-    GLuint snailTextureID = Util::LoadTexture("SNAIL.png");
-    Mesh *snailMesh = new Mesh();
-    snailMesh->LoadOBJ("SNAIL.OBJ", 1);
-    
-    int snail_num = num_ferns + num_grass + num_palms + 1;
-    state.objects[snail_num].textureID = snailTextureID;
-    state.objects[snail_num].mesh = snailMesh;
-    state.objects[snail_num].scale = glm::vec3(14.0f, 14.0f, 14.0f);
-    state.objects[snail_num].position = glm::vec3(-0.25, 0.19, -2);
-    state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
-    state.objects[snail_num].entityType = SNAIL;
-    
-    // --------------- ENEMIES ----------------
-    state.enemies = new Entity[ENEMY_COUNT];
-    // ---------------- BETTA ----------------
-    GLuint bettaTextureID = Util::LoadTexture("betta.png");
-    Mesh *bettaMesh = new Mesh();
-    bettaMesh->LoadOBJ("betta.obj", 1);
-    
-    state.enemies[0].textureID = bettaTextureID;
-    state.enemies[0].mesh = bettaMesh;
-    state.enemies[0].scale = glm::vec3(0.45f, 0.45f, 0.45f);
-    state.enemies[0].position = glm::vec3(-0.5, 0.5, -2);
-//    state.enemies[0].position = glm::vec3(rand() % 20 - 10, 0.5, rand() % 20 - 10);
-    state.enemies[0].rotation = glm::vec3(270, 0, 0);
-    state.enemies[0].entityType = ENEMY;
-
-//    for (int i = 0; i < ENEMY_COUNT; i++) {
-//        state.enemies[i].billboard = true;
-//        state.enemies[i].textureID = enemyTextureID;
-//        state.enemies[i].position = glm::vec3(rand() % 20 - 10, 0.5, rand() % 20 - 10);
-//        state.enemies[i].rotation = glm::vec3(0, 0, 0);
-//        state.enemies[i].acceleration = glm::vec3(0, 0, 0);
-//    }
 }
 
 void ProcessInput() {
@@ -200,38 +113,48 @@ void ProcessInput() {
     
     const Uint8 *keys = SDL_GetKeyboardState(NULL);
     
-    // -------------- PLAYER VIEW ----------------
-    if (keys[SDL_SCANCODE_A]) {
-        state.player->rotation.y += 1.0f;
-    }
-    else if (keys[SDL_SCANCODE_D]) {
-        state.player->rotation.y -= 1.0f;
+    // ----------------- START -------------------
+    if (keys[SDL_SCANCODE_RETURN]) {
+        currentScene->state.player_lives = 3;
+        currentScene->state.next = true;
+        SwitchToScene(1);
     }
     
-    state.player->velocity.x = 0;
-    state.player->velocity.z = 0;
-
+    // -------------- PLAYER VIEW ----------------
+    if (keys[SDL_SCANCODE_A]) {
+        currentScene->state.player->rotation.y += 1.0f;
+    }
+    else if (keys[SDL_SCANCODE_D]) {
+        currentScene->state.player->rotation.y -= 1.0f;
+    }
+    
+    // test
+    if (currentScene == sceneList[1]) {
+        currentScene->state.player->velocity.x = 0;
+        currentScene->state.player->velocity.z = 0;
+    }
+    
     if (keys[SDL_SCANCODE_W]) {
-        state.player->velocity.z = cos(glm::radians(state.player->rotation.y)) * -2.0f;
-        state.player->velocity.x = sin(glm::radians(state.player->rotation.y)) * -2.0f;
+        currentScene->state.player->velocity.z = cos(glm::radians(currentScene->state.player->rotation.y)) * -2.0f;
+        currentScene->state.player->velocity.x = sin(glm::radians(currentScene->state.player->rotation.y)) * -2.0f;
     }
     else if (keys[SDL_SCANCODE_S]) {
-        state.player->velocity.z = cos(glm::radians(state.player->rotation.y)) * 2.0f;
-        state.player->velocity.x = sin(glm::radians(state.player->rotation.y)) * 2.0f;
+        currentScene->state.player->velocity.z = cos(glm::radians(currentScene->state.player->rotation.y)) * 2.0f;
+        currentScene->state.player->velocity.x = sin(glm::radians(currentScene->state.player->rotation.y)) * 2.0f;
     }
     // --------------- SNAIL MOVES ----------------
     int snail_num = OBJECT_COUNT - 1;
     
     if (keys[SDL_SCANCODE_LEFT]) {
-        state.objects[snail_num].position.x -= 0.01f;
+        currentScene->state.objects[snail_num].position.x -= 0.01f;
     }
     else if (keys[SDL_SCANCODE_RIGHT]) {
-        state.objects[snail_num].position.x += 0.01f;
+        currentScene->state.objects[snail_num].position.x += 0.01f;
     }
     
     if (keys[SDL_SCANCODE_UP]) {
-        state.objects[snail_num].rotation.y -= 2.75;
-        state.objects[snail_num].position.z -= 0.01f;
+        currentScene->state.objects[snail_num].rotation.y -= 2.75;
+        currentScene->state.objects[snail_num].position.z -= 0.01f;
         
 //        // roll
 //        state.objects[snail_num].rotation.x -= 25;
@@ -239,8 +162,8 @@ void ProcessInput() {
     
     }
     else if (keys[SDL_SCANCODE_DOWN]) {
-        state.objects[snail_num].rotation.y += 2.75;
-        state.objects[snail_num].position.z += 0.01f;
+        currentScene->state.objects[snail_num].rotation.y += 2.75;
+        currentScene->state.objects[snail_num].position.z += 0.01f;
     }
 }
 
@@ -260,15 +183,15 @@ void Update() {
     }
     
     while (deltaTime >= FIXED_TIMESTEP) {
-        state.player->Update(FIXED_TIMESTEP, state.player, state.objects, OBJECT_COUNT);
+        currentScene->state.player->Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
         
-        for (int i = 0; i < OBJECT_COUNT; i++) {
-            state.objects[i].Update(FIXED_TIMESTEP, state.player, state.objects, OBJECT_COUNT);
-        }
-        
-        for (int i = 0; i < ENEMY_COUNT; i++) {
-            state.enemies[i].Update(FIXED_TIMESTEP, state.player, state.objects, OBJECT_COUNT);
-        }
+//        for (int i = 0; i < OBJECT_COUNT; i++) {
+//            currentScene->state.objects[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
+//        }
+//
+//        for (int i = 0; i < ENEMY_COUNT; i++) {
+//            currentScene->state.enemies[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
+//        }
         
         deltaTime -= FIXED_TIMESTEP;
     }
@@ -277,8 +200,8 @@ void Update() {
     
     viewMatrix = glm::mat4(1.0f);
     viewMatrix = glm::rotate(viewMatrix,
-    glm::radians(state.player->rotation.y), glm::vec3(0, -1.0f, 0));
-    viewMatrix = glm::translate(viewMatrix, -state.player->position);
+    glm::radians(currentScene->state.player->rotation.y), glm::vec3(0, -1.0f, 0));
+    viewMatrix = glm::translate(viewMatrix, -currentScene->state.player->position);
 }
 
 
@@ -288,27 +211,30 @@ void Render() {
     program.SetProjectionMatrix(projectionMatrix);
     program.SetViewMatrix(viewMatrix);
     
-//    state.player->Render(&program);
+    currentScene->Render(&program);
+//    currentScene->state.player->Render(&program);
     
-    for (int i = 0; i < OBJECT_COUNT; i++) {
-        state.objects[i].Render(&program);
-    }
-    
-    for (int i = 0; i < ENEMY_COUNT; i++) {
-        state.enemies[i].Render(&program);
-    }
+//    for (int i = 0; i < OBJECT_COUNT; i++) {
+//        currentScene->state.objects[i].Render(&program);
+//    }
+//
+//    for (int i = 0; i < ENEMY_COUNT; i++) {
+//        currentScene->state.enemies[i].Render(&program);
+//    }
     
     // Once we are done drawing 3D objects...switch!
-    program.SetProjectionMatrix(uiProjectionMatrix);
-    program.SetViewMatrix(uiViewMatrix);
-
-    Util::DrawText(&program, fontTextureID, "Lives: 3", 0.25, 0.0f, glm::vec3(-6, 3.2, 0));
+//    program.SetProjectionMatrix(uiProjectionMatrix);
+//    program.SetViewMatrix(uiViewMatrix);
     
-    for (int i = 0; i < 3; i++)
-    {
-        // These icons are small, so just move 0.5 to the right for each one.
-        Util::DrawIcon(&program, heartTextureID, glm::vec3(5 + (i * 0.5f), 3.2, 0));
-    }
+//    currentScene->Render(&program);
+
+//    Util::DrawText(&program, fontTextureID, "Lives: 3", 0.25, 0.0f, glm::vec3(-6, 3.2, 0));
+//    
+//    for (int i = 0; i < 3; i++)
+//    {
+//        // These icons are small, so just move 0.5 to the right for each one.
+//        Util::DrawIcon(&program, heartTextureID, glm::vec3(5 + (i * 0.5f), 3.2, 0));
+//    }
     
     SDL_GL_SwapWindow(displayWindow);
 }
@@ -323,6 +249,17 @@ int main(int argc, char* argv[]) {
     while (gameIsRunning) {
         ProcessInput();
         Update();
+        
+        if (currentScene->state.nextScene >= 0) {
+//            if (currentScene->state.player_lives == 0) {
+//                SwitchToScene(5);
+//            }
+//            // if next is less than curr initialize w less lives?
+//            else {
+                SwitchToScene(currentScene->state.nextScene, currentScene->state.player_lives);
+//            }
+        }
+        
         Render();
     }
     
