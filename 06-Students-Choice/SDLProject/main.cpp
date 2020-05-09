@@ -26,12 +26,11 @@ glm::mat4 uiViewMatrix, uiProjectionMatrix;
 GLuint fontTextureID;
 GLuint heartTextureID;
 
-#define OBJECT_COUNT 4
+#define OBJECT_COUNT 11
 #define ENEMY_COUNT 1
 
 struct GameState {
     Entity *player;
-//    Entity *snail;
     Entity *objects;
     Entity *enemies;
 };
@@ -79,75 +78,85 @@ void Initialize() {
     state.player->entityType = PLAYER;
     state.player->position = glm::vec3(0, 0.5f, 0);
 //    state.player->acceleration = glm::vec3(0, 0, 0);
-    state.player->speed = 1.0f;
+    state.player->speed = 1.75f;
     
+    // ------------- OBJECTS ----------------
     state.objects = new Entity[OBJECT_COUNT];
-    
+    // -------------- GROUND ---------------
     GLuint floorTextureID = Util::LoadTexture("gravel2.jpg");
     Mesh *cubeMesh = new Mesh();
     cubeMesh->LoadOBJ("cube.obj", 20);
     
     state.objects[0].textureID = floorTextureID;
-        state.objects[0].mesh = cubeMesh;
-        state.objects[0].position = glm::vec3(0, -0.25f, 0);
-        state.objects[0].rotation = glm::vec3(0, 0, 0);
-        state.objects[0].acceleration = glm::vec3(0, 0, 0);
+    state.objects[0].mesh = cubeMesh;
+    state.objects[0].position = glm::vec3(0, -0.25f, 0);
+    state.objects[0].rotation = glm::vec3(0, 0, 0);
+    state.objects[0].acceleration = glm::vec3(0, 0, 0);
     state.objects[0].scale = glm::vec3(20, 0.75f, 20);
-        state.objects[0].entityType = FLOOR;
+    state.objects[0].entityType = FLOOR;
     
     // ---------------- FERN ----------------
     GLuint fernTextureID = Util::LoadTexture("fern_diffuse.jpg");
     Mesh *fernMesh = new Mesh();
     fernMesh->LoadOBJ("fern.obj", 1);
-
-    state.objects[1].textureID = fernTextureID;
-    state.objects[1].mesh = fernMesh;
-    state.objects[1].scale = glm::vec3(0.005, 0.004f, 0.005f);
-    state.objects[1].position = glm::vec3(0, 0.5, -2);
-    state.objects[1].rotation = glm::vec3(90, 270, -170);
-    state.objects[1].entityType = PLANT;
+    
+    int num_ferns = 3;
+    for (int i = 0; i < num_ferns; i++) {
+        int num = 1 + i;
+        state.objects[num].textureID = fernTextureID;
+        state.objects[num].mesh = fernMesh;
+        state.objects[num].scale = glm::vec3(0.005, 0.004f, 0.005f);
+        state.objects[num].position = glm::vec3(rand() % 20 - 10, 0.15, rand() % 20 - 10);//glm::vec3(0, 0.15, -2);
+        state.objects[num].rotation = glm::vec3(270, 0, 0);
+        state.objects[num].entityType = PLANT;
+    }
 
     // ---------------- GRASS ----------------
     GLuint grassTextureID = Util::LoadTexture("Grass.png");
     Mesh *grassMesh = new Mesh();
     grassMesh->LoadOBJ("Low Grass.obj", 1);
-    
-    state.objects[2].textureID = grassTextureID;
-    state.objects[2].mesh = grassMesh;
-    state.objects[2].scale = glm::vec3(2.0f, 2.0f, 2.0f);
-    state.objects[2].position = glm::vec3(0, 0.15, -2);
-    state.objects[2].entityType = PLANT;
-    
+
+    int num_grass = 3;
+    for (int i = 0; i < num_grass; i++) {
+        int num = 1 + num_ferns + i;
+        state.objects[num].textureID = grassTextureID;
+        state.objects[num].mesh = grassMesh;
+        state.objects[num].scale = glm::vec3(2.0f, 2.0f, 2.0f);
+        state.objects[num].position = glm::vec3(rand() % 20 - 10, 0.15, rand() % 20 - 10);//glm::vec3(0, 0.15, -2);
+        state.objects[num].entityType = PLANT;
+    }
+
     // ----------------- PALM ----------------
     GLuint palmTextureID = Util::LoadTexture("palmleaves.png");
     Mesh *palmMesh = new Mesh();
     palmMesh->LoadOBJ("Palm_01.obj", 1);
-    
-    state.objects[3].textureID = palmTextureID;
-    state.objects[3].mesh = palmMesh;
-    state.objects[3].scale = glm::vec3(0.05, 0.05f, 0.05f);
-    state.objects[3].position = glm::vec3(0.25, 0.15, -2);
-    state.objects[3].entityType = PLANT;
+
+    int num_palms = 3;
+    for (int i = 0; i < num_palms; i++) {
+        int num = 1 + num_ferns + num_grass + i;
+        state.objects[num].textureID = palmTextureID;
+        state.objects[num].mesh = palmMesh;
+        state.objects[num].scale = glm::vec3(0.05, 0.05f, 0.05f);
+        state.objects[num].position = glm::vec3(rand() % 20 - 10, 0.15, rand() % 20 - 10);//glm::vec3(0.25, 0.15, -2);
+        state.objects[num].entityType = PLANT;
+    }
     
     // ---------------- SNAIL ----------------
-//    GLuint snailTextureID = Util::LoadTexture("SNAIL.png");
-//    Mesh *snailMesh = new Mesh();
-//    snailMesh->LoadOBJ("SNAIL.OBJ", 1);
-//    
-//    state.snail = new Entity();
-//    state.snail->entityType = PLAYER;
-//    
-//    state.snail[0].textureID = snailTextureID;
-//    state.snail[0].mesh = snailMesh;
-//    state.snail[0].scale = glm::vec3(14.0f, 14.0f, 14.0f);
-//    state.snail[0].position = glm::vec3(-0.25, 0.19, -2);
-//    state.snail[0].rotation = glm::vec3(0, 90, 0);
-//    state.snail[0].entityType = PLAYER;
-
-    // ---------------- BETTA ----------------
+    GLuint snailTextureID = Util::LoadTexture("SNAIL.png");
+    Mesh *snailMesh = new Mesh();
+    snailMesh->LoadOBJ("SNAIL.OBJ", 1);
+    
+    state.objects[10].textureID = snailTextureID;
+    state.objects[10].mesh = snailMesh;
+    state.objects[10].scale = glm::vec3(14.0f, 14.0f, 14.0f);
+    state.objects[10].position = glm::vec3(-0.25, 0.19, -2);
+    state.objects[10].rotation = glm::vec3(0, 90, 0);
+    state.objects[10].entityType = SNAIL;
+    
+    // --------------- ENEMIES ----------------
     state.enemies = new Entity[ENEMY_COUNT];
-
-    GLuint bettaTextureID = Util::LoadTexture("betta.jpg");
+    // ---------------- BETTA ----------------
+    GLuint bettaTextureID = Util::LoadTexture("betta.png");
     Mesh *bettaMesh = new Mesh();
     bettaMesh->LoadOBJ("betta.obj", 1);
     
@@ -155,6 +164,7 @@ void Initialize() {
     state.enemies[0].mesh = bettaMesh;
     state.enemies[0].scale = glm::vec3(0.45f, 0.45f, 0.45f);
     state.enemies[0].position = glm::vec3(-0.5, 0.5, -2);
+//    state.enemies[0].position = glm::vec3(rand() % 20 - 10, 0.5, rand() % 20 - 10);
     state.enemies[0].rotation = glm::vec3(270, 0, 0);
     state.enemies[0].entityType = ENEMY;
 
