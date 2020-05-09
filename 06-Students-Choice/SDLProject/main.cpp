@@ -26,7 +26,7 @@ glm::mat4 uiViewMatrix, uiProjectionMatrix;
 GLuint fontTextureID;
 GLuint heartTextureID;
 
-#define OBJECT_COUNT 3
+#define OBJECT_COUNT 5
 #define ENEMY_COUNT 0
 
 struct GameState {
@@ -102,8 +102,8 @@ void Initialize() {
     state.objects[1].textureID = fernTextureID;
     state.objects[1].mesh = fernMesh;
     state.objects[1].scale = glm::vec3(0.005, 0.004f, 0.005f);
-    state.objects[1].position = glm::vec3(0, 0.5, -5);
-    state.objects[1].rotation = glm::vec3(0, 270, 10);
+    state.objects[1].position = glm::vec3(0, 0.5, -2);
+    state.objects[1].rotation = glm::vec3(0, 270, -170);
     state.objects[1].entityType = PLANT;
 
     // ---------------- GRASS ----------------
@@ -113,14 +113,34 @@ void Initialize() {
     
     state.objects[2].textureID = grassTextureID;
     state.objects[2].mesh = grassMesh;
+    state.objects[2].scale = glm::vec3(2.0f, 2.0f, 2.0f);
     state.objects[2].position = glm::vec3(0, 0.15, -2);
     state.objects[2].entityType = PLANT;
-//
-//    state.objects[3].textureID = crateTextureID;
-//    state.objects[3].mesh = crateMesh;
-//    state.objects[3].position = glm::vec3(0, 1.75, -5);
-//    state.objects[3].entityType = CRATE;
-//
+    
+    // ----------------- PALM ----------------
+    GLuint palmTextureID = Util::LoadTexture("palmleaves.png");
+    Mesh *palmMesh = new Mesh();
+    palmMesh->LoadOBJ("Palm_01.obj", 1);
+    
+    state.objects[3].textureID = palmTextureID;
+    state.objects[3].mesh = palmMesh;
+    state.objects[3].scale = glm::vec3(0.05, 0.05f, 0.05f);
+    state.objects[3].position = glm::vec3(0.25, 0.15, -2);
+    state.objects[3].entityType = PLANT;
+    
+    // ---------------- SNAIL ----------------
+    GLuint snailTextureID = Util::LoadTexture("SNAIL.png");
+    Mesh *snailMesh = new Mesh();
+    snailMesh->LoadOBJ("SNAIL.OBJ", 1);
+    
+    state.objects[4].textureID = snailTextureID;
+    state.objects[4].mesh = snailMesh;
+    state.objects[4].scale = glm::vec3(14.0f, 14.0f, 14.0f);
+    state.objects[4].position = glm::vec3(-0.25, 0.15, -2);
+    state.objects[4].rotation = glm::vec3(0, 90, 0);
+    state.objects[4].entityType = PLANT;
+
+
 //    state.enemies = new Entity[ENEMY_COUNT];
 //
 //    GLuint enemyTextureID = Util::LoadTexture("ctg.png");

@@ -25,6 +25,12 @@
 		ECF558742466151000B918D5 /* small_blocky.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF55873246614BB00B918D5 /* small_blocky.png */; };
 		ECF558772466301F00B918D5 /* Grass.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5587524662FE400B918D5 /* Grass.png */; };
 		ECF558782466302200B918D5 /* Low Grass.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5587624662FEC00B918D5 /* Low Grass.obj */; };
+		ECF5587D246633F200B918D5 /* palmleaves.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5587B246633D500B918D5 /* palmleaves.png */; };
+		ECF5587E246633F500B918D5 /* Palm_01.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5587C246633DB00B918D5 /* Palm_01.obj */; };
+		ECF55881246636E800B918D5 /* SNAIL.JPG in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5587F246636DE00B918D5 /* SNAIL.JPG */; };
+		ECF55882246636EB00B918D5 /* SNAIL.OBJ in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF55880246636E300B918D5 /* SNAIL.OBJ */; };
+		ECF558842466386200B918D5 /* SNAIL.TIF in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF558832466383800B918D5 /* SNAIL.TIF */; };
+		ECF5588624663B8400B918D5 /* SNAIL.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5588524663B7C00B918D5 /* SNAIL.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +48,12 @@
 				ECF558602463BD7400B918D5 /* fern.obj in CopyFiles */,
 				ECF558772466301F00B918D5 /* Grass.png in CopyFiles */,
 				ECF558782466302200B918D5 /* Low Grass.obj in CopyFiles */,
+				ECF5587D246633F200B918D5 /* palmleaves.png in CopyFiles */,
+				ECF5587E246633F500B918D5 /* Palm_01.obj in CopyFiles */,
+				ECF558842466386200B918D5 /* SNAIL.TIF in CopyFiles */,
+				ECF55881246636E800B918D5 /* SNAIL.JPG in CopyFiles */,
+				ECF5588624663B8400B918D5 /* SNAIL.png in CopyFiles */,
+				ECF55882246636EB00B918D5 /* SNAIL.OBJ in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +85,12 @@
 		ECF55873246614BB00B918D5 /* small_blocky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = small_blocky.png; path = Assets/Font/small_blocky.png; sourceTree = SOURCE_ROOT; };
 		ECF5587524662FE400B918D5 /* Grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Grass.png; path = Assets/Grass/Tex/Grass.png; sourceTree = SOURCE_ROOT; };
 		ECF5587624662FEC00B918D5 /* Low Grass.obj */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Low Grass.obj"; path = "Assets/Grass/Low/Low Grass.obj"; sourceTree = SOURCE_ROOT; };
+		ECF5587B246633D500B918D5 /* palmleaves.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = palmleaves.png; path = Assets/Palm/palmleaves.png; sourceTree = SOURCE_ROOT; };
+		ECF5587C246633DB00B918D5 /* Palm_01.obj */ = {isa = PBXFileReference; lastKnownFileType = file; name = Palm_01.obj; path = Assets/Palm/Palm_01.obj; sourceTree = SOURCE_ROOT; };
+		ECF5587F246636DE00B918D5 /* SNAIL.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = SNAIL.JPG; path = Assets/Snail/SNAIL.JPG; sourceTree = SOURCE_ROOT; };
+		ECF55880246636E300B918D5 /* SNAIL.OBJ */ = {isa = PBXFileReference; lastKnownFileType = file; name = SNAIL.OBJ; path = Assets/Snail/SNAIL.OBJ; sourceTree = SOURCE_ROOT; };
+		ECF558832466383800B918D5 /* SNAIL.TIF */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = SNAIL.TIF; path = Assets/Snail/SNAIL.TIF; sourceTree = SOURCE_ROOT; };
+		ECF5588524663B7C00B918D5 /* SNAIL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SNAIL.png; path = Assets/Snail/SNAIL.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +136,12 @@
 				ECF5585E2463BD5F00B918D5 /* fern.obj */,
 				ECF5587524662FE400B918D5 /* Grass.png */,
 				ECF5587624662FEC00B918D5 /* Low Grass.obj */,
+				ECF5587B246633D500B918D5 /* palmleaves.png */,
+				ECF5587C246633DB00B918D5 /* Palm_01.obj */,
+				ECF558832466383800B918D5 /* SNAIL.TIF */,
+				ECF5588524663B7C00B918D5 /* SNAIL.png */,
+				ECF5587F246636DE00B918D5 /* SNAIL.JPG */,
+				ECF55880246636E300B918D5 /* SNAIL.OBJ */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
 				DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */,
 				DBDF1B592323DE8D007CECB1 /* ShaderProgram.h */,
