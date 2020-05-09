@@ -27,7 +27,7 @@ Original music by [Charlie Reynolds](https://soundcloud.com/saxyjew) *coming soo
 [Small Blocky Font](https://opengameart.org/content/small-blocky-font) by [Jerom](https://opengameart.org/users/jerom) via [`OpenGameArt.org`](https://opengameart.org/).
 
 ## Graphics
-| ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/Assets/Betta/betta-demo.jpg) | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/assets/snail/SNAIL.JPG) | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/Assets/Grass/grass-demo.png) |
+| ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/Assets/Betta/betta-demo.jpg) | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/assets/snail/SNAIL.png) | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/Assets/Grass/grass-demo.png) |
 | :-: | :-: | :-: |
 | [Betta](https://free3d.com/3d-model/crowntailbetta-v1--31129.html) | [Snail](https://free3d.com/3d-model/snail-23158.html) | [Grass](https://free3d.com/3d-model/high-quality-grass-78178.html) |
 | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/Assets/Palm/Palm_01.jpeg) | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/Assets/Fern/fern-demo.jpg) | ![](https://github.com/mkarroqe/CS3113/blob/master/06-Students-Choice/Assets/Ground/gravel2.jpg) |
