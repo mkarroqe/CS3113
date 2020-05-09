@@ -27,7 +27,7 @@ GLuint fontTextureID;
 GLuint heartTextureID;
 
 #define OBJECT_COUNT 5
-#define ENEMY_COUNT 0
+#define ENEMY_COUNT 1
 
 struct GameState {
     Entity *player;
@@ -136,15 +136,24 @@ void Initialize() {
     state.objects[4].textureID = snailTextureID;
     state.objects[4].mesh = snailMesh;
     state.objects[4].scale = glm::vec3(14.0f, 14.0f, 14.0f);
-    state.objects[4].position = glm::vec3(-0.25, 0.15, -2);
+    state.objects[4].position = glm::vec3(-0.25, 0.19, -2);
     state.objects[4].rotation = glm::vec3(0, 90, 0);
-    state.objects[4].entityType = PLANT;
+    state.objects[4].entityType = PLAYER;
 
+    // ---------------- BETTA ----------------
+    state.enemies = new Entity[ENEMY_COUNT];
 
-//    state.enemies = new Entity[ENEMY_COUNT];
-//
-//    GLuint enemyTextureID = Util::LoadTexture("ctg.png");
-//
+    GLuint bettaTextureID = Util::LoadTexture("betta.jpg");
+    Mesh *bettaMesh = new Mesh();
+    bettaMesh->LoadOBJ("betta.obj", 1);
+    
+    state.enemies[0].textureID = bettaTextureID;
+    state.enemies[0].mesh = bettaMesh;
+    state.enemies[0].scale = glm::vec3(0.45f, 0.45f, 0.45f);
+    state.enemies[0].position = glm::vec3(-0.5, 0.5, -2);
+    state.enemies[0].rotation = glm::vec3(290, 292, 235);
+    state.enemies[0].entityType = ENEMY;
+
 //    for (int i = 0; i < ENEMY_COUNT; i++) {
 //        state.enemies[i].billboard = true;
 //        state.enemies[i].textureID = enemyTextureID;

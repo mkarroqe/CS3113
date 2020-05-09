@@ -31,6 +31,8 @@
 		ECF55882246636EB00B918D5 /* SNAIL.OBJ in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF55880246636E300B918D5 /* SNAIL.OBJ */; };
 		ECF558842466386200B918D5 /* SNAIL.TIF in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF558832466383800B918D5 /* SNAIL.TIF */; };
 		ECF5588624663B8400B918D5 /* SNAIL.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5588524663B7C00B918D5 /* SNAIL.png */; };
+		ECF5588924663CFD00B918D5 /* betta.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5588724663CF700B918D5 /* betta.jpg */; };
+		ECF5588A24663D0000B918D5 /* betta.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5588824663CF700B918D5 /* betta.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +56,8 @@
 				ECF55881246636E800B918D5 /* SNAIL.JPG in CopyFiles */,
 				ECF5588624663B8400B918D5 /* SNAIL.png in CopyFiles */,
 				ECF55882246636EB00B918D5 /* SNAIL.OBJ in CopyFiles */,
+				ECF5588924663CFD00B918D5 /* betta.jpg in CopyFiles */,
+				ECF5588A24663D0000B918D5 /* betta.obj in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +95,8 @@
 		ECF55880246636E300B918D5 /* SNAIL.OBJ */ = {isa = PBXFileReference; lastKnownFileType = file; name = SNAIL.OBJ; path = Assets/Snail/SNAIL.OBJ; sourceTree = SOURCE_ROOT; };
 		ECF558832466383800B918D5 /* SNAIL.TIF */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = SNAIL.TIF; path = Assets/Snail/SNAIL.TIF; sourceTree = SOURCE_ROOT; };
 		ECF5588524663B7C00B918D5 /* SNAIL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SNAIL.png; path = Assets/Snail/SNAIL.png; sourceTree = SOURCE_ROOT; };
+		ECF5588724663CF700B918D5 /* betta.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = betta.jpg; path = Assets/Betta/betta.jpg; sourceTree = SOURCE_ROOT; };
+		ECF5588824663CF700B918D5 /* betta.obj */ = {isa = PBXFileReference; lastKnownFileType = file; name = betta.obj; path = Assets/Betta/betta.obj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +148,8 @@
 				ECF5588524663B7C00B918D5 /* SNAIL.png */,
 				ECF5587F246636DE00B918D5 /* SNAIL.JPG */,
 				ECF55880246636E300B918D5 /* SNAIL.OBJ */,
+				ECF5588724663CF700B918D5 /* betta.jpg */,
+				ECF5588824663CF700B918D5 /* betta.obj */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
 				DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */,
 				DBDF1B592323DE8D007CECB1 /* ShaderProgram.h */,

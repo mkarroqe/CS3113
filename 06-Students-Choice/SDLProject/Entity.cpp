@@ -62,7 +62,10 @@ void Entity::Update(float deltaTime, Entity *player, Entity *objects, int object
         rotation.z += 45 * deltaTime;
     }
     else if (entityType == ENEMY) {
-        rotation.y += 30 * deltaTime;
+//        rotation.y += 45 * deltaTime;
+        rotation.z += 25 * deltaTime;
+        
+        std::cout << "(x, " << rotation.y << ", " << rotation.z << ")\n";
     }
     
     modelMatrix = glm::mat4(1.0f);
