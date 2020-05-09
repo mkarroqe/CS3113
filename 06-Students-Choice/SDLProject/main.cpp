@@ -104,7 +104,7 @@ void Initialize() {
     state.objects[1].mesh = fernMesh;
     state.objects[1].scale = glm::vec3(0.005, 0.004f, 0.005f);
     state.objects[1].position = glm::vec3(0, 0.5, -2);
-    state.objects[1].rotation = glm::vec3(0, 270, -170);
+    state.objects[1].rotation = glm::vec3(90, 270, -170);
     state.objects[1].entityType = PLANT;
 
     // ---------------- GRASS ----------------
@@ -155,7 +155,7 @@ void Initialize() {
     state.enemies[0].mesh = bettaMesh;
     state.enemies[0].scale = glm::vec3(0.45f, 0.45f, 0.45f);
     state.enemies[0].position = glm::vec3(-0.5, 0.5, -2);
-    state.enemies[0].rotation = glm::vec3(290, 292, 235);
+    state.enemies[0].rotation = glm::vec3(270, 0, 0);
     state.enemies[0].entityType = ENEMY;
 
 //    for (int i = 0; i < ENEMY_COUNT; i++) {

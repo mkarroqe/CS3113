@@ -63,15 +63,16 @@ void Entity::Update(float deltaTime, Entity *player, Entity *objects, int object
     }
     else if (entityType == ENEMY) {
 //        rotation.y += 45 * deltaTime;
-        rotation.z += 25 * deltaTime;
+//        rotation.x += 25 * deltaTime;
         
-        std::cout << "(x, " << rotation.y << ", " << rotation.z << ")\n";
+//        std::cout << "(x, " << rotation.y << ", " << rotation.z << ")\n";
     }
     
     modelMatrix = glm::mat4(1.0f);
     modelMatrix = glm::translate(modelMatrix, position);
     modelMatrix = glm::scale(modelMatrix, scale);
     
+    modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
     modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
     modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 }
