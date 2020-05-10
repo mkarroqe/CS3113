@@ -103,7 +103,7 @@ void Initialize() {
     
     sceneList[0] = new Menu();
     sceneList[1] = new Level(3);
-    SwitchToScene(0);
+    SwitchToScene(1);
     
     effects = new Effects(projectionMatrix, viewMatrix);
     effects->Start(GROW, 1.0f); // TODO: i don't think is is doing anything
@@ -120,18 +120,29 @@ void ProcessInput() {
                 
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
-                    case SDLK_LEFT:
-                        // Move the player left
+                    case SDLK_w:
+                        break;
+                    case SDLK_s:
+                        break;
+                    case SDLK_a:
+                        break;
+                    case SDLK_d:
                         break;
                         
-                    case SDLK_RIGHT:
-                        // Move the player right
+                    case SDLK_UP:
                         break;
-                    
+                    case SDLK_DOWN:
+                        break;
+                    case SDLK_LEFT:
+                        break;
+                    case SDLK_RIGHT:
+                        break;
+                    case SDLK_RSHIFT:
+                        break;
+                    case SDLK_LSHIFT:
+                        break;
+                        
                     case SDLK_RETURN:
-//                        currentScene->state.player_lives = 3;
-//                        std::cout << "yes ma'am u hit THAT\n";
-//                        SwitchToScene(1);
                         break;
                 }
                 break; // SDL_KEYDOWN
@@ -142,11 +153,12 @@ void ProcessInput() {
     
     // ----------------- START -------------------
     if (keys[SDL_SCANCODE_RETURN]) {
-//        currentScene->state.player_lives = 3;
-//        currentScene->state.next = true;
-        
-        currentScene->state.transitioning = true;
-        Mix_PlayChannel(-1, sploosh, 0);
+        if (currentScene == sceneList[0]) {
+            currentScene->state.player_lives = 3;
+            currentScene->state.transitioning = true;
+            
+            Mix_PlayChannel(-1, sploosh, 0);
+        }
     }
     
     // -------------- PLAYER VIEW ----------------
@@ -159,53 +171,135 @@ void ProcessInput() {
         std::cout << "you pressed D\n";
     }
     
-    // test
-    if (currentScene == sceneList[1]) {
+    if (keys[SDL_SCANCODE_W]) {
         currentScene->state.player->velocity.x = 0;
         currentScene->state.player->velocity.z = 0;
-    }
-    
-    if (keys[SDL_SCANCODE_W]) {
+        
         currentScene->state.player->velocity.z = cos(glm::radians(currentScene->state.player->rotation.y)) * -2.0f;
+        
         currentScene->state.player->velocity.x = sin(glm::radians(currentScene->state.player->rotation.y)) * -2.0f;
         
         std::cout << "you pressed W\n";
     }
     else if (keys[SDL_SCANCODE_S]) {
+        currentScene->state.player->velocity.x = 0;
+        currentScene->state.player->velocity.z = 0;
+        
         currentScene->state.player->velocity.z = cos(glm::radians(currentScene->state.player->rotation.y)) * 2.0f;
+        
         currentScene->state.player->velocity.x = sin(glm::radians(currentScene->state.player->rotation.y)) * 2.0f;
         
         std::cout << "you pressed S\n";
     }
+    
     // --------------- SNAIL MOVES ----------------
     int snail_num = OBJECT_COUNT - 1;
     
+    float curr_x_pos = currentScene->state.objects[snail_num].position.x;
+    float curr_y_pos = currentScene->state.objects[snail_num].position.y;
+//    float curr_z_pos = currentScene->state.objects[snail_num].position.z;
+    
     if (keys[SDL_SCANCODE_LEFT]) {
+        currentScene->state.objects[snail_num].rotation.y = 270; //TODO: check
         currentScene->state.objects[snail_num].position.x -= 0.01f;
         std::cout << "you pressed LEFT\n";
     }
     else if (keys[SDL_SCANCODE_RIGHT]) {
+        currentScene->state.objects[snail_num].rotation.y = 90;
         currentScene->state.objects[snail_num].position.x += 0.01f;
         
         std::cout << "you pressed RIGHT\n";
     }
     
     if (keys[SDL_SCANCODE_UP]) {
-        currentScene->state.objects[snail_num].rotation.y -= 2.75;
+        // TODO: if on wall, deactivate
+        currentScene->state.objects[snail_num].rotation.y = -180;
         currentScene->state.objects[snail_num].position.z -= 0.01f;
         
         std::cout << "you pressed UP\n";
-        
-//        // roll
-//        state.objects[snail_num].rotation.x -= 25;
-//        state.objects[snail_num].position.z -= 0.01f;
-    
     }
     else if (keys[SDL_SCANCODE_DOWN]) {
-        currentScene->state.objects[snail_num].rotation.y += 2.75;
+        // TODO: if on wall, deactivate
+        currentScene->state.objects[snail_num].rotation.y = -360;
         currentScene->state.objects[snail_num].position.z += 0.01f;
         
         std::cout << "you pressed DOWN\n";
+    }
+                                                    
+    // --------------- WALL CLIMBING --------------
+    if (keys[SDL_SCANCODE_RSHIFT]) {
+        if (curr_y_pos >= -0.051) {
+            currentScene->state.objects[snail_num].position.y += 0.02f;
+            
+            // Climb up front wall
+            if (curr_x_pos > 5) {
+                currentScene->state.objects[snail_num].rotation.x = -90;
+                currentScene->state.objects[snail_num].rotation.y = 360;
+            }
+
+            // Climb up back wall
+            else if (curr_x_pos > 5) {
+                currentScene->state.objects[snail_num].rotation.x = 90;
+                currentScene->state.objects[snail_num].rotation.y = 180;
+            }
+            
+            // Climb up right wall
+            else if (curr_x_pos > 5) {
+                currentScene->state.objects[snail_num].rotation.x = 90;
+                currentScene->state.objects[snail_num].rotation.y = 180;
+                currentScene->state.objects[snail_num].rotation.z = -90;
+            }
+            
+            // Climb up left wall
+            else if (curr_x_pos > 5) {
+                currentScene->state.objects[snail_num].rotation.x = 90;
+                currentScene->state.objects[snail_num].rotation.y = 180;
+                currentScene->state.objects[snail_num].rotation.z = 90;
+            }
+        }
+        else {
+            currentScene->state.objects[snail_num].position.y = -0.049f;
+            currentScene->state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
+        }
+        
+        std::cout << "you pressed RSHIFT at y pos: " << curr_y_pos << "\n";
+    }
+    else if (keys[SDL_SCANCODE_LSHIFT]) {
+        if (curr_y_pos > -0.05) {
+            currentScene->state.objects[snail_num].position.y -= 0.01f;
+            
+            // Climb down front wall
+            if (curr_x_pos > 5) {
+                currentScene->state.objects[snail_num].rotation.x = -90;
+                currentScene->state.objects[snail_num].rotation.y = -180;
+            }
+            
+            // Climb down back wall
+            else if (curr_x_pos > 5) {
+                currentScene->state.objects[snail_num].rotation.x = 90;
+                currentScene->state.objects[snail_num].rotation.y = -360;
+            }
+            
+            // Climb down right wall
+            else if (curr_x_pos > 5) {
+                currentScene->state.objects[snail_num].rotation.x = 90;
+                currentScene->state.objects[snail_num].rotation.y = -360;
+                currentScene->state.objects[snail_num].rotation.z = 90;
+            }
+            
+            // Climb down left wall
+            else if (curr_x_pos > 5) {
+                currentScene->state.objects[snail_num].rotation.x = 90;
+                currentScene->state.objects[snail_num].rotation.y = -360;
+                currentScene->state.objects[snail_num].rotation.z = -90;
+            }
+        }
+        else {
+            currentScene->state.objects[snail_num].position.y = -0.049f;
+            currentScene->state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
+        }
+        
+        std::cout << "you pressed LSHIFT at y pos: " << curr_y_pos << "\n";
     }
 }
 

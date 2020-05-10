@@ -10,11 +10,10 @@ Level::Level(int _lives) {
 void Level::Initialize() {
     state.nextScene = -1;
     state.transitioning = false;
-//    state.next = false;
     
     state.player = new Entity();
     state.player->entityType = PLAYER;
-    state.player->position = glm::vec3(0, 0.5f, 0);
+    state.player->position = glm::vec3(0, 0.75f, 0);
     state.player->speed = 1.75f;
     
     // ------------- OBJECTS ----------------
@@ -26,7 +25,7 @@ void Level::Initialize() {
     
     state.objects[0].textureID = floorTextureID;
     state.objects[0].mesh = cubeMesh;
-    state.objects[0].position = glm::vec3(0, -0.45f, 0);
+    state.objects[0].position = glm::vec3(0, -0.45, 0);
     state.objects[0].rotation = glm::vec3(0, 0, 0);
     state.objects[0].acceleration = glm::vec3(0, 0, 0);
     state.objects[0].scale = glm::vec3(20, 0.75f, 20);
@@ -43,7 +42,7 @@ void Level::Initialize() {
         state.objects[num].textureID = fernTextureID;
         state.objects[num].mesh = fernMesh;
         state.objects[num].scale = glm::vec3(0.005, 0.004f, 0.005f);
-        state.objects[num].position = glm::vec3(rand() % 20 - 10, 0.15, rand() % 20 - 10);//glm::vec3(0, 0.15, -2);
+        state.objects[num].position = glm::vec3(rand() % 20 - 10, -0.1, rand() % 20 - 10);
         state.objects[num].rotation = glm::vec3(270, 0, 0);
         state.objects[num].entityType = PLANT;
     }
@@ -59,7 +58,7 @@ void Level::Initialize() {
         state.objects[num].textureID = grassTextureID;
         state.objects[num].mesh = grassMesh;
         state.objects[num].scale = glm::vec3(2.0f, 2.0f, 2.0f);
-        state.objects[num].position = glm::vec3(rand() % 20 - 10, 0.15, rand() % 20 - 10);//glm::vec3(0, 0.15, -2);
+        state.objects[num].position = glm::vec3(rand() % 20 - 10, -0.1, rand() % 20 - 10);
         state.objects[num].entityType = PLANT;
     }
 
@@ -74,7 +73,7 @@ void Level::Initialize() {
         state.objects[num].textureID = palmTextureID;
         state.objects[num].mesh = palmMesh;
         state.objects[num].scale = glm::vec3(0.05, 0.05f, 0.05f);
-        state.objects[num].position = glm::vec3(rand() % 20 - 10, 0.15, rand() % 20 - 10);//glm::vec3(0.25, 0.15, -2);
+        state.objects[num].position = glm::vec3(rand() % 20 - 10, -0.1, rand() % 20 - 10);
         state.objects[num].entityType = PLANT;
     }
     
@@ -87,7 +86,7 @@ void Level::Initialize() {
     state.objects[snail_num].textureID = snailTextureID;
     state.objects[snail_num].mesh = snailMesh;
     state.objects[snail_num].scale = glm::vec3(14.0f, 14.0f, 14.0f);
-    state.objects[snail_num].position = glm::vec3(-0.25, 0.19, -2);
+    state.objects[snail_num].position = glm::vec3(-0.25, -0.05, -2);
     state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
     state.objects[snail_num].entityType = SNAIL;
     
