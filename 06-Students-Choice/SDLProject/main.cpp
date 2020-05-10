@@ -16,6 +16,7 @@
 #include "Util.h"
 #include "Entity.h"
 #include "Scene.h"
+#include "Effects.hpp"
 
 #include "Level.h"
 #include "Menu.h"
@@ -35,6 +36,8 @@ GLuint fontTextureID;
 
 Scene *currentScene;
 Scene *sceneList[2];
+
+Effects *effects;
 
 void SwitchToScene(int _nextScene, int _lives=3) {
 //    if (_nextScene == 1) {
@@ -74,7 +77,7 @@ void Initialize() {
     uiProjectionMatrix = glm::ortho(-6.4f, 6.4f, -3.6f, 3.6f, -1.0f, 1.0f);
     programUI.SetProjectionMatrix(uiProjectionMatrix);
     programUI.SetViewMatrix(uiViewMatrix);
-    programUI.SetColor(0.0f, 0.0f, 1.0f, 1.0f);
+//    programUI.SetColor(0.0f, 0.0f, 1.0f, 1.0f);
     
     glUseProgram(program.programID);
     
@@ -84,7 +87,10 @@ void Initialize() {
     glDepthMask(GL_TRUE);
     glDepthFunc(GL_LEQUAL);
     
-    glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
+    glClearColor(0.0f, 0.8f, 1.0f, 1.0f);
+    
+    effects = new Effects(projectionMatrix, viewMatrix);
+    effects->Start(GROW, 1.0f); // TODO: i don't think is is doing anything
     
     sceneList[0] = new Menu();
     sceneList[1] = new Level(3);
@@ -192,22 +198,24 @@ void Update() {
         return;
     }
     
-    while (deltaTime >= FIXED_TIMESTEP) {
-        currentScene->state.player->Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
-        
-        for (int i = 0; i < OBJECT_COUNT; i++) {
-            currentScene->state.objects[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
-        }
-        
-        // pls
-        if (currentScene == sceneList[1]) {
-            for (int i = 0; i < ENEMY_COUNT; i++) {
-                currentScene->state.enemies[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
+    if (currentScene == sceneList[1]) {
+        while (deltaTime >= FIXED_TIMESTEP) {
+            currentScene->state.player->Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
+            
+            for (int i = 0; i < OBJECT_COUNT; i++) {
+                currentScene->state.objects[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
             }
+            
+            // pls
+//            if (currentScene == sceneList[1]) {
+                for (int i = 0; i < ENEMY_COUNT; i++) {
+                    currentScene->state.enemies[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
+                }
+//            }
+            
+            deltaTime -= FIXED_TIMESTEP;
         }
-        
-        deltaTime -= FIXED_TIMESTEP;
-    }
+    
     
     accumulator = deltaTime;
     
@@ -215,13 +223,18 @@ void Update() {
     viewMatrix = glm::rotate(viewMatrix,
     glm::radians(currentScene->state.player->rotation.y), glm::vec3(0, -1.0f, 0));
     viewMatrix = glm::translate(viewMatrix, -currentScene->state.player->position);
+    }
+    viewMatrix = glm::translate(viewMatrix, effects->viewOffset);
 }
 
 
 void Render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    // TODO: i think something here is still not right
     currentScene->Render(&program, &programUI);
+    
+    effects->Render();
     
     SDL_GL_SwapWindow(displayWindow);
 }
