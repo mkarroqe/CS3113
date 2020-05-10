@@ -234,18 +234,18 @@ void Render() {
     // TODO: i think something here is still not right
     currentScene->Render(&program, &programUI);
     
-    if (currentScene == sceneList[1]) { // TODO: is this the right comparison?
-        // Entities
-        for (int i = 0; i < OBJECT_COUNT; i++) {
-            currentScene->state.objects[i].Render(&program);
-        }
+//    if (currentScene == sceneList[1]) { // TODO: is this the right comparison?
+//        // Entities
+//        for (int i = 0; i < OBJECT_COUNT; i++) {
+//            currentScene->state.objects[i].Render(&program);
+//        }
+//        
+//        for (int i = 0; i < ENEMY_COUNT; i++) {
+//            currentScene->state.enemies[i].Render(&program);
+//        }
         
-        for (int i = 0; i < ENEMY_COUNT; i++) {
-            currentScene->state.enemies[i].Render(&program);
-        }
-        
-        currentScene->state.player->Render(&program);
-    }
+//        currentScene->state.player->Render(&program);
+//    }
     
     effects->Render();
     
