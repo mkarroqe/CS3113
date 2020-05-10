@@ -12,9 +12,11 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 # Controls
 | Key | Function |
 | :-: | :-: |
-| Enter | Start Game |
+| `Enter` | Start Game |
 | `WASD` | Orbit Scene |
-| Arrow Keys | Move Snail |
+| `Arrow Keys` | Move snail |
+| `Right Shift` | Climb up a wall |
+| `Left Shift` | Climb down a wall |
 
 # Demo
 *in progress*
