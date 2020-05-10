@@ -5,5 +5,5 @@ class Level : public Scene {
         Level(int _lives);
         void Initialize() override;
         void Update(float deltaTime) override;
-        void Render(ShaderProgram *program) override;
+        void Render(ShaderProgram *program, ShaderProgram *programUI) override;
 };

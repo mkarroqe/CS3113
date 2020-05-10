@@ -8,12 +8,12 @@ Level::Level(int _lives) {
 }
 
 void Level::Initialize() {
-    state.nextScene = -10;
+    state.nextScene = -1;
+    state.next = false;
     
     state.player = new Entity();
     state.player->entityType = PLAYER;
     state.player->position = glm::vec3(0, 0.5f, 0);
-//    state.player->acceleration = glm::vec3(0, 0, 0);
     state.player->speed = 1.75f;
     
     // ------------- OBJECTS ----------------
@@ -101,45 +101,31 @@ void Level::Initialize() {
     state.enemies[0].mesh = bettaMesh;
     state.enemies[0].scale = glm::vec3(0.45f, 0.45f, 0.45f);
     state.enemies[0].position = glm::vec3(-0.5, 0.5, -2);
-//    state.enemies[0].position = glm::vec3(rand() % 20 - 10, 0.5, rand() % 20 - 10);
     state.enemies[0].rotation = glm::vec3(270, 0, 0);
     state.enemies[0].entityType = ENEMY;
-
-//    for (int i = 0; i < ENEMY_COUNT; i++) {
-//        state.enemies[i].billboard = true;
-//        state.enemies[i].textureID = enemyTextureID;
-//        state.enemies[i].position = glm::vec3(rand() % 20 - 10, 0.5, rand() % 20 - 10);
-//        state.enemies[i].rotation = glm::vec3(0, 0, 0);
-//        state.enemies[i].acceleration = glm::vec3(0, 0, 0);
-//    }
 }
 
 void Level::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.objects, OBJECT_COUNT);
+    
+    for (int i = 0; i < OBJECT_COUNT; i++) {
+        state.objects[i].Update(deltaTime, state.player, state.objects, OBJECT_COUNT);
+    }
 }
 
-void Level::Render(ShaderProgram *program) {
+void Level::Render(ShaderProgram *program, ShaderProgram *programUI) {
+    // Text
+    GLuint fontTextureID = Util::LoadTexture("small_blocky.png");
+
+    Util::DrawText(programUI, fontTextureID, "Lives: 3", 0.25, 0.0f, glm::vec3(-6, 3.2, 0));
+    
+    // Entities
     for (int i = 0; i < OBJECT_COUNT; i++) {
         state.objects[i].Render(program);
     }
     
     for (int i = 0; i < ENEMY_COUNT; i++) {
         state.enemies[i].Render(program);
-    }
-//    
-//    // Once we are done drawing 3D objects...switch!
-//    program->SetProjectionMatrix(uiProjectionMatrix);
-//    program->SetViewMatrix(uiViewMatrix);
-//
-    GLuint fontTextureID = Util::LoadTexture("small_blocky.png");
-    GLuint heartTextureID = Util::LoadTexture("gravel2.jpg");
-    
-    Util::DrawText(program, fontTextureID, "Lives: 3", 0.25, 0.0f, glm::vec3(-6, 3.2, 0));
-    
-    for (int i = 0; i < 3; i++)
-    {
-        // These icons are small, so just move 0.5 to the right for each one.
-        Util::DrawIcon(program, heartTextureID, glm::vec3(5 + (i * 0.5f), 3.2, 0));
     }
     
     state.player->Render(program);

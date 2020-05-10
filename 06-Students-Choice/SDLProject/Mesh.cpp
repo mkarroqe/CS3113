@@ -68,7 +68,6 @@ void Mesh::LoadOBJ(const char *fileName, float textureRepeat) {
 }
 
 void Mesh::Render(ShaderProgram *program) {
-    
     glVertexAttribPointer(program->positionAttribute, 3, GL_FLOAT, false, 0, vertices.data());
     glEnableVertexAttribArray(program->positionAttribute);
     

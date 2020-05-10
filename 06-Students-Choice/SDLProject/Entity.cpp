@@ -78,12 +78,7 @@ void Entity::Render(ShaderProgram *program) {
         
     glBindTexture(GL_TEXTURE_2D, textureID);
 
-    if (billboard) {
-        Entity::DrawBillboard(program);
-    }
-    else {
-        mesh->Render(program);
-    }
+    mesh->Render(program);
 }
 
 void Entity::DrawBillboard(ShaderProgram *program) {

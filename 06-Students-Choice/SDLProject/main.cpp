@@ -29,22 +29,20 @@ bool gameIsRunning = true;
 ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
 
+ShaderProgram programUI;
 glm::mat4 uiViewMatrix, uiProjectionMatrix;
 GLuint fontTextureID;
-GLuint heartTextureID;
 
 Scene *currentScene;
 Scene *sceneList[2];
 
 void SwitchToScene(int _nextScene, int _lives=3) {
-    if (_nextScene == 1) {
-        currentScene = new Level(_lives);
-    }
-    
-    // if win (4) or lose (5)
-    else {
+//    if (_nextScene == 1) {
+//        currentScene = new Level(_lives);
+//    }
+//    else {
         currentScene = sceneList[_nextScene];
-    }
+//    }
     currentScene->Initialize();
 }
 
@@ -62,11 +60,6 @@ void Initialize() {
     
     program.Load("shaders/vertex_textured.glsl", "shaders/fragment_textured.glsl");
     
-    uiViewMatrix = glm::mat4(1.0);
-    uiProjectionMatrix = glm::ortho(-6.4f, 6.4f, -3.6f, 3.6f, -1.0f, 1.0f);
-//    fontTextureID = Util::LoadTexture("small_blocky.png");
-////    heartTextureID = Util::LoadTexture("gravel2.jpg");
-    
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);
     projectionMatrix = glm::perspective(glm::radians(45.0f), 1.777f, 0.1f, 100.0f);
@@ -74,6 +67,14 @@ void Initialize() {
     program.SetProjectionMatrix(projectionMatrix);
     program.SetViewMatrix(viewMatrix);
     program.SetColor(0.0f, 1.0f, 1.0f, 1.0f);
+    
+    programUI.Load("shaders/vertex_textured.glsl", "shaders/fragment_textured.glsl");
+    
+    uiViewMatrix = glm::mat4(1.0);
+    uiProjectionMatrix = glm::ortho(-6.4f, 6.4f, -3.6f, 3.6f, -1.0f, 1.0f);
+    programUI.SetProjectionMatrix(uiProjectionMatrix);
+    programUI.SetViewMatrix(uiViewMatrix);
+    programUI.SetColor(0.0f, 0.0f, 1.0f, 1.0f);
     
     glUseProgram(program.programID);
     
@@ -88,7 +89,6 @@ void Initialize() {
     sceneList[0] = new Menu();
     sceneList[1] = new Level(3);
     SwitchToScene(0);
-    
 }
 
 void ProcessInput() {
@@ -102,12 +102,21 @@ void ProcessInput() {
                 
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
-                    case SDLK_SPACE:
-                        // Some sort of action
+                    case SDLK_LEFT:
+                        // Move the player left
                         break;
                         
+                    case SDLK_RIGHT:
+                        // Move the player right
+                        break;
+                    
+                    case SDLK_RETURN:
+//                        currentScene->state.player_lives = 3;
+                        std::cout << "yes ma'am u hit THAT\n";
+//                        SwitchToScene(1);
+                        break;
                 }
-                break;
+                break; // SDL_KEYDOWN
         }
     }
     
@@ -115,9 +124,10 @@ void ProcessInput() {
     
     // ----------------- START -------------------
     if (keys[SDL_SCANCODE_RETURN]) {
-        currentScene->state.player_lives = 3;
-        currentScene->state.next = true;
-        SwitchToScene(1);
+//        currentScene->state.player_lives = 3;
+//        currentScene->state.next = true;
+        std::cout << "yes ma'am u hit that\n";
+//        SwitchToScene(1);
     }
     
     // -------------- PLAYER VIEW ----------------
@@ -185,13 +195,16 @@ void Update() {
     while (deltaTime >= FIXED_TIMESTEP) {
         currentScene->state.player->Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
         
-//        for (int i = 0; i < OBJECT_COUNT; i++) {
-//            currentScene->state.objects[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
-//        }
-//
-//        for (int i = 0; i < ENEMY_COUNT; i++) {
-//            currentScene->state.enemies[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
-//        }
+        for (int i = 0; i < OBJECT_COUNT; i++) {
+            currentScene->state.objects[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
+        }
+        
+        // pls
+        if (currentScene == sceneList[1]) {
+            for (int i = 0; i < ENEMY_COUNT; i++) {
+                currentScene->state.enemies[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
+            }
+        }
         
         deltaTime -= FIXED_TIMESTEP;
     }
@@ -208,33 +221,7 @@ void Update() {
 void Render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    program.SetProjectionMatrix(projectionMatrix);
-    program.SetViewMatrix(viewMatrix);
-    
-    currentScene->Render(&program);
-//    currentScene->state.player->Render(&program);
-    
-//    for (int i = 0; i < OBJECT_COUNT; i++) {
-//        currentScene->state.objects[i].Render(&program);
-//    }
-//
-//    for (int i = 0; i < ENEMY_COUNT; i++) {
-//        currentScene->state.enemies[i].Render(&program);
-//    }
-    
-    // Once we are done drawing 3D objects...switch!
-//    program.SetProjectionMatrix(uiProjectionMatrix);
-//    program.SetViewMatrix(uiViewMatrix);
-    
-//    currentScene->Render(&program);
-
-//    Util::DrawText(&program, fontTextureID, "Lives: 3", 0.25, 0.0f, glm::vec3(-6, 3.2, 0));
-//    
-//    for (int i = 0; i < 3; i++)
-//    {
-//        // These icons are small, so just move 0.5 to the right for each one.
-//        Util::DrawIcon(&program, heartTextureID, glm::vec3(5 + (i * 0.5f), 3.2, 0));
-//    }
+    currentScene->Render(&program, &programUI);
     
     SDL_GL_SwapWindow(displayWindow);
 }
@@ -251,13 +238,7 @@ int main(int argc, char* argv[]) {
         Update();
         
         if (currentScene->state.nextScene >= 0) {
-//            if (currentScene->state.player_lives == 0) {
-//                SwitchToScene(5);
-//            }
-//            // if next is less than curr initialize w less lives?
-//            else {
-                SwitchToScene(currentScene->state.nextScene, currentScene->state.player_lives);
-//            }
+            SwitchToScene(currentScene->state.nextScene, currentScene->state.player_lives);
         }
         
         Render();
