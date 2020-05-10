@@ -21,7 +21,7 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 
 # Asset Credits
 ## Music
-Original music by [Charlie Reynolds](https://soundcloud.com/saxyjew) *coming soon*.
+Original [music](audio/mary_aquatic_samba_trim.wav) by [Charlie Reynolds](https://soundcloud.com/saxyjew).
 
 ## Font
 [Small Blocky Font](https://opengameart.org/content/small-blocky-font) by [Jerom](https://opengameart.org/users/jerom) via [`OpenGameArt.org`](https://opengameart.org/).
