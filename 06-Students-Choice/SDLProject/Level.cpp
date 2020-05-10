@@ -9,7 +9,8 @@ Level::Level(int _lives) {
 
 void Level::Initialize() {
     state.nextScene = -1;
-    state.next = false;
+    state.transitioning = false;
+//    state.next = false;
     
     state.player = new Entity();
     state.player->entityType = PLAYER;

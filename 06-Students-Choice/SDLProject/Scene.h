@@ -20,7 +20,7 @@ struct GameState {
     Entity *enemies;
     int nextScene;
     int player_lives;
-    bool next;
+    bool transitioning;
 };
 class Scene {
     public:

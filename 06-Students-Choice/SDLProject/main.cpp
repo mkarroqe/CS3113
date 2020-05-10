@@ -41,7 +41,7 @@ Scene *sceneList[2];
 Mix_Music *music;
 Mix_Chunk *sploosh;
 
-//Effects *effects;
+Effects *effects;
 
 void SwitchToScene(int _nextScene, int _lives=3) {
 //    if (_nextScene == 1) {
@@ -101,12 +101,12 @@ void Initialize() {
     
     glClearColor(0.0f, 0.8f, 1.0f, 1.0f);
     
-//    effects = new Effects(projectionMatrix, viewMatrix);
-//    effects->Start(GROW, 1.0f); // TODO: i don't think is is doing anything
-    
     sceneList[0] = new Menu();
     sceneList[1] = new Level(3);
     SwitchToScene(0);
+    
+    effects = new Effects(projectionMatrix, viewMatrix);
+    effects->Start(GROW, 1.0f); // TODO: i don't think is is doing anything
 }
 
 void ProcessInput() {
@@ -130,7 +130,7 @@ void ProcessInput() {
                     
                     case SDLK_RETURN:
 //                        currentScene->state.player_lives = 3;
-                        std::cout << "yes ma'am u hit THAT\n";
+//                        std::cout << "yes ma'am u hit THAT\n";
 //                        SwitchToScene(1);
                         break;
                 }
@@ -144,8 +144,9 @@ void ProcessInput() {
     if (keys[SDL_SCANCODE_RETURN]) {
 //        currentScene->state.player_lives = 3;
 //        currentScene->state.next = true;
-        std::cout << "yes ma'am u hit that\n";
-        SwitchToScene(1);
+        
+        currentScene->state.transitioning = true;
+        Mix_PlayChannel(-1, sploosh, 0);
     }
     
     // -------------- PLAYER VIEW ----------------
@@ -246,17 +247,16 @@ void Update() {
     glm::radians(currentScene->state.player->rotation.y), glm::vec3(0, -1.0f, 0));
     viewMatrix = glm::translate(viewMatrix, -currentScene->state.player->position);
     }
-//    viewMatrix = glm::translate(viewMatrix, effects->viewOffset);
+    viewMatrix = glm::translate(viewMatrix, effects->viewOffset);
 }
 
 
 void Render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    // TODO: i think something here is still not right
     currentScene->Render(&program, &programUI);
     
-//    effects->Render();
+    effects->Render();
     
     SDL_GL_SwapWindow(displayWindow);
 }
@@ -271,12 +271,16 @@ int main(int argc, char* argv[]) {
     while (gameIsRunning) {
         ProcessInput();
         Update();
+        Render();
         
-        if (currentScene->state.nextScene >= 0) {
-            SwitchToScene(currentScene->state.nextScene, currentScene->state.player_lives);
+        // pls
+        if (currentScene->state.transitioning) {
+            SwitchToScene(1);
         }
         
-        Render();
+//        if (currentScene->state.nextScene >= 0) {
+//            SwitchToScene(currentScene->state.nextScene, currentScene->state.player_lives);
+//        }
     }
     
     Shutdown();
