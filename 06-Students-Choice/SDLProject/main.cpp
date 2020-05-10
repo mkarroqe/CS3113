@@ -119,7 +119,7 @@ void ProcessInput() {
                     case SDLK_RETURN:
 //                        currentScene->state.player_lives = 3;
                         std::cout << "yes ma'am u hit THAT\n";
-                        SwitchToScene(1);
+//                        SwitchToScene(1);
                         break;
                 }
                 break; // SDL_KEYDOWN
@@ -139,9 +139,11 @@ void ProcessInput() {
     // -------------- PLAYER VIEW ----------------
     if (keys[SDL_SCANCODE_A]) {
         currentScene->state.player->rotation.y += 1.0f;
+        std::cout << "you pressed A\n";
     }
     else if (keys[SDL_SCANCODE_D]) {
         currentScene->state.player->rotation.y -= 1.0f;
+        std::cout << "you pressed D\n";
     }
     
     // test
@@ -153,24 +155,33 @@ void ProcessInput() {
     if (keys[SDL_SCANCODE_W]) {
         currentScene->state.player->velocity.z = cos(glm::radians(currentScene->state.player->rotation.y)) * -2.0f;
         currentScene->state.player->velocity.x = sin(glm::radians(currentScene->state.player->rotation.y)) * -2.0f;
+        
+        std::cout << "you pressed W\n";
     }
     else if (keys[SDL_SCANCODE_S]) {
         currentScene->state.player->velocity.z = cos(glm::radians(currentScene->state.player->rotation.y)) * 2.0f;
         currentScene->state.player->velocity.x = sin(glm::radians(currentScene->state.player->rotation.y)) * 2.0f;
+        
+        std::cout << "you pressed S\n";
     }
     // --------------- SNAIL MOVES ----------------
     int snail_num = OBJECT_COUNT - 1;
     
     if (keys[SDL_SCANCODE_LEFT]) {
         currentScene->state.objects[snail_num].position.x -= 0.01f;
+        std::cout << "you pressed LEFT\n";
     }
     else if (keys[SDL_SCANCODE_RIGHT]) {
         currentScene->state.objects[snail_num].position.x += 0.01f;
+        
+        std::cout << "you pressed RIGHT\n";
     }
     
     if (keys[SDL_SCANCODE_UP]) {
         currentScene->state.objects[snail_num].rotation.y -= 2.75;
         currentScene->state.objects[snail_num].position.z -= 0.01f;
+        
+        std::cout << "you pressed UP\n";
         
 //        // roll
 //        state.objects[snail_num].rotation.x -= 25;
@@ -180,6 +191,8 @@ void ProcessInput() {
     else if (keys[SDL_SCANCODE_DOWN]) {
         currentScene->state.objects[snail_num].rotation.y += 2.75;
         currentScene->state.objects[snail_num].position.z += 0.01f;
+        
+        std::cout << "you pressed DOWN\n";
     }
 }
 

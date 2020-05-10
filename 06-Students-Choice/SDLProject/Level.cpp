@@ -25,7 +25,7 @@ void Level::Initialize() {
     
     state.objects[0].textureID = floorTextureID;
     state.objects[0].mesh = cubeMesh;
-    state.objects[0].position = glm::vec3(0, -1.25f, 0);
+    state.objects[0].position = glm::vec3(0, -0.45f, 0);
     state.objects[0].rotation = glm::vec3(0, 0, 0);
     state.objects[0].acceleration = glm::vec3(0, 0, 0);
     state.objects[0].scale = glm::vec3(20, 0.75f, 20);
