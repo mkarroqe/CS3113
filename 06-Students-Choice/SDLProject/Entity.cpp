@@ -46,7 +46,8 @@ void Entity::Update(float deltaTime, Entity *player, Entity *objects, int object
     velocity += acceleration * deltaTime;
     position += velocity * deltaTime;
     
-    if (entityType == PLAYER) {
+    if (entityType == SNAIL) {
+        // Collisions w plants
         for (int i = 0; i < objectCount; i++) {
             // Ignore collisions with the floor
             if (objects[i].entityType == FLOOR) continue;
@@ -56,12 +57,9 @@ void Entity::Update(float deltaTime, Entity *player, Entity *objects, int object
                 break;
             }
         }
-    }
-    else if (entityType == ENEMY) {
-//        rotation.y += 45 * deltaTime;
-//        rotation.x += 25 * deltaTime;
         
-//        std::cout << "(x, " << rotation.y << ", " << rotation.z << ")\n";
+        // Collisions with enemy (there's only 1)
+//        if (CheckCollision())
     }
     
     modelMatrix = glm::mat4(1.0f);
@@ -71,6 +69,14 @@ void Entity::Update(float deltaTime, Entity *player, Entity *objects, int object
     modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
     modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
     modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+    
+    if (entityType == ENEMY) {
+        rotation.x -= 50 * deltaTime;
+        rotation.y += 70 * deltaTime;
+        rotation.z -= 10 * deltaTime;
+
+        modelMatrix = glm::translate(modelMatrix, glm::vec3(sin(0.5 * position.y), 0.1, 0.1));
+    }
 }
 
 void Entity::Render(ShaderProgram *program) {

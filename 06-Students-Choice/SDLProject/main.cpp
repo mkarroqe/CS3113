@@ -226,10 +226,8 @@ void ProcessInput() {
     }
     else if (keys[SDL_SCANCODE_RIGHT]) {
         // TODO: make work while on wall
-//        if (curr_y_pos < 0) {
-            currentScene->state.objects[snail_num].rotation.y = 90;
-            currentScene->state.objects[snail_num].position.x += 0.01f;
-//        }
+        currentScene->state.objects[snail_num].rotation.y = 90;
+        currentScene->state.objects[snail_num].position.x += 0.01f;
         
 //        // back wall
 //        else if (curr_z_pos > 3.5){
@@ -263,6 +261,7 @@ void ProcessInput() {
             currentScene->state.objects[snail_num].rotation.y = -180;
             currentScene->state.objects[snail_num].position.z -= 0.01f;
         }
+        
         // on wall
         else {
             currentScene->state.objects[snail_num].rotation.y = -180;
@@ -275,6 +274,7 @@ void ProcessInput() {
             currentScene->state.objects[snail_num].rotation.y = -360;
             currentScene->state.objects[snail_num].position.z += 0.01f;
         }
+        
         // on wall
         else {
             currentScene->state.objects[snail_num].rotation.y = -360;
