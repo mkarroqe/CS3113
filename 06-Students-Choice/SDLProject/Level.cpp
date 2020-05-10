@@ -118,15 +118,4 @@ void Level::Render(ShaderProgram *program, ShaderProgram *programUI) {
     GLuint fontTextureID = Util::LoadTexture("small_blocky.png");
 
     Util::DrawText(programUI, fontTextureID, "Lives: 3", 0.25, 0.0f, glm::vec3(-6, 3.2, 0));
-    
-    // Entities
-    for (int i = 0; i < OBJECT_COUNT; i++) {
-        state.objects[i].Render(program);
-    }
-    
-    for (int i = 0; i < ENEMY_COUNT; i++) {
-        state.enemies[i].Render(program);
-    }
-    
-    state.player->Render(program);
 }

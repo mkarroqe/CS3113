@@ -119,7 +119,7 @@ void ProcessInput() {
                     case SDLK_RETURN:
 //                        currentScene->state.player_lives = 3;
                         std::cout << "yes ma'am u hit THAT\n";
-//                        SwitchToScene(1);
+                        SwitchToScene(1);
                         break;
                 }
                 break; // SDL_KEYDOWN
@@ -233,6 +233,19 @@ void Render() {
     
     // TODO: i think something here is still not right
     currentScene->Render(&program, &programUI);
+    
+    if (currentScene == sceneList[1]) { // TODO: is this the right comparison?
+        // Entities
+        for (int i = 0; i < OBJECT_COUNT; i++) {
+            currentScene->state.objects[i].Render(&program);
+        }
+        
+        for (int i = 0; i < ENEMY_COUNT; i++) {
+            currentScene->state.enemies[i].Render(&program);
+        }
+        
+        currentScene->state.player->Render(&program);
+    }
     
     effects->Render();
     
