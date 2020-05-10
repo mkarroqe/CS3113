@@ -37,7 +37,7 @@ GLuint fontTextureID;
 Scene *currentScene;
 Scene *sceneList[2];
 
-Effects *effects;
+//Effects *effects;
 
 void SwitchToScene(int _nextScene, int _lives=3) {
 //    if (_nextScene == 1) {
@@ -89,8 +89,8 @@ void Initialize() {
     
     glClearColor(0.0f, 0.8f, 1.0f, 1.0f);
     
-    effects = new Effects(projectionMatrix, viewMatrix);
-    effects->Start(GROW, 1.0f); // TODO: i don't think is is doing anything
+//    effects = new Effects(projectionMatrix, viewMatrix);
+//    effects->Start(GROW, 1.0f); // TODO: i don't think is is doing anything
     
     sceneList[0] = new Menu();
     sceneList[1] = new Level(3);
@@ -133,7 +133,7 @@ void ProcessInput() {
 //        currentScene->state.player_lives = 3;
 //        currentScene->state.next = true;
         std::cout << "yes ma'am u hit that\n";
-//        SwitchToScene(1);
+        SwitchToScene(1);
     }
     
     // -------------- PLAYER VIEW ----------------
@@ -206,12 +206,9 @@ void Update() {
                 currentScene->state.objects[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
             }
             
-            // pls
-//            if (currentScene == sceneList[1]) {
-                for (int i = 0; i < ENEMY_COUNT; i++) {
-                    currentScene->state.enemies[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
-                }
-//            }
+            for (int i = 0; i < ENEMY_COUNT; i++) {
+                currentScene->state.enemies[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
+            }
             
             deltaTime -= FIXED_TIMESTEP;
         }
@@ -224,7 +221,7 @@ void Update() {
     glm::radians(currentScene->state.player->rotation.y), glm::vec3(0, -1.0f, 0));
     viewMatrix = glm::translate(viewMatrix, -currentScene->state.player->position);
     }
-    viewMatrix = glm::translate(viewMatrix, effects->viewOffset);
+//    viewMatrix = glm::translate(viewMatrix, effects->viewOffset);
 }
 
 
@@ -234,20 +231,7 @@ void Render() {
     // TODO: i think something here is still not right
     currentScene->Render(&program, &programUI);
     
-//    if (currentScene == sceneList[1]) { // TODO: is this the right comparison?
-//        // Entities
-//        for (int i = 0; i < OBJECT_COUNT; i++) {
-//            currentScene->state.objects[i].Render(&program);
-//        }
-//        
-//        for (int i = 0; i < ENEMY_COUNT; i++) {
-//            currentScene->state.enemies[i].Render(&program);
-//        }
-        
-//        currentScene->state.player->Render(&program);
-//    }
-    
-    effects->Render();
+//    effects->Render();
     
     SDL_GL_SwapWindow(displayWindow);
 }

@@ -25,7 +25,7 @@ void Level::Initialize() {
     
     state.objects[0].textureID = floorTextureID;
     state.objects[0].mesh = cubeMesh;
-    state.objects[0].position = glm::vec3(0, -0.25f, 0);
+    state.objects[0].position = glm::vec3(0, -1.25f, 0);
     state.objects[0].rotation = glm::vec3(0, 0, 0);
     state.objects[0].acceleration = glm::vec3(0, 0, 0);
     state.objects[0].scale = glm::vec3(20, 0.75f, 20);
@@ -118,4 +118,14 @@ void Level::Render(ShaderProgram *program, ShaderProgram *programUI) {
     GLuint fontTextureID = Util::LoadTexture("small_blocky.png");
 
     Util::DrawText(programUI, fontTextureID, "Lives: 3", 0.25, 0.0f, glm::vec3(-6, 3.2, 0));
+    
+    // Entities
+    for (int i = 0; i < OBJECT_COUNT; i++) {
+        state.objects[i].Render(program);
+    }
+    
+    for (int i = 0; i < ENEMY_COUNT; i++) {
+        state.enemies[i].Render(program);
+    }
+
 }
