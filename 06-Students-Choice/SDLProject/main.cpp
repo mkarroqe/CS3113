@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <SDL.h>
+#include <SDL_mixer.h>
 #include <SDL_opengl.h>
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -37,6 +38,9 @@ GLuint fontTextureID;
 Scene *currentScene;
 Scene *sceneList[2];
 
+Mix_Music *music;
+Mix_Chunk *sploosh;
+
 //Effects *effects;
 
 void SwitchToScene(int _nextScene, int _lives=3) {
@@ -62,6 +66,14 @@ void Initialize() {
     glViewport(0, 0, 1280, 720);
     
     program.Load("shaders/vertex_textured.glsl", "shaders/fragment_textured.glsl");
+    
+    // ----------------- MUSIC -----------------
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
+    music = Mix_LoadMUS("mary_aquatic_samba_trim.mp3");
+    Mix_PlayMusic(music, -1);
+    
+    sploosh = Mix_LoadWAV("mary_fish_sploosh.wav");
+    // ---------------- /MUSIC -----------------
     
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);

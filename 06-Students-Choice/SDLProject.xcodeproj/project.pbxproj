@@ -36,6 +36,8 @@
 		ECF558922467236300B918D5 /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECF558902467236200B918D5 /* Level.cpp */; };
 		ECF55895246730BB00B918D5 /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECF55893246730BB00B918D5 /* Menu.cpp */; };
 		ECF558982467BB4C00B918D5 /* Effects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECF558962467BB4900B918D5 /* Effects.cpp */; };
+		ECF5589C2468636E00B918D5 /* mary_fish_sploosh.wav in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5589A2468632F00B918D5 /* mary_fish_sploosh.wav */; };
+		ECF5589E2468641E00B918D5 /* mary_aquatic_samba_trim.mp3 in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5589D2468641700B918D5 /* mary_aquatic_samba_trim.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +62,8 @@
 				ECF5588924663CFD00B918D5 /* betta.jpg in CopyFiles */,
 				ECF5588C246714F800B918D5 /* betta.png in CopyFiles */,
 				ECF5588A24663D0000B918D5 /* betta.obj in CopyFiles */,
+				ECF5589E2468641E00B918D5 /* mary_aquatic_samba_trim.mp3 in CopyFiles */,
+				ECF5589C2468636E00B918D5 /* mary_fish_sploosh.wav in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +110,8 @@
 		ECF55894246730BB00B918D5 /* Menu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		ECF558962467BB4900B918D5 /* Effects.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Effects.cpp; sourceTree = "<group>"; };
 		ECF558972467BB4A00B918D5 /* Effects.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Effects.hpp; sourceTree = "<group>"; };
+		ECF5589A2468632F00B918D5 /* mary_fish_sploosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = mary_fish_sploosh.wav; path = audio/mary_fish_sploosh.wav; sourceTree = SOURCE_ROOT; };
+		ECF5589D2468641700B918D5 /* mary_aquatic_samba_trim.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = mary_aquatic_samba_trim.mp3; path = audio/mary_aquatic_samba_trim.mp3; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,8 @@
 				ECF5588724663CF700B918D5 /* betta.jpg */,
 				ECF5588B246714CC00B918D5 /* betta.png */,
 				ECF5588824663CF700B918D5 /* betta.obj */,
+				ECF5589D2468641700B918D5 /* mary_aquatic_samba_trim.mp3 */,
+				ECF5589A2468632F00B918D5 /* mary_fish_sploosh.wav */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
 				DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */,
 				DBDF1B592323DE8D007CECB1 /* ShaderProgram.h */,
