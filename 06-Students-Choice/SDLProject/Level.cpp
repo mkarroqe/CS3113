@@ -17,11 +17,6 @@ void Level::Initialize() {
     state.player->acceleration = glm::vec3(0, 0, 0);
     state.player->speed = 1.0f;
     
-//    state.player = new Entity();
-//    state.player->entityType = PLAYER;
-//    state.player->position = glm::vec3(0, 0.75f, 0);
-//    state.player->speed = 1.75f;
-    
     // ------------- OBJECTS ----------------
     state.objects = new Entity[OBJECT_COUNT];
     // -------------- GROUND ---------------
@@ -114,16 +109,33 @@ void Level::Initialize() {
 void Level::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.objects, OBJECT_COUNT);
     
-    for (int i = 0; i < OBJECT_COUNT; i++) {
-        state.objects[i].Update(deltaTime, state.player, state.objects, OBJECT_COUNT);
-    }
+//    for (int i = 0; i < OBJECT_COUNT; i++) {
+//        state.objects[i].Update(deltaTime, state.player, state.objects, OBJECT_COUNT);
+//        
+//        // idk
+//        std::cout<< "\t y pos is" << state.objects[i].position.y << "\n";
+//        if (((state.objects[i].position.y) > 2) && (state.objects[i].entityType == SNAIL)) {
+//            std::cout << "ya u got a winner\n";
+//            state.nextScene = 2;
+//        }
+//    }
+    
+    // lose code for lives/collisions here
+    // TODO:
+    
+    // win
+//    if ((state.objects[OBJECT_COUNT - 1].position.y) > 2) {
+//        std::cout << "ya u got a winner\n";
+//        state.nextScene = 2;
+//    }
 }
 
 void Level::Render(ShaderProgram *program, ShaderProgram *programUI) {
     // Text
     GLuint fontTextureID = Util::LoadTexture("small_blocky.png");
 
-    Util::DrawText(programUI, fontTextureID, "Lives: 3", 0.25, 0.0f, glm::vec3(-6, 3.2, 0));
+    std::string lives_text = "Lives: " + std::to_string(state.player_lives);
+    Util::DrawText(programUI, fontTextureID, lives_text, 0.25, 0.0f, glm::vec3(-6, 3.2, 0));
     
     // Entities
     for (int i = 0; i < OBJECT_COUNT; i++) {

@@ -20,6 +20,8 @@
 		DBDF1B6B2323DEEA007CECB1 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */; };
 		ECE497B52469F904005D462B /* mary fish sploosh.wav in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECE497B32469F8F0005D462B /* mary fish sploosh.wav */; };
 		ECE497B62469F907005D462B /* mary samba loop.mp3 in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECE497B42469F8F5005D462B /* mary samba loop.mp3 */; };
+		ECE497B9246A0192005D462B /* Win.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECE497B7246A0192005D462B /* Win.cpp */; };
+		ECE497BC246A0211005D462B /* Lose.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECE497BA246A0211005D462B /* Lose.cpp */; };
 		ECF5585B2463BB0A00B918D5 /* cube.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5585A2463BB0200B918D5 /* cube.obj */; };
 		ECF5585C2463BB0C00B918D5 /* gravel2.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF558592463BB0200B918D5 /* gravel2.jpg */; };
 		ECF5585F2463BD7000B918D5 /* fern_diffuse.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECF5585D2463BD5900B918D5 /* fern_diffuse.jpg */; };
@@ -89,6 +91,10 @@
 		DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
 		ECE497B32469F8F0005D462B /* mary fish sploosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "mary fish sploosh.wav"; path = "audio/mary fish sploosh.wav"; sourceTree = SOURCE_ROOT; };
 		ECE497B42469F8F5005D462B /* mary samba loop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "mary samba loop.mp3"; path = "audio/mary samba loop.mp3"; sourceTree = SOURCE_ROOT; };
+		ECE497B7246A0192005D462B /* Win.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Win.cpp; sourceTree = "<group>"; };
+		ECE497B8246A0192005D462B /* Win.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Win.h; sourceTree = "<group>"; };
+		ECE497BA246A0211005D462B /* Lose.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Lose.cpp; sourceTree = "<group>"; };
+		ECE497BB246A0211005D462B /* Lose.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lose.h; sourceTree = "<group>"; };
 		ECF558592463BB0200B918D5 /* gravel2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = gravel2.jpg; path = Assets/Ground/gravel2.jpg; sourceTree = SOURCE_ROOT; };
 		ECF5585A2463BB0200B918D5 /* cube.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = cube.obj; path = Assets/Ground/cube.obj; sourceTree = SOURCE_ROOT; };
 		ECF5585D2463BD5900B918D5 /* fern_diffuse.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fern_diffuse.jpg; path = Assets/Fern/fern_diffuse.jpg; sourceTree = SOURCE_ROOT; };
@@ -181,6 +187,10 @@
 				ECF558912467236200B918D5 /* Level.h */,
 				ECF55893246730BB00B918D5 /* Menu.cpp */,
 				ECF55894246730BB00B918D5 /* Menu.h */,
+				ECE497B7246A0192005D462B /* Win.cpp */,
+				ECE497B8246A0192005D462B /* Win.h */,
+				ECE497BA246A0211005D462B /* Lose.cpp */,
+				ECE497BB246A0211005D462B /* Lose.h */,
 			);
 			path = SDLProject;
 			sourceTree = "<group>";
@@ -256,6 +266,8 @@
 				ECF5588F2467220300B918D5 /* Scene.cpp in Sources */,
 				DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */,
 				DB4C61FB236CE8FD0096309D /* Entity.cpp in Sources */,
+				ECE497B9246A0192005D462B /* Win.cpp in Sources */,
+				ECE497BC246A0211005D462B /* Lose.cpp in Sources */,
 				ECF558922467236300B918D5 /* Level.cpp in Sources */,
 				DB1BA2952378E51A001F1FBC /* Mesh.cpp in Sources */,
 				DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */,

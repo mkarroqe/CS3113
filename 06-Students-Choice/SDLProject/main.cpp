@@ -20,6 +20,8 @@
 
 #include "Level.h"
 #include "Menu.h"
+#include "Win.h"
+#include "Lose.h"
 
 #define OBJECT_COUNT 11
 #define ENEMY_COUNT 1
@@ -35,18 +37,13 @@ glm::mat4 uiViewMatrix, uiProjectionMatrix;
 GLuint fontTextureID;
 
 Scene *currentScene;
-Scene *sceneList[2];
+Scene *sceneList[4];
 
 Mix_Music *music;
 Mix_Chunk *sploosh;
 
 void SwitchToScene(int _nextScene, int _lives=3) {
-//    if (_nextScene == 1) {
-//        currentScene = new Level(_lives);
-//    }
-//    else {
-        currentScene = sceneList[_nextScene];
-//    }
+    currentScene = sceneList[_nextScene];
     currentScene->Initialize();
 }
 
@@ -86,7 +83,6 @@ void Initialize() {
     uiProjectionMatrix = glm::ortho(-6.4f, 6.4f, -3.6f, 3.6f, -1.0f, 1.0f);
     programUI.SetProjectionMatrix(uiProjectionMatrix);
     programUI.SetViewMatrix(uiViewMatrix);
-//    programUI.SetColor(0.0f, 0.0f, 1.0f, 1.0f);
     
     glUseProgram(program.programID);
     
@@ -100,6 +96,8 @@ void Initialize() {
     
     sceneList[0] = new Menu();
     sceneList[1] = new Level(3);
+    sceneList[2] = new Win();
+    sceneList[3] = new Lose();
     SwitchToScene(0);
 }
 
@@ -196,6 +194,11 @@ void ProcessInput() {
                                 << curr_y_pos << ", "
                                 << curr_z_pos << ")\n";
     
+        // I KNOW IT SHOULDN'T BE HERE BUT HERE IT IS
+        if (curr_y_pos > 2) {
+//            SwitchToScene(2); // WIN
+            currentScene->state.nextScene = 2;
+        }
     
         if (keys[SDL_SCANCODE_LEFT]) {
             // TODO: make work while on wall
@@ -345,10 +348,10 @@ void ProcessInput() {
     //                currentScene->state.objects[snail_num].rotation.y = -360;
     //                currentScene->state.objects[snail_num].rotation.z = -90;
     //            }
-    //        }
-    //        else {
-    //            currentScene->state.objects[snail_num].position.y = -0.049f;
-    //            currentScene->state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
+            }
+            else {
+                currentScene->state.objects[snail_num].position.y = -0.049f;
+                currentScene->state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
             }
             
             std::cout << "you pressed LSHIFT at y pos: " << curr_y_pos << "\n";
@@ -385,8 +388,7 @@ void Update() {
             
             deltaTime -= FIXED_TIMESTEP;
         }
-    
-    
+        
     accumulator = deltaTime;
     
     viewMatrix = glm::mat4(1.0f);
@@ -418,14 +420,17 @@ int main(int argc, char* argv[]) {
         Update();
         Render();
         
-        // pls
-        if (currentScene->state.transitioning) {
+        if (currentScene->state.nextScene >= 0) {
+            if (currentScene->state.player_lives == 0) {
+                SwitchToScene(3); // lose
+            }
+            else {
+                SwitchToScene(currentScene->state.nextScene); // ..win?
+            }
+        }
+        else if (currentScene->state.transitioning) {
             SwitchToScene(1);
         }
-        
-//        if (currentScene->state.nextScene >= 0) {
-//            SwitchToScene(currentScene->state.nextScene, currentScene->state.player_lives);
-//        }
     }
     
     Shutdown();
