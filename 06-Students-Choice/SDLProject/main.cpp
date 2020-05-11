@@ -100,13 +100,7 @@ void Initialize() {
     
     sceneList[0] = new Menu();
     sceneList[1] = new Level(3);
-    SwitchToScene(1);
-    
-    currentScene->state.player = new Entity();
-    currentScene->state.player->entityType = PLAYER;
-    currentScene->state.player->position = glm::vec3(0, 0.5f, 0);
-    currentScene->state.player->acceleration = glm::vec3(0, 0, 0);
-    currentScene->state.player->speed = 1.0f;
+    SwitchToScene(0);
 }
 
 void ProcessInput() {
@@ -161,200 +155,204 @@ void ProcessInput() {
         }
     }
     
-    // -------------- PLAYER VIEW ----------------
-    if (keys[SDL_SCANCODE_A]) {
-        currentScene->state.player->rotation.y += 1.0f;
-        std::cout << "you pressed A\n";
-    }
-    else if (keys[SDL_SCANCODE_D]) {
-        currentScene->state.player->rotation.y -= 1.0f;
-        std::cout << "you pressed D\n";
-    }
-    
-    currentScene->state.player->velocity.x = 0;
-    currentScene->state.player->velocity.z = 0;
-    
-    if (keys[SDL_SCANCODE_W]) {
-        currentScene->state.player->velocity.z = cos(glm::radians(currentScene->state.player->rotation.y)) * -2.0f;
-        
-        currentScene->state.player->velocity.x = sin(glm::radians(currentScene->state.player->rotation.y)) * -2.0f;
-        
-        std::cout << "you pressed W\n";
-    }
-    else if (keys[SDL_SCANCODE_S]) {
-        
-        currentScene->state.player->velocity.z = cos(glm::radians(currentScene->state.player->rotation.y)) * 2.0f;
-        
-        currentScene->state.player->velocity.x = sin(glm::radians(currentScene->state.player->rotation.y)) * 2.0f;
-        
-        std::cout << "you pressed S\n";
-    }
-    
-    // --------------- SNAIL MOVES ----------------
-    int snail_num = OBJECT_COUNT - 1;
-    
-    float curr_x_pos = currentScene->state.objects[snail_num].position.x;
-    float curr_y_pos = currentScene->state.objects[snail_num].position.y;
-    float curr_z_pos = currentScene->state.objects[snail_num].position.z;
-    
-    std::cout << "pos is (" << curr_x_pos << ", "
-                            << curr_y_pos << ", "
-                            << curr_z_pos << ")\n";
-    
-    if (keys[SDL_SCANCODE_LEFT]) {
-        // TODO: make work while on wall
-//        if (curr_y_pos < -0.4) {
-            currentScene->state.objects[snail_num].rotation.y = 270;
-            currentScene->state.objects[snail_num].position.x -= 0.01f;
-//        }
-//
-//        // back wall
-//        else {
-//            currentScene->state.objects[snail_num].rotation.y = 270;
-//            currentScene->state.objects[snail_num].position.x -= 0.01f;
-//        }
-        
-        // front wall
-        
-        // right wall
-        
-        // left wall
-        
-        std::cout << "you pressed LEFT\n";
-    }
-    else if (keys[SDL_SCANCODE_RIGHT]) {
-        // TODO: make work while on wall
-        currentScene->state.objects[snail_num].rotation.y = 90;
-        currentScene->state.objects[snail_num].position.x += 0.01f;
-        
-//        // back wall
-//        else if (curr_z_pos > 3.5){
-//            currentScene->state.objects[snail_num].rotation.y = 270;
-//            currentScene->state.objects[snail_num].position.x -= 0.01f;
-//        }
-//
-//        // front wall
-//        else if (curr_z_pos < 1.3){
-//            currentScene->state.objects[snail_num].rotation.y = 270;
-//            currentScene->state.objects[snail_num].position.x -= 0.01f;
-//        }
-//
-//        // right wall
-//        else if (curr_x_pos > 1.3){
-//            currentScene->state.objects[snail_num].rotation.y = 270;
-//            currentScene->state.objects[snail_num].position.x -= 0.01f;
-//        }
-//
-//        // left wall
-//        else if (curr_x_pos < -1.3){
-//            currentScene->state.objects[snail_num].rotation.y = 270;
-//            currentScene->state.objects[snail_num].position.x -= 0.01f;
-//        }
-        
-        std::cout << "you pressed RIGHT\n";
-    }
-    
-    if (keys[SDL_SCANCODE_UP]) {
-        if (curr_y_pos < 0) {
-            currentScene->state.objects[snail_num].rotation.y = -180;
-            currentScene->state.objects[snail_num].position.z -= 0.01f;
+    // For level.. not most graceful implementation but it WORKS
+    if (currentScene == sceneList[1]) {
+        // -------------- PLAYER VIEW ----------------
+        if (keys[SDL_SCANCODE_A]) {
+            currentScene->state.player->rotation.y += 1.0f;
+            std::cout << "you pressed A\n";
+        }
+        else if (keys[SDL_SCANCODE_D]) {
+            currentScene->state.player->rotation.y -= 1.0f;
+            std::cout << "you pressed D\n";
         }
         
-        // on wall
-        else {
-            currentScene->state.objects[snail_num].rotation.y = -180;
+        currentScene->state.player->velocity.x = 0;
+        currentScene->state.player->velocity.z = 0;
+        
+        if (keys[SDL_SCANCODE_W]) {
+            currentScene->state.player->velocity.z = cos(glm::radians(currentScene->state.player->rotation.y)) * -2.0f;
+            
+            currentScene->state.player->velocity.x = sin(glm::radians(currentScene->state.player->rotation.y)) * -2.0f;
+            
+            std::cout << "you pressed W\n";
+        }
+        else if (keys[SDL_SCANCODE_S]) {
+            
+            currentScene->state.player->velocity.z = cos(glm::radians(currentScene->state.player->rotation.y)) * 2.0f;
+            
+            currentScene->state.player->velocity.x = sin(glm::radians(currentScene->state.player->rotation.y)) * 2.0f;
+            
+            std::cout << "you pressed S\n";
+        }
+    
+        // --------------- SNAIL MOVES ----------------
+        int snail_num = OBJECT_COUNT - 1;
+        float curr_x_pos = currentScene->state.objects[snail_num].position.x;
+        float curr_y_pos = currentScene->state.objects[snail_num].position.y;
+        float curr_z_pos = currentScene->state.objects[snail_num].position.z;
+        
+        std::cout << "pos is (" << curr_x_pos << ", "
+                                << curr_y_pos << ", "
+                                << curr_z_pos << ")\n";
+    
+    
+        if (keys[SDL_SCANCODE_LEFT]) {
+            // TODO: make work while on wall
+    //        if (curr_y_pos < -0.4) {
+                currentScene->state.objects[snail_num].rotation.y = 270;
+                currentScene->state.objects[snail_num].position.x -= 0.01f;
+    //        }
+    //
+    //        // back wall
+    //        else {
+    //            currentScene->state.objects[snail_num].rotation.y = 270;
+    //            currentScene->state.objects[snail_num].position.x -= 0.01f;
+    //        }
+            
+            // front wall
+            
+            // right wall
+            
+            // left wall
+            
+            std::cout << "you pressed LEFT\n";
+        }
+        else if (keys[SDL_SCANCODE_RIGHT]) {
+            // TODO: make work while on wall
+            currentScene->state.objects[snail_num].rotation.y = 90;
+            currentScene->state.objects[snail_num].position.x += 0.01f;
+            
+    //        // back wall
+    //        else if (curr_z_pos > 3.5){
+    //            currentScene->state.objects[snail_num].rotation.y = 270;
+    //            currentScene->state.objects[snail_num].position.x -= 0.01f;
+    //        }
+    //
+    //        // front wall
+    //        else if (curr_z_pos < 1.3){
+    //            currentScene->state.objects[snail_num].rotation.y = 270;
+    //            currentScene->state.objects[snail_num].position.x -= 0.01f;
+    //        }
+    //
+    //        // right wall
+    //        else if (curr_x_pos > 1.3){
+    //            currentScene->state.objects[snail_num].rotation.y = 270;
+    //            currentScene->state.objects[snail_num].position.x -= 0.01f;
+    //        }
+    //
+    //        // left wall
+    //        else if (curr_x_pos < -1.3){
+    //            currentScene->state.objects[snail_num].rotation.y = 270;
+    //            currentScene->state.objects[snail_num].position.x -= 0.01f;
+    //        }
+            
+            std::cout << "you pressed RIGHT\n";
         }
         
-        std::cout << "you pressed UP\n";
-    }
-    else if (keys[SDL_SCANCODE_DOWN]) {
-        if (curr_y_pos < 0) {
-            currentScene->state.objects[snail_num].rotation.y = -360;
-            currentScene->state.objects[snail_num].position.z += 0.01f;
+        if (keys[SDL_SCANCODE_UP]) {
+            if (curr_y_pos < 0) {
+                currentScene->state.objects[snail_num].rotation.y = -180;
+                currentScene->state.objects[snail_num].position.z -= 0.01f;
+            }
+            
+            // on wall
+            else {
+                currentScene->state.objects[snail_num].rotation.y = -180;
+            }
+            
+            std::cout << "you pressed UP\n";
         }
-        
-        // on wall
-        else {
-            currentScene->state.objects[snail_num].rotation.y = -360;
+        else if (keys[SDL_SCANCODE_DOWN]) {
+            if (curr_y_pos < 0) {
+                currentScene->state.objects[snail_num].rotation.y = -360;
+                currentScene->state.objects[snail_num].position.z += 0.01f;
+            }
+            
+            // on wall
+            else {
+                currentScene->state.objects[snail_num].rotation.y = -360;
+            }
+            
+            std::cout << "you pressed DOWN\n";
         }
-        
-        std::cout << "you pressed DOWN\n";
-    }
+    
                                                     
     // --------------- WALL CLIMBING --------------
-    if (keys[SDL_SCANCODE_RSHIFT]) {
-        if (curr_y_pos >= -0.051) {
-            currentScene->state.objects[snail_num].position.y += 0.02f;
-            
-            // Climb up front wall
-            if (curr_z_pos > 1.3) {//> 7) {
-                currentScene->state.objects[snail_num].rotation.x = -90;
-                currentScene->state.objects[snail_num].rotation.y = 360;
-            }
+        if (keys[SDL_SCANCODE_RSHIFT]) {
+            if (curr_y_pos >= -0.051) {
+                currentScene->state.objects[snail_num].position.y += 0.02f;
+                
+                // Climb up front wall
+                if (curr_z_pos > 1.3) {//> 7) {
+                    currentScene->state.objects[snail_num].rotation.x = -90;
+                    currentScene->state.objects[snail_num].rotation.y = 360;
+                }
 
-            // Climb up back wall
-            else if (curr_z_pos < 3.5) {// < -7) {
-                currentScene->state.objects[snail_num].rotation.x = 90;
-                currentScene->state.objects[snail_num].rotation.y = 180;
+                // Climb up back wall
+                else if (curr_z_pos < 3.5) {// < -7) {
+                    currentScene->state.objects[snail_num].rotation.x = 90;
+                    currentScene->state.objects[snail_num].rotation.y = 180;
+                }
+                
+                // Climb up right wall
+                else if (curr_x_pos > 1.3) { //> 5) {
+                    currentScene->state.objects[snail_num].rotation.x = 90;
+                    currentScene->state.objects[snail_num].rotation.y = 180;
+                    currentScene->state.objects[snail_num].rotation.z = -90;
+                }
+                
+                // Climb up left wall
+                else if (curr_x_pos > -1.3) { //> 5) {
+                    currentScene->state.objects[snail_num].rotation.x = 90;
+                    currentScene->state.objects[snail_num].rotation.y = 180;
+                    currentScene->state.objects[snail_num].rotation.z = 90;
+                }
+            }
+            else {
+                currentScene->state.objects[snail_num].position.y = -0.049f;
+                currentScene->state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
             }
             
-            // Climb up right wall
-            else if (curr_x_pos > 1.3) { //> 5) {
-                currentScene->state.objects[snail_num].rotation.x = 90;
-                currentScene->state.objects[snail_num].rotation.y = 180;
-                currentScene->state.objects[snail_num].rotation.z = -90;
+            std::cout << "you pressed RSHIFT at y pos: " << curr_y_pos << "\n";
+        }
+        else if (keys[SDL_SCANCODE_LSHIFT]) {
+            if (curr_y_pos >= -0.051) {
+                currentScene->state.objects[snail_num].position.y -= 0.01f;
+                
+                // Climb down front wall
+    //            if (curr_x_pos > 1.3) {
+                    currentScene->state.objects[snail_num].rotation.x = -90;
+                    currentScene->state.objects[snail_num].rotation.y = -180;
+    //            }
+                
+    //            // Climb down back wall
+    //            else if (curr_x_pos > 5) {
+    //                currentScene->state.objects[snail_num].rotation.x = 90;
+    //                currentScene->state.objects[snail_num].rotation.y = -360;
+    //            }
+    //
+    //            // Climb down right wall
+    //            else if (curr_x_pos > 5) {
+    //                currentScene->state.objects[snail_num].rotation.x = 90;
+    //                currentScene->state.objects[snail_num].rotation.y = -360;
+    //                currentScene->state.objects[snail_num].rotation.z = 90;
+    //            }
+    //
+    //            // Climb down left wall
+    //            else if (curr_x_pos > 5) {
+    //                currentScene->state.objects[snail_num].rotation.x = 90;
+    //                currentScene->state.objects[snail_num].rotation.y = -360;
+    //                currentScene->state.objects[snail_num].rotation.z = -90;
+    //            }
+    //        }
+    //        else {
+    //            currentScene->state.objects[snail_num].position.y = -0.049f;
+    //            currentScene->state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
             }
             
-            // Climb up left wall
-            else if (curr_x_pos > -1.3) { //> 5) {
-                currentScene->state.objects[snail_num].rotation.x = 90;
-                currentScene->state.objects[snail_num].rotation.y = 180;
-                currentScene->state.objects[snail_num].rotation.z = 90;
-            }
+            std::cout << "you pressed LSHIFT at y pos: " << curr_y_pos << "\n";
         }
-        else {
-            currentScene->state.objects[snail_num].position.y = -0.049f;
-            currentScene->state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
-        }
-        
-        std::cout << "you pressed RSHIFT at y pos: " << curr_y_pos << "\n";
-    }
-    else if (keys[SDL_SCANCODE_LSHIFT]) {
-        if (curr_y_pos >= -0.051) {
-            currentScene->state.objects[snail_num].position.y -= 0.01f;
-            
-            // Climb down front wall
-//            if (curr_x_pos > 1.3) {
-                currentScene->state.objects[snail_num].rotation.x = -90;
-                currentScene->state.objects[snail_num].rotation.y = -180;
-//            }
-            
-//            // Climb down back wall
-//            else if (curr_x_pos > 5) {
-//                currentScene->state.objects[snail_num].rotation.x = 90;
-//                currentScene->state.objects[snail_num].rotation.y = -360;
-//            }
-//
-//            // Climb down right wall
-//            else if (curr_x_pos > 5) {
-//                currentScene->state.objects[snail_num].rotation.x = 90;
-//                currentScene->state.objects[snail_num].rotation.y = -360;
-//                currentScene->state.objects[snail_num].rotation.z = 90;
-//            }
-//
-//            // Climb down left wall
-//            else if (curr_x_pos > 5) {
-//                currentScene->state.objects[snail_num].rotation.x = 90;
-//                currentScene->state.objects[snail_num].rotation.y = -360;
-//                currentScene->state.objects[snail_num].rotation.z = -90;
-//            }
-//        }
-//        else {
-//            currentScene->state.objects[snail_num].position.y = -0.049f;
-//            currentScene->state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
-        }
-        
-        std::cout << "you pressed LSHIFT at y pos: " << curr_y_pos << "\n";
     }
 }
 
