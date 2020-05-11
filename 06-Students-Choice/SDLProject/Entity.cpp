@@ -71,11 +71,19 @@ void Entity::Update(float deltaTime, Entity *player, Entity *objects, int object
     modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
     
     if (entityType == ENEMY) {
-        rotation.x -= 50 * deltaTime;
-        rotation.y += 70 * deltaTime;
-        rotation.z -= 10 * deltaTime;
+        rotation.z -= 90 * deltaTime;
+        if (position.x < 1) {
+            position.x += 0.01 * deltaTime;
+            position.z += 0.01 * deltaTime;
+        }
+        else {
+            position.x -= 0.01 * deltaTime;
+            position.z -= 0.01 * deltaTime;
+        }
+//        rotation.y += 70 * deltaTime;
+//        rotation.z -= 10 * deltaTime;
 
-        modelMatrix = glm::translate(modelMatrix, glm::vec3(sin(0.5 * position.y), 0.1, 0.1));
+//        modelMatrix = glm::translate(modelMatrix, glm::vec3(sin(0.5 * position.y), 0.1, 0.1));
     }
 }
 

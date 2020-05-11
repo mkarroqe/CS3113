@@ -41,8 +41,6 @@ Scene *sceneList[2];
 Mix_Music *music;
 Mix_Chunk *sploosh;
 
-Effects *effects;
-
 void SwitchToScene(int _nextScene, int _lives=3) {
 //    if (_nextScene == 1) {
 //        currentScene = new Level(_lives);
@@ -69,10 +67,10 @@ void Initialize() {
     
     // ----------------- MUSIC -----------------
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
-    music = Mix_LoadMUS("mary_aquatic_samba_trim.mp3");
+    music = Mix_LoadMUS("mary samba loop.mp3");
     Mix_PlayMusic(music, -1);
     
-    sploosh = Mix_LoadWAV("mary_fish_sploosh.wav");
+    sploosh = Mix_LoadWAV("mary fish sploosh.wav");
     // ---------------- /MUSIC -----------------
     
     viewMatrix = glm::mat4(1.0f);
@@ -104,9 +102,6 @@ void Initialize() {
     sceneList[0] = new Menu();
     sceneList[1] = new Level(3);
     SwitchToScene(1);
-    
-    effects = new Effects(projectionMatrix, viewMatrix);
-    effects->Start(GROW, 1.0f); // TODO: i don't think is is doing anything
 }
 
 void ProcessInput() {
@@ -322,11 +317,11 @@ void ProcessInput() {
         std::cout << "you pressed RSHIFT at y pos: " << curr_y_pos << "\n";
     }
     else if (keys[SDL_SCANCODE_LSHIFT]) {
-        if (curr_y_pos > -0.05) {
+        if (curr_y_pos > -0.051) {
             currentScene->state.objects[snail_num].position.y -= 0.01f;
             
             // Climb down front wall
-            if (curr_x_pos > 5) {
+            if (curr_x_pos > 1.3) {
                 currentScene->state.objects[snail_num].rotation.x = -90;
                 currentScene->state.objects[snail_num].rotation.y = -180;
             }
@@ -398,7 +393,6 @@ void Update() {
     glm::radians(currentScene->state.player->rotation.y), glm::vec3(0, -1.0f, 0));
     viewMatrix = glm::translate(viewMatrix, -currentScene->state.player->position);
     }
-    viewMatrix = glm::translate(viewMatrix, effects->viewOffset);
 }
 
 
@@ -406,8 +400,6 @@ void Render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     currentScene->Render(&program, &programUI);
-    
-    effects->Render();
     
     SDL_GL_SwapWindow(displayWindow);
 }
