@@ -43,12 +43,13 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 - Implementation of original assets not used in previous assignments
 
 ## In Progress:
-- making betta movements more realistic by rotating along y-axis
+-
 
 ## Future Development:
 - Make gameplay last longer
 - Set wall boundaries (maybe with more cubes?)
 - More natural fish movements
+  - making betta movements more realistic by rotating along y-axis
 - Shorter load time in between scenes?
 
 *Stay tuned!*
