@@ -19,7 +19,26 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 | `Left Shift` | Climb down a wall |
 
 # Demo
-*in progress*
+## Completed Tasks:
+- Menu Screen: name of game; enter to start
+- Moving AI Betta
+- Some way for player to win
+  - snail is moved "out" of tank when `y.pos > 2`
+  - win screen
+- 1 looping background music
+- 1 sound effect
+  - heard when pressing `Enter` on `Menu` screen
+  
+## In Progress:
+- Some way for player to lose
+  - Betta collision: lose life, back to center
+- Make gameplay last longer than 15 seconds
+  - wall boundaries
+  - betta follows you unless you're near a plant
+
+| ![](demos/title1.png) | ![](demos/title2.png) |
+| - | - |
+| ![](demos/game.png) | ![](demos/win.png) |
 
 # Asset Credits
 ## Music
