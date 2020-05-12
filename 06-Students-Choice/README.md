@@ -19,7 +19,31 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 | `Left Shift` | Climb down a wall |
 
 # Demo
-*in progress*
+## Completed Tasks:
+- Menu Screen: 
+  - Name of game is displayed
+  - `Enter` to start
+- Moving AI Betta
+- Some way for player to win
+  - Snail is moved "out" of tank when `y.pos > 2` (hold down `RSHIFT` for a few seconds to test)
+  - Win screen
+- 1 looping background music
+- 1 sound effect
+  - Played when pressing `Enter` on `Menu` screen
+- Implementation of original assets not used in previous assignments
+
+## In Progress:
+- Some way for player to lose
+  - Betta collision: lose life/back to center
+
+## Future Development:
+- Make gameplay last longer than 15 seconds
+  - Set wall boundaries (maybe with more cubes?)
+  - Betta follows you unless you're near a plant
+
+| ![](demos/title1.png) | ![](demos/title2.png) |
+| - | - |
+| ![](demos/game.png) | ![](demos/win.png) |
 
 # Asset Credits
 ## Music
@@ -42,5 +66,3 @@ Original music by [Charlie Reynolds](https://soundcloud.com/saxyjew).
 # Bloopers
 | ![](demos/bloopers/fern-overload.gif) | ![](demos/bloopers/angry-betta.gif) |
 | - | - |
-
-+ def more coming soon
