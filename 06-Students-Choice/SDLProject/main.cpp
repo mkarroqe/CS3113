@@ -193,10 +193,9 @@ void ProcessInput() {
         std::cout << "pos is (" << curr_x_pos << ", "
                                 << curr_y_pos << ", "
                                 << curr_z_pos << ")\n";
-    
+        
         // I KNOW IT SHOULDN'T BE HERE BUT HERE IT IS
         if (curr_y_pos > 2) {
-//            SwitchToScene(2); // WIN
             currentScene->state.nextScene = 2;
         }
     
@@ -384,6 +383,11 @@ void Update() {
             
             for (int i = 0; i < ENEMY_COUNT; i++) {
                 currentScene->state.enemies[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
+                
+                if(currentScene->state.objects[OBJECT_COUNT - 1].CheckCollision(&currentScene->state.enemies[i])) {
+        //            currentScene->state.player_lives -= 1;
+                    currentScene->state.nextScene = 3;
+                }
             }
             
             deltaTime -= FIXED_TIMESTEP;

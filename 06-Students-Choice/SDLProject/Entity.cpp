@@ -57,9 +57,6 @@ void Entity::Update(float deltaTime, Entity *player, Entity *objects, int object
                 break;
             }
         }
-        
-        // Collisions with enemy (there's only 1)
-//        if (CheckCollision())
     }
     
     modelMatrix = glm::mat4(1.0f);
@@ -80,6 +77,13 @@ void Entity::Update(float deltaTime, Entity *player, Entity *objects, int object
             position.x -= 0.01 * deltaTime;
             position.z -= 0.01 * deltaTime;
         }
+        
+//        // Collisions with enemy (there's only 1)
+//        if (CheckCollision(&objects[objectCount - 1])) {
+//            state.player_lives -= 1;
+//            state.nextScene = 3; //TODO: figure out what to return
+//        }
+        
 //        rotation.y += 70 * deltaTime;
 //        rotation.z -= 10 * deltaTime;
 

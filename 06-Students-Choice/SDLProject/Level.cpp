@@ -111,7 +111,7 @@ void Level::Update(float deltaTime) {
     
 //    for (int i = 0; i < OBJECT_COUNT; i++) {
 //        state.objects[i].Update(deltaTime, state.player, state.objects, OBJECT_COUNT);
-//        
+//
 //        // idk
 //        std::cout<< "\t y pos is" << state.objects[i].position.y << "\n";
 //        if (((state.objects[i].position.y) > 2) && (state.objects[i].entityType == SNAIL)) {
