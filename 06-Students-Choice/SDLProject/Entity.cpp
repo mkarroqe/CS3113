@@ -24,7 +24,7 @@ bool Entity::CheckCollision(Entity *other)
     float xdist = fabs(position.x - other->position.x) - ((width + other->width) / 2.0f);
     float ydist = fabs(position.y - other->position.y) - ((height + other->height) / 2.0f);
     float zdist = fabs(position.z - other->position.z) - ((depth + other->depth) / 2.0f);
-    if (xdist < 0 && ydist < 0 && zdist < 0) return true;
+    if (xdist < -0.75 && ydist < -0.75 && zdist < -0.75) return true; // TODO: check bc this is some fudging
 
     return false;
 }
@@ -55,7 +55,7 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
             if ((CheckCollision(&objects[i])) && (objects[i].entityType == PLANT)) {
                 std::cout << "plant collision\n";
                 position = previousPosition;
-                break;
+//                break;
             }
         }
     }
@@ -71,19 +71,43 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
     if (entityType == ENEMY) {
 //        rotation.z -= 90 * deltaTime;
         
-        if (position.x < snail->position.x) {
-            position.x += 1 * deltaTime;
-        }
-        else {
-            position.x -= 1 * deltaTime;
+        // BETTA MOVEMENT BASED ON IF SNAIL IS NEAR A PLANT
+        for (int i = 0; i < objectCount - 1; i++) {
+            // if snail is not near plant, follow
+            if (!(objects[i].CheckCollision(snail))) {
+                if (position.x < snail->position.x) {
+                    position.x += 1 * deltaTime;
+                }
+                else {
+                    position.x -= 1 * deltaTime;
+                }
+                
+                if (position.z < snail->position.x) {
+                    position.z += 1 * deltaTime;
+                }
+                else {
+                    position.z -= 1 * deltaTime;
+                }
+            }
+            // if snail is near a plant, go the opposite way TODO: check this makes sense
+            else {
+                if (position.x < snail->position.x) {
+                    position.x -= 1 * deltaTime;
+                }
+                else {
+                    position.x += 1 * deltaTime;
+                }
+                
+                if (position.z < snail->position.x) {
+                    position.z -= 1 * deltaTime;
+                }
+                else {
+                    position.z += 1 * deltaTime;
+                }
+            }
         }
         
-        if (position.z < snail->position.x) {
-            position.z += 1 * deltaTime;
-        }
-        else {
-            position.z -= 1 * deltaTime;
-        }
+        
     }
 }
 
