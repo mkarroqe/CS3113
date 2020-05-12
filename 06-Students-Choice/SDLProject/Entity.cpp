@@ -60,8 +60,8 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
     
     if (entityType == ENEMY) {
         // something subtle here..
-        rotation.z -= 0.5 * deltaTime;
-        rotation.y -= 0.5 * deltaTime;
+//        rotation.z -= 0.5 * deltaTime;
+//        rotation.y -= 0.5 * deltaTime;
         
         if (CheckCollision(snail)) {
             std::cout << "snail collision w betta\n";
@@ -104,9 +104,9 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
             }
             // if you haven't collided before, live ur life, betta
             else {
-                position.x += rand() % 20 - 10;
-                position.y -= 0.01;
-                position.z += rand() % 20 - 10;
+                position.x += 0;//rand() % 20 - 10;
+                position.y -= 0; //0.01;
+                position.z += 0; //rand() % 20 - 10;
             }
         }
         

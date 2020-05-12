@@ -86,6 +86,7 @@ void Level::Initialize() {
     int snail_num = num_ferns + num_grass + num_palms + 1;
     state.objects[snail_num].textureID = snailTextureID;
     state.objects[snail_num].mesh = snailMesh;
+    state.objects[snail_num].speed = 12.0;
     state.objects[snail_num].scale = glm::vec3(14.0f, 14.0f, 14.0f);
     state.objects[snail_num].position = glm::vec3(0.85, -0.05, -2);
     state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
@@ -102,7 +103,7 @@ void Level::Initialize() {
     state.enemies[0].mesh = bettaMesh;
     state.enemies[0].scale = glm::vec3(0.45f, 0.45f, 0.45f);
     state.enemies[0].position = glm::vec3(-0.85, 0.5, -2);
-    state.enemies[0].rotation = glm::vec3(270, 0, 0);
+    state.enemies[0].rotation = glm::vec3(270, -1, 0);
     state.enemies[0].entityType = ENEMY;
 }
 

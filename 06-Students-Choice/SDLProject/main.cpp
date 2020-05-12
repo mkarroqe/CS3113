@@ -201,10 +201,10 @@ void ProcessInput() {
     
         if (keys[SDL_SCANCODE_LEFT]) {
             // TODO: make work while on wall
-    //        if (curr_y_pos < -0.4) {
+            if (curr_y_pos < 0 && curr_x_pos > -10) {
                 currentScene->state.objects[snail_num].rotation.y = 270;
                 currentScene->state.objects[snail_num].position.x -= 0.01f;
-    //        }
+            }
     //
     //        // back wall
     //        else {
@@ -222,8 +222,10 @@ void ProcessInput() {
         }
         else if (keys[SDL_SCANCODE_RIGHT]) {
             // TODO: make work while on wall
-            currentScene->state.objects[snail_num].rotation.y = 90;
-            currentScene->state.objects[snail_num].position.x += 0.01f;
+            if (curr_y_pos < 0 && curr_x_pos < 10) {
+                currentScene->state.objects[snail_num].rotation.y = 90;
+                currentScene->state.objects[snail_num].position.x += 0.01f;
+            }
             
     //        // back wall
     //        else if (curr_z_pos > 3.5){
@@ -253,7 +255,7 @@ void ProcessInput() {
         }
         
         if (keys[SDL_SCANCODE_UP]) {
-            if (curr_y_pos < 0) {
+            if (curr_y_pos < 0 && curr_z_pos > -10) {
                 currentScene->state.objects[snail_num].rotation.y = -180;
                 currentScene->state.objects[snail_num].position.z -= 0.01f;
             }
@@ -266,7 +268,7 @@ void ProcessInput() {
             std::cout << "you pressed UP\n";
         }
         else if (keys[SDL_SCANCODE_DOWN]) {
-            if (curr_y_pos < 0) {
+            if (curr_y_pos < 0 && curr_z_pos < 10) {
                 currentScene->state.objects[snail_num].rotation.y = -360;
                 currentScene->state.objects[snail_num].position.z += 0.01f;
             }
@@ -283,29 +285,35 @@ void ProcessInput() {
     // --------------- WALL CLIMBING --------------
         if (keys[SDL_SCANCODE_RSHIFT]) {
             if (curr_y_pos >= -0.051) {
-                currentScene->state.objects[snail_num].position.y += 0.02f;
-                
                 // Climb up front wall
-                if (curr_z_pos > 1.3) {//> 7) {
+                if (curr_z_pos > 9.7) {
+                    currentScene->state.objects[snail_num].position.y += 0.02f;
+                    
                     currentScene->state.objects[snail_num].rotation.x = -90;
                     currentScene->state.objects[snail_num].rotation.y = 360;
                 }
 
                 // Climb up back wall
-                else if (curr_z_pos < 3.5) {// < -7) {
+                else if (curr_z_pos < -9.7) {
+                    currentScene->state.objects[snail_num].position.y += 0.02f;
+                    
                     currentScene->state.objects[snail_num].rotation.x = 90;
                     currentScene->state.objects[snail_num].rotation.y = 180;
                 }
                 
                 // Climb up right wall
-                else if (curr_x_pos > 1.3) { //> 5) {
+                else if (curr_x_pos > 9.7) {
+                    currentScene->state.objects[snail_num].position.y += 0.02f;
+                    
                     currentScene->state.objects[snail_num].rotation.x = 90;
                     currentScene->state.objects[snail_num].rotation.y = 180;
                     currentScene->state.objects[snail_num].rotation.z = -90;
                 }
                 
                 // Climb up left wall
-                else if (curr_x_pos > -1.3) { //> 5) {
+                else if (curr_x_pos < -9.7) {
+                    currentScene->state.objects[snail_num].position.y += 0.02f;
+    
                     currentScene->state.objects[snail_num].rotation.x = 90;
                     currentScene->state.objects[snail_num].rotation.y = 180;
                     currentScene->state.objects[snail_num].rotation.z = 90;
@@ -320,33 +328,39 @@ void ProcessInput() {
         }
         else if (keys[SDL_SCANCODE_LSHIFT]) {
             if (curr_y_pos >= -0.051) {
-                currentScene->state.objects[snail_num].position.y -= 0.01f;
-                
                 // Climb down front wall
-    //            if (curr_x_pos > 1.3) {
+                if (curr_z_pos > 9.7) {
+                    currentScene->state.objects[snail_num].position.y -= 0.01f;
+                    
                     currentScene->state.objects[snail_num].rotation.x = -90;
                     currentScene->state.objects[snail_num].rotation.y = -180;
-    //            }
+                }
                 
-    //            // Climb down back wall
-    //            else if (curr_x_pos > 5) {
-    //                currentScene->state.objects[snail_num].rotation.x = 90;
-    //                currentScene->state.objects[snail_num].rotation.y = -360;
-    //            }
-    //
-    //            // Climb down right wall
-    //            else if (curr_x_pos > 5) {
-    //                currentScene->state.objects[snail_num].rotation.x = 90;
-    //                currentScene->state.objects[snail_num].rotation.y = -360;
-    //                currentScene->state.objects[snail_num].rotation.z = 90;
-    //            }
-    //
-    //            // Climb down left wall
-    //            else if (curr_x_pos > 5) {
-    //                currentScene->state.objects[snail_num].rotation.x = 90;
-    //                currentScene->state.objects[snail_num].rotation.y = -360;
-    //                currentScene->state.objects[snail_num].rotation.z = -90;
-    //            }
+                // Climb down back wall
+                else if (curr_z_pos < -9.7) {
+                    currentScene->state.objects[snail_num].position.y -= 0.01f;
+                    
+                    currentScene->state.objects[snail_num].rotation.x = 90;
+                    currentScene->state.objects[snail_num].rotation.y = -360;
+                }
+    
+                // Climb down right wall
+                else if (curr_x_pos > 9.7) {
+                    currentScene->state.objects[snail_num].position.y -= 0.01f;
+                    
+                    currentScene->state.objects[snail_num].rotation.x = 90;
+                    currentScene->state.objects[snail_num].rotation.y = -360;
+                    currentScene->state.objects[snail_num].rotation.z = 90;
+                }
+    
+                // Climb down left wall
+                else if (curr_x_pos < -9.7) {
+                    currentScene->state.objects[snail_num].position.y -= 0.01f;
+                    
+                    currentScene->state.objects[snail_num].rotation.x = 90;
+                    currentScene->state.objects[snail_num].rotation.y = -360;
+                    currentScene->state.objects[snail_num].rotation.z = -90;
+                }
             }
             else {
                 currentScene->state.objects[snail_num].position.y = -0.049f;
