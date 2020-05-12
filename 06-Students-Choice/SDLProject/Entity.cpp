@@ -50,14 +50,6 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
         }
     }
     
-    modelMatrix = glm::mat4(1.0f);
-    modelMatrix = glm::translate(modelMatrix, position);
-    modelMatrix = glm::scale(modelMatrix, scale);
-    
-    modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-    modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-    modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-    
     if (entityType == ENEMY) {
         // something subtle here..
 //        rotation.z -= 0.5 * deltaTime;
@@ -89,29 +81,35 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
             // if snail is near a plant, go the opposite way
             else if (previouslyCollided) {
                 if (position.x < snail->position.x) {
-                    position.x -= 1 * deltaTime;
+                    position.x -= 0.41 * deltaTime;
                 }
                 else {
-                    position.x += 1 * deltaTime;
+                    position.x += 0.41 * deltaTime;
                 }
                 
                 if (position.z < snail->position.z) {
-                    position.z -= 1 * deltaTime;
+                    position.z -= 0.41 * deltaTime;
                 }
                 else {
-                    position.z += 1 * deltaTime;
+                    position.z += 0.41 * deltaTime;
                 }
             }
             // if you haven't collided before, live ur life, betta
             else {
-                position.x += 0;//rand() % 20 - 10;
-                position.y -= 0; //0.01;
-                position.z += 0; //rand() % 20 - 10;
+                position.x = 0;//rand() % 20 - 10;
+                position.y = 0; //0.01;
+                position.z = 0; //rand() % 20 - 10;
             }
         }
-        
-        
     }
+    
+    modelMatrix = glm::mat4(1.0f);
+    modelMatrix = glm::translate(modelMatrix, position);
+    modelMatrix = glm::scale(modelMatrix, scale);
+    
+    modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+    modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+    modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
 void Entity::Render(ShaderProgram *program) {
