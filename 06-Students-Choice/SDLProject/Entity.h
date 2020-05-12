@@ -42,6 +42,7 @@ public:
     
     Entity();
     
+//    void Timer();
     bool CheckCollision(Entity *other);
     void Update(float deltaTime, Entity *snail, Entity *player, Entity *objects, int objectCount);
     void Render(ShaderProgram *program);

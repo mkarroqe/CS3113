@@ -16,6 +16,8 @@ Entity::Entity()
     depth = 1.0f;
 }
 
+//void Entity::Timer() { }
+
 bool Entity::CheckCollision(Entity *other)
 {
     float xdist = fabs(position.x - other->position.x) - ((width + other->width) / 2.0f);
@@ -62,9 +64,10 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
         
         // BETTA MOVEMENT BASED ON IF SNAIL IS NEAR A PLANT
         for (int i = 0; i < objectCount - 1; i++) {
-            // if snail is not near plant, follow
+            // if snail is not near plant, follow and swim lower
             int offset = 0.1;
             if (!(objects[i].CheckCollision(snail))) {
+                // x pos
                 if (position.x < snail->position.x) {
                     position.x += 0.01 * deltaTime;
                 }
@@ -72,6 +75,12 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
                     position.x -= 0.01 * deltaTime;
                 }
                 
+//                // y pos
+//                if (position.y < snail->position.y) {
+//                    position.y += 0.001 * deltaTime; // but subtle
+//                }
+                
+                // z pos
                 if (position.z < snail->position.z + offset) {
                     position.z += 0.01 * deltaTime;
                 }
@@ -97,8 +106,18 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
             }
             // if you haven't collided before, live ur life, betta
             else {
-                position.x += 0.1;
-                position.z -= 0.1;
+                // within reason ofc
+                if (position.x < 10 && position.x > -10)
+                    position.x += 0.05;
+                else {
+                    position.x -= 0.05; // maybe we'll get rid of this
+                }
+                
+                if (position.z < 10 && position.z > -10)
+                    position.z -= 0.05;
+                else {
+                    position.z += 0.05; // maybe we'll get rid of this
+                }
             }
         }
     }
