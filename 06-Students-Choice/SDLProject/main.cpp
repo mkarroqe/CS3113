@@ -393,7 +393,6 @@ void Update() {
         while (deltaTime >= FIXED_TIMESTEP) {
             currentScene->state.player->Update(FIXED_TIMESTEP, snail, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
             
-            // TODO: uncomment
             if (currentScene->state.objects[OBJECT_COUNT - 1].CheckCollision(&currentScene->state.enemies[0])) {
                 std::cout << "COLLISION\n";
                 Mix_PlayChannel(-1, sploosh, 0);

@@ -102,7 +102,7 @@ void Level::Initialize() {
     state.enemies[0].textureID = bettaTextureID;
     state.enemies[0].mesh = bettaMesh;
     state.enemies[0].scale = glm::vec3(0.45f, 0.45f, 0.45f);
-    state.enemies[0].position = glm::vec3(-0.85, 0.5, -8);
+    state.enemies[0].position = glm::vec3(-0.85, 0.65, -8);
     state.enemies[0].rotation = glm::vec3(270, -35, 0);
     state.enemies[0].entityType = ENEMY;
 }
