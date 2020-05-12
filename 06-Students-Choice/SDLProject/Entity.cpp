@@ -52,7 +52,7 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
             // Ignore collisions with the floor
             if (objects[i].entityType == FLOOR) continue;
 
-            if (CheckCollision(&objects[i])) {
+            if ((CheckCollision(&objects[i])) && (objects[i].entityType == PLANT)) {
                 std::cout << "plant collision\n";
                 position = previousPosition;
                 break;
