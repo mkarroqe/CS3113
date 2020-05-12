@@ -1,6 +1,6 @@
 #include "Level.h"
 
-#define OBJECT_COUNT 11
+#define OBJECT_COUNT 20
 #define ENEMY_COUNT 1
 
 Level::Level(int _lives) {
@@ -37,7 +37,7 @@ void Level::Initialize() {
     Mesh *fernMesh = new Mesh();
     fernMesh->LoadOBJ("fern.obj", 1);
     
-    int num_ferns = 3;
+    int num_ferns = (OBJECT_COUNT - 2) / 3;
     for (int i = 0; i < num_ferns; i++) {
         int num = 1 + i;
         state.objects[num].textureID = fernTextureID;
@@ -53,7 +53,7 @@ void Level::Initialize() {
     Mesh *grassMesh = new Mesh();
     grassMesh->LoadOBJ("Low Grass.obj", 1);
 
-    int num_grass = 3;
+    int num_grass = (OBJECT_COUNT - 2) / 3;
     for (int i = 0; i < num_grass; i++) {
         int num = 1 + num_ferns + i;
         state.objects[num].textureID = grassTextureID;
@@ -68,7 +68,7 @@ void Level::Initialize() {
     Mesh *palmMesh = new Mesh();
     palmMesh->LoadOBJ("Palm_01.obj", 1);
 
-    int num_palms = 3;
+    int num_palms = (OBJECT_COUNT - 2) / 3;
     for (int i = 0; i < num_palms; i++) {
         int num = 1 + num_ferns + num_grass + i;
         state.objects[num].textureID = palmTextureID;

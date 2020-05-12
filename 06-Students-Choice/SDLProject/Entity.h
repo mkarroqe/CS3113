@@ -33,6 +33,8 @@ public:
     float height;
     float depth;
     
+    bool previouslyCollided = false;
+    
     GLuint textureID;
     Mesh *mesh;
     
