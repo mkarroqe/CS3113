@@ -26,7 +26,10 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
   - Name of game is displayed
   - `Enter` to start
 - Moving AI Betta
-  - - Betta follows you unless you're near a plant
+  - Betta follows you unless you're near a plant
+  - If you're near a plant, the betta swims away in the opposite direction
+  - Betta slowly swims lower and lower until it hits the snail 
+  
 - Some way for player to win
   - Snail is moved "out" of tank when `y.pos > 2` (hold down `RSHIFT` for a few seconds to test)
   - `Win` screen
@@ -36,13 +39,11 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 - 1 looping background music
 - 1 sound effect
   - Played when pressing `Enter` on `Menu` screen
+  - Also played when betta and snail collide
 - Implementation of original assets not used in previous assignments
 
-> Some notes: the collision box for my betta seems to be too large. The snail's start positition is outside the box, but moving `left` will cause a life to be lost. To test winning, hold down `RSHIFT` for a few seconds and the snail will climb to the "top" of the tank.
-
 ## In Progress:
-- betta start position should be at the far distance so snail has a chance
-- betta needs to swoop in (changing y-position) to collide w snail 
+- making betta movements more realistic by rotating along y-axis
 
 ## Future Development:
 - Make gameplay last longer
