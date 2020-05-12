@@ -29,7 +29,7 @@ bool Entity::CheckCollision(Entity *other)
     return false;
 }
 
-void Entity::Update(float deltaTime, Entity *player, Entity *objects, int objectCount)
+void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *objects, int objectCount)
 {
     glm::vec3 previousPosition = position;
     
@@ -69,14 +69,28 @@ void Entity::Update(float deltaTime, Entity *player, Entity *objects, int object
     
     if (entityType == ENEMY) {
         rotation.z -= 90 * deltaTime;
-        if (position.x < 1) {
-            position.x += 0.01 * deltaTime;
-            position.z += 0.01 * deltaTime;
+        
+        if (position.x < snail->position.x) {
+            position.x += 1 * deltaTime;
         }
         else {
-            position.x -= 0.01 * deltaTime;
-            position.z -= 0.01 * deltaTime;
+            position.x -= 1 * deltaTime;
         }
+        
+        if (position.z < snail->position.x) {
+            position.z += 1 * deltaTime;
+        }
+        else {
+            position.z -= 1 * deltaTime;
+        }
+//        if (position.x < 1) {
+//            position.x += 0.01 * deltaTime;
+//            position.z += 0.01 * deltaTime;
+//        }
+//        else {
+//            position.x -= 0.01 * deltaTime;
+//            position.z -= 0.01 * deltaTime;
+//        }
         
 //        modelMatrix = glm::translate(modelMatrix, glm::vec3(sin(0.5 * position.y), 0.1, 0.1));
     }

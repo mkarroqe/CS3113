@@ -373,22 +373,24 @@ void Update() {
         return;
     }
     
+    Entity *snail = &currentScene->state.objects[OBJECT_COUNT - 1];
+    
     if (currentScene == sceneList[1]) {
         while (deltaTime >= FIXED_TIMESTEP) {
-            currentScene->state.player->Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
+            currentScene->state.player->Update(FIXED_TIMESTEP, snail, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
             
-            if (currentScene->state.objects[OBJECT_COUNT - 1].CheckCollision(&currentScene->state.enemies[0])) {
-                std::cout << "COLLISION\n";
-                currentScene->state.player_lives -= 1;
-                currentScene->state.nextScene = 1;
-            }
+//            if (currentScene->state.objects[OBJECT_COUNT - 1].CheckCollision(&currentScene->state.enemies[0])) {
+//                std::cout << "COLLISION\n";
+//                currentScene->state.player_lives -= 1;
+//                currentScene->state.nextScene = 1;
+//            }
             
             for (int i = 0; i < OBJECT_COUNT; i++) {
-                currentScene->state.objects[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
+                currentScene->state.objects[i].Update(FIXED_TIMESTEP, snail, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
             }
             
             for (int i = 0; i < ENEMY_COUNT; i++) {
-                currentScene->state.enemies[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
+                currentScene->state.enemies[i].Update(FIXED_TIMESTEP, snail, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
             }
             
             deltaTime -= FIXED_TIMESTEP;

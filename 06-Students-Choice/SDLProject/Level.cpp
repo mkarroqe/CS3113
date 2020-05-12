@@ -107,27 +107,8 @@ void Level::Initialize() {
 }
 
 void Level::Update(float deltaTime) {
-    state.player->Update(deltaTime, state.player, state.objects, OBJECT_COUNT);
-    
-//    for (int i = 0; i < OBJECT_COUNT; i++) {
-//        state.objects[i].Update(deltaTime, state.player, state.objects, OBJECT_COUNT);
-//
-//        // idk
-//        std::cout<< "\t y pos is" << state.objects[i].position.y << "\n";
-//        if (((state.objects[i].position.y) > 2) && (state.objects[i].entityType == SNAIL)) {
-//            std::cout << "ya u got a winner\n";
-//            state.nextScene = 2;
-//        }
-//    }
-    
-    // lose code for lives/collisions here
-    // TODO:
-    
-    // win
-//    if ((state.objects[OBJECT_COUNT - 1].position.y) > 2) {
-//        std::cout << "ya u got a winner\n";
-//        state.nextScene = 2;
-//    }
+    Entity *snail = &state.objects[OBJECT_COUNT - 1];
+    state.player->Update(deltaTime, snail, state.player, state.objects, OBJECT_COUNT);
 }
 
 void Level::Render(ShaderProgram *program, ShaderProgram *programUI) {
