@@ -26,20 +26,28 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 - Moving AI Betta
 - Some way for player to win
   - Snail is moved "out" of tank when `y.pos > 2` (hold down `RSHIFT` for a few seconds to test)
-  - Win screen
+  - `Win` screen
+ - Some way for player to lose
+  - Betta collision: life lost and level is restarted
+  - after 3 lives are lost, `Lose` screen
 - 1 looping background music
 - 1 sound effect
   - Played when pressing `Enter` on `Menu` screen
 - Implementation of original assets not used in previous assignments
 
+> Some notes: the collision box for my betta seems to be too large. The snail's start positition is outside the box, but moving `left` will cause a life to be lost. To test winning, hold down `RSHIFT` for a few seconds and the snail will climb to the "top" of the tank.
+
 ## In Progress:
-- Some way for player to lose
-  - Betta collision: lose life/back to center
+-
 
 ## Future Development:
 - Make gameplay last longer
 - Set wall boundaries (maybe with more cubes?)
 - Betta follows you unless you're near a plant
+- More natural fish movements
+- Shorter load time in between scenes?
+
+*Stay tuned!*
 
 | ![](demos/title1.png) | ![](demos/title2.png) |
 | - | - |
