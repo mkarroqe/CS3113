@@ -396,6 +396,7 @@ void Update() {
             // TODO: uncomment
             if (currentScene->state.objects[OBJECT_COUNT - 1].CheckCollision(&currentScene->state.enemies[0])) {
                 std::cout << "COLLISION\n";
+                Mix_PlayChannel(-1, sploosh, 0);
                 currentScene->state.player_lives -= 1;
                 currentScene->state.objects[OBJECT_COUNT - 1].previouslyCollided = false;
                 currentScene->state.nextScene = 1;
