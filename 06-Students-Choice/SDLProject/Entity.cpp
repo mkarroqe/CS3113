@@ -110,8 +110,9 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
             // if you haven't collided before, live ur life, betta
             else {
                 // within reason ofc
-                if (position.x < 10 && position.x > -10)
+                if (position.x < 10 && position.x > -10) {
                     position.x += 0.05;
+                }
                 else {
                     position.x -= 0.05; // maybe we'll get rid of this
                 }
