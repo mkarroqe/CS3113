@@ -377,17 +377,18 @@ void Update() {
         while (deltaTime >= FIXED_TIMESTEP) {
             currentScene->state.player->Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
             
+            if (currentScene->state.objects[OBJECT_COUNT - 1].CheckCollision(&currentScene->state.enemies[0])) {
+                std::cout << "COLLISION\n";
+                currentScene->state.player_lives -= 1;
+                currentScene->state.nextScene = 1;
+            }
+            
             for (int i = 0; i < OBJECT_COUNT; i++) {
                 currentScene->state.objects[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
             }
             
             for (int i = 0; i < ENEMY_COUNT; i++) {
                 currentScene->state.enemies[i].Update(FIXED_TIMESTEP, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
-                
-                if(currentScene->state.objects[OBJECT_COUNT - 1].CheckCollision(&currentScene->state.enemies[i])) {
-        //            currentScene->state.player_lives -= 1;
-                    currentScene->state.nextScene = 3;
-                }
             }
             
             deltaTime -= FIXED_TIMESTEP;
@@ -427,6 +428,9 @@ int main(int argc, char* argv[]) {
         if (currentScene->state.nextScene >= 0) {
             if (currentScene->state.player_lives == 0) {
                 SwitchToScene(3); // lose
+            }
+            else if (currentScene->state.nextScene == 1 && currentScene->state.player_lives < 3) {
+                SwitchToScene(1, currentScene->state.player_lives);
             }
             else {
                 SwitchToScene(currentScene->state.nextScene); // ..win?

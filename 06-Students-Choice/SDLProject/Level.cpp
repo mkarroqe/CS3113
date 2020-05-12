@@ -87,7 +87,7 @@ void Level::Initialize() {
     state.objects[snail_num].textureID = snailTextureID;
     state.objects[snail_num].mesh = snailMesh;
     state.objects[snail_num].scale = glm::vec3(14.0f, 14.0f, 14.0f);
-    state.objects[snail_num].position = glm::vec3(-0.25, -0.05, -2);
+    state.objects[snail_num].position = glm::vec3(0.75, -0.05, -2);
     state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
     state.objects[snail_num].entityType = SNAIL;
     
