@@ -31,12 +31,14 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 - 1 sound effect
   - Played when pressing `Enter` on `Menu` screen
 - Implementation of original assets not used in previous assignments
-  
+
 ## In Progress:
 - Some way for player to lose
-  - Betta collision: lose life, back to center
+  - Betta collision: lose life/back to center
+
+## Future Development:
 - Make gameplay last longer than 15 seconds
-  - Set wall boundaries
+  - Set wall boundaries (maybe with more cubes?)
   - Betta follows you unless you're near a plant
 
 | ![](demos/title1.png) | ![](demos/title2.png) |
