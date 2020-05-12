@@ -23,7 +23,7 @@
 #include "Win.h"
 #include "Lose.h"
 
-#define OBJECT_COUNT 20
+#define OBJECT_COUNT 56
 #define ENEMY_COUNT 1
 
 SDL_Window* displayWindow;

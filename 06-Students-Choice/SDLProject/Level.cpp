@@ -1,6 +1,6 @@
 #include "Level.h"
 
-#define OBJECT_COUNT 20
+#define OBJECT_COUNT 56
 #define ENEMY_COUNT 1
 
 Level::Level(int _lives) {
