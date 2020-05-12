@@ -11,9 +11,6 @@ Entity::Entity()
     modelMatrix = glm::mat4(1.0f);
     
     speed = 0.0f;
-    
-    billboard = false;
-    
     width = 1.0f;
     height = 1.0f;
     depth = 1.0f;
@@ -62,7 +59,8 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
     modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
     
     if (entityType == ENEMY) {
-//        rotation.z -= 90 * deltaTime;
+        rotation.z -= 0.5 * deltaTime;
+        rotation.y -= 0.5 * deltaTime;
         
         // BETTA MOVEMENT BASED ON IF SNAIL IS NEAR A PLANT
         for (int i = 0; i < objectCount - 1; i++) {
@@ -84,19 +82,9 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
             }
             // if snail is near a plant, go the opposite way TODO: check this makes sense
             else {
-                if (position.x < snail->position.x) {
-                    position.x -= 1 * deltaTime;
-                }
-                else {
-                    position.x += 1 * deltaTime;
-                }
-                
-                if (position.z < snail->position.x) {
-                    position.z -= 1 * deltaTime;
-                }
-                else {
-                    position.z += 1 * deltaTime;
-                }
+                rotation.z += 360 * deltaTime;
+                position.x -= 1 * deltaTime;
+                position.z -= 1 * deltaTime;
             }
         }
         
