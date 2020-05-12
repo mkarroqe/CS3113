@@ -37,9 +37,9 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
   - Betta collision: lose life/back to center
 
 ## Future Development:
-- Make gameplay last longer than 15 seconds
-  - Set wall boundaries (maybe with more cubes?)
-  - Betta follows you unless you're near a plant
+- Make gameplay last longer
+- Set wall boundaries (maybe with more cubes?)
+- Betta follows you unless you're near a plant
 
 | ![](demos/title1.png) | ![](demos/title2.png) |
 | - | - |
