@@ -53,6 +53,7 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
             if (objects[i].entityType == FLOOR) continue;
 
             if (CheckCollision(&objects[i])) {
+                std::cout << "plant collision\n";
                 position = previousPosition;
                 break;
             }
@@ -68,7 +69,7 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
     modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
     
     if (entityType == ENEMY) {
-        rotation.z -= 90 * deltaTime;
+//        rotation.z -= 90 * deltaTime;
         
         if (position.x < snail->position.x) {
             position.x += 1 * deltaTime;
@@ -83,16 +84,6 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
         else {
             position.z -= 1 * deltaTime;
         }
-//        if (position.x < 1) {
-//            position.x += 0.01 * deltaTime;
-//            position.z += 0.01 * deltaTime;
-//        }
-//        else {
-//            position.x -= 0.01 * deltaTime;
-//            position.z -= 0.01 * deltaTime;
-//        }
-        
-//        modelMatrix = glm::translate(modelMatrix, glm::vec3(sin(0.5 * position.y), 0.1, 0.1));
     }
 }
 
