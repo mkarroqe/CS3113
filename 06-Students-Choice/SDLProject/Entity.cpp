@@ -69,6 +69,7 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
             if (!(objects[i].CheckCollision(snail))) {
                 // x pos
                 if (position.x < snail->position.x) {
+//                    int diff = abs(position.x - snail->position.x);
                     position.x += 0.01 * deltaTime;
                 }
                 else {
@@ -77,7 +78,7 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
                 
                 // y pos
                 if (position.y > snail->position.y) {
-                    if (position.y > 0) {
+                    if (position.y > 0.05) {
                         position.y -= 0.0002 * deltaTime; // but subtle
                     }
                 }
