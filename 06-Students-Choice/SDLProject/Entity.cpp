@@ -67,24 +67,34 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
             // if snail is not near plant, follow
             if (!(objects[i].CheckCollision(snail))) {
                 if (position.x < snail->position.x) {
-                    position.x += 1 * deltaTime;
+                    position.x += 0.1 * deltaTime;
                 }
                 else {
-                    position.x -= 1 * deltaTime;
+                    position.x -= 0.1 * deltaTime;
                 }
                 
-                if (position.z < snail->position.x) {
-                    position.z += 1 * deltaTime;
+                if (position.z < snail->position.z) {
+                    position.z += 0.1 * deltaTime;
                 }
                 else {
-                    position.z -= 1 * deltaTime;
+                    position.z -= 0.1 * deltaTime;
                 }
             }
             // if snail is near a plant, go the opposite way TODO: check this makes sense
             else {
-                rotation.z += 360 * deltaTime;
-                position.x -= 1 * deltaTime;
-                position.z -= 1 * deltaTime;
+                if (position.x < snail->position.x) {
+                    position.x -= 1 * deltaTime;
+                }
+                else {
+                    position.x += 1 * deltaTime;
+                }
+                
+                if (position.z < snail->position.z) {
+                    position.z -= 1 * deltaTime;
+                }
+                else {
+                    position.z += 1 * deltaTime;
+                }
             }
         }
         
