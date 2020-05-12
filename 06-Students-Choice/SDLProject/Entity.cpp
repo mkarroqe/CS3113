@@ -63,15 +63,16 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
         // BETTA MOVEMENT BASED ON IF SNAIL IS NEAR A PLANT
         for (int i = 0; i < objectCount - 1; i++) {
             // if snail is not near plant, follow
+            int offset = 4;
             if (!(objects[i].CheckCollision(snail))) {
-                if (position.x < snail->position.x) {
+                if (position.x < snail->position.x + offset) {
                     position.x += 0.1 * deltaTime;
                 }
                 else {
                     position.x -= 0.1 * deltaTime;
                 }
                 
-                if (position.z < snail->position.z) {
+                if (position.z < snail->position.z + offset) {
                     position.z += 0.1 * deltaTime;
                 }
                 else {

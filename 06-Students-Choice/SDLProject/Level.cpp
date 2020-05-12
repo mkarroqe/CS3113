@@ -1,6 +1,6 @@
 #include "Level.h"
 
-#define OBJECT_COUNT 56
+#define OBJECT_COUNT 65 // lush
 #define ENEMY_COUNT 1
 
 Level::Level(int _lives) {
@@ -88,7 +88,7 @@ void Level::Initialize() {
     state.objects[snail_num].mesh = snailMesh;
     state.objects[snail_num].speed = 12.0;
     state.objects[snail_num].scale = glm::vec3(14.0f, 14.0f, 14.0f);
-    state.objects[snail_num].position = glm::vec3(0.85, -0.05, -2);
+    state.objects[snail_num].position = glm::vec3(0, -0.05, -1.5);
     state.objects[snail_num].rotation = glm::vec3(0, 90, 0);
     state.objects[snail_num].entityType = SNAIL;
     
@@ -102,8 +102,8 @@ void Level::Initialize() {
     state.enemies[0].textureID = bettaTextureID;
     state.enemies[0].mesh = bettaMesh;
     state.enemies[0].scale = glm::vec3(0.45f, 0.45f, 0.45f);
-    state.enemies[0].position = glm::vec3(-0.85, 0.5, -2);
-    state.enemies[0].rotation = glm::vec3(270, -1, 0);
+    state.enemies[0].position = glm::vec3(-0.85, 0.5, -8);
+    state.enemies[0].rotation = glm::vec3(270, -35, 0);
     state.enemies[0].entityType = ENEMY;
 }
 
