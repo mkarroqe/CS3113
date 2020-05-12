@@ -32,16 +32,6 @@ bool Entity::CheckCollision(Entity *other)
 void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *objects, int objectCount)
 {
     glm::vec3 previousPosition = position;
-    
-    if (billboard) {
-        float directionX = position.x - player->position.x;
-        float directionZ = position.z - player->position.z;
-        rotation.y = glm::degrees(atan2f(directionX, directionZ));
-        
-        // come towards us
-        velocity.z = cos(glm::radians(rotation.y)) * -1.0f;
-        velocity.x = sin(glm::radians(rotation.y)) * -1.0f;
-    }
 
     velocity += acceleration * deltaTime;
     position += velocity * deltaTime;
@@ -54,8 +44,11 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
 
             if ((CheckCollision(&objects[i])) && (objects[i].entityType == PLANT)) {
                 std::cout << "plant collision\n";
-                position = previousPosition;
-//                break;
+                
+                // sliding snail behavior that adds a "time limit" on how long it is safe from betta
+                position.z = previousPosition.z + 0.001;
+                position.x = previousPosition.x + 0.001;
+                break;
             }
         }
     }
