@@ -394,11 +394,12 @@ void Update() {
             currentScene->state.player->Update(FIXED_TIMESTEP, snail, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
             
             // TODO: uncomment
-//            if (currentScene->state.objects[OBJECT_COUNT - 1].CheckCollision(&currentScene->state.enemies[0])) {
-//                std::cout << "COLLISION\n";
-//                currentScene->state.player_lives -= 1;
-//                currentScene->state.nextScene = 1;
-//            }
+            if (currentScene->state.objects[OBJECT_COUNT - 1].CheckCollision(&currentScene->state.enemies[0])) {
+                std::cout << "COLLISION\n";
+                currentScene->state.player_lives -= 1;
+                currentScene->state.objects[OBJECT_COUNT - 1].previouslyCollided = false;
+                currentScene->state.nextScene = 1;
+            }
             
             for (int i = 0; i < OBJECT_COUNT; i++) {
                 currentScene->state.objects[i].Update(FIXED_TIMESTEP, snail, currentScene->state.player, currentScene->state.objects, OBJECT_COUNT);
@@ -443,7 +444,7 @@ int main(int argc, char* argv[]) {
         Render();
         
         if (currentScene->state.nextScene >= 0) {
-            if (currentScene->state.player_lives == 0) {
+            if (currentScene->state.player_lives < 0) {
                 SwitchToScene(3); // lose
             }
             else if (currentScene->state.nextScene == 1 && currentScene->state.player_lives < 3) {
