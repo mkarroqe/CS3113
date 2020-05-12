@@ -75,10 +75,12 @@ void Entity::Update(float deltaTime, Entity *snail, Entity *player, Entity *obje
                     position.x -= 0.01 * deltaTime;
                 }
                 
-//                // y pos
-//                if (position.y < snail->position.y) {
-//                    position.y += 0.001 * deltaTime; // but subtle
-//                }
+                // y pos
+                if (position.y > snail->position.y) {
+                    if (position.y > 0) {
+                        position.y -= 0.0002 * deltaTime; // but subtle
+                    }
+                }
                 
                 // z pos
                 if (position.z < snail->position.z + offset) {
