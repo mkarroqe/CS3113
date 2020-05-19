@@ -79,3 +79,7 @@ Original music by [Charlie Reynolds](https://soundcloud.com/saxyjew).
 # Bloopers
 | ![](demos/bloopers/fern-overload.gif) | ![](demos/bloopers/angry-betta.gif) |
 | - | - |
+
+| ![](demos/wip.gif) |
+| :-: |
+| *Screenshots captured as I was working* |
