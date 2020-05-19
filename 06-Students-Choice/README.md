@@ -25,7 +25,7 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 | - | - |
 | ![](demos/game.png) | ![](demos/win.png) |
 
-> *More details [here]()*
+> *More details [here](more-deets.md#completed-tasks)*
 
 # Asset Credits
 ## Music
@@ -48,7 +48,3 @@ Original music by [Charlie Reynolds](https://soundcloud.com/saxyjew).
 # Bloopers
 | ![](demos/bloopers/fern-overload.gif) | ![](demos/bloopers/angry-betta.gif) |
 | - | - |
-
-| ![](demos/wip.gif) |
-| :-: |
-| *Screenshots captured as I was working* |
