@@ -20,7 +20,9 @@
 - Implementation of original assets not used in previous assignments
 
 ## In Progress:
--
+| ![](demos/wip.gif) |
+| :-: |
+| *Screenshots captured as I was working* |
 
 ## Future Development:
 - Make gameplay last longer
