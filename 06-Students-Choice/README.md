@@ -21,11 +21,11 @@ Make a game in the style of your choice (2D or 3D). No 2D Platformers or extensi
 > Once the snail is up a wall, it will only move along the y-axis. To move along other axis, return to the aquarium floor by holding down `LSHIFT`.
 
 # Demo
+> *Detailed breakdown and more [here](more-deets.md#completed-tasks)*
+
 | ![](demos/title1.png) | ![](demos/title2.png) |
 | - | - |
 | ![](demos/game.png) | ![](demos/win.png) |
-
-> *More details [here](more-deets.md#completed-tasks)*
 
 # Asset Credits
 ## Music
